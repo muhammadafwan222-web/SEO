@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pusat Konten SEO Profesional | Artikel, Produk Digital & Referensi</title>
+  <meta name="description" content="Pusat konten profesional untuk artikel, produk digital, referensi SEO, tautan promosi, dan berbagai materi yang mudah ditemukan di Google.">
+  <meta name="keywords" content="SEO, artikel SEO, produk digital, referensi, blog, affiliate, konten digital">
+  <meta name="author" content="Nama Anda">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href="https://USERNAME.github.io/REPOSITORY/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Pusat Konten SEO">
+  <meta property="og:title" content="Pusat Konten SEO Profesional">
+  <meta property="og:description" content="Kumpulan artikel, produk digital, referensi, dan tautan pilihan dalam satu halaman.">
+  <meta property="og:url" content="https://USERNAME.github.io/REPOSITORY/">
+  <meta property="og:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Pusat+Konten+SEO">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pusat Konten SEO Profesional">
+  <meta name="twitter:description" content="Kumpulan artikel, produk digital, referensi, dan tautan pilihan.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Pusat+Konten+SEO">
+
+  <!-- Favicon sederhana tanpa file tambahan -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%232563eb'/%3E%3Ctext x='50' y='67' font-size='58' text-anchor='middle' fill='white' font-family='Arial'%3ES%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fafc;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --primary:#2563eb;
+      --primary-2:#1d4ed8;
+      --success:#16a34a;
+      --danger:#dc2626;
+      --shadow:0 18px 48px rgba(15,23,42,.09);
+      --radius:22px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      line-height:1.55;
+    }
+    a{color:inherit}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(var(--max),calc(100% - 28px));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:30;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(226,232,240,.9);
+    }
+    .nav{
+      min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .brand-logo{
+      width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--primary),#60a5fa);color:#fff;font-weight:900;
+      box-shadow:0 10px 24px rgba(37,99,235,.25);
+    }
+    .brand strong{display:block;font-size:15px}
+    .brand small{display:block;color:var(--muted);font-size:12px}
+    .nav-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{
+      border:1px solid var(--line);background:#fff;color:var(--text);
+      min-height:42px;padding:0 14px;border-radius:12px;font-weight:700;
+      transition:.2s transform,.2s box-shadow,.2s background;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.07)}
+    .btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .btn.primary:hover{background:var(--primary-2)}
+    .btn.ghost{background:transparent}
+    .hero{
+      padding:54px 0 28px;
+      background:
+        radial-gradient(circle at 8% 0%,rgba(59,130,246,.15),transparent 31%),
+        radial-gradient(circle at 92% 18%,rgba(14,165,233,.11),transparent 28%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.22fr .78fr;gap:28px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;
+      background:#dbeafe;color:#1d4ed8;font-size:12px;font-weight:800;margin-bottom:14px;
+    }
+    h1{font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-.04em;margin:0 0 16px}
+    .hero p{font-size:18px;color:var(--muted);max-width:760px;margin:0 0 22px}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .hero-card{
+      background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:var(--shadow)
+    }
+    .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .metric{padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface-2)}
+    .metric b{display:block;font-size:28px;line-height:1}
+    .metric span{display:block;color:var(--muted);font-size:12px;margin-top:8px}
+    main{padding:12px 0 58px}
+    .toolbar{
+      display:grid;grid-template-columns:1.5fr .7fr .7fr auto;gap:10px;
+      padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)
+    }
+    .field{
+      width:100%;height:44px;border:1px solid var(--line);border-radius:12px;
+      padding:0 13px;background:#fff;color:var(--text);outline:none;
+    }
+    .field:focus{border-color:#93c5fd;box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:34px 0 14px}
+    .section-head h2{margin:0;font-size:26px;letter-spacing:-.02em}
+    .section-head p{margin:4px 0 0;color:var(--muted)}
+    .count{color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);
+      border-radius:20px;box-shadow:0 10px 26px rgba(15,23,42,.05);transition:.22s transform,.22s box-shadow;
+      display:flex;flex-direction:column;min-height:100%;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 20px 42px rgba(15,23,42,.1)}
+    .thumb{
+      aspect-ratio:16/9;background:linear-gradient(135deg,#dbeafe,#eff6ff);
+      display:grid;place-items:center;overflow:hidden
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-body{padding:17px;display:flex;flex-direction:column;flex:1}
+    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+    .chip{padding:5px 9px;border-radius:999px;background:#f1f5f9;color:#475569;font-size:11px;font-weight:800}
+    .chip.primary{background:#dbeafe;color:#1d4ed8}
+    .card h3{margin:0 0 8px;font-size:18px;line-height:1.25}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin:13px 0 15px;color:#64748b;font-size:12px}
+    .meta span{display:inline-flex;align-items:center;gap:5px}
+    .card-actions{display:flex;gap:8px;margin-top:auto}
+    .card-actions .btn{flex:1}
+    .empty{
+      padding:44px 20px;text-align:center;color:var(--muted);background:var(--surface);
+      border:1px dashed var(--line);border-radius:20px
+    }
+    .seo-panel{
+      margin-top:34px;padding:22px;background:linear-gradient(135deg,#0f172a,#1e293b);
+      border-radius:24px;color:#fff;display:grid;grid-template-columns:1fr .8fr;gap:20px;align-items:center;
+      box-shadow:var(--shadow)
+    }
+    .seo-panel p{color:#cbd5e1;margin:8px 0 0}
+    .seo-list{display:grid;gap:10px}
+    .seo-item{padding:13px 15px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:13px}
+    footer{padding:30px 0;border-top:1px solid var(--line);background:#fff}
+    .footer-grid{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .muted{color:var(--muted);font-size:13px}
+    .modal{
+      position:fixed;inset:0;background:rgba(2,6,23,.54);display:none;align-items:center;justify-content:center;
+      z-index:60;padding:16px
+    }
+    .modal.open{display:flex}
+    .modal-box{
+      width:min(980px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:20px;
+      box-shadow:0 24px 70px rgba(0,0,0,.25)
+    }
+    .modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+    .modal-head h3{margin:0}
+    .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-group{display:grid;gap:6px}
+    .form-group.full{grid-column:1/-1}
+    .form-group label{font-size:12px;font-weight:800;color:#475569}
+    textarea.field{min-height:92px;padding:12px;resize:vertical}
+    .admin-list{margin-top:20px;border-top:1px solid var(--line);padding-top:15px}
+    .admin-row{
+      display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9
+    }
+    .admin-row strong{font-size:13px}
+    .admin-row small{display:block;color:var(--muted)}
+    .toast{
+      position:fixed;right:18px;bottom:18px;z-index:100;background:#0f172a;color:#fff;
+      padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);display:none;font-size:13px
+    }
+    .toast.show{display:block}
+    @media (max-width: 920px){
+      .hero-grid,.seo-panel{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .toolbar{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 620px){
+      .container{width:min(var(--max),calc(100% - 20px))}
+      .nav{min-height:62px}
+      .nav-actions .btn span{display:none}
+      .hero{padding-top:38px}
+      h1{font-size:38px}
+      .hero p{font-size:16px}
+      .grid{grid-template-columns:1fr}
+      .toolbar{grid-template-columns:1fr}
+      .admin-grid{grid-template-columns:1fr}
+      .form-group.full{grid-column:auto}
+      .footer-grid{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+
+  <!-- Data inti untuk mesin pencari; JS juga akan memperbaruinya sesuai pengaturan -->
+  <script type="application/ld+json" id="websiteSchema">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Pusat Konten SEO",
+    "url":"https://USERNAME.github.io/REPOSITORY/",
+    "description":"Pusat artikel, produk digital, referensi, dan tautan pilihan."
+  }
+  </script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand" id="brandLink" href="#home" aria-label="Beranda">
+        <span class="brand-logo" id="brandLogo">S</span>
+        <span>
+          <strong id="brandName">Pusat Konten SEO</strong>
+          <small id="brandTagline">Artikel • Produk Digital • Referensi</small>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <button class="btn ghost" id="shareSiteBtn" type="button">↗ <span>Bagikan</span></button>
+        <button class="btn primary" id="adminBtn" type="button">⚙ <span>Pengaturan</span></button>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero" id="home">
+    <div class="container hero-grid">
+      <section>
+        <div class="eyebrow">● WEBSITE SEO-READY • GITHUB PAGES</div>
+        <h1 id="heroTitle">Satu halaman untuk banyak jenis konten.</h1>
+        <p id="heroDescription">
+          Gunakan template ini untuk katalog digital, artikel, landing page, daftar affiliate,
+          tutorial, file download, kursus, atau pusat referensi. Konten dapat dicari, difilter, dibagikan,
+          dan data pengaturannya tersimpan di browser.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#konten">Lihat Konten ↓</a>
+          <button class="btn" id="copySeoBtn" type="button">Salin SEO HTML</button>
+        </div>
+      </section>
+
+      <aside class="hero-card" aria-label="Ringkasan situs">
+        <div class="metric-grid">
+          <div class="metric"><b id="metricTotal">0</b><span>Konten aktif</span></div>
+          <div class="metric"><b id="metricCategories">0</b><span>Kategori</span></div>
+          <div class="metric"><b>SEO</b><span>Meta + OG + Schema</span></div>
+          <div class="metric"><b>100%</b><span>Static • GitHub Ready</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <div class="container" id="konten">
+      <section class="toolbar" aria-label="Pencarian dan filter">
+        <input class="field" id="searchInput" type="search" placeholder="Cari judul, kategori, kata kunci..." aria-label="Cari konten">
+        <select class="field" id="categoryFilter" aria-label="Pilih kategori">
+          <option value="">Semua kategori</option>
+        </select>
+        <select class="field" id="sortSelect" aria-label="Urutkan">
+          <option value="newest">Terbaru</option>
+          <option value="oldest">Terlama</option>
+          <option value="az">Judul A–Z</option>
+        </select>
+        <button class="btn" id="resetBtn" type="button">Reset</button>
+      </section>
+
+      <div class="section-head">
+        <div>
+          <h2 id="contentHeading">Koleksi Konten</h2>
+          <p id="contentSubheading">Format fleksibel untuk berbagai kebutuhan.</p>
+        </div>
+        <div class="count" id="resultCount">0 hasil</div>
+      </div>
+
+      <div class="grid" id="contentGrid"></div>
+      <div class="empty" id="emptyState" hidden>
+        Tidak ada konten yang cocok. Ubah kata pencarian atau filter.
+      </div>
+
+      <section class="seo-panel">
+        <div>
+          <div class="eyebrow" style="background:rgba(255,255,255,.1);color:#bfdbfe">SEO TEKNIS OTOMATIS</div>
+          <h2 style="margin:0;font-size:28px">Disiapkan untuk Google, WhatsApp, dan media sosial.</h2>
+          <p>
+            Struktur HTML semantik, meta description, Open Graph, Twitter Card, canonical,
+            JSON-LD, pencarian, dan tombol berbagi sudah disiapkan dalam satu file.
+          </p>
+        </div>
+        <div class="seo-list">
+          <div class="seo-item">✓ H1, H2, semantic sections & article cards</div>
+          <div class="seo-item">✓ Schema.org WebSite + ItemList + Article/CreativeWork</div>
+          <div class="seo-item">✓ Open Graph + Twitter Card untuk preview share</div>
+          <div class="seo-item">✓ Rel sponsored/nofollow untuk tautan affiliate</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="muted"><strong id="footerName">Pusat Konten SEO</strong> — template static untuk GitHub Pages.</div>
+      <div class="muted">© <span id="year"></span> • Dibuat agar mudah dikembangkan</div>
+    </div>
+  </footer>
+
+  <!-- Modal pengaturan -->
+  <div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="adminTitle">Pengaturan Website</h3>
+        <button class="btn" id="closeAdminBtn" type="button">Tutup</button>
+      </div>
+
+      <div class="admin-grid">
+        <div class="form-group">
+          <label for="siteName">Nama website</label>
+          <input class="field" id="siteName" placeholder="Pusat Konten SEO">
+        </div>
+        <div class="form-group">
+          <label for="siteTagline">Tagline</label>
+          <input class="field" id="siteTagline" placeholder="Artikel • Produk Digital • Referensi">
+        </div>
+        <div class="form-group">
+          <label for="siteUrl">URL GitHub Pages</label>
+          <input class="field" id="siteUrl" placeholder="https://username.github.io/repository/">
+        </div>
+        <div class="form-group">
+          <label for="siteAuthor">Nama penulis / brand</label>
+          <input class="field" id="siteAuthor" placeholder="Nama Anda">
+        </div>
+        <div class="form-group full">
+          <label for="siteTitle">SEO title default</label>
+          <input class="field" id="siteTitle">
+        </div>
+        <div class="form-group full">
+          <label for="siteDescription">Meta description</label>
+          <textarea class="field" id="siteDescription"></textarea>
+        </div>
+        <div class="form-group full">
+          <label for="siteKeywords">Kata kunci (pisahkan koma)</label>
+          <input class="field" id="siteKeywords">
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <button class="btn primary" id="saveSettingsBtn" type="button">Simpan Pengaturan</button>
+        <button class="btn" id="exportBtn" type="button">Export Data JSON</button>
+        <button class="btn" id="importBtn" type="button">Import Data JSON</button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+
+      <div class="admin-list">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <strong>Kelola Konten</strong>
+          <button class="btn primary" id="addItemBtn" type="button">+ Tambah Konten</button>
+        </div>
+        <div id="adminList"></div>
+      </div>
+
+      <div id="editor" hidden style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line)">
+        <h4 id="editorTitle" style="margin:0 0 12px">Tambah Konten</h4>
+        <div class="admin-grid">
+          <div class="form-group">
+            <label for="itemTitle">Judul</label>
+            <input class="field" id="itemTitle">
+          </div>
+          <div class="form-group">
+            <label for="itemCategory">Kategori</label>
+            <input class="field" id="itemCategory" placeholder="SEO / Artikel / Produk">
+          </div>
+          <div class="form-group full">
+            <label for="itemDescription">Deskripsi</label>
+            <textarea class="field" id="itemDescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="itemUrl">Link tujuan</label>
+            <input class="field" id="itemUrl" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label for="itemImage">URL gambar</label>
+            <input class="field" id="itemImage" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label for="itemKeywords">Kata kunci</label>
+            <input class="field" id="itemKeywords" placeholder="seo, google, artikel">
+          </div>
+          <div class="form-group">
+            <label for="itemType">Jenis konten</label>
+            <select class="field" id="itemType">
+              <option value="article">Artikel</option>
+              <option value="product">Produk</option>
+              <option value="affiliate">Affiliate</option>
+              <option value="download">Download</option>
+              <option value="reference">Referensi</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="btn primary" id="saveItemBtn" type="button">Simpan Konten</button>
+          <button class="btn" id="cancelEditorBtn" type="button">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /*
+      ============================================================
+      SEO HUB — KONFIGURASI
+      ============================================================
+      1) Bagian SETTINGS adalah identitas website.
+      2) CONTENT_ITEMS adalah isi awal.
+      3) Setelah upload ke GitHub Pages, buka tombol Pengaturan
+         untuk mengubah data dari browser.
+      4) Untuk SEO publik yang paling stabil, edit juga nilai
+         meta/canonical di <head> sesuai domain GitHub Pages Anda.
+    */
+
+    const DEFAULT_SETTINGS = {
+      siteName: "Pusat Konten SEO",
+      siteTagline: "Artikel • Produk Digital • Referensi",
+      siteUrl: "https://USERNAME.github.io/REPOSITORY/",
+      siteAuthor: "Nama Anda",
+      siteTitle: "Pusat Konten SEO Profesional | Artikel, Produk Digital & Referensi",
+      siteDescription: "Pusat konten profesional untuk artikel, produk digital, referensi SEO, tautan promosi, dan berbagai materi yang mudah ditemukan di Google.",
+      siteKeywords: "SEO, artikel SEO, produk digital, referensi, blog, affiliate, konten digital"
+    };
+
+    const STARTER_ITEMS = [
+      {
+        id: 1,
+        title: "SEO Mastery V2",
+        category: "SEO",
+        description: "Contoh halaman promosi yang berisi judul, ringkasan manfaat, gambar, dan tombol menuju halaman tujuan.",
+        url: "https://example.com",
+        image: "https://placehold.co/960x540/0f4c81/ffffff?text=SEO+MASTERY",
+        keywords: "seo, search engine optimization, google",
+        type: "product",
+        date: "2026-09-25"
+      },
+      {
+        id: 2,
+        title: "Search Engine Domination",
+        category: "SEO",
+        description: "Contoh konten kedua. Dapat digunakan untuk ebook, kursus, artikel, landing page, atau tautan affiliate.",
+        url: "https://example.com",
+        image: "https://placehold.co/960x540/7c3aed/ffffff?text=SEARCH+ENGINE",
+        keywords: "google, seo, trafik, mesin pencari",
+        type: "affiliate",
+        date: "2026-09-24"
+      },
+      {
+        id: 3,
+        title: "Panduan Membuat Artikel SEO",
+        category: "Artikel",
+        description: "Template artikel evergreen dengan heading terstruktur dan ringkasan yang mudah dipahami pengunjung.",
+        url: "#",
+        image: "https://placehold.co/960x540/0369a1/ffffff?text=ARTIKEL+SEO",
+        keywords: "artikel seo, copywriting, blog",
+        type: "article",
+        date: "2026-09-23"
+      },
+      {
+        id: 4,
+        title: "Katalog Produk Digital",
+        category: "Produk",
+        description: "Gunakan item ini untuk katalog ebook, desain, aplikasi, template, file PDF, atau produk digital lainnya.",
+        url: "#",
+        image: "https://placehold.co/960x540/059669/ffffff?text=PRODUK+DIGITAL",
+        keywords: "ebook, pdf, produk digital, download",
+        type: "product",
+        date: "2026-09-22"
+      },
+      {
+        id: 5,
+        title: "Koleksi Referensi",
+        category: "Referensi",
+        description: "Satu tempat untuk mengumpulkan materi penting, dokumentasi, tutorial, dan sumber belajar.",
+        url: "#",
+        image: "https://placehold.co/960x540/334155/ffffff?text=REFERENSI",
+        keywords: "referensi, tutorial, dokumentasi",
+        type: "reference",
+        date: "2026-09-20"
+      },
+      {
+        id: 6,
+        title: "File Download & Materi Gratis",
+        category: "Download",
+        description: "Bisa dipakai untuk daftar file PDF, spreadsheet, modul, aplikasi, atau materi gratis yang ingin ditemukan dari Google.",
+        url: "#",
+        image: "https://placehold.co/960x540/ea580c/ffffff?text=DOWNLOAD",
+        keywords: "download, pdf, template, gratis",
+        type: "download",
+        date: "2026-09-18"
+      }
+    ];
+
+    let settings = load("seo_hub_settings", DEFAULT_SETTINGS);
+    let items = load("seo_hub_items", STARTER_ITEMS);
+    let editingId = null;
+
+    const $ = (s) => document.querySelector(s);
+
+    function load(key, fallback){
+      try{
+        const value = JSON.parse(localStorage.getItem(key));
+        return value ?? structuredClone(fallback);
+      }catch(e){
+        return structuredClone(fallback);
+      }
+    }
+
+    function save(key, value){
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function esc(value){
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[ch]));
+    }
+
+    function showToast(msg){
+      const el = $("#toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(showToast.t);
+      showToast.t = setTimeout(() => el.classList.remove("show"), 2400);
+    }
+
+    function buildThumb(title){
+      const text = encodeURIComponent(String(title).slice(0,26));
+      return `https://placehold.co/960x540/2563eb/ffffff?text=${text}`;
+    }
+
+    function applySettings(){
+      document.title = settings.siteTitle;
+      document.documentElement.lang = "id";
+
+      $("#brandName").textContent = settings.siteName;
+      $("#brandTagline").textContent = settings.siteTagline;
+      $("#brandLogo").textContent = (settings.siteName || "S").trim().charAt(0).toUpperCase();
+      $("#footerName").textContent = settings.siteName;
+
+      setMeta("description", settings.siteDescription);
+      setMeta("keywords", settings.siteKeywords);
+      setMeta("author", settings.siteAuthor);
+
+      setMeta("og:title", settings.siteTitle, true);
+      setMeta("og:description", settings.siteDescription, true);
+      setMeta("og:url", settings.siteUrl, true);
+      setMeta("twitter:title", settings.siteTitle);
+      setMeta("twitter:description", settings.siteDescription);
+
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if(canonical) canonical.href = settings.siteUrl;
+
+      const schema = {
+        "@context":"https://schema.org",
+        "@type":"WebSite",
+        "name":settings.siteName,
+        "url":settings.siteUrl,
+        "description":settings.siteDescription,
+        "author":{"@type":"Person","name":settings.siteAuthor},
+        "inLanguage":"id-ID"
+      };
+      $("#websiteSchema").textContent = JSON.stringify(schema);
+
+      $("#siteName").value = settings.siteName;
+      $("#siteTagline").value = settings.siteTagline;
+      $("#siteUrl").value = settings.siteUrl;
+      $("#siteAuthor").value = settings.siteAuthor;
+      $("#siteTitle").value = settings.siteTitle;
+      $("#siteDescription").value = settings.siteDescription;
+      $("#siteKeywords").value = settings.siteKeywords;
+    }
+
+    function setMeta(name, content, property=false){
+      let selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+      let el = document.querySelector(selector);
+      if(!el){
+        el = document.createElement("meta");
+        el.setAttribute(property ? "property" : "name", name);
+        document.head.appendChild(el);
+      }
+      el.content = content || "";
+    }
+
+    function categories(){
+      return [...new Set(items.map(i => i.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+    }
+
+    function renderCategories(){
+      const select = $("#categoryFilter");
+      const current = select.value;
+      select.innerHTML = '<option value="">Semua kategori</option>' +
+        categories().map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+      if([...select.options].some(o=>o.value===current)) select.value = current;
+    }
+
+    function filteredItems(){
+      const q = $("#searchInput").value.trim().toLowerCase();
+      const cat = $("#categoryFilter").value;
+      const sort = $("#sortSelect").value;
+
+      let data = items.filter(item => {
+        const hay = `${item.title} ${item.description} ${item.category} ${item.keywords}`.toLowerCase();
+        return (!q || hay.includes(q)) && (!cat || item.category === cat);
+      });
+
+      if(sort === "newest") data.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+      if(sort === "oldest") data.sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+      if(sort === "az") data.sort((a,b)=>String(a.title).localeCompare(String(b.title)));
+      return data;
+    }
+
+    function typeLabel(type){
+      return ({
+        article:"Artikel",
+        product:"Produk",
+        affiliate:"Affiliate",
+        download:"Download",
+        reference:"Referensi"
+      })[type] || "Konten";
+    }
+
+    function render(){
+      applySettings();
+      renderCategories();
+
+      const data = filteredItems();
+      $("#metricTotal").textContent = items.length;
+      $("#metricCategories").textContent = categories().length;
+      $("#resultCount").textContent = `${data.length} hasil`;
+
+      const grid = $("#contentGrid");
+      grid.innerHTML = data.map(item => {
+        const safeUrl = item.url || "#";
+        const isExternal = /^https?:\/\//i.test(safeUrl);
+        const rel = item.type === "affiliate"
+          ? "nofollow sponsored noopener"
+          : "noopener";
+        const target = isExternal ? ' target="_blank"' : "";
+
+        const image = item.image || buildThumb(item.title);
+
+        return `
+          <article class="card">
+            <a href="${esc(safeUrl)}"${target} rel="${rel}" aria-label="${esc(item.title)}">
+              <div class="thumb">
+                <img loading="lazy" src="${esc(image)}" alt="${esc(item.title)}" onerror="this.src='${buildThumb(item.title)}'">
+              </div>
+            </a>
+            <div class="card-body">
+              <div class="chips">
+                <span class="chip primary">${esc(item.category || "Umum")}</span>
+                <span class="chip">${typeLabel(item.type)}</span>
+              </div>
+              <h3>${esc(item.title)}</h3>
+              <p>${esc(item.description)}</p>
+              <div class="meta">
+                <span>📅 ${esc(item.date || "")}</span>
+                <span>🔎 ${esc((item.keywords || "").split(",")[0] || item.category || "SEO")}</span>
+              </div>
+              <div class="card-actions">
+                <a class="btn primary" href="${esc(safeUrl)}"${target} rel="${rel}">Buka Konten</a>
+                <button class="btn" type="button" data-share="${esc(item.id)}">Bagikan</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      $("#emptyState").hidden = data.length !== 0;
+      bindShareButtons();
+      renderAdminList();
+      updateItemListSchema();
+    }
+
+    function bindShareButtons(){
+      document.querySelectorAll("[data-share]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const item = items.find(x => String(x.id) === String(btn.dataset.share));
+          if(!item) return;
+          const url = item.url && /^https?:\/\//i.test(item.url) ? item.url : location.href;
+          const shareData = {title:item.title, text:item.description, url};
+
+          if(navigator.share){
+            try { await navigator.share(shareData); return; } catch(e){}
+          }
+          const wa = `https://wa.me/?text=${encodeURIComponent(item.title + " — " + url)}`;
+          window.open(wa, "_blank", "noopener,noreferrer");
+        });
+      });
+    }
+
+    function updateItemListSchema(){
+      const old = document.getElementById("itemListSchema");
+      if(old) old.remove();
+
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "itemListSchema";
+
+      script.textContent = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"ItemList",
+        "name":settings.siteName + " — Koleksi Konten",
+        "itemListElement":items.slice(0,30).map((item, index) => ({
+          "@type":"ListItem",
+          "position":index+1,
+          "name":item.title,
+          "url": item.url && /^https?:\/\//i.test(item.url) ? item.url : settings.siteUrl
+        }))
+      });
+      document.head.appendChild(script);
+    }
+
+    function renderAdminList(){
+      $("#adminList").innerHTML = items
+        .sort((a,b)=>Number(b.id)-Number(a.id))
+        .map(item => `
+          <div class="admin-row">
+            <div>
+              <strong>${esc(item.title)}</strong>
+              <small>${esc(item.category)} • ${typeLabel(item.type)}</small>
+            </div>
+            <button class="btn" type="button" data-edit="${esc(item.id)}">Edit</button>
+            <button class="btn" type="button" data-delete="${esc(item.id)}">Hapus</button>
+          </div>
+        `).join("");
+
+      document.querySelectorAll("[data-edit]").forEach(btn => {
+        btn.addEventListener("click", () => openEditor(Number(btn.dataset.edit)));
+      });
+
+      document.querySelectorAll("[data-delete]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = Number(btn.dataset.delete);
+          const item = items.find(x=>x.id===id);
+          if(confirm(`Hapus "${item?.title || ""}"?`)){
+            items = items.filter(x=>x.id!==id);
+            save("seo_hub_items",items);
+            render();
+            showToast("Konten dihapus.");
+          }
+        });
+      });
+    }
+
+    function openEditor(id=null){
+      editingId = id;
+      $("#editor").hidden = false;
+      const item = id ? items.find(x=>x.id===id) : {
+        title:"", category:"Artikel", description:"", url:"#", image:"",
+        keywords:"", type:"article", date:new Date().toISOString().slice(0,10)
+      };
+      $("#editorTitle").textContent = id ? "Edit Konten" : "Tambah Konten";
+      $("#itemTitle").value = item.title || "";
+      $("#itemCategory").value = item.category || "";
+      $("#itemDescription").value = item.description || "";
+      $("#itemUrl").value = item.url || "#";
+      $("#itemImage").value = item.image || "";
+      $("#itemKeywords").value = item.keywords || "";
+      $("#itemType").value = item.type || "article";
+      $("#itemTitle").focus();
+    }
+
+    function closeEditor(){
+      editingId = null;
+      $("#editor").hidden = true;
+    }
+
+    function getSeoHtml(){
+      const escText = s => String(s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;");
+      return `<!-- SEO HEAD GENERATED BY ${escText(settings.siteName)} -->
+<title>${escText(settings.siteTitle)}</title>
+<meta name="description" content="${escText(settings.siteDescription)}">
+<meta name="keywords" content="${escText(settings.siteKeywords)}">
+<meta name="author" content="${escText(settings.siteAuthor)}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="${escText(settings.siteUrl)}">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="${escText(settings.siteName)}">
+<meta property="og:title" content="${escText(settings.siteTitle)}">
+<meta property="og:description" content="${escText(settings.siteDescription)}">
+<meta property="og:url" content="${escText(settings.siteUrl)}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escText(settings.siteTitle)}">
+<meta name="twitter:description" content="${escText(settings.siteDescription)}">`;
+    }
+
+    function shareSite(){
+      const data = {title:settings.siteName,text:settings.siteDescription,url:settings.siteUrl};
+      if(navigator.share){
+        navigator.share(data).catch(()=>{});
+      }else{
+        navigator.clipboard?.writeText(settings.siteUrl).then(()=>showToast("Link website disalin."));
+      }
+    }
+
+    $("#searchInput").addEventListener("input", render);
+    $("#categoryFilter").addEventListener("change", render);
+    $("#sortSelect").addEventListener("change", render);
+    $("#resetBtn").addEventListener("click", () => {
+      $("#searchInput").value="";
+      $("#categoryFilter").value="";
+      $("#sortSelect").value="newest";
+      render();
+    });
+
+    $("#shareSiteBtn").addEventListener("click", shareSite);
+
+    $("#copySeoBtn").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(getSeoHtml());
+        showToast("SEO HTML berhasil disalin.");
+      }catch(e){
+        prompt("Salin SEO HTML berikut:", getSeoHtml());
+      }
+    });
+
+    $("#adminBtn").addEventListener("click", () => {
+      $("#adminModal").classList.add("open");
+      renderAdminList();
+      applySettings();
+    });
+
+    $("#closeAdminBtn").addEventListener("click", () => $("#adminModal").classList.remove("open"));
+    $("#adminModal").addEventListener("click", e => {
+      if(e.target === $("#adminModal")) $("#adminModal").classList.remove("open");
+    });
+
+    $("#saveSettingsBtn").addEventListener("click", () => {
+      settings = {
+        siteName: $("#siteName").value.trim() || DEFAULT_SETTINGS.siteName,
+        siteTagline: $("#siteTagline").value.trim() || DEFAULT_SETTINGS.siteTagline,
+        siteUrl: $("#siteUrl").value.trim() || DEFAULT_SETTINGS.siteUrl,
+        siteAuthor: $("#siteAuthor").value.trim() || DEFAULT_SETTINGS.siteAuthor,
+        siteTitle: $("#siteTitle").value.trim() || DEFAULT_SETTINGS.siteTitle,
+        siteDescription: $("#siteDescription").value.trim() || DEFAULT_SETTINGS.siteDescription,
+        siteKeywords: $("#siteKeywords").value.trim() || DEFAULT_SETTINGS.siteKeywords
+      };
+      save("seo_hub_settings",settings);
+      render();
+      showToast("Pengaturan disimpan.");
+    });
+
+    $("#addItemBtn").addEventListener("click", () => openEditor());
+    $("#cancelEditorBtn").addEventListener("click", closeEditor);
+
+    $("#saveItemBtn").addEventListener("click", () => {
+      const item = {
+        id: editingId ?? Date.now(),
+        title: $("#itemTitle").value.trim(),
+        category: $("#itemCategory").value.trim() || "Umum",
+        description: $("#itemDescription").value.trim(),
+        url: $("#itemUrl").value.trim() || "#",
+        image: $("#itemImage").value.trim(),
+        keywords: $("#itemKeywords").value.trim(),
+        type: $("#itemType").value,
+        date: new Date().toISOString().slice(0,10)
+      };
+
+      if(!item.title){
+        alert("Judul konten wajib diisi.");
+        return;
+      }
+
+      if(editingId){
+        items = items.map(x=>x.id===editingId ? {...x,...item} : x);
+      }else{
+        items.push(item);
+      }
+
+      save("seo_hub_items",items);
+      closeEditor();
+      render();
+      showToast(editingId ? "Konten diperbarui." : "Konten ditambahkan.");
+    });
+
+    $("#exportBtn").addEventListener("click", () => {
+      const data = {settings,items};
+      const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "seo-hub-data.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Data JSON diekspor.");
+    });
+
+    $("#importBtn").addEventListener("click", () => $("#importFile").click());
+
+    $("#importFile").addEventListener("change", e => {
+      const file = e.target.files?.[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try{
+          const data = JSON.parse(reader.result);
+          if(data.settings) settings = {...DEFAULT_SETTINGS,...data.settings};
+          if(Array.isArray(data.items)) items = data.items;
+          save("seo_hub_settings",settings);
+          save("seo_hub_items",items);
+          render();
+          showToast("Data berhasil diimpor.");
+        }catch(err){
+          alert("File JSON tidak valid.");
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    $("#year").textContent = new Date().getFullYear();
+
+    // Inisialisasi
+    render();
+  </script>
+</body>
+</html>
