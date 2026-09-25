@@ -179,6 +179,16 @@
     }
     .admin-row strong{font-size:13px}
     .admin-row small{display:block;color:var(--muted)}
+    .detail-modal{position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;z-index:90;padding:16px}
+    .detail-modal.open{display:flex}
+    .detail-box{width:min(900px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:20px;box-shadow:0 30px 90px rgba(0,0,0,.3)}
+    .detail-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:14px}
+    .detail-head h2{margin:7px 0 0;font-size:28px;line-height:1.2}
+    .detail-image{width:100%;max-height:420px;object-fit:cover;border-radius:16px;background:#e2e8f0}
+    .detail-text{font-size:15px;line-height:1.8;color:#334155;margin-top:16px}
+    .detail-text p{margin:0 0 12px}.detail-text h3{margin:18px 0 8px}
+    .detail-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+    .detail-actions .btn{flex:1;min-width:150px}
     .toast{
       position:fixed;right:18px;bottom:18px;z-index:100;background:#0f172a;color:#fff;
       padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);display:none;font-size:13px
@@ -314,6 +324,19 @@
     </div>
   </footer>
 
+  <!-- Modal membaca / menggunakan konten -->
+  <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="detail-box">
+      <div class="detail-head">
+        <div><span class="chip primary" id="detailType">Konten</span><h2 id="detailTitle">Judul Konten</h2></div>
+        <button class="btn" id="closeDetailBtn" type="button">Tutup</button>
+      </div>
+      <img class="detail-image" id="detailImage" alt="">
+      <div class="detail-text" id="detailContent"></div>
+      <div class="detail-actions" id="detailActions"></div>
+    </div>
+  </div>
+
   <!-- Modal pengaturan -->
   <div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
     <div class="modal-box">
@@ -380,8 +403,20 @@
             <input class="field" id="itemCategory" placeholder="SEO / Artikel / Produk">
           </div>
           <div class="form-group full">
-            <label for="itemDescription">Deskripsi</label>
+            <label for="itemDescription">Deskripsi singkat</label>
             <textarea class="field" id="itemDescription"></textarea>
+          </div>
+          <div class="form-group full">
+            <label for="itemContent">Isi lengkap / detail konten</label>
+            <textarea class="field" id="itemContent" placeholder="Artikel: isi artikel. Produk: detail produk. Download/referensi: penjelasan dan petunjuk."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="itemPrice">Harga (opsional)</label>
+            <input class="field" id="itemPrice" placeholder="Rp99.000">
+          </div>
+          <div class="form-group">
+            <label for="itemButton">Teks tombol</label>
+            <input class="field" id="itemButton" placeholder="Baca Artikel / Beli Sekarang / Download File">
           </div>
           <div class="form-group">
             <label for="itemUrl">Link tujuan</label>
@@ -390,6 +425,10 @@
           <div class="form-group">
             <label for="itemImage">URL gambar</label>
             <input class="field" id="itemImage" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label for="itemAlt">Alt gambar</label>
+            <input class="field" id="itemAlt" placeholder="Nama/deskripsi gambar">
           </div>
           <div class="form-group">
             <label for="itemKeywords">Kata kunci</label>
@@ -445,10 +484,13 @@
         title: "SEO Mastery V2",
         category: "SEO",
         description: "Contoh halaman promosi yang berisi judul, ringkasan manfaat, gambar, dan tombol menuju halaman tujuan.",
-        url: "https://example.com",
+        url: "#",
         image: "https://placehold.co/960x540/0f4c81/ffffff?text=SEO+MASTERY",
         keywords: "seo, search engine optimization, google",
         type: "product",
+        price: "Rp99.000",
+        buttonText: "Beli Sekarang",
+        content: "Jelaskan isi produk, manfaat, format file, dan cara mendapatkannya. Masukkan link checkout Anda melalui menu Pengaturan.",
         date: "2026-09-25"
       },
       {
@@ -456,10 +498,13 @@
         title: "Search Engine Domination",
         category: "SEO",
         description: "Contoh konten kedua. Dapat digunakan untuk ebook, kursus, artikel, landing page, atau tautan affiliate.",
-        url: "https://example.com",
+        url: "#",
         image: "https://placehold.co/960x540/7c3aed/ffffff?text=SEARCH+ENGINE",
         keywords: "google, seo, trafik, mesin pencari",
         type: "affiliate",
+        price: "",
+        buttonText: "Lihat Produk",
+        content: "Tulis review atau penjelasan Anda sendiri. Masukkan link affiliate pada kolom link tujuan.",
         date: "2026-09-24"
       },
       {
@@ -471,6 +516,9 @@
         image: "https://placehold.co/960x540/0369a1/ffffff?text=ARTIKEL+SEO",
         keywords: "artikel seo, copywriting, blog",
         type: "article",
+        price: "",
+        buttonText: "Baca Artikel",
+        content: "Tulis artikel lengkap Anda di sini. Paragraf yang dipisahkan baris kosong akan ditampilkan dengan rapi.",
         date: "2026-09-23"
       },
       {
@@ -482,6 +530,9 @@
         image: "https://placehold.co/960x540/059669/ffffff?text=PRODUK+DIGITAL",
         keywords: "ebook, pdf, produk digital, download",
         type: "product",
+        price: "Rp99.000",
+        buttonText: "Beli Sekarang",
+        content: "Tulis detail produk digital, isi paket, format file, dan cara pembelian.",
         date: "2026-09-22"
       },
       {
@@ -493,6 +544,9 @@
         image: "https://placehold.co/960x540/334155/ffffff?text=REFERENSI",
         keywords: "referensi, tutorial, dokumentasi",
         type: "reference",
+        price: "",
+        buttonText: "Buka Sumber",
+        content: "Tuliskan ringkasan sumber, alasan menjadi rujukan, dan catatan penting.",
         date: "2026-09-20"
       },
       {
@@ -504,6 +558,9 @@
         image: "https://placehold.co/960x540/ea580c/ffffff?text=DOWNLOAD",
         keywords: "download, pdf, template, gratis",
         type: "download",
+        price: "",
+        buttonText: "Download File",
+        content: "Jelaskan isi file, format, versi, serta petunjuk penggunaan.",
         date: "2026-09-18"
       }
     ];
@@ -637,74 +694,82 @@
       })[type] || "Konten";
     }
 
+    function actionText(item){
+      return item.buttonText || ({article:"Baca Artikel",product:"Beli Sekarang",affiliate:"Lihat Produk",download:"Download File",reference:"Buka Sumber"}[item.type] || "Buka Konten");
+    }
+
     function render(){
       applySettings();
       renderCategories();
-
       const data = filteredItems();
       $("#metricTotal").textContent = items.length;
       $("#metricCategories").textContent = categories().length;
       $("#resultCount").textContent = `${data.length} hasil`;
-
       const grid = $("#contentGrid");
       grid.innerHTML = data.map(item => {
-        const safeUrl = item.url || "#";
-        const isExternal = /^https?:\/\//i.test(safeUrl);
-        const rel = item.type === "affiliate"
-          ? "nofollow sponsored noopener"
-          : "noopener";
-        const target = isExternal ? ' target="_blank"' : "";
-
         const image = item.image || buildThumb(item.title);
-
         return `
           <article class="card">
-            <a href="${esc(safeUrl)}"${target} rel="${rel}" aria-label="${esc(item.title)}">
-              <div class="thumb">
-                <img loading="lazy" src="${esc(image)}" alt="${esc(item.title)}" onerror="this.src='${buildThumb(item.title)}'">
-              </div>
-            </a>
+            <button class="card-image-btn" type="button" data-open-content="${esc(item.id)}" style="border:0;padding:0;background:transparent;text-align:left;width:100%">
+              <div class="thumb"><img loading="lazy" src="${esc(image)}" alt="${esc(item.alt || item.title)}" onerror="this.src='${buildThumb(item.title)}'"></div>
+            </button>
             <div class="card-body">
               <div class="chips">
                 <span class="chip primary">${esc(item.category || "Umum")}</span>
                 <span class="chip">${typeLabel(item.type)}</span>
+                ${item.price ? `<span class="chip">${esc(item.price)}</span>` : ""}
               </div>
               <h3>${esc(item.title)}</h3>
               <p>${esc(item.description)}</p>
-              <div class="meta">
-                <span>📅 ${esc(item.date || "")}</span>
-                <span>🔎 ${esc((item.keywords || "").split(",")[0] || item.category || "SEO")}</span>
-              </div>
+              <div class="meta"><span>📅 ${esc(item.date || "")}</span><span>🔎 ${esc((item.keywords || "").split(",")[0] || item.category || "SEO")}</span></div>
               <div class="card-actions">
-                <a class="btn primary" href="${esc(safeUrl)}"${target} rel="${rel}">Buka Konten</a>
+                <button class="btn primary" type="button" data-open-content="${esc(item.id)}">${esc(actionText(item))}</button>
                 <button class="btn" type="button" data-share="${esc(item.id)}">Bagikan</button>
               </div>
             </div>
-          </article>
-        `;
+          </article>`;
       }).join("");
-
       $("#emptyState").hidden = data.length !== 0;
+      document.querySelectorAll("[data-open-content]").forEach(btn => btn.addEventListener("click", () => openContent(Number(btn.dataset.openContent))));
       bindShareButtons();
       renderAdminList();
       updateItemListSchema();
     }
 
-    function bindShareButtons(){
-      document.querySelectorAll("[data-share]").forEach(btn => {
-        btn.addEventListener("click", async () => {
-          const item = items.find(x => String(x.id) === String(btn.dataset.share));
-          if(!item) return;
-          const url = item.url && /^https?:\/\//i.test(item.url) ? item.url : location.href;
-          const shareData = {title:item.title, text:item.description, url};
+    function openContent(id){
+      const item = items.find(x => Number(x.id) === Number(id));
+      if(!item) return;
+      $("#detailType").textContent = typeLabel(item.type);
+      $("#detailTitle").textContent = item.title;
+      const im = $("#detailImage"); im.src = item.image || buildThumb(item.title); im.alt = item.alt || item.title;
+      const text = item.content || item.description || "Belum ada detail konten.";
+      $("#detailContent").innerHTML = String(text).split(/\n\s*\n/).map(x => x.trim()).filter(Boolean).map(x => `<p>${esc(x).replace(/\n/g,"<br>")}</p>`).join("");
+      const url = item.url || "#";
+      const isExternal = /^https?:\/\//i.test(url);
+      const rel = item.type === "affiliate" ? "nofollow sponsored noopener" : "noopener";
+      let actions = item.price ? `<div style="width:100%;font-weight:800;font-size:18px">${esc(item.price)}</div>` : "";
+      actions += isExternal ? `<a class="btn primary" href="${esc(url)}" target="_blank" rel="${rel}">${esc(actionText(item))}</a>` : `<button class="btn primary" id="detailMainBtn" type="button">${esc(actionText(item))}</button>`;
+      actions += `<button class="btn" id="detailShareBtn" type="button">Bagikan</button>`;
+      $("#detailActions").innerHTML = actions;
+      if(!isExternal) $("#detailMainBtn").addEventListener("click", () => showToast("Masukkan link tujuan yang sebenarnya melalui Admin."));
+      $("#detailShareBtn").addEventListener("click", () => shareContent(item));
+      $("#detailModal").classList.add("open");
+      history.replaceState(null,"",location.pathname+location.search+"#content-"+item.id);
+    }
 
-          if(navigator.share){
-            try { await navigator.share(shareData); return; } catch(e){}
-          }
-          const wa = `https://wa.me/?text=${encodeURIComponent(item.title + " — " + url)}`;
-          window.open(wa, "_blank", "noopener,noreferrer");
-        });
-      });
+    function shareContent(item){
+      const url = item.url && /^https?:\/\//i.test(item.url) ? item.url : `${location.href.split("#")[0]}#content-${item.id}`;
+      const shareData = {title:item.title,text:item.description || item.title,url};
+      if(navigator.share){ navigator.share(shareData).catch(()=>{}); return; }
+      const wa = `https://wa.me/?text=${encodeURIComponent(item.title + " — " + url)}`;
+      window.open(wa,"_blank","noopener,noreferrer");
+    }
+
+    function bindShareButtons(){
+      document.querySelectorAll("[data-share]").forEach(btn => btn.addEventListener("click", () => {
+        const item = items.find(x => String(x.id) === String(btn.dataset.share));
+        if(item) shareContent(item);
+      }));
     }
 
     function updateItemListSchema(){
@@ -765,17 +830,21 @@
       editingId = id;
       $("#editor").hidden = false;
       const item = id ? items.find(x=>x.id===id) : {
-        title:"", category:"Artikel", description:"", url:"#", image:"",
-        keywords:"", type:"article", date:new Date().toISOString().slice(0,10)
+        title:"", category:"Artikel", description:"", content:"", url:"#", image:"", alt:"",
+        keywords:"", type:"article", price:"", buttonText:"", date:new Date().toISOString().slice(0,10)
       };
       $("#editorTitle").textContent = id ? "Edit Konten" : "Tambah Konten";
       $("#itemTitle").value = item.title || "";
       $("#itemCategory").value = item.category || "";
       $("#itemDescription").value = item.description || "";
+      $("#itemContent").value = item.content || "";
       $("#itemUrl").value = item.url || "#";
       $("#itemImage").value = item.image || "";
+      $("#itemAlt").value = item.alt || item.title || "";
       $("#itemKeywords").value = item.keywords || "";
       $("#itemType").value = item.type || "article";
+      $("#itemPrice").value = item.price || "";
+      $("#itemButton").value = item.buttonText || "";
       $("#itemTitle").focus();
     }
 
@@ -871,10 +940,14 @@
         title: $("#itemTitle").value.trim(),
         category: $("#itemCategory").value.trim() || "Umum",
         description: $("#itemDescription").value.trim(),
+        content: $("#itemContent").value.trim(),
         url: $("#itemUrl").value.trim() || "#",
         image: $("#itemImage").value.trim(),
+        alt: $("#itemAlt").value.trim(),
         keywords: $("#itemKeywords").value.trim(),
         type: $("#itemType").value,
+        price: $("#itemPrice").value.trim(),
+        buttonText: $("#itemButton").value.trim(),
         date: new Date().toISOString().slice(0,10)
       };
 
@@ -929,10 +1002,16 @@
       reader.readAsText(file);
     });
 
+    $("#closeDetailBtn").addEventListener("click", () => { $("#detailModal").classList.remove("open"); history.replaceState(null,"",location.pathname+location.search); });
+    $("#detailModal").addEventListener("click", e => { if(e.target === $("#detailModal")) $("#closeDetailBtn").click(); });
+    window.addEventListener("hashchange", () => { const m=location.hash.match(/^#content-(\d+)$/); if(m) openContent(Number(m[1])); });
+
     $("#year").textContent = new Date().getFullYear();
 
     // Inisialisasi
     render();
+    const hashMatch = location.hash.match(/^#content-(\d+)$/);
+    if(hashMatch) setTimeout(() => openContent(Number(hashMatch[1])), 80);
   </script>
 </body>
 </html>
