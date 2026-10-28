@@ -2053,7 +2053,7 @@ async function generateAndSendCertificate() {
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(textColor.r, textColor.g, textColor.b);
-    doc.text(t.desc || 'Telah menyelesaikan pelatihan profesional:', 148.5, 120, { align: 'center' });
+    doc.text(t.description || 'Telah menyelesaikan pelatihan profesional:', 148.5, 120, { align: 'center' });
 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
@@ -2265,7 +2265,7 @@ async function loadAdminCertTemplate() {
       <div><strong>Header:</strong> ${template.header || '-'}</div>
       <div><strong>Judul Utama:</strong> ${template.mainTitle || '-'}</div>
       <div><strong>Pengantar:</strong> ${template.intro || '-'}</div>
-      <div><strong>Deskripsi:</strong> ${template.desc || '-'}</div>
+      <div><strong>Deskripsi:</strong> ${template.description || '-'}</div>
       <div><strong>Nama Pelatihan:</strong> ${template.trainingName || '-'}</div>
       <div><strong>Predikat:</strong> ${template.predicate || '-'}</div>
       <div><strong>Tanda Tangan Kiri:</strong> ${template.signLeft || '-'}</div>
