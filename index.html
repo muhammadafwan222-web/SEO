@@ -36,59 +36,35 @@
     transition: all 0.3s ease;
   }
   .btn-primary:hover { transform: translateY(-2px); }
-  .btn-success {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    transition: all 0.3s ease;
-  }
-  .btn-danger {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    transition: all 0.3s ease;
-  }
+  .btn-success { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); transition: all 0.3s ease; }
+  .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); transition: all 0.3s ease; }
+  .btn-warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); transition: all 0.3s ease; }
   .glow { box-shadow: 0 0 60px rgba(139, 92, 246, 0.3); }
   .floating { animation: floating 3s ease-in-out infinite; }
   @keyframes floating {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
   }
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
-    z-index: 0;
-  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; z-index: 0; }
   .hidden-section { display: none !important; }
   .loader {
     border: 3px solid rgba(255,255,255,0.1);
     border-top: 3px solid #a78bfa;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     animation: spin 1s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .module-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(139, 92, 246, 0.5);
-  }
-  .progress-bar {
-    background: linear-gradient(90deg, #6366f1, #a78bfa, #f472b6);
-    transition: width 0.5s ease;
-  }
+  .module-card:hover { transform: translateY(-5px); border-color: rgba(139, 92, 246, 0.5); }
+  .progress-bar { background: linear-gradient(90deg, #6366f1, #a78bfa, #f472b6); transition: width 0.5s ease; }
   input, textarea, select {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
     color: #fff;
   }
-  input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: #a78bfa;
-  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #a78bfa; }
   .toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
+    position: fixed; top: 20px; right: 20px; z-index: 9999;
     animation: slideIn 0.3s ease;
   }
   @keyframes slideIn {
@@ -96,42 +72,55 @@
     to { transform: translateX(0); opacity: 1; }
   }
   .video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 12px;
-    background: #000;
+    position: relative; padding-bottom: 56.25%; height: 0;
+    overflow: hidden; border-radius: 12px; background: #000;
   }
-  .video-container iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-  }
+  .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
   .video-item { cursor: pointer; transition: all 0.3s ease; }
   .video-item:hover { background: rgba(99, 102, 241, 0.2); }
-  .video-item.active {
-    background: rgba(99, 102, 241, 0.3);
-    border-color: #8b5cf6;
-  }
-  .quiz-option {
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+  .video-item.active { background: rgba(99, 102, 241, 0.3); border-color: #8b5cf6; }
+  .quiz-option { cursor: pointer; transition: all 0.3s ease; }
   .quiz-option:hover { background: rgba(99, 102, 241, 0.2); }
-  .quiz-option.selected { background: rgba(99, 102, 241, 0.3); border-color: #8b5cf6; }
-  .quiz-option.correct { background: rgba(34, 197, 94, 0.3); border-color: #22c55e; }
-  .quiz-option.wrong { background: rgba(239, 68, 68, 0.3); border-color: #ef4444; }
+  .quiz-option.selected { background: rgba(99, 102, 241, 0.3); }
+  .quiz-option.correct { background: rgba(34, 197, 94, 0.3); }
+  .quiz-option.wrong { background: rgba(239, 68, 68, 0.3); }
   .admin-table { width: 100%; border-collapse: collapse; }
-  .admin-table th, .admin-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
+  .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .admin-table th { background: rgba(99, 102, 241, 0.2); font-weight: 600; }
   .admin-table tr:hover { background: rgba(255,255,255,0.05); }
   .ebook-card { transition: all 0.3s ease; }
   .ebook-card:hover { transform: translateY(-3px); }
+  .product-card { transition: all 0.3s ease; }
+  .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+  .step-item { position: relative; padding-left: 40px; }
+  .step-item::before {
+    content: ''; position: absolute; left: 15px; top: 40px; bottom: -20px;
+    width: 2px; background: rgba(139, 92, 246, 0.3);
+  }
+  .step-item:last-child::before { display: none; }
+  .step-icon {
+    position: absolute; left: 0; top: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: bold;
+  }
+  .step-item.completed .step-icon { background: linear-gradient(135deg, #22c55e, #16a34a); }
+  .tab-btn { transition: all 0.3s ease; }
+  .tab-btn.active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-color: transparent;
+  }
+  .color-picker-wrapper { display: flex; gap: 8px; flex-wrap: wrap; }
+  .color-option {
+    width: 40px; height: 40px; border-radius: 8px; cursor: pointer;
+    border: 3px solid transparent; transition: all 0.3s ease;
+  }
+  .color-option:hover, .color-option.active { border-color: #fff; transform: scale(1.1); }
+  .category-badge {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 12px; font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -144,16 +133,22 @@
 
 <!-- NAVIGATION -->
 <nav class="relative z-50 glass px-6 py-4 mb-8">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
+  <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-3">
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
         <i class="fas fa-graduation-cap text-xl"></i>
       </div>
       <span class="text-2xl font-bold gradient-text">AcademyPro</span>
     </div>
-    <div class="flex gap-3">
+    <div class="flex gap-2 flex-wrap">
       <button onclick="showLanding()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
         <i class="fas fa-home mr-2"></i>Home
+      </button>
+      <button onclick="showTrainings()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
+        <i class="fas fa-book mr-2"></i>Pelatihan
+      </button>
+      <button onclick="showMarketplace()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
+        <i class="fas fa-store mr-2"></i>Marketplace
       </button>
       <button onclick="showAdminLogin()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
         <i class="fas fa-lock mr-2"></i>Admin
@@ -164,7 +159,7 @@
 
 <!-- LANDING -->
 <section id="landingSection" class="relative min-h-screen flex items-center justify-center px-4 py-20">
-  <div class="max-w-6xl mx-auto relative z-10">
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-12" data-aos="fade-up">
       <div class="inline-block glass rounded-full px-6 py-2 mb-6">
         <span class="text-sm text-purple-300">🚀 Platform Pelatihan #1 di Indonesia</span>
@@ -174,11 +169,14 @@
         Raih <span class="gradient-text">Cuan Jutaan</span>
       </h1>
       <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-        Pelatihan profesional dengan video, quiz, e-book, sertifikat otomatis, dan peluang bisnis.
+        Pelatihan profesional dengan video, quiz, e-book, sertifikat otomatis, dan marketplace produk digital.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <button onclick="showRegisterModal()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg">
           <i class="fas fa-rocket mr-2"></i>Daftar Sekarang - GRATIS
+        </button>
+        <button onclick="showTrainings()" class="glass px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10">
+          <i class="fas fa-book-open mr-2"></i>Lihat Pelatihan
         </button>
       </div>
     </div>
@@ -189,17 +187,29 @@
         <div class="text-sm text-gray-400">Alumni Aktif</div>
       </div>
       <div class="glass rounded-2xl p-6 text-center">
-        <div class="text-3xl font-bold gradient-text">98%</div>
-        <div class="text-sm text-gray-400">Kepuasan</div>
+        <div class="text-3xl font-bold gradient-text" id="statTrainings">0</div>
+        <div class="text-sm text-gray-400">Pelatihan</div>
       </div>
       <div class="glass rounded-2xl p-6 text-center">
-        <div class="text-3xl font-bold gradient-text" id="statModules">0</div>
-        <div class="text-sm text-gray-400">Materi Premium</div>
+        <div class="text-3xl font-bold gradient-text" id="statProducts">0</div>
+        <div class="text-sm text-gray-400">Produk Digital</div>
       </div>
       <div class="glass rounded-2xl p-6 text-center">
         <div class="text-3xl font-bold gradient-text">Rp 5Jt+</div>
         <div class="text-sm text-gray-400">Rata-rata Income</div>
       </div>
+    </div>
+
+    <!-- Featured Trainings -->
+    <div class="mt-20">
+      <h2 class="text-3xl font-bold mb-8 text-center">🎓 Pelatihan Unggulan</h2>
+      <div id="featuredTrainings" class="grid md:grid-cols-3 gap-6"></div>
+    </div>
+
+    <!-- Featured Products -->
+    <div class="mt-20">
+      <h2 class="text-3xl font-bold mb-8 text-center">🛍️ Produk Digital Terlaris</h2>
+      <div id="featuredProducts" class="grid md:grid-cols-4 gap-4"></div>
     </div>
   </div>
 </section>
@@ -217,18 +227,9 @@
       <h2 class="text-2xl font-bold">Daftar Pelatihan</h2>
     </div>
     <form id="registerForm" class="space-y-4">
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Nama Lengkap</label>
-        <input type="text" id="regName" required class="w-full px-4 py-3 rounded-xl" />
-      </div>
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Nomor WhatsApp</label>
-        <input type="tel" id="regWa" required class="w-full px-4 py-3 rounded-xl" />
-      </div>
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Email Aktif</label>
-        <input type="email" id="regEmail" required class="w-full px-4 py-3 rounded-xl" />
-      </div>
+      <input type="text" id="regName" required placeholder="Nama Lengkap" class="w-full px-4 py-3 rounded-xl" />
+      <input type="tel" id="regWa" required placeholder="Nomor WhatsApp" class="w-full px-4 py-3 rounded-xl" />
+      <input type="email" id="regEmail" required placeholder="Email Aktif" class="w-full px-4 py-3 rounded-xl" />
       <button type="submit" id="btnRegister" class="btn-primary w-full py-4 rounded-xl font-bold text-lg">
         <i class="fas fa-paper-plane mr-2"></i>Daftar & Mulai Belajar
       </button>
@@ -236,9 +237,9 @@
   </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- USER DASHBOARD -->
 <section id="dashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-6xl mx-auto relative z-10">
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="glass rounded-2xl p-6 mb-6 flex items-center justify-between flex-wrap gap-4">
       <div>
         <h2 class="text-2xl font-bold">Selamat Datang, <span id="userName" class="gradient-text"></span> 👋</h2>
@@ -251,47 +252,109 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-4 mb-6">
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Progress</span>
-          <i class="fas fa-chart-line text-purple-400"></i>
+    <!-- Tabs -->
+    <div class="flex gap-2 mb-6 flex-wrap">
+      <button onclick="switchDashboardTab('my-trainings')" class="tab-btn active glass px-4 py-2 rounded-xl" data-tab="my-trainings">
+        <i class="fas fa-book-open mr-2"></i>Pelatihan Saya
+      </button>
+      <button onclick="switchDashboardTab('all-trainings')" class="tab-btn glass px-4 py-2 rounded-xl" data-tab="all-trainings">
+        <i class="fas fa-graduation-cap mr-2"></i>Semua Pelatihan
+      </button>
+      <button onclick="switchDashboardTab('marketplace')" class="tab-btn glass px-4 py-2 rounded-xl" data-tab="marketplace">
+        <i class="fas fa-store mr-2"></i>Marketplace
+      </button>
+      <button onclick="switchDashboardTab('my-certificates')" class="tab-btn glass px-4 py-2 rounded-xl" data-tab="my-certificates">
+        <i class="fas fa-certificate mr-2"></i>Sertifikat Saya
+      </button>
+    </div>
+
+    <!-- Tab: My Trainings -->
+    <div id="tab-my-trainings" class="dashboard-tab">
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-sm">Progress</span>
+            <i class="fas fa-chart-line text-purple-400"></i>
+          </div>
+          <div class="text-3xl font-bold" id="progressPercent">0%</div>
+          <div class="w-full bg-white/10 rounded-full h-2 mt-3">
+            <div id="progressBar" class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+          </div>
         </div>
-        <div class="text-3xl font-bold" id="progressPercent">0%</div>
-        <div class="w-full bg-white/10 rounded-full h-2 mt-3">
-          <div id="progressBar" class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-sm">Modul Selesai</span>
+            <i class="fas fa-check-circle text-green-400"></i>
+          </div>
+          <div class="text-3xl font-bold"><span id="completedModules">0</span>/<span id="totalModules">0</span></div>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-sm">Nilai Rata-rata</span>
+            <i class="fas fa-star text-yellow-400"></i>
+          </div>
+          <div class="text-3xl font-bold gradient-text" id="averageScore">0</div>
         </div>
       </div>
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Modul Selesai</span>
-          <i class="fas fa-check-circle text-green-400"></i>
+
+      <h3 class="text-2xl font-bold mb-4"><i class="fas fa-book-open mr-2 text-purple-400"></i>Modul Pelatihan</h3>
+      <div id="modulesContainer" class="grid md:grid-cols-2 gap-4 mb-8"></div>
+
+      <div id="certificateSection" class="hidden-section">
+        <div class="glass rounded-2xl p-8 text-center glow">
+          <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4 floating">
+            <i class="fas fa-trophy text-3xl"></i>
+          </div>
+          <h3 class="text-3xl font-bold mb-2">🎉 Selamat! Kamu Lulus!</h3>
+          <button onclick="generateAndSendCertificate()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg mt-4">
+            <i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email
+          </button>
         </div>
-        <div class="text-3xl font-bold"><span id="completedModules">0</span>/<span id="totalModules">0</span></div>
-      </div>
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Nilai Rata-rata</span>
-          <i class="fas fa-star text-yellow-400"></i>
-        </div>
-        <div class="text-3xl font-bold gradient-text" id="averageScore">0</div>
       </div>
     </div>
 
-    <h3 class="text-2xl font-bold mb-4"><i class="fas fa-book-open mr-2 text-purple-400"></i>Modul Pelatihan</h3>
-    <div id="modulesContainer" class="grid md:grid-cols-2 gap-4 mb-8"></div>
-
-    <div id="certificateSection" class="hidden-section">
-      <div class="glass rounded-2xl p-8 text-center glow">
-        <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4 floating">
-          <i class="fas fa-trophy text-3xl"></i>
-        </div>
-        <h3 class="text-3xl font-bold mb-2">🎉 Selamat! Kamu Lulus!</h3>
-        <button onclick="generateAndSendCertificate()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg mt-4">
-          <i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email
-        </button>
-      </div>
+    <!-- Tab: All Trainings -->
+    <div id="tab-all-trainings" class="dashboard-tab hidden-section">
+      <h3 class="text-2xl font-bold mb-4"><i class="fas fa-graduation-cap mr-2 text-purple-400"></i>Semua Pelatihan Tersedia</h3>
+      <div id="allTrainingsContainer" class="grid md:grid-cols-3 gap-4"></div>
     </div>
+
+    <!-- Tab: Marketplace -->
+    <div id="tab-marketplace" class="dashboard-tab hidden-section">
+      <h3 class="text-2xl font-bold mb-4"><i class="fas fa-store mr-2 text-green-400"></i>Marketplace Produk Digital</h3>
+      <div id="marketplaceContainer" class="grid md:grid-cols-4 gap-4"></div>
+    </div>
+
+    <!-- Tab: My Certificates -->
+    <div id="tab-my-certificates" class="dashboard-tab hidden-section">
+      <h3 class="text-2xl font-bold mb-4"><i class="fas fa-certificate mr-2 text-yellow-400"></i>Sertifikat Saya</h3>
+      <div id="myCertificatesContainer" class="grid md:grid-cols-2 gap-4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAININGS LIST PAGE -->
+<section id="trainingsSection" class="hidden-section relative min-h-screen px-4 py-10">
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h1 class="text-4xl font-bold mb-2">🎓 Semua Pelatihan</h1>
+    <p class="text-gray-400 mb-8">Pilih pelatihan yang sesuai dengan minatmu</p>
+
+    <!-- Category Filter -->
+    <div class="flex gap-2 mb-8 flex-wrap" id="categoryFilter"></div>
+
+    <div id="trainingsListContainer" class="grid md:grid-cols-3 gap-6"></div>
+  </div>
+</section>
+
+<!-- MARKETPLACE PAGE -->
+<section id="marketplaceSection" class="hidden-section relative min-h-screen px-4 py-10">
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h1 class="text-4xl font-bold mb-2">🛍️ Marketplace Produk Digital</h1>
+    <p class="text-gray-400 mb-8">Beli & Jual produk digital berkualitas</p>
+
+    <div class="flex gap-2 mb-8 flex-wrap" id="productCategoryFilter"></div>
+
+    <div id="marketplaceListContainer" class="grid md:grid-cols-4 gap-4"></div>
   </div>
 </section>
 
@@ -307,17 +370,26 @@
       <p id="moduleDescription" class="text-gray-300"></p>
     </div>
 
+    <!-- Tahapan/Stages -->
+    <div class="glass rounded-2xl p-6 mb-6">
+      <h3 class="text-xl font-bold mb-4"><i class="fas fa-route mr-2 text-purple-400"></i>Tahapan Pembelajaran</h3>
+      <div id="stagesContainer" class="space-y-4"></div>
+    </div>
+
+    <!-- Videos -->
     <div class="glass rounded-2xl p-6 mb-6">
       <h3 class="text-xl font-bold mb-4"><i class="fas fa-video mr-2 text-red-400"></i>Video Pembelajaran</h3>
       <div id="videoThumbnails" class="grid md:grid-cols-3 gap-3 mb-4"></div>
       <div id="activeVideoContainer" class="video-container mb-4"></div>
     </div>
 
+    <!-- E-Books -->
     <div id="ebooksSection" class="glass rounded-2xl p-6 mb-6 hidden-section">
       <h3 class="text-xl font-bold mb-4"><i class="fas fa-book mr-2 text-blue-400"></i>E-Book & Materi Download</h3>
       <div id="ebooksContainer" class="grid md:grid-cols-2 gap-4"></div>
     </div>
 
+    <!-- Quiz -->
     <div class="glass rounded-2xl p-6">
       <h3 class="text-xl font-bold mb-4"><i class="fas fa-question-circle mr-2 text-purple-400"></i>Quiz</h3>
       <div id="quizContent"></div>
@@ -352,14 +424,21 @@
 
 <!-- ADMIN DASHBOARD -->
 <section id="adminDashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-6xl mx-auto relative z-10">
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="glass rounded-2xl p-6 mb-6 flex items-center justify-between flex-wrap gap-4">
       <div>
         <h2 class="text-2xl font-bold"><i class="fas fa-cog mr-2 text-purple-400"></i>Admin Dashboard</h2>
+        <p class="text-gray-400 text-sm">Kelola semua aspek platform</p>
       </div>
-      <div class="flex gap-2">
+      <div class="flex gap-2 flex-wrap">
         <button onclick="showModuleForm()" class="btn-success px-4 py-2 rounded-xl">
           <i class="fas fa-plus mr-2"></i>Tambah Modul
+        </button>
+        <button onclick="showProductForm()" class="btn-warning px-4 py-2 rounded-xl">
+          <i class="fas fa-box mr-2"></i>Tambah Produk
+        </button>
+        <button onclick="showCertTemplateForm()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
+          <i class="fas fa-palette mr-2"></i>Template Sertifikat
         </button>
         <button onclick="logout()" class="bg-red-500/20 border border-red-500/30 px-4 py-2 rounded-xl">
           <i class="fas fa-sign-out-alt mr-2"></i>Logout
@@ -367,22 +446,81 @@
       </div>
     </div>
 
-    <div class="glass rounded-2xl p-6">
-      <h3 class="text-xl font-bold mb-4">Daftar Modul</h3>
-      <div class="overflow-x-auto">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Judul</th>
-              <th>Video</th>
-              <th>E-Book</th>
-              <th>Quiz</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="adminModulesTable"></tbody>
-        </table>
+    <!-- Admin Tabs -->
+    <div class="flex gap-2 mb-6 flex-wrap">
+      <button onclick="switchAdminTab('modules')" class="tab-btn active glass px-4 py-2 rounded-xl" data-tab="modules">
+        <i class="fas fa-book mr-2"></i>Modul Pelatihan
+      </button>
+      <button onclick="switchAdminTab('products')" class="tab-btn glass px-4 py-2 rounded-xl" data-tab="products">
+        <i class="fas fa-store mr-2"></i>Produk Digital
+      </button>
+      <button onclick="switchAdminTab('peserta')" class="tab-btn glass px-4 py-2 rounded-xl" data-tab="peserta">
+        <i class="fas fa-users mr-2"></i>Peserta
+      </button>
+      <button onclick="switchAdminTab('certificates')" class="tab-btn glass px-4 py-2 rounded-xl" data-tab="certificates">
+        <i class="fas fa-certificate mr-2"></i>Sertifikat
+      </button>
+    </div>
+
+    <!-- Tab: Modules -->
+    <div id="admin-tab-modules" class="admin-tab">
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-xl font-bold mb-4">Daftar Modul Pelatihan</h3>
+        <div class="overflow-x-auto">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>No</th><th>Judul</th><th>Kategori</th><th>Video</th><th>E-Book</th><th>Quiz</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminModulesTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Products -->
+    <div id="admin-tab-products" class="admin-tab hidden-section">
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-xl font-bold mb-4">Daftar Produk Digital</h3>
+        <div class="overflow-x-auto">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>No</th><th>Nama Produk</th><th>Kategori</th><th>Harga</th><th>Terjual</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Peserta -->
+    <div id="admin-tab-peserta" class="admin-tab hidden-section">
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-xl font-bold mb-4">Daftar Peserta</h3>
+        <div class="overflow-x-auto">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>No</th><th>Nama</th><th>Email</th><th>WhatsApp</th><th>Tanggal</th><th>Progress</th>
+              </tr>
+            </thead>
+            <tbody id="adminPesertaTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Certificates -->
+    <div id="admin-tab-certificates" class="admin-tab hidden-section">
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-xl font-bold mb-4">Template Sertifikat Saat Ini</h3>
+        <div id="currentCertTemplate" class="glass rounded-xl p-6 mb-4"></div>
+        <button onclick="showCertTemplateForm()" class="btn-primary px-6 py-3 rounded-xl font-bold">
+          <i class="fas fa-edit mr-2"></i>Edit Template Sertifikat
+        </button>
       </div>
     </div>
   </div>
@@ -404,10 +542,34 @@
       </div>
 
       <div>
+        <label class="text-sm text-gray-300 mb-2 block">Kategori *</label>
+        <select id="moduleCategory" required class="w-full px-4 py-3 rounded-xl">
+          <option value="Digital Marketing">Digital Marketing</option>
+          <option value="Bisnis Online">Bisnis Online</option>
+          <option value="Desain Grafis">Desain Grafis</option>
+          <option value="Programming">Programming</option>
+          <option value="Content Creation">Content Creation</option>
+          <option value="Finance">Finance</option>
+        </select>
+      </div>
+
+      <div>
         <label class="text-sm text-gray-300 mb-2 block">Deskripsi *</label>
         <textarea id="moduleDesc" rows="3" required class="w-full px-4 py-3 rounded-xl"></textarea>
       </div>
 
+      <!-- Tahapan/Stages -->
+      <div class="border-t border-white/10 pt-4">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-bold">Tahapan Pembelajaran</h3>
+          <button type="button" onclick="addStageField()" class="text-sm text-blue-400 hover:text-blue-300">
+            <i class="fas fa-plus mr-1"></i>Tambah Tahapan
+          </button>
+        </div>
+        <div id="stagesFormContainer" class="space-y-3"></div>
+      </div>
+
+      <!-- Videos -->
       <div class="border-t border-white/10 pt-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="font-bold">Video Pembelajaran</h3>
@@ -418,6 +580,7 @@
         <div id="videosContainer" class="space-y-3"></div>
       </div>
 
+      <!-- E-Books -->
       <div class="border-t border-white/10 pt-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="font-bold">E-Book / Materi Download</h3>
@@ -428,27 +591,34 @@
         <div id="ebooksFormContainer" class="space-y-3"></div>
       </div>
 
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Icon</label>
-        <select id="moduleIcon" class="w-full px-4 py-3 rounded-xl">
-          <option value="book">book</option>
-          <option value="video">video</option>
-          <option value="laptop-code">laptop-code</option>
-          <option value="chart-line">chart-line</option>
-          <option value="rocket">rocket</option>
-        </select>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm text-gray-300 mb-2 block">Icon</label>
+          <select id="moduleIcon" class="w-full px-4 py-3 rounded-xl">
+            <option value="book">book</option>
+            <option value="video">video</option>
+            <option value="laptop-code">laptop-code</option>
+            <option value="chart-line">chart-line</option>
+            <option value="rocket">rocket</option>
+            <option value="paint-brush">paint-brush</option>
+            <option value="code">code</option>
+            <option value="camera">camera</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm text-gray-300 mb-2 block">Warna</label>
+          <select id="moduleColor" class="w-full px-4 py-3 rounded-xl">
+            <option value="from-blue-500 to-cyan-500">Biru - Cyan</option>
+            <option value="from-purple-500 to-pink-500">Ungu - Pink</option>
+            <option value="from-green-500 to-emerald-500">Hijau</option>
+            <option value="from-orange-500 to-red-500">Orange - Merah</option>
+            <option value="from-yellow-500 to-orange-500">Kuning - Orange</option>
+            <option value="from-pink-500 to-rose-500">Pink - Rose</option>
+          </select>
+        </div>
       </div>
 
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Warna</label>
-        <select id="moduleColor" class="w-full px-4 py-3 rounded-xl">
-          <option value="from-blue-500 to-cyan-500">Biru - Cyan</option>
-          <option value="from-purple-500 to-pink-500">Ungu - Pink</option>
-          <option value="from-green-500 to-emerald-500">Hijau</option>
-          <option value="from-orange-500 to-red-500">Orange - Merah</option>
-        </select>
-      </div>
-
+      <!-- Quiz -->
       <div class="border-t border-white/10 pt-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="font-bold">Quiz (Opsional)</h3>
@@ -471,9 +641,189 @@
   </div>
 </div>
 
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+  <div class="glass rounded-3xl p-8 max-w-2xl w-full glow relative max-h-[90vh] overflow-y-auto">
+    <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+    <h2 class="text-2xl font-bold mb-6" id="productModalTitle">Tambah Produk Digital</h2>
+    <form id="productForm" class="space-y-4">
+      <input type="hidden" id="productId" />
+      
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Nama Produk *</label>
+        <input type="text" id="productName" required class="w-full px-4 py-3 rounded-xl" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Kategori *</label>
+        <select id="productCategory" required class="w-full px-4 py-3 rounded-xl">
+          <option value="E-Book">E-Book</option>
+          <option value="Template">Template</option>
+          <option value="Course">Course</option>
+          <option value="Software">Software</option>
+          <option value="Design Asset">Design Asset</option>
+          <option value="Audio">Audio</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Deskripsi *</label>
+        <textarea id="productDesc" rows="3" required class="w-full px-4 py-3 rounded-xl"></textarea>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm text-gray-300 mb-2 block">Harga (Rp) *</label>
+          <input type="number" id="productPrice" required min="0" class="w-full px-4 py-3 rounded-xl" />
+        </div>
+        <div>
+          <label class="text-sm text-gray-300 mb-2 block">Harga Coret (Rp)</label>
+          <input type="number" id="productOriginalPrice" min="0" class="w-full px-4 py-3 rounded-xl" placeholder="Opsional" />
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">URL Gambar/Thumbnail</label>
+        <input type="text" id="productImage" class="w-full px-4 py-3 rounded-xl" placeholder="https://..." />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">URL Download/Produk</label>
+        <input type="text" id="productUrl" class="w-full px-4 py-3 rounded-xl" placeholder="Link produk setelah dibeli" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Penjual</label>
+        <input type="text" id="productSeller" class="w-full px-4 py-3 rounded-xl" placeholder="Nama penjual" />
+      </div>
+
+      <div class="flex gap-3 pt-4">
+        <button type="submit" class="btn-primary flex-1 py-3 rounded-xl font-bold">
+          <i class="fas fa-save mr-2"></i>Simpan
+        </button>
+        <button type="button" onclick="closeProductModal()" class="glass flex-1 py-3 rounded-xl font-bold hover:bg-white/10">
+          Batal
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CERTIFICATE TEMPLATE MODAL -->
+<div id="certTemplateModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+  <div class="glass rounded-3xl p-8 max-w-3xl w-full glow relative max-h-[90vh] overflow-y-auto">
+    <button onclick="closeCertTemplateModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+    <h2 class="text-2xl font-bold mb-6">⚙️ Pengaturan Template Sertifikat</h2>
+    <form id="certTemplateForm" class="space-y-4">
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Judul Atas (Header)</label>
+        <input type="text" id="certHeader" class="w-full px-4 py-3 rounded-xl" placeholder="ACADEMYPRO CERTIFIED" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Judul Utama</label>
+        <input type="text" id="certMainTitle" class="w-full px-4 py-3 rounded-xl" placeholder="SERTIFIKAT" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Teks Pengantar</label>
+        <input type="text" id="certIntro" class="w-full px-4 py-3 rounded-xl" placeholder="Diberikan kepada" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Teks Deskripsi</label>
+        <input type="text" id="certDesc" class="w-full px-4 py-3 rounded-xl" placeholder="Telah menyelesaikan pelatihan profesional:" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Nama Pelatihan</label>
+        <input type="text" id="certTrainingName" class="w-full px-4 py-3 rounded-xl" placeholder="Digital Marketing & Business Mastery" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Predikat</label>
+        <input type="text" id="certPredicate" class="w-full px-4 py-3 rounded-xl" placeholder="Dengan predikat SANGAT BAIK" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm text-gray-300 mb-2 block">Tanda Tangan Kiri</label>
+          <input type="text" id="certSignLeft" class="w-full px-4 py-3 rounded-xl" placeholder="Mentor Utama" />
+        </div>
+        <div>
+          <label class="text-sm text-gray-300 mb-2 block">Tanda Tangan Kanan</label>
+          <input type="text" id="certSignRight" class="w-full px-4 py-3 rounded-xl" placeholder="Direktur AcademyPro" />
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Kota</label>
+        <input type="text" id="certCity" class="w-full px-4 py-3 rounded-xl" placeholder="Jakarta" />
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Warna Background</label>
+        <div class="color-picker-wrapper" id="bgColorPicker">
+          <div class="color-option active" style="background: #fef3c7" data-color="#fef3c7" onclick="selectCertColor('bg', this)"></div>
+          <div class="color-option" style="background: #ffffff" data-color="#ffffff" onclick="selectCertColor('bg', this)"></div>
+          <div class="color-option" style="background: #dbeafe" data-color="#dbeafe" onclick="selectCertColor('bg', this)"></div>
+          <div class="color-option" style="background: #fce7f3" data-color="#fce7f3" onclick="selectCertColor('bg', this)"></div>
+          <div class="color-option" style="background: #d1fae5" data-color="#d1fae5" onclick="selectCertColor('bg', this)"></div>
+          <div class="color-option" style="background: #1e1b4b" data-color="#1e1b4b" onclick="selectCertColor('bg', this)"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Warna Border</label>
+        <div class="color-picker-wrapper" id="borderColorPicker">
+          <div class="color-option active" style="background: #92400e" data-color="#92400e" onclick="selectCertColor('border', this)"></div>
+          <div class="color-option" style="background: #6366f1" data-color="#6366f1" onclick="selectCertColor('border', this)"></div>
+          <div class="color-option" style="background: #22c55e" data-color="#22c55e" onclick="selectCertColor('border', this)"></div>
+          <div class="color-option" style="background: #ef4444" data-color="#ef4444" onclick="selectCertColor('border', this)"></div>
+          <div class="color-option" style="background: #f59e0b" data-color="#f59e0b" onclick="selectCertColor('border', this)"></div>
+          <div class="color-option" style="background: #000000" data-color="#000000" onclick="selectCertColor('border', this)"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Warna Teks Utama</label>
+        <div class="color-picker-wrapper" id="textColorPicker">
+          <div class="color-option active" style="background: #92400e" data-color="#92400e" onclick="selectCertColor('text', this)"></div>
+          <div class="color-option" style="background: #1f2937" data-color="#1f2937" onclick="selectCertColor('text', this)"></div>
+          <div class="color-option" style="background: #6366f1" data-color="#6366f1" onclick="selectCertColor('text', this)"></div>
+          <div class="color-option" style="background: #ffffff" data-color="#ffffff" onclick="selectCertColor('text', this)"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Warna Nama Peserta</label>
+        <div class="color-picker-wrapper" id="nameColorPicker">
+          <div class="color-option active" style="background: #4f46e5" data-color="#4f46e5" onclick="selectCertColor('name', this)"></div>
+          <div class="color-option" style="background: #92400e" data-color="#92400e" onclick="selectCertColor('name', this)"></div>
+          <div class="color-option" style="background: #dc2626" data-color="#dc2626" onclick="selectCertColor('name', this)"></div>
+          <div class="color-option" style="background: #000000" data-color="#000000" onclick="selectCertColor('name', this)"></div>
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-4">
+        <button type="submit" class="btn-primary flex-1 py-3 rounded-xl font-bold">
+          <i class="fas fa-save mr-2"></i>Simpan Template
+        </button>
+        <button type="button" onclick="closeCertTemplateModal()" class="glass flex-1 py-3 rounded-xl font-bold hover:bg-white/10">
+          Batal
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
 /* ============================================================
-   KONFIGURASI - GANTI DENGAN DATA KAMU
+   KONFIGURASI
    ============================================================ */
 const CONFIG = {
   SUPABASE_URL: 'https://jnbtgryfrrvpxpfujwuo.supabase.co',
@@ -492,18 +842,27 @@ let supabaseClient = null;
 let currentUser = null;
 let currentAdmin = null;
 let modulesData = [];
+let productsData = [];
+let certTemplate = null;
 let currentModule = null;
 let currentVideoIndex = 0;
 let quizAnswers = {};
 let quizScore = 0;
 
-// Counter untuk form
 let videoFieldCounter = 0;
 let ebookFieldCounter = 0;
 let quizFieldCounter = 0;
+let stageFieldCounter = 0;
+
+let selectedCertColors = {
+  bg: '#fef3c7',
+  border: '#92400e',
+  text: '#92400e',
+  name: '#4f46e5'
+};
 
 /* ============================================================
-   SUPABASE INIT - SAFE
+   SUPABASE INIT
    ============================================================ */
 function getSupabase() {
   if (!supabaseClient) {
@@ -518,7 +877,6 @@ function getSupabase() {
   return supabaseClient;
 }
 
-// Init EmailJS
 try {
   if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY) {
     emailjs.init({ publicKey: CONFIG.EMAILJS_PUBLIC_KEY });
@@ -551,7 +909,8 @@ function showToast(message, type = 'success') {
 function hideAllSections() {
   ['landingSection', 'dashboardSection', 'learningSection', 
    'adminLoginSection', 'adminDashboardSection', 
-   'registerModal', 'moduleModal'].forEach(id => {
+   'registerModal', 'moduleModal', 'productModal', 'certTemplateModal',
+   'trainingsSection', 'marketplaceSection'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.add('hidden-section');
   });
@@ -562,6 +921,8 @@ function showLanding() {
   const el = document.getElementById('landingSection');
   if (el) el.classList.remove('hidden-section');
   loadStats();
+  renderFeaturedTrainings();
+  renderFeaturedProducts();
   window.scrollTo(0, 0);
 }
 
@@ -576,13 +937,12 @@ function closeRegisterModal() {
 }
 
 /* ============================================================
-   LOAD DATA - DENGAN FALLBACK
+   LOAD DATA
    ============================================================ */
 async function loadModules() {
   const supabase = getSupabase();
   
   if (!supabase) {
-    console.log('Supabase tidak tersedia, menggunakan data lokal');
     return getLocalModules();
   }
   
@@ -605,9 +965,34 @@ async function loadModules() {
   }
 }
 
-async function loadPeserta() {
+async function loadProducts() {
   const supabase = getSupabase();
   
+  if (!supabase) {
+    return getLocalProducts();
+  }
+  
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.warn('Error load products:', error.message);
+      return getLocalProducts();
+    }
+    
+    productsData = data || [];
+    return productsData;
+  } catch (err) {
+    console.error('Error loading products:', err);
+    return getLocalProducts();
+  }
+}
+
+async function loadPeserta() {
+  const supabase = getSupabase();
   if (!supabase) return [];
   
   try {
@@ -616,28 +1001,49 @@ async function loadPeserta() {
       .select('*')
       .order('tanggal_daftar', { ascending: false });
     
-    if (error) {
-      console.warn('Error load peserta:', error.message);
-      return [];
-    }
+    if (error) return [];
     return data || [];
   } catch (err) {
-    console.error('Error loading peserta:', err);
     return [];
+  }
+}
+
+async function loadCertTemplate() {
+  const supabase = getSupabase();
+  
+  if (!supabase) {
+    return getLocalCertTemplate();
+  }
+  
+  try {
+    const { data, error } = await supabase
+      .from('certificate_templates')
+      .select('*')
+      .limit(1)
+      .single();
+    
+    if (error) return getLocalCertTemplate();
+    certTemplate = data;
+    return data;
+  } catch (err) {
+    return getLocalCertTemplate();
   }
 }
 
 async function loadStats() {
   try {
-    const [peserta, modules] = await Promise.all([
+    const [peserta, modules, products] = await Promise.all([
       loadPeserta(),
-      loadModules()
+      loadModules(),
+      loadProducts()
     ]);
     
     const statAlumni = document.getElementById('statAlumni');
-    const statModules = document.getElementById('statModules');
+    const statTrainings = document.getElementById('statTrainings');
+    const statProducts = document.getElementById('statProducts');
     if (statAlumni) statAlumni.textContent = peserta.length;
-    if (statModules) statModules.textContent = modules.length;
+    if (statTrainings) statTrainings.textContent = modules.length;
+    if (statProducts) statProducts.textContent = products.length;
   } catch (err) {
     console.error('Error loading stats:', err);
   }
@@ -652,40 +1058,58 @@ function getLocalModules() {
     } catch (e) {}
   }
   
-  // Default modules
   const defaults = [
     {
       id: 1,
       judul: 'Fundamental Digital Marketing',
+      kategori: 'Digital Marketing',
       deskripsi: 'Pelajari dasar-dasar digital marketing dari nol sampai mahir',
-      videos: [
-        { title: 'Pengantar Digital Marketing', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
+      videos: [{ title: 'Pengantar Digital Marketing', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }],
+      ebooks: [{ title: 'Panduan Digital Marketing PDF', url: '#' }],
+      stages: [
+        { title: 'Pengenalan', desc: 'Memahami konsep dasar digital marketing', icon: 'info-circle' },
+        { title: 'Strategi', desc: 'Membuat strategi marketing yang efektif', icon: 'target' },
+        { title: 'Eksekusi', desc: 'Implementasi strategi di berbagai platform', icon: 'rocket' },
+        { title: 'Analisis', desc: 'Mengukur dan mengoptimasi hasil', icon: 'chart-line' }
       ],
-      ebooks: [
-        { title: 'Panduan Digital Marketing PDF', url: 'https://example.com/ebook.pdf' }
-      ],
-      icon: 'book',
+      icon: 'bullhorn',
       color: 'from-blue-500 to-cyan-500',
       urutan: 1,
-      quiz: [
-        {
-          question: 'Apa itu Digital Marketing?',
-          options: ['Pemasaran melalui media digital', 'Jual beli di pasar', 'Iklan di TV saja', 'Tidak ada yang benar'],
-          correct: 0
-        }
-      ]
+      quiz: [{ question: 'Apa itu Digital Marketing?', options: ['Pemasaran melalui media digital', 'Jual beli di pasar', 'Iklan di TV saja', 'Tidak ada yang benar'], correct: 0 }]
     },
     {
       id: 2,
-      judul: 'Copywriting & Content Strategy',
-      deskripsi: 'Belajar menulis copy yang menjual dan strategi konten',
-      videos: [
-        { title: 'Dasar Copywriting', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
-      ],
+      judul: 'Copywriting Mastery',
+      kategori: 'Content Creation',
+      deskripsi: 'Belajar menulis copy yang menjual dan persuasif',
+      videos: [{ title: 'Dasar Copywriting', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }],
       ebooks: [],
+      stages: [
+        { title: 'Psikologi Pembeli', desc: 'Memahami mindset konsumen', icon: 'brain' },
+        { title: 'Formula AIDA', desc: 'Attention, Interest, Desire, Action', icon: 'magic' },
+        { title: 'Headline Mastery', desc: 'Membuat headline yang menarik', icon: 'heading' }
+      ],
       icon: 'pen-fancy',
       color: 'from-purple-500 to-pink-500',
       urutan: 2,
+      quiz: []
+    },
+    {
+      id: 3,
+      judul: 'Bisnis Online dari Nol',
+      kategori: 'Bisnis Online',
+      deskripsi: 'Bangun bisnis online yang profitable',
+      videos: [],
+      ebooks: [{ title: 'Panduan Bisnis Online', url: '#' }],
+      stages: [
+        { title: 'Riset Pasar', desc: 'Menemukan niche yang profitable', icon: 'search' },
+        { title: 'Setup Bisnis', desc: 'Membangun infrastruktur bisnis', icon: 'cogs' },
+        { title: 'Marketing', desc: 'Strategi marketing digital', icon: 'megaphone' },
+        { title: 'Scaling', desc: 'Membesarkan bisnis', icon: 'chart-line' }
+      ],
+      icon: 'store',
+      color: 'from-green-500 to-emerald-500',
+      urutan: 3,
       quiz: []
     }
   ];
@@ -694,9 +1118,161 @@ function getLocalModules() {
   return defaults;
 }
 
-function saveLocalModules() {
+function getLocalProducts() {
+  const saved = localStorage.getItem('localProducts');
+  if (saved) {
+    try {
+      productsData = JSON.parse(saved);
+      return productsData;
+    } catch (e) {}
+  }
+  
+  const defaults = [
+    {
+      id: 1,
+      name: 'E-Book Digital Marketing Lengkap',
+      category: 'E-Book',
+      description: 'Panduan lengkap digital marketing dari A-Z dengan 200+ halaman',
+      price: 149000,
+      originalPrice: 299000,
+      image: '',
+      url: '#',
+      seller: 'AcademyPro',
+      sold: 1250,
+      rating: 4.9
+    },
+    {
+      id: 2,
+      name: 'Template Landing Page Premium',
+      category: 'Template',
+      description: '50+ template landing page siap pakai untuk berbagai niche',
+      price: 199000,
+      originalPrice: 399000,
+      image: '',
+      url: '#',
+      seller: 'DesignPro',
+      sold: 856,
+      rating: 4.8
+    },
+    {
+      id: 3,
+      name: 'Course Facebook Ads Mastery',
+      category: 'Course',
+      description: 'Video course lengkap Facebook Ads dari basic sampai advanced',
+      price: 499000,
+      originalPrice: 999000,
+      image: '',
+      url: '#',
+      seller: 'AdsExpert',
+      sold: 2340,
+      rating: 4.9
+    },
+    {
+      id: 4,
+      name: 'Pack Icon Premium 5000+',
+      category: 'Design Asset',
+      description: 'Koleksi 5000+ icon premium untuk desain grafis',
+      price: 99000,
+      originalPrice: 199000,
+      image: '',
+      url: '#',
+      seller: 'IconMaster',
+      sold: 3420,
+      rating: 4.7
+    },
+    {
+      id: 5,
+      name: 'Template Instagram Feed',
+      category: 'Template',
+      description: '100+ template Instagram feed profesional',
+      price: 79000,
+      originalPrice: 149000,
+      image: '',
+      url: '#',
+      seller: 'SocialMediaPro',
+      sold: 1890,
+      rating: 4.8
+    },
+    {
+      id: 6,
+      name: 'E-Book Copywriting Secrets',
+      category: 'E-Book',
+      description: 'Rahasia copywriting yang menghasilkan jutaan rupiah',
+      price: 129000,
+      originalPrice: 249000,
+      image: '',
+      url: '#',
+      seller: 'CopyMaster',
+      sold: 2100,
+      rating: 4.9
+    },
+    {
+      id: 7,
+      name: 'Software Email Marketing',
+      category: 'Software',
+      description: 'Tools email marketing otomatis dengan fitur lengkap',
+      price: 299000,
+      originalPrice: 599000,
+      image: '',
+      url: '#',
+      seller: 'TechSolutions',
+      sold: 567,
+      rating: 4.6
+    },
+    {
+      id: 8,
+      name: 'Pack Sound Effect Premium',
+      category: 'Audio',
+      description: '1000+ sound effect untuk video dan podcast',
+      price: 149000,
+      originalPrice: 299000,
+      image: '',
+      url: '#',
+      seller: 'AudioPro',
+      sold: 1234,
+      rating: 4.8
+    }
+  ];
+  
+  productsData = defaults;
+  return defaults;
+}
+
+function getLocalCertTemplate() {
+  const saved = localStorage.getItem('localCertTemplate');
+  if (saved) {
+    try {
+      certTemplate = JSON.parse(saved);
+      return certTemplate;
+    } catch (e) {}
+  }
+  
+  const defaultTemplate = {
+    id: 1,
+    header: 'ACADEMYPRO CERTIFIED',
+    mainTitle: 'SERTIFIKAT',
+    intro: 'Diberikan kepada',
+    desc: 'Telah menyelesaikan pelatihan profesional:',
+    trainingName: 'Digital Marketing & Business Mastery',
+    predicate: 'Dengan predikat SANGAT BAIK',
+    signLeft: 'Mentor Utama',
+    signRight: 'Direktur AcademyPro',
+    city: 'Jakarta',
+    bgColor: '#fef3c7',
+    borderColor: '#92400e',
+    textColor: '#92400e',
+    nameColor: '#4f46e5'
+  };
+  
+  certTemplate = defaultTemplate;
+  return defaultTemplate;
+}
+
+function saveLocalData() {
   try {
     localStorage.setItem('localModules', JSON.stringify(modulesData));
+    localStorage.setItem('localProducts', JSON.stringify(productsData));
+    localStorage.setItem('localCertTemplate', JSON.stringify(certTemplate));
   } catch (e) {
     console.warn('Gagal simpan ke localStorage:', e);
   }
@@ -704,7 +1280,6 @@ function saveLocalModules() {
 
 function extractVideoId(url) {
   if (!url || typeof url !== 'string') return null;
-  
   try {
     if (url.includes('youtube.com') || url.includes('youtu.be')) {
       const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
@@ -713,14 +1288,315 @@ function extractVideoId(url) {
       const match = url.match(/vimeo\.com\/(\d+)/);
       return match ? `https://player.vimeo.com/video/${match[1]}` : null;
     }
-  } catch (e) {
-    console.warn('Error extract video:', e);
-  }
+  } catch (e) {}
   return url;
 }
 
+function formatRupiah(angka) {
+  return 'Rp ' + (angka || 0).toLocaleString('id-ID');
+}
+
 /* ============================================================
-   RENDER MODULES
+   RENDER FEATURED (LANDING)
+   ============================================================ */
+async function renderFeaturedTrainings() {
+  const container = document.getElementById('featuredTrainings');
+  if (!container) return;
+  
+  const modules = await loadModules();
+  container.innerHTML = modules.slice(0, 3).map(m => `
+    <div class="glass rounded-2xl p-6 module-card transition cursor-pointer" onclick="enrollTraining(${m.id})">
+      <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${m.color || 'from-blue-500 to-cyan-500'} flex items-center justify-center mb-4">
+        <i class="fas fa-${m.icon || 'book'} text-2xl"></i>
+      </div>
+      <span class="category-badge bg-purple-500/20 text-purple-300 mb-2">${m.kategori || 'Umum'}</span>
+      <h4 class="font-bold text-lg mb-1">${m.judul || ''}</h4>
+      <p class="text-sm text-gray-400 mb-3 line-clamp-2">${m.deskripsi || ''}</p>
+      <div class="flex items-center gap-3 text-xs text-gray-400">
+        <span><i class="fas fa-video mr-1"></i>${(m.videos || []).length} Video</span>
+        <span><i class="fas fa-layer-group mr-1"></i>${(m.stages || []).length} Tahapan</span>
+        <span><i class="fas fa-question-circle mr-1"></i>${(m.quiz || []).length} Quiz</span>
+      </div>
+      <button class="mt-4 w-full py-2 rounded-lg btn-primary text-white font-semibold">
+        Daftar Sekarang
+      </button>
+    </div>
+  `).join('');
+}
+
+async function renderFeaturedProducts() {
+  const container = document.getElementById('featuredProducts');
+  if (!container) return;
+  
+  const products = await loadProducts();
+  container.innerHTML = products.slice(0, 4).map(p => renderProductCard(p)).join('');
+}
+
+function renderProductCard(p) {
+  const discount = p.originalPrice && p.originalPrice > p.price 
+    ? Math.round((1 - p.price / p.originalPrice) * 100) 
+    : 0;
+  
+  return `
+    <div class="product-card glass rounded-2xl p-4 border border-white/10">
+      <div class="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl mb-3 flex items-center justify-center">
+        <i class="fas fa-${getProductIcon(p.category)} text-4xl text-purple-400"></i>
+      </div>
+      <span class="category-badge bg-blue-500/20 text-blue-300 text-xs">${p.category || 'Product'}</span>
+      <h4 class="font-bold text-sm mt-2 mb-1 line-clamp-2">${p.name || ''}</h4>
+      <div class="flex items-center gap-1 text-xs text-yellow-400 mb-2">
+        <i class="fas fa-star"></i>
+        <span>${p.rating || 4.5}</span>
+        <span class="text-gray-400">(${p.sold || 0} terjual)</span>
+      </div>
+      <div class="flex items-center gap-2 mb-3">
+        <span class="font-bold text-green-400">${formatRupiah(p.price)}</span>
+        ${p.originalPrice ? `<span class="text-xs text-gray-500 line-through">${formatRupiah(p.originalPrice)}</span>` : ''}
+        ${discount > 0 ? `<span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">-${discount}%</span>` : ''}
+      </div>
+      <button onclick="buyProduct(${p.id})" class="w-full py-2 rounded-lg btn-primary text-white text-sm font-semibold">
+        <i class="fas fa-shopping-cart mr-1"></i>Beli
+      </button>
+    </div>
+  `;
+}
+
+function getProductIcon(category) {
+  const icons = {
+    'E-Book': 'book',
+    'Template': 'file-alt',
+    'Course': 'graduation-cap',
+    'Software': 'laptop-code',
+    'Design Asset': 'paint-brush',
+    'Audio': 'music'
+  };
+  return icons[category] || 'box';
+}
+
+/* ============================================================
+   TRAININGS PAGE
+   ============================================================ */
+async function showTrainings() {
+  hideAllSections();
+  const el = document.getElementById('trainingsSection');
+  if (el) el.classList.remove('hidden-section');
+  
+  await renderTrainingsList();
+  window.scrollTo(0, 0);
+}
+
+async function renderTrainingsList(filterCategory = null) {
+  const container = document.getElementById('trainingsListContainer');
+  const filterContainer = document.getElementById('categoryFilter');
+  if (!container) return;
+  
+  const modules = await loadModules();
+  const categories = [...new Set(modules.map(m => m.kategori).filter(Boolean))];
+  
+  // Render filter
+  if (filterContainer) {
+    filterContainer.innerHTML = `
+      <button onclick="renderTrainingsList(null)" class="glass px-4 py-2 rounded-xl ${!filterCategory ? 'bg-purple-500/30' : ''}">
+        Semua
+      </button>
+      ${categories.map(c => `
+        <button onclick="renderTrainingsList('${c}')" class="glass px-4 py-2 rounded-xl ${filterCategory === c ? 'bg-purple-500/30' : ''}">
+          ${c}
+        </button>
+      `).join('')}
+    `;
+  }
+  
+  const filtered = filterCategory ? modules.filter(m => m.kategori === filterCategory) : modules;
+  
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="col-span-3 text-center py-12 text-gray-400">Tidak ada pelatihan</div>';
+    return;
+  }
+  
+  container.innerHTML = filtered.map(m => `
+    <div class="glass rounded-2xl p-6 module-card transition">
+      <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${m.color || 'from-blue-500 to-cyan-500'} flex items-center justify-center mb-4">
+        <i class="fas fa-${m.icon || 'book'} text-3xl"></i>
+      </div>
+      <span class="category-badge bg-purple-500/20 text-purple-300 mb-2">${m.kategori || 'Umum'}</span>
+      <h4 class="font-bold text-xl mb-2">${m.judul || ''}</h4>
+      <p class="text-sm text-gray-400 mb-4 line-clamp-3">${m.deskripsi || ''}</p>
+      
+      <div class="space-y-2 mb-4">
+        ${(m.stages || []).slice(0, 3).map((s, i) => `
+          <div class="flex items-center gap-2 text-xs text-gray-300">
+            <div class="w-6 h-6 rounded-full bg-purple-500/30 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-${s.icon || 'check'} text-xs"></i>
+            </div>
+            <span>${s.title || 'Tahap ' + (i+1)}</span>
+          </div>
+        `).join('')}
+        ${(m.stages || []).length > 3 ? `<div class="text-xs text-gray-500">+${(m.stages || []).length - 3} tahapan lainnya</div>` : ''}
+      </div>
+      
+      <div class="flex items-center gap-3 text-xs text-gray-400 mb-4">
+        <span><i class="fas fa-video mr-1"></i>${(m.videos || []).length} Video</span>
+        <span><i class="fas fa-layer-group mr-1"></i>${(m.stages || []).length} Tahapan</span>
+        <span><i class="fas fa-book mr-1"></i>${(m.ebooks || []).length} E-Book</span>
+      </div>
+      
+      <button onclick="enrollTraining(${m.id})" class="w-full py-3 rounded-lg btn-primary text-white font-semibold">
+        <i class="fas fa-rocket mr-2"></i>Mulai Pelatihan
+      </button>
+    </div>
+  `).join('');
+}
+
+function enrollTraining(id) {
+  if (!currentUser) {
+    showRegisterModal();
+    return;
+  }
+  openModule(id);
+}
+
+/* ============================================================
+   MARKETPLACE PAGE
+   ============================================================ */
+async function showMarketplace() {
+  hideAllSections();
+  const el = document.getElementById('marketplaceSection');
+  if (el) el.classList.remove('hidden-section');
+  
+  await renderMarketplaceList();
+  window.scrollTo(0, 0);
+}
+
+async function renderMarketplaceList(filterCategory = null) {
+  const container = document.getElementById('marketplaceListContainer');
+  const filterContainer = document.getElementById('productCategoryFilter');
+  if (!container) return;
+  
+  const products = await loadProducts();
+  const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
+  
+  if (filterContainer) {
+    filterContainer.innerHTML = `
+      <button onclick="renderMarketplaceList(null)" class="glass px-4 py-2 rounded-xl ${!filterCategory ? 'bg-green-500/30' : ''}">
+        Semua
+      </button>
+      ${categories.map(c => `
+        <button onclick="renderMarketplaceList('${c}')" class="glass px-4 py-2 rounded-xl ${filterCategory === c ? 'bg-green-500/30' : ''}">
+          ${c}
+        </button>
+      `).join('')}
+    `;
+  }
+  
+  const filtered = filterCategory ? products.filter(p => p.category === filterCategory) : products;
+  
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="col-span-4 text-center py-12 text-gray-400">Tidak ada produk</div>';
+    return;
+  }
+  
+  container.innerHTML = filtered.map(p => renderProductCard(p)).join('');
+}
+
+function buyProduct(id) {
+  const product = productsData.find(p => p.id === id);
+  if (!product) return;
+  
+  if (!currentUser) {
+    showRegisterModal();
+    showToast('Silakan daftar terlebih dahulu', 'info');
+    return;
+  }
+  
+  showToast(`🛒 ${product.name} ditambahkan ke keranjang! (Demo)`, 'success');
+  // Di production, ini akan redirect ke payment gateway
+}
+
+/* ============================================================
+   DASHBOARD TABS
+   ============================================================ */
+function switchDashboardTab(tabName) {
+  document.querySelectorAll('.dashboard-tab').forEach(el => el.classList.add('hidden-section'));
+  document.querySelectorAll('#dashboardSection .tab-btn').forEach(btn => btn.classList.remove('active'));
+  
+  const tabEl = document.getElementById(`tab-${tabName}`);
+  if (tabEl) tabEl.classList.remove('hidden-section');
+  
+  const activeBtn = document.querySelector(`#dashboardSection .tab-btn[data-tab="${tabName}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  
+  if (tabName === 'all-trainings') renderAllTrainings();
+  if (tabName === 'marketplace') renderDashboardMarketplace();
+  if (tabName === 'my-certificates') renderMyCertificates();
+}
+
+async function renderAllTrainings() {
+  const container = document.getElementById('allTrainingsContainer');
+  if (!container) return;
+  
+  const modules = await loadModules();
+  container.innerHTML = modules.map(m => `
+    <div class="glass rounded-2xl p-6 module-card transition">
+      <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${m.color || 'from-blue-500 to-cyan-500'} flex items-center justify-center mb-4">
+        <i class="fas fa-${m.icon || 'book'} text-2xl"></i>
+      </div>
+      <span class="category-badge bg-purple-500/20 text-purple-300 mb-2">${m.kategori || 'Umum'}</span>
+      <h4 class="font-bold text-lg mb-1">${m.judul || ''}</h4>
+      <p class="text-sm text-gray-400 mb-3 line-clamp-2">${m.deskripsi || ''}</p>
+      <button onclick="enrollTraining(${m.id})" class="w-full py-2 rounded-lg btn-primary text-white font-semibold">
+        Mulai Belajar
+      </button>
+    </div>
+  `).join('');
+}
+
+async function renderDashboardMarketplace() {
+  const container = document.getElementById('marketplaceContainer');
+  if (!container) return;
+  
+  const products = await loadProducts();
+  container.innerHTML = products.map(p => renderProductCard(p)).join('');
+}
+
+function renderMyCertificates() {
+  const container = document.getElementById('myCertificatesContainer');
+  if (!container) return;
+  
+  const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+  const myCerts = JSON.parse(localStorage.getItem('myCertificates') || '[]');
+  
+  if (myCerts.length === 0 && completed.length === 0) {
+    container.innerHTML = '<div class="col-span-2 text-center py-12 text-gray-400">Belum ada sertifikat. Selesaikan pelatihan untuk mendapatkan sertifikat.</div>';
+    return;
+  }
+  
+  container.innerHTML = myCerts.map(cert => `
+    <div class="glass rounded-2xl p-6">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+          <i class="fas fa-certificate text-2xl"></i>
+        </div>
+        <div>
+          <h4 class="font-bold">${cert.trainingName || 'Sertifikat'}</h4>
+          <p class="text-sm text-gray-400">ID: ${cert.certId || '-'}</p>
+          <p class="text-xs text-gray-500">${cert.date || '-'}</p>
+        </div>
+      </div>
+      <button onclick="downloadCertificate('${cert.certId}')" class="w-full py-2 rounded-lg btn-primary text-white font-semibold">
+        <i class="fas fa-download mr-2"></i>Download PDF
+      </button>
+    </div>
+  `).join('');
+}
+
+function downloadCertificate(certId) {
+  showToast('📥 Download sertifikat...', 'info');
+  // Di production, ini akan download dari Supabase Storage
+}
+
+/* ============================================================
+   RENDER MODULES (USER)
    ============================================================ */
 async function renderModules() {
   const container = document.getElementById('modulesContainer');
@@ -735,20 +1611,16 @@ async function renderModules() {
     if (totalEl) totalEl.textContent = modules.length;
     
     if (modules.length === 0) {
-      container.innerHTML = `
-        <div class="glass rounded-2xl p-8 text-center col-span-2">
-          <i class="fas fa-inbox text-4xl text-gray-400 mb-3"></i>
-          <p class="text-gray-400">Belum ada modul tersedia</p>
-        </div>
-      `;
+      container.innerHTML = '<div class="glass rounded-2xl p-8 text-center col-span-2"><i class="fas fa-inbox text-4xl text-gray-400 mb-3"></i><p class="text-gray-400">Belum ada modul</p></div>';
       return;
     }
     
     container.innerHTML = modules.map(m => {
       const isDone = completed.includes(m.id);
       const score = scores[m.id] || 0;
-      const vCount = (m.videos && m.videos.length) || 0;
-      const eCount = (m.ebooks && m.ebooks.length) || 0;
+      const vCount = (m.videos || []).length;
+      const eCount = (m.ebooks || []).length;
+      const sCount = (m.stages || []).length;
       
       return `
         <div class="glass rounded-2xl p-6 module-card transition cursor-pointer" onclick="openModule(${m.id})">
@@ -758,11 +1630,14 @@ async function renderModules() {
             </div>
             ${isDone ? '<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs"><i class="fas fa-check mr-1"></i>Selesai</span>' : '<span class="bg-white/10 text-gray-400 px-3 py-1 rounded-full text-xs">Belum</span>'}
           </div>
+          <span class="category-badge bg-purple-500/20 text-purple-300 text-xs mb-2">${m.kategori || 'Umum'}</span>
           <h4 class="font-bold text-lg mb-1">Modul ${m.urutan || m.id}: ${m.judul || ''}</h4>
-          ${vCount > 0 ? `<p class="text-sm text-red-400 mb-1"><i class="fas fa-video mr-1"></i>${vCount} Video</p>` : ''}
-          ${eCount > 0 ? `<p class="text-sm text-blue-400 mb-1"><i class="fas fa-book mr-1"></i>${eCount} E-Book</p>` : ''}
-          ${(m.quiz && m.quiz.length > 0) ? '<p class="text-sm text-purple-400 mb-2"><i class="fas fa-question-circle mr-1"></i>Ada Quiz</p>' : ''}
-          ${score > 0 ? `<p class="text-sm text-yellow-400">Nilai: ${score}</p>` : ''}
+          <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-2">
+            ${vCount > 0 ? `<span><i class="fas fa-video mr-1"></i>${vCount} Video</span>` : ''}
+            ${sCount > 0 ? `<span><i class="fas fa-layer-group mr-1"></i>${sCount} Tahapan</span>` : ''}
+            ${eCount > 0 ? `<span><i class="fas fa-book mr-1"></i>${eCount} E-Book</span>` : ''}
+          </div>
+          ${score > 0 ? `<p class="text-sm text-yellow-400">Nilai Quiz: ${score}</p>` : ''}
           <button class="mt-4 w-full py-2 rounded-lg ${isDone ? 'bg-green-500/20 text-green-400' : 'btn-primary text-white'} font-semibold">
             ${isDone ? 'Ulangi Materi' : 'Mulai Belajar'}
           </button>
@@ -773,7 +1648,6 @@ async function renderModules() {
     updateProgress();
   } catch (err) {
     console.error('Error rendering modules:', err);
-    container.innerHTML = `<div class="text-red-400 text-center">Gagal load modul</div>`;
   }
 }
 
@@ -796,11 +1670,32 @@ async function openModule(id) {
   if (titleEl) titleEl.textContent = `Modul ${module.urutan || module.id}: ${module.judul || ''}`;
   if (descEl) descEl.textContent = module.deskripsi || '';
   
+  renderStages(module);
   renderVideos(module);
   renderEbooks(module);
   renderQuiz(module);
   
   window.scrollTo(0, 0);
+}
+
+function renderStages(module) {
+  const container = document.getElementById('stagesContainer');
+  if (!container) return;
+  
+  if (!module.stages || module.stages.length === 0) {
+    container.innerHTML = '<p class="text-gray-400">Belum ada tahapan untuk modul ini</p>';
+    return;
+  }
+  
+  container.innerHTML = module.stages.map((s, idx) => `
+    <div class="step-item">
+      <div class="step-icon">${idx + 1}</div>
+      <div class="glass p-4 rounded-xl border border-white/10">
+        <h4 class="font-bold mb-1">${s.title || 'Tahap ' + (idx + 1)}</h4>
+        <p class="text-sm text-gray-400">${s.desc || ''}</p>
+      </div>
+    </div>
+  `).join('');
 }
 
 function renderVideos(module) {
@@ -809,7 +1704,7 @@ function renderVideos(module) {
   if (!thumbnailsContainer || !videoContainer) return;
   
   if (!module.videos || module.videos.length === 0) {
-    thumbnailsContainer.innerHTML = '<p class="text-gray-400 col-span-3">Tidak ada video untuk modul ini</p>';
+    thumbnailsContainer.innerHTML = '<p class="text-gray-400 col-span-3">Tidak ada video</p>';
     videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">Tidak ada video</div>';
     return;
   }
@@ -837,9 +1732,7 @@ function playVideo(index) {
   if (!videoContainer) return;
   
   if (embedUrl) {
-    videoContainer.innerHTML = `
-      <iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `;
+    videoContainer.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
     videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">URL video tidak valid</div>';
   }
@@ -953,7 +1846,7 @@ async function submitQuiz() {
       localStorage.setItem('completedModules', JSON.stringify(completed));
     }
     
-    showToast(`Selamat! Nilai Anda: ${quizScore} - Modul selesai!`, 'success');
+    showToast(`Selamat! Nilai: ${quizScore} - Modul selesai!`, 'success');
     
     const modules = await loadModules();
     if (completed.length >= modules.length) {
@@ -966,7 +1859,7 @@ async function submitQuiz() {
       }, 1000);
     }
   } else {
-    showToast(`Nilai Anda: ${quizScore} - Minimal 70 untuk lulus`, 'error');
+    showToast(`Nilai: ${quizScore} - Minimal 70 untuk lulus`, 'error');
   }
   
   const submitBtn = document.getElementById('submitQuiz');
@@ -1034,32 +1927,21 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     
     if (supabase) {
       try {
-        const { data: existing } = await supabase
-          .from('peserta_pelatihan')
-          .select('id')
-          .eq('email', email)
-          .single();
+        const { data: existing } = await supabase.from('peserta_pelatihan').select('id').eq('email', email).single();
 
         if (!existing) {
           const { error } = await supabase.from('peserta_pelatihan').insert([{
-            nama: name,
-            whatsapp: wa,
-            email: email,
+            nama: name, whatsapp: wa, email: email,
             tanggal_daftar: new Date().toISOString(),
-            progress: 0,
-            status: 'aktif'
+            progress: 0, status: 'aktif'
           }]);
           
-          if (error && error.code !== '42P01') {
-            console.warn('Insert error:', error.message);
-          } else if (!error) {
-            showToast('Registrasi berhasil! Selamat belajar 🎉', 'success');
-          }
+          if (!error) showToast('Registrasi berhasil! 🎉', 'success');
         } else {
           showToast('Email sudah terdaftar!', 'info');
         }
       } catch (dbErr) {
-        console.warn('Database error, menggunakan mode lokal:', dbErr.message);
+        console.warn('Database error:', dbErr.message);
       }
     }
 
@@ -1075,7 +1957,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     console.error(err);
     currentUser = { name, wa, email, registeredAt: Date.now() };
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    showToast('Mode demo - data disimpan lokal', 'info');
+    showToast('Mode demo', 'info');
     
     setTimeout(() => {
       closeRegisterModal();
@@ -1110,7 +1992,7 @@ function logout() {
 }
 
 /* ============================================================
-   SERTIFIKAT
+   SERTIFIKAT - DENGAN TEMPLATE
    ============================================================ */
 async function generateAndSendCertificate() {
   const btn = event.target.closest('button');
@@ -1121,60 +2003,74 @@ async function generateAndSendCertificate() {
 
   try {
     if (!currentUser || !currentUser.email) {
-      throw new Error('Email pengguna tidak ditemukan.');
+      throw new Error('Email tidak ditemukan.');
     }
+
+    // Load template
+    const template = await loadCertTemplate();
+    const t = template || certTemplate || getLocalCertTemplate();
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
 
-    doc.setFillColor(254, 243, 199);
+    // Background
+    const bgColor = hexToRgb(t.bgColor || '#fef3c7');
+    doc.setFillColor(bgColor.r, bgColor.g, bgColor.b);
     doc.rect(0, 0, 297, 210, 'F');
 
-    doc.setDrawColor(146, 64, 14);
+    // Border
+    const borderColor = hexToRgb(t.borderColor || '#92400e');
+    doc.setDrawColor(borderColor.r, borderColor.g, borderColor.b);
     doc.setLineWidth(2);
     doc.rect(10, 10, 277, 190);
     doc.setLineWidth(0.5);
     doc.rect(15, 15, 267, 180);
 
-    doc.setTextColor(146, 64, 14);
+    // Text color
+    const textColor = hexToRgb(t.textColor || '#92400e');
+    const nameColor = hexToRgb(t.nameColor || '#4f46e5');
+
+    // Header
+    doc.setTextColor(textColor.r, textColor.g, textColor.b);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
-    doc.text('ACADEMYPRO CERTIFIED', 148.5, 40, { align: 'center' });
+    doc.text(t.header || 'ACADEMYPRO CERTIFIED', 148.5, 40, { align: 'center' });
 
     doc.setFontSize(32);
     doc.setFont('helvetica', 'bold');
-    doc.text('SERTIFIKAT', 148.5, 60, { align: 'center' });
+    doc.text(t.mainTitle || 'SERTIFIKAT', 148.5, 60, { align: 'center' });
 
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
-    doc.text('Diberikan kepada', 148.5, 80, { align: 'center' });
+    doc.text(t.intro || 'Diberikan kepada', 148.5, 80, { align: 'center' });
 
+    // Nama
     doc.setFontSize(28);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(79, 70, 229);
+    doc.setTextColor(nameColor.r, nameColor.g, nameColor.b);
     doc.text((currentUser.name || 'USER').toUpperCase(), 148.5, 100, { align: 'center' });
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(146, 64, 14);
-    doc.text('Telah menyelesaikan pelatihan profesional:', 148.5, 120, { align: 'center' });
+    doc.setTextColor(textColor.r, textColor.g, textColor.b);
+    doc.text(t.desc || 'Telah menyelesaikan pelatihan profesional:', 148.5, 120, { align: 'center' });
 
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
-    doc.text('Digital Marketing & Business Mastery', 148.5, 135, { align: 'center' });
+    doc.text(t.trainingName || 'Digital Marketing & Business Mastery', 148.5, 135, { align: 'center' });
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
-    doc.text('Dengan predikat SANGAT BAIK', 148.5, 150, { align: 'center' });
+    doc.text(t.predicate || 'Dengan predikat SANGAT BAIK', 148.5, 150, { align: 'center' });
 
     const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     doc.setFontSize(10);
-    doc.text(`Jakarta, ${today}`, 230, 170, { align: 'center' });
+    doc.text(`${t.city || 'Jakarta'}, ${today}`, 230, 170, { align: 'center' });
     doc.text('_____________________', 230, 180, { align: 'center' });
-    doc.text('Direktur AcademyPro', 230, 185, { align: 'center' });
+    doc.text(t.signRight || 'Direktur AcademyPro', 230, 185, { align: 'center' });
 
     doc.text('_____________________', 67, 180, { align: 'center' });
-    doc.text('Mentor Utama', 67, 185, { align: 'center' });
+    doc.text(t.signLeft || 'Mentor Utama', 67, 185, { align: 'center' });
 
     const certId = 'ACPRO-' + Date.now().toString(36).toUpperCase();
     doc.setFontSize(8);
@@ -1182,6 +2078,17 @@ async function generateAndSendCertificate() {
 
     const fileName = `Sertifikat_${(currentUser.name || 'user').replace(/\s+/g, '_')}_${certId}.pdf`;
     doc.save(fileName);
+    
+    // Save to my certificates
+    const myCerts = JSON.parse(localStorage.getItem('myCertificates') || '[]');
+    myCerts.push({
+      certId,
+      trainingName: t.trainingName,
+      date: today,
+      name: currentUser.name,
+      email: currentUser.email
+    });
+    localStorage.setItem('myCertificates', JSON.stringify(myCerts));
     
     if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY && CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_KEY') {
       try {
@@ -1192,10 +2099,9 @@ async function generateAndSendCertificate() {
           date: today,
           message: 'Selamat! Berikut adalah sertifikat Anda.'
         });
-        showToast('✅ Sertifikat berhasil dikirim ke email!', 'success');
+        showToast('✅ Sertifikat dikirim ke email!', 'success');
       } catch (emailErr) {
-        console.error('EmailJS Error:', emailErr);
-        showToast('📥 Sertifikat di-download. Email gagal dikirim.', 'info');
+        showToast(' Sertifikat di-download. Email gagal.', 'info');
       }
     } else {
       showToast('📥 Sertifikat berhasil di-download', 'success');
@@ -1210,6 +2116,15 @@ async function generateAndSendCertificate() {
       btn.innerHTML = '<i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email';
     }
   }
+}
+
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : { r: 0, g: 0, b: 0 };
 }
 
 /* ============================================================
@@ -1239,7 +2154,27 @@ async function showAdminDashboard() {
   hideAllSections();
   const el = document.getElementById('adminDashboardSection');
   if (el) el.classList.remove('hidden-section');
-  await loadAdminModules();
+  await loadAdminData();
+}
+
+function switchAdminTab(tabName) {
+  document.querySelectorAll('.admin-tab').forEach(el => el.classList.add('hidden-section'));
+  document.querySelectorAll('#adminDashboardSection .tab-btn').forEach(btn => btn.classList.remove('active'));
+  
+  const tabEl = document.getElementById(`admin-tab-${tabName}`);
+  if (tabEl) tabEl.classList.remove('hidden-section');
+  
+  const activeBtn = document.querySelector(`#adminDashboardSection .tab-btn[data-tab="${tabName}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+}
+
+async function loadAdminData() {
+  await Promise.all([
+    loadAdminModules(),
+    loadAdminProducts(),
+    loadAdminPeserta(),
+    loadAdminCertTemplate()
+  ]);
 }
 
 async function loadAdminModules() {
@@ -1248,34 +2183,107 @@ async function loadAdminModules() {
   if (!tbody) return;
   
   if (modules.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8">Belum ada modul</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8">Belum ada modul</td></tr>';
     return;
   }
 
-  tbody.innerHTML = modules.map((m, index) => {
-    const vCount = (m.videos && m.videos.length) || 0;
-    const eCount = (m.ebooks && m.ebooks.length) || 0;
-    const qCount = (m.quiz && m.quiz.length) || 0;
-    
-    return `
+  tbody.innerHTML = modules.map((m, index) => `
     <tr>
       <td>${index + 1}</td>
       <td>${m.judul || ''}</td>
-      <td>${vCount > 0 ? vCount + ' video' : '-'}</td>
-      <td>${eCount > 0 ? eCount + ' ebook' : '-'}</td>
-      <td>${qCount > 0 ? qCount + ' soal' : '-'}</td>
+      <td><span class="category-badge bg-purple-500/20 text-purple-300">${m.kategori || '-'}</span></td>
+      <td>${(m.videos || []).length}</td>
+      <td>${(m.ebooks || []).length}</td>
+      <td>${(m.quiz || []).length}</td>
       <td>
-        <button onclick="editModule(${m.id})" class="text-blue-400 hover:text-blue-300 mr-2">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button onclick="deleteModule(${m.id})" class="text-red-400 hover:text-red-300">
-          <i class="fas fa-trash"></i>
-        </button>
+        <button onclick="editModule(${m.id})" class="text-blue-400 hover:text-blue-300 mr-2"><i class="fas fa-edit"></i></button>
+        <button onclick="deleteModule(${m.id})" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button>
       </td>
     </tr>
-  `}).join('');
+  `).join('');
 }
 
+async function loadAdminProducts() {
+  const products = await loadProducts();
+  const tbody = document.getElementById('adminProductsTable');
+  if (!tbody) return;
+  
+  if (products.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8">Belum ada produk</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = products.map((p, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${p.name || ''}</td>
+      <td><span class="category-badge bg-blue-500/20 text-blue-300">${p.category || '-'}</span></td>
+      <td>${formatRupiah(p.price)}</td>
+      <td>${p.sold || 0}</td>
+      <td>
+        <button onclick="editProduct(${p.id})" class="text-blue-400 hover:text-blue-300 mr-2"><i class="fas fa-edit"></i></button>
+        <button onclick="deleteProduct(${p.id})" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function loadAdminPeserta() {
+  const peserta = await loadPeserta();
+  const tbody = document.getElementById('adminPesertaTable');
+  if (!tbody) return;
+  
+  if (peserta.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8">Belum ada peserta</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = peserta.map((p, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${p.nama || ''}</td>
+      <td>${p.email || ''}</td>
+      <td>${p.whatsapp || ''}</td>
+      <td>${p.tanggal_daftar ? new Date(p.tanggal_daftar).toLocaleDateString('id-ID') : '-'}</td>
+      <td>
+        <div class="w-full bg-white/10 rounded-full h-2">
+          <div class="progress-bar h-2 rounded-full" style="width: ${p.progress || 0}%"></div>
+        </div>
+        <span class="text-xs text-gray-400">${p.progress || 0}%</span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function loadAdminCertTemplate() {
+  const template = await loadCertTemplate();
+  const container = document.getElementById('currentCertTemplate');
+  if (!container || !template) return;
+  
+  container.innerHTML = `
+    <div class="grid md:grid-cols-2 gap-4">
+      <div><strong>Header:</strong> ${template.header || '-'}</div>
+      <div><strong>Judul Utama:</strong> ${template.mainTitle || '-'}</div>
+      <div><strong>Pengantar:</strong> ${template.intro || '-'}</div>
+      <div><strong>Deskripsi:</strong> ${template.desc || '-'}</div>
+      <div><strong>Nama Pelatihan:</strong> ${template.trainingName || '-'}</div>
+      <div><strong>Predikat:</strong> ${template.predicate || '-'}</div>
+      <div><strong>Tanda Tangan Kiri:</strong> ${template.signLeft || '-'}</div>
+      <div><strong>Tanda Tangan Kanan:</strong> ${template.signRight || '-'}</div>
+      <div><strong>Kota:</strong> ${template.city || '-'}</div>
+      <div class="flex gap-4">
+        <div><strong>Background:</strong> <span class="inline-block w-6 h-6 rounded" style="background:${template.bgColor}"></span></div>
+        <div><strong>Border:</strong> <span class="inline-block w-6 h-6 rounded" style="background:${template.borderColor}"></span></div>
+        <div><strong>Teks:</strong> <span class="inline-block w-6 h-6 rounded" style="background:${template.textColor}"></span></div>
+        <div><strong>Nama:</strong> <span class="inline-block w-6 h-6 rounded" style="background:${template.nameColor}"></span></div>
+      </div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   MODULE FORM
+   ============================================================ */
 function showModuleForm(moduleId = null) {
   const modal = document.getElementById('moduleModal');
   const title = document.getElementById('moduleModalTitle');
@@ -1284,14 +2292,12 @@ function showModuleForm(moduleId = null) {
   videoFieldCounter = 0;
   ebookFieldCounter = 0;
   quizFieldCounter = 0;
+  stageFieldCounter = 0;
   
-  const videosContainer = document.getElementById('videosContainer');
-  const ebooksContainer = document.getElementById('ebooksFormContainer');
-  const quizContainer = document.getElementById('quizQuestionsContainer');
-  
-  if (videosContainer) videosContainer.innerHTML = '';
-  if (ebooksContainer) ebooksContainer.innerHTML = '';
-  if (quizContainer) quizContainer.innerHTML = '';
+  ['videosContainer', 'ebooksFormContainer', 'quizQuestionsContainer', 'stagesFormContainer'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '';
+  });
   
   if (moduleId) {
     const module = modulesData.find(m => m.id === moduleId);
@@ -1301,36 +2307,28 @@ function showModuleForm(moduleId = null) {
     }
     
     title.textContent = 'Edit Modul';
-    const idField = document.getElementById('moduleId');
-    const titleField = document.getElementById('moduleTitle');
-    const descField = document.getElementById('moduleDesc');
-    const iconField = document.getElementById('moduleIcon');
-    const colorField = document.getElementById('moduleColor');
+    const fields = ['moduleId', 'moduleTitle', 'moduleDesc', 'moduleIcon', 'moduleColor', 'moduleCategory'];
+    const values = [module.id, module.judul, module.deskripsi, module.icon, module.color, module.kategori];
+    fields.forEach((f, i) => {
+      const el = document.getElementById(f);
+      if (el && values[i] !== undefined) el.value = values[i] || '';
+    });
     
-    if (idField) idField.value = module.id;
-    if (titleField) titleField.value = module.judul || '';
-    if (descField) descField.value = module.deskripsi || '';
-    if (iconField) iconField.value = module.icon || 'book';
-    if (colorField) colorField.value = module.color || 'from-blue-500 to-cyan-500';
+    if (module.stages && module.stages.length > 0) module.stages.forEach(s => addStageField(s));
+    else addStageField();
     
-    if (module.videos && module.videos.length > 0) {
-      module.videos.forEach(v => addVideoField(v));
-    } else {
-      addVideoField();
-    }
+    if (module.videos && module.videos.length > 0) module.videos.forEach(v => addVideoField(v));
+    else addVideoField();
     
-    if (module.ebooks && module.ebooks.length > 0) {
-      module.ebooks.forEach(e => addEbookField(e));
-    }
+    if (module.ebooks && module.ebooks.length > 0) module.ebooks.forEach(e => addEbookField(e));
     
-    if (module.quiz && module.quiz.length > 0) {
-      module.quiz.forEach(q => addQuizQuestion(q));
-    }
+    if (module.quiz && module.quiz.length > 0) module.quiz.forEach(q => addQuizQuestion(q));
   } else {
     title.textContent = 'Tambah Modul';
     if (form) form.reset();
     const idField = document.getElementById('moduleId');
     if (idField) idField.value = '';
+    addStageField();
     addVideoField();
   }
   
@@ -1340,6 +2338,53 @@ function showModuleForm(moduleId = null) {
 function closeModuleModal() {
   const el = document.getElementById('moduleModal');
   if (el) el.classList.add('hidden-section');
+}
+
+function addStageField(existingData = null) {
+  stageFieldCounter++;
+  const container = document.getElementById('stagesFormContainer');
+  if (!container) return;
+  
+  const stageDiv = document.createElement('div');
+  stageDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  stageDiv.dataset.stageId = stageFieldCounter;
+  stageDiv.innerHTML = `
+    <div class="flex justify-between items-center mb-2">
+      <h4 class="font-semibold">Tahapan ${stageFieldCounter}</h4>
+      <button type="button" onclick="this.closest('[data-stage-id]').remove()" class="text-red-400 hover:text-red-300">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="grid grid-cols-3 gap-2">
+      <div class="col-span-2">
+        <label class="text-xs text-gray-400">Judul Tahapan</label>
+        <input type="text" class="stage-title w-full px-3 py-2 rounded-lg mt-1" 
+          placeholder="Contoh: Pengenalan" 
+          value="${existingData && existingData.title ? existingData.title : ''}" />
+      </div>
+      <div>
+        <label class="text-xs text-gray-400">Icon</label>
+        <select class="stage-icon w-full px-3 py-2 rounded-lg mt-1">
+          <option value="info-circle" ${existingData && existingData.icon === 'info-circle' ? 'selected' : ''}>Info</option>
+          <option value="target" ${existingData && existingData.icon === 'target' ? 'selected' : ''}>Target</option>
+          <option value="rocket" ${existingData && existingData.icon === 'rocket' ? 'selected' : ''}>Rocket</option>
+          <option value="chart-line" ${existingData && existingData.icon === 'chart-line' ? 'selected' : ''}>Chart</option>
+          <option value="brain" ${existingData && existingData.icon === 'brain' ? 'selected' : ''}>Brain</option>
+          <option value="magic" ${existingData && existingData.icon === 'magic' ? 'selected' : ''}>Magic</option>
+          <option value="cogs" ${existingData && existingData.icon === 'cogs' ? 'selected' : ''}>Cogs</option>
+          <option value="search" ${existingData && existingData.icon === 'search' ? 'selected' : ''}>Search</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-2">
+      <label class="text-xs text-gray-400">Deskripsi</label>
+      <input type="text" class="stage-desc w-full px-3 py-2 rounded-lg mt-1" 
+        placeholder="Deskripsi tahapan..." 
+        value="${existingData && existingData.desc ? existingData.desc : ''}" />
+    </div>
+  `;
+  
+  container.appendChild(stageDiv);
 }
 
 function addVideoField(existingData = null) {
@@ -1450,55 +2495,56 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
   try {
-    const idField = document.getElementById('moduleId');
-    const titleField = document.getElementById('moduleTitle');
-    const descField = document.getElementById('moduleDesc');
-    const iconField = document.getElementById('moduleIcon');
-    const colorField = document.getElementById('moduleColor');
+    const id = document.getElementById('moduleId').value;
+    const judul = (document.getElementById('moduleTitle').value || '').trim();
+    const deskripsi = (document.getElementById('moduleDesc').value || '').trim();
+    const kategori = document.getElementById('moduleCategory').value;
+    const icon = document.getElementById('moduleIcon').value;
+    const color = document.getElementById('moduleColor').value;
     
-    if (!titleField || !descField) {
-      showToast('Form tidak lengkap', 'error');
+    if (!judul || !deskripsi) {
+      showToast('Judul dan deskripsi wajib diisi', 'error');
       return;
     }
     
-    const id = idField ? idField.value : '';
+    // Collect stages
+    const stages = [];
+    document.querySelectorAll('#stagesFormContainer > [data-stage-id]').forEach(div => {
+      const titleEl = div.querySelector('.stage-title');
+      const descEl = div.querySelector('.stage-desc');
+      const iconEl = div.querySelector('.stage-icon');
+      const title = titleEl ? (titleEl.value || '').trim() : '';
+      const desc = descEl ? (descEl.value || '').trim() : '';
+      const icon = iconEl ? iconEl.value : 'check';
+      if (title) stages.push({ title, desc, icon });
+    });
     
     // Collect videos
     const videos = [];
-    const videoDivs = document.querySelectorAll('#videosContainer > [data-video-id]');
-    videoDivs.forEach(div => {
+    document.querySelectorAll('#videosContainer > [data-video-id]').forEach(div => {
       const titleEl = div.querySelector('.video-title');
       const urlEl = div.querySelector('.video-url');
       const title = titleEl ? (titleEl.value || '').trim() : '';
       const url = urlEl ? (urlEl.value || '').trim() : '';
-      
-      if (title && url) {
-        videos.push({ title, url });
-      }
+      if (title && url) videos.push({ title, url });
     });
     
     // Collect ebooks
     const ebooks = [];
-    const ebookDivs = document.querySelectorAll('#ebooksFormContainer > [data-ebook-id]');
-    ebookDivs.forEach(div => {
+    document.querySelectorAll('#ebooksFormContainer > [data-ebook-id]').forEach(div => {
       const titleEl = div.querySelector('.ebook-title');
       const urlEl = div.querySelector('.ebook-url');
       const title = titleEl ? (titleEl.value || '').trim() : '';
       const url = urlEl ? (urlEl.value || '').trim() : '';
-      
-      if (title && url) {
-        ebooks.push({ title, url });
-      }
+      if (title && url) ebooks.push({ title, url });
     });
     
     // Collect quiz
     const quizQuestions = [];
-    const questionDivs = document.querySelectorAll('#quizQuestionsContainer > [data-quiz-id]');
-    questionDivs.forEach(div => {
+    document.querySelectorAll('#quizQuestionsContainer > [data-quiz-id]').forEach(div => {
       const textEl = div.querySelector('.quiz-question-text');
       const optEl = div.querySelector('.quiz-question-options');
       const corrEl = div.querySelector('.quiz-question-correct');
-      
       const questionText = textEl ? (textEl.value || '').trim() : '';
       const optionsText = optEl ? (optEl.value || '').trim() : '';
       const correctVal = corrEl ? parseInt(corrEl.value) : 1;
@@ -1507,35 +2553,23 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       if (questionText && optionsText) {
         const options = optionsText.split(',').map(o => o.trim()).filter(o => o);
         if (options.length >= 2) {
-          quizQuestions.push({
-            question: questionText,
-            options: options,
-            correct: correctAnswer
-          });
+          quizQuestions.push({ question: questionText, options, correct: correctAnswer });
         }
       }
     });
     
     const moduleData = {
-      judul: (titleField.value || '').trim(),
-      deskripsi: (descField.value || '').trim(),
-      videos: videos,
-      ebooks: ebooks,
-      icon: iconField ? iconField.value : 'book',
-      color: colorField ? colorField.value : 'from-blue-500 to-cyan-500',
+      judul, deskripsi, kategori, icon, color,
+      stages, videos, ebooks,
       quiz: quizQuestions.length > 0 ? quizQuestions : [],
       updated_at: new Date().toISOString()
     };
 
     if (id) {
-      // Update existing
       const idx = modulesData.findIndex(m => m.id === parseInt(id));
-      if (idx !== -1) {
-        modulesData[idx] = { ...modulesData[idx], ...moduleData };
-      }
+      if (idx !== -1) modulesData[idx] = { ...modulesData[idx], ...moduleData };
       showToast('Modul berhasil diupdate', 'success');
     } else {
-      // Add new
       const newId = modulesData.length > 0 ? Math.max(...modulesData.map(m => m.id)) + 1 : 1;
       moduleData.id = newId;
       moduleData.urutan = modulesData.length + 1;
@@ -1544,20 +2578,15 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       showToast('Modul berhasil ditambahkan', 'success');
     }
     
-    // Save to localStorage as fallback
-    saveLocalModules();
+    saveLocalData();
     
-    // Try save to Supabase
     const supabase = getSupabase();
     if (supabase) {
       try {
-        if (id) {
-          await supabase.from('modules').update(moduleData).eq('id', id);
-        } else {
-          await supabase.from('modules').insert([moduleData]);
-        }
+        if (id) await supabase.from('modules').update(moduleData).eq('id', id);
+        else await supabase.from('modules').insert([moduleData]);
       } catch (dbErr) {
-        console.warn('Supabase save failed, using localStorage:', dbErr.message);
+        console.warn('Supabase save failed:', dbErr.message);
       }
     }
     
@@ -1570,36 +2599,228 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   }
 });
 
-async function editModule(id) {
-  showModuleForm(id);
-}
+async function editModule(id) { showModuleForm(id); }
 
 async function deleteModule(id) {
   if (!confirm('Yakin ingin hapus modul ini?')) return;
   
-  try {
-    // Remove from local array
-    modulesData = modulesData.filter(m => m.id !== id);
-    saveLocalModules();
+  modulesData = modulesData.filter(m => m.id !== id);
+  saveLocalData();
+  
+  const supabase = getSupabase();
+  if (supabase) {
+    try { await supabase.from('modules').delete().eq('id', id); } catch (dbErr) {}
+  }
+  
+  showToast('Modul berhasil dihapus', 'success');
+  await loadAdminModules();
+}
+
+/* ============================================================
+   PRODUCT FORM
+   ============================================================ */
+function showProductForm(productId = null) {
+  const modal = document.getElementById('productModal');
+  const title = document.getElementById('productModalTitle');
+  const form = document.getElementById('productForm');
+  
+  if (productId) {
+    const product = productsData.find(p => p.id === productId);
+    if (!product) {
+      showToast('Produk tidak ditemukan', 'error');
+      return;
+    }
     
-    // Try remove from Supabase
+    title.textContent = 'Edit Produk';
+    const fields = ['productId', 'productName', 'productCategory', 'productDesc', 'productPrice', 'productOriginalPrice', 'productImage', 'productUrl', 'productSeller'];
+    const values = [product.id, product.name, product.category, product.description, product.price, product.originalPrice, product.image, product.url, product.seller];
+    fields.forEach((f, i) => {
+      const el = document.getElementById(f);
+      if (el && values[i] !== undefined) el.value = values[i] || '';
+    });
+  } else {
+    title.textContent = 'Tambah Produk Digital';
+    if (form) form.reset();
+    const idField = document.getElementById('productId');
+    if (idField) idField.value = '';
+  }
+  
+  if (modal) modal.classList.remove('hidden-section');
+}
+
+function closeProductModal() {
+  const el = document.getElementById('productModal');
+  if (el) el.classList.add('hidden-section');
+}
+
+document.getElementById('productForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  try {
+    const id = document.getElementById('productId').value;
+    const name = (document.getElementById('productName').value || '').trim();
+    const category = document.getElementById('productCategory').value;
+    const description = (document.getElementById('productDesc').value || '').trim();
+    const price = parseInt(document.getElementById('productPrice').value) || 0;
+    const originalPrice = parseInt(document.getElementById('productOriginalPrice').value) || 0;
+    const image = (document.getElementById('productImage').value || '').trim();
+    const url = (document.getElementById('productUrl').value || '').trim();
+    const seller = (document.getElementById('productSeller').value || '').trim();
+    
+    if (!name || !description || price <= 0) {
+      showToast('Nama, deskripsi, dan harga wajib diisi', 'error');
+      return;
+    }
+    
+    const productData = {
+      name, category, description, price, originalPrice,
+      image, url, seller,
+      sold: 0, rating: 4.5,
+      updated_at: new Date().toISOString()
+    };
+
+    if (id) {
+      const idx = productsData.findIndex(p => p.id === parseInt(id));
+      if (idx !== -1) productsData[idx] = { ...productsData[idx], ...productData };
+      showToast('Produk berhasil diupdate', 'success');
+    } else {
+      const newId = productsData.length > 0 ? Math.max(...productsData.map(p => p.id)) + 1 : 1;
+      productData.id = newId;
+      productData.created_at = new Date().toISOString();
+      productsData.push(productData);
+      showToast('Produk berhasil ditambahkan', 'success');
+    }
+    
+    saveLocalData();
+    
     const supabase = getSupabase();
     if (supabase) {
       try {
-        await supabase.from('modules').delete().eq('id', id);
+        if (id) await supabase.from('products').update(productData).eq('id', id);
+        else await supabase.from('products').insert([productData]);
       } catch (dbErr) {
-        console.warn('Supabase delete failed:', dbErr.message);
+        console.warn('Supabase save failed:', dbErr.message);
       }
     }
     
-    showToast('Modul berhasil dihapus', 'success');
-    await loadAdminModules();
+    closeProductModal();
+    await loadAdminProducts();
     
   } catch (err) {
-    console.error(err);
-    showToast('Gagal hapus modul', 'error');
+    console.error('Product form error:', err);
+    showToast('Gagal menyimpan: ' + err.message, 'error');
   }
+});
+
+async function editProduct(id) { showProductForm(id); }
+
+async function deleteProduct(id) {
+  if (!confirm('Yakin ingin hapus produk ini?')) return;
+  
+  productsData = productsData.filter(p => p.id !== id);
+  saveLocalData();
+  
+  const supabase = getSupabase();
+  if (supabase) {
+    try { await supabase.from('products').delete().eq('id', id); } catch (dbErr) {}
+  }
+  
+  showToast('Produk berhasil dihapus', 'success');
+  await loadAdminProducts();
 }
+
+/* ============================================================
+   CERTIFICATE TEMPLATE FORM
+   ============================================================ */
+async function showCertTemplateForm() {
+  const template = await loadCertTemplate();
+  const t = template || certTemplate || getLocalCertTemplate();
+  
+  const fields = ['certHeader', 'certMainTitle', 'certIntro', 'certDesc', 'certTrainingName', 'certPredicate', 'certSignLeft', 'certSignRight', 'certCity'];
+  const values = [t.header, t.mainTitle, t.intro, t.desc, t.trainingName, t.predicate, t.signLeft, t.signRight, t.city];
+  fields.forEach((f, i) => {
+    const el = document.getElementById(f);
+    if (el) el.value = values[i] || '';
+  });
+  
+  // Set colors
+  selectedCertColors = {
+    bg: t.bgColor || '#fef3c7',
+    border: t.borderColor || '#92400e',
+    text: t.textColor || '#92400e',
+    name: t.nameColor || '#4f46e5'
+  };
+  
+  document.querySelectorAll('.color-option').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll(`.color-option[data-color="${selectedCertColors.bg}"]`).forEach(el => el.classList.add('active'));
+  document.querySelectorAll(`.color-option[data-color="${selectedCertColors.border}"]`).forEach(el => el.classList.add('active'));
+  document.querySelectorAll(`.color-option[data-color="${selectedCertColors.text}"]`).forEach(el => el.classList.add('active'));
+  document.querySelectorAll(`.color-option[data-color="${selectedCertColors.name}"]`).forEach(el => el.classList.add('active'));
+  
+  const modal = document.getElementById('certTemplateModal');
+  if (modal) modal.classList.remove('hidden-section');
+}
+
+function closeCertTemplateModal() {
+  const el = document.getElementById('certTemplateModal');
+  if (el) el.classList.add('hidden-section');
+}
+
+function selectCertColor(type, el) {
+  selectedCertColors[type] = el.dataset.color;
+  const pickerId = type + 'ColorPicker';
+  document.querySelectorAll(`#${pickerId} .color-option`).forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+}
+
+document.getElementById('certTemplateForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  try {
+    const templateData = {
+      id: 1,
+      header: (document.getElementById('certHeader').value || '').trim(),
+      mainTitle: (document.getElementById('certMainTitle').value || '').trim(),
+      intro: (document.getElementById('certIntro').value || '').trim(),
+      desc: (document.getElementById('certDesc').value || '').trim(),
+      trainingName: (document.getElementById('certTrainingName').value || '').trim(),
+      predicate: (document.getElementById('certPredicate').value || '').trim(),
+      signLeft: (document.getElementById('certSignLeft').value || '').trim(),
+      signRight: (document.getElementById('certSignRight').value || '').trim(),
+      city: (document.getElementById('certCity').value || '').trim(),
+      bgColor: selectedCertColors.bg,
+      borderColor: selectedCertColors.border,
+      textColor: selectedCertColors.text,
+      nameColor: selectedCertColors.name,
+      updated_at: new Date().toISOString()
+    };
+    
+    certTemplate = templateData;
+    saveLocalData();
+    
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        const { data: existing } = await supabase.from('certificate_templates').select('id').limit(1).single();
+        if (existing) {
+          await supabase.from('certificate_templates').update(templateData).eq('id', existing.id);
+        } else {
+          await supabase.from('certificate_templates').insert([templateData]);
+        }
+      } catch (dbErr) {
+        console.warn('Supabase cert template save failed:', dbErr.message);
+      }
+    }
+    
+    showToast('Template sertifikat berhasil disimpan!', 'success');
+    closeCertTemplateModal();
+    await loadAdminCertTemplate();
+    
+  } catch (err) {
+    console.error('Cert template error:', err);
+    showToast('Gagal menyimpan template', 'error');
+  }
+});
 
 /* ============================================================
    INIT
@@ -1618,12 +2839,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   
   try {
-    if (typeof AOS !== 'undefined') {
-      AOS.init({ duration: 800, once: true });
-    }
-  } catch (e) {
-    console.warn('AOS init failed:', e);
-  }
+    if (typeof AOS !== 'undefined') AOS.init({ duration: 800, once: true });
+  } catch (e) {}
 });
 </script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
