@@ -121,6 +121,7 @@
     height: 0;
     overflow: hidden;
     border-radius: 12px;
+    background: #000;
   }
   .video-container iframe {
     position: absolute;
@@ -128,6 +129,17 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+  .video-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .video-item:hover {
+    background: rgba(99, 102, 241, 0.2);
+  }
+  .video-item.active {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: #8b5cf6;
   }
   .quiz-option {
     cursor: pointer;
@@ -164,6 +176,13 @@
   }
   .admin-table tr:hover {
     background: rgba(255,255,255,0.05);
+  }
+  .ebook-card {
+    transition: all 0.3s ease;
+  }
+  .ebook-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 </style>
 </head>
@@ -209,7 +228,7 @@
         Raih <span class="gradient-text">Cuan Jutaan</span>
       </h1>
       <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-        Dapatkan pelatihan profesional dengan video, quiz, sertifikat otomatis, dan peluang bisnis.
+        Dapatkan pelatihan profesional dengan video, quiz, e-book, sertifikat otomatis, dan peluang bisnis.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <button onclick="showRegisterModal()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg">
@@ -350,19 +369,39 @@
 
 <!-- SECTION 4: MODULE LEARNING -->
 <section id="learningSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-4xl mx-auto relative z-10">
+  <div class="max-w-6xl mx-auto relative z-10">
     <button onclick="backToDashboard()" class="glass px-4 py-2 rounded-xl mb-6 hover:bg-white/10">
       <i class="fas fa-arrow-left mr-2"></i>Kembali
     </button>
 
     <div id="learningContent">
-      <!-- Video -->
+      <!-- Module Title -->
       <div class="glass rounded-2xl p-6 mb-6">
-        <h2 id="moduleTitle" class="text-2xl font-bold mb-4"></h2>
-        <div id="videoContainer" class="video-container mb-4">
+        <h2 id="moduleTitle" class="text-3xl font-bold mb-2"></h2>
+        <p id="moduleDescription" class="text-gray-300"></p>
+      </div>
+
+      <!-- Videos Section -->
+      <div class="glass rounded-2xl p-6 mb-6">
+        <h3 class="text-xl font-bold mb-4"><i class="fas fa-video mr-2 text-red-400"></i>Video Pembelajaran</h3>
+        
+        <!-- Video Thumbnails -->
+        <div id="videoThumbnails" class="grid md:grid-cols-3 gap-3 mb-4">
+          <!-- Video thumbnails will be rendered here -->
+        </div>
+
+        <!-- Active Video Player -->
+        <div id="activeVideoContainer" class="video-container mb-4">
           <!-- Video will be embedded here -->
         </div>
-        <p id="moduleDescription" class="text-gray-300"></p>
+      </div>
+
+      <!-- E-Books Section -->
+      <div id="ebooksSection" class="glass rounded-2xl p-6 mb-6">
+        <h3 class="text-xl font-bold mb-4"><i class="fas fa-book mr-2 text-blue-400"></i>E-Book & Materi Download</h3>
+        <div id="ebooksContainer" class="grid md:grid-cols-2 gap-4">
+          <!-- E-books will be rendered here -->
+        </div>
       </div>
 
       <!-- Quiz -->
@@ -411,7 +450,7 @@
     <div class="glass rounded-2xl p-6 mb-6 flex items-center justify-between flex-wrap gap-4">
       <div>
         <h2 class="text-2xl font-bold"><i class="fas fa-cog mr-2 text-purple-400"></i>Admin Dashboard</h2>
-        <p class="text-gray-400 text-sm">Kelola modul, video, dan quiz</p>
+        <p class="text-gray-400 text-sm">Kelola modul, video, e-book, dan quiz</p>
       </div>
       <div class="flex gap-2">
         <button onclick="showModuleForm()" class="btn-success px-4 py-2 rounded-xl">
@@ -432,12 +471,13 @@
               <th>No</th>
               <th>Judul</th>
               <th>Video</th>
+              <th>E-Book</th>
               <th>Quiz</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody id="adminModulesTable">
-            <tr><td colspan="5" class="text-center py-8">Loading...</td></tr>
+            <tr><td colspan="6" class="text-center py-8">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -447,7 +487,7 @@
 
 <!-- MODAL: ADD/EDIT MODULE -->
 <div id="moduleModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-  <div class="glass rounded-3xl p-8 max-w-2xl w-full glow relative max-h-[90vh] overflow-y-auto">
+  <div class="glass rounded-3xl p-8 max-w-3xl w-full glow relative max-h-[90vh] overflow-y-auto">
     <button onclick="closeModuleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
       <i class="fas fa-times text-xl"></i>
     </button>
@@ -465,10 +505,30 @@
         <textarea id="moduleDesc" rows="3" required placeholder="Deskripsi modul..." class="w-full px-4 py-3 rounded-xl"></textarea>
       </div>
 
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Video URL (YouTube/Vimeo)</label>
-        <input type="text" id="moduleVideo" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-4 py-3 rounded-xl" />
-        <p class="text-xs text-gray-400 mt-1">Masukkan link YouTube atau Vimeo</p>
+      <!-- Multiple Videos Section -->
+      <div class="border-t border-white/10 pt-4">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-bold">Video Pembelajaran</h3>
+          <button type="button" onclick="addVideoField()" class="text-sm text-blue-400 hover:text-blue-300">
+            <i class="fas fa-plus mr-1"></i>Tambah Video
+          </button>
+        </div>
+        <div id="videosContainer" class="space-y-3">
+          <!-- Video fields will be added here -->
+        </div>
+      </div>
+
+      <!-- E-Books Section -->
+      <div class="border-t border-white/10 pt-4">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-bold">E-Book / Materi Download</h3>
+          <button type="button" onclick="addEbookField()" class="text-sm text-blue-400 hover:text-blue-300">
+            <i class="fas fa-plus mr-1"></i>Tambah E-Book
+          </button>
+        </div>
+        <div id="ebooksContainer" class="space-y-3">
+          <!-- E-book fields will be added here -->
+        </div>
       </div>
 
       <div>
@@ -494,13 +554,15 @@
 
       <!-- Quiz Section -->
       <div class="border-t border-white/10 pt-4 mt-4">
-        <h3 class="font-bold mb-3">Quiz (Opsional)</h3>
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-bold">Quiz (Opsional)</h3>
+          <button type="button" onclick="addQuizQuestion()" class="text-sm text-blue-400 hover:text-blue-300">
+            <i class="fas fa-plus mr-1"></i>Tambah Pertanyaan
+          </button>
+        </div>
         <div id="quizQuestionsContainer" class="space-y-4">
           <!-- Quiz questions will be added here -->
         </div>
-        <button type="button" onclick="addQuizQuestion()" class="mt-3 glass px-4 py-2 rounded-xl hover:bg-white/10 text-sm">
-          <i class="fas fa-plus mr-2"></i>Tambah Pertanyaan Quiz
-        </button>
       </div>
 
       <div class="flex gap-3 pt-4">
@@ -537,8 +599,12 @@ let currentUser = null;
 let currentAdmin = null;
 let modulesData = [];
 let currentModule = null;
+let currentVideoIndex = 0;
 let quizAnswers = {};
 let quizScore = 0;
+let videoCount = 0;
+let ebookCount = 0;
+let quizQuestionCount = 0;
 
 /* ============================================================
    INISIALISASI
@@ -599,7 +665,8 @@ function closeRegisterModal() {
 }
 
 function scrollToFeatures() { 
-  document.getElementById('features').scrollIntoView({ behavior: 'smooth' }); 
+  const features = document.getElementById('features');
+  if (features) features.scrollIntoView({ behavior: 'smooth' }); 
 }
 
 /* ============================================================
@@ -658,7 +725,12 @@ function getDefaultModules() {
       id: 1,
       judul: 'Fundamental Digital Marketing',
       deskripsi: 'Pelajari dasar-dasar digital marketing',
-      video_url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      videos: [
+        { title: 'Pengantar Digital Marketing', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
+      ],
+      ebooks: [
+        { title: 'Panduan Digital Marketing', url: 'https://example.com/ebook.pdf' }
+      ],
       icon: 'book',
       color: 'from-blue-500 to-cyan-500',
       urutan: 1,
@@ -674,7 +746,8 @@ function getDefaultModules() {
 }
 
 function extractVideoId(url) {
-  // Extract video ID from YouTube or Vimeo URL
+  if (!url || typeof url !== 'string') return null;
+  
   if (url.includes('youtube.com') || url.includes('youtu.be')) {
     const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
     return match ? `https://www.youtube.com/embed/${match[1]}` : null;
@@ -710,6 +783,9 @@ async function renderModules() {
     container.innerHTML = modules.map(m => {
       const isDone = completed.includes(m.id);
       const score = scores[m.id] || 0;
+      const videoCount = (m.videos && m.videos.length) || 0;
+      const ebookCount = (m.ebooks && m.ebooks.length) || 0;
+      
       return `
         <div class="glass rounded-2xl p-6 module-card transition cursor-pointer" onclick="openModule(${m.id})">
           <div class="flex items-start justify-between mb-4">
@@ -719,7 +795,8 @@ async function renderModules() {
             ${isDone ? '<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs"><i class="fas fa-check mr-1"></i>Selesai</span>' : '<span class="bg-white/10 text-gray-400 px-3 py-1 rounded-full text-xs">Belum</span>'}
           </div>
           <h4 class="font-bold text-lg mb-1">Modul ${m.urutan || m.id}: ${m.judul}</h4>
-          ${m.video_url ? '<p class="text-sm text-blue-400 mb-2"><i class="fas fa-video mr-1"></i>Ada Video</p>' : ''}
+          ${videoCount > 0 ? `<p class="text-sm text-red-400 mb-1"><i class="fas fa-video mr-1"></i>${videoCount} Video</p>` : ''}
+          ${ebookCount > 0 ? `<p class="text-sm text-blue-400 mb-1"><i class="fas fa-book mr-1"></i>${ebookCount} E-Book</p>` : ''}
           ${m.quiz && m.quiz.length > 0 ? '<p class="text-sm text-purple-400 mb-2"><i class="fas fa-question-circle mr-1"></i>Ada Quiz</p>' : ''}
           ${score > 0 ? `<p class="text-sm text-yellow-400">Nilai: ${score}</p>` : ''}
           <button class="mt-4 w-full py-2 rounded-lg ${isDone ? 'bg-green-500/20 text-green-400' : 'btn-primary text-white'} font-semibold">
@@ -738,7 +815,13 @@ async function renderModules() {
 
 async function openModule(id) {
   const module = modulesData.find(m => m.id === id);
+  if (!module) {
+    showToast('Modul tidak ditemukan', 'error');
+    return;
+  }
+  
   currentModule = module;
+  currentVideoIndex = 0;
   
   hideAllSections();
   document.getElementById('learningSection').classList.remove('hidden-section');
@@ -746,21 +829,92 @@ async function openModule(id) {
   document.getElementById('moduleTitle').textContent = `Modul ${module.urutan || module.id}: ${module.judul}`;
   document.getElementById('moduleDescription').textContent = module.deskripsi || '';
   
-  // Embed video
-  const videoContainer = document.getElementById('videoContainer');
-  if (module.video_url) {
-    const embedUrl = extractVideoId(module.video_url);
-    videoContainer.innerHTML = `
-      <iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `;
-  } else {
-    videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">Tidak ada video untuk modul ini</div>';
-  }
+  // Render videos
+  renderVideos(module);
+  
+  // Render ebooks
+  renderEbooks(module);
   
   // Render quiz
   renderQuiz(module);
   
   window.scrollTo(0, 0);
+}
+
+function renderVideos(module) {
+  const thumbnailsContainer = document.getElementById('videoThumbnails');
+  const videoContainer = document.getElementById('activeVideoContainer');
+  
+  if (!module.videos || module.videos.length === 0) {
+    thumbnailsContainer.innerHTML = '<p class="text-gray-400 col-span-3">Tidak ada video untuk modul ini</p>';
+    videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">Tidak ada video</div>';
+    return;
+  }
+  
+  // Render thumbnails
+  thumbnailsContainer.innerHTML = module.videos.map((v, idx) => `
+    <div class="video-item glass p-3 rounded-xl border border-white/10 ${idx === 0 ? 'active' : ''}" onclick="playVideo(${idx})">
+      <div class="aspect-video bg-black/50 rounded-lg mb-2 flex items-center justify-center">
+        <i class="fas fa-play-circle text-3xl text-white/70"></i>
+      </div>
+      <p class="text-sm font-semibold truncate">${v.title || 'Video ' + (idx + 1)}</p>
+    </div>
+  `).join('');
+  
+  // Play first video
+  playVideo(0);
+}
+
+function playVideo(index) {
+  if (!currentModule || !currentModule.videos || !currentModule.videos[index]) return;
+  
+  currentVideoIndex = index;
+  const videoUrl = currentModule.videos[index].url;
+  const embedUrl = extractVideoId(videoUrl);
+  
+  const videoContainer = document.getElementById('activeVideoContainer');
+  if (embedUrl) {
+    videoContainer.innerHTML = `
+      <iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `;
+  } else {
+    videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">URL video tidak valid</div>';
+  }
+  
+  // Update active thumbnail
+  document.querySelectorAll('.video-item').forEach((el, idx) => {
+    if (idx === index) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+
+function renderEbooks(module) {
+  const container = document.getElementById('ebooksContainer');
+  const section = document.getElementById('ebooksSection');
+  
+  if (!module.ebooks || module.ebooks.length === 0) {
+    section.classList.add('hidden-section');
+    return;
+  }
+  
+  section.classList.remove('hidden-section');
+  container.innerHTML = module.ebooks.map((ebook, idx) => `
+    <div class="ebook-card glass p-4 rounded-xl border border-white/10 flex items-center gap-4">
+      <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
+        <i class="fas fa-file-pdf text-xl"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h4 class="font-semibold truncate">${ebook.title || 'E-Book ' + (idx + 1)}</h4>
+        <p class="text-xs text-gray-400">PDF Document</p>
+      </div>
+      <a href="${ebook.url}" target="_blank" class="btn-primary px-4 py-2 rounded-lg text-sm">
+        <i class="fas fa-download mr-1"></i>Download
+      </a>
+    </div>
+  `).join('');
 }
 
 function renderQuiz(module) {
@@ -794,7 +948,6 @@ function renderQuiz(module) {
 function selectQuizAnswer(questionIdx, answerIdx) {
   quizAnswers[questionIdx] = answerIdx;
   
-  // Visual feedback
   const questionDiv = document.querySelector(`[data-quiz-idx="${questionIdx}"]`);
   const options = questionDiv.querySelectorAll('.quiz-option');
   options.forEach((opt, idx) => {
@@ -817,7 +970,6 @@ async function submitQuiz() {
       correct++;
     }
     
-    // Show correct/wrong
     const questionDiv = document.querySelector(`[data-quiz-idx="${idx}"]`);
     const options = questionDiv.querySelectorAll('.quiz-option');
     options.forEach((opt, optIdx) => {
@@ -832,12 +984,10 @@ async function submitQuiz() {
   
   quizScore = Math.round((correct / total) * 100);
   
-  // Save score
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   scores[currentModule.id] = quizScore;
   localStorage.setItem('quizScores', JSON.stringify(scores));
   
-  // Mark module as complete if score >= 70
   if (quizScore >= 70) {
     let completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
     if (!completed.includes(currentModule.id)) {
@@ -847,7 +997,6 @@ async function submitQuiz() {
     
     showToast(`Selamat! Nilai Anda: ${quizScore} - Modul selesai!`, 'success');
     
-    // Check if all modules completed
     const modules = await loadModules();
     if (completed.length >= modules.length) {
       setTimeout(() => {
@@ -871,7 +1020,6 @@ function updateProgress() {
   document.getElementById('progressBar').style.width = percent + '%';
   document.getElementById('completedModules').textContent = completed.length;
   
-  // Calculate average score
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   const scoreValues = Object.values(scores);
   const avg = scoreValues.length > 0 ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length) : 0;
@@ -971,7 +1119,7 @@ function logout() {
 }
 
 /* ============================================================
-   SERTIFIKAT - FIXED VERSION
+   SERTIFIKAT
    ============================================================ */
 async function generateAndSendCertificate() {
   const btn = event.target;
@@ -986,18 +1134,15 @@ async function generateAndSendCertificate() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
 
-    // Background
     doc.setFillColor(254, 243, 199);
     doc.rect(0, 0, 297, 210, 'F');
 
-    // Border
     doc.setDrawColor(146, 64, 14);
     doc.setLineWidth(2);
     doc.rect(10, 10, 277, 190);
     doc.setLineWidth(0.5);
     doc.rect(15, 15, 267, 180);
 
-    // Header
     doc.setTextColor(146, 64, 14);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
@@ -1011,11 +1156,10 @@ async function generateAndSendCertificate() {
     doc.setFont('helvetica', 'normal');
     doc.text('Diberikan kepada', 148.5, 80, { align: 'center' });
 
-    // Nama
     doc.setFontSize(28);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(79, 70, 229);
-    doc.text(currentUser.name.toUpperCase(), 148.5, 100, { align: 'center' });
+    doc.text((currentUser.name || '').toUpperCase(), 148.5, 100, { align: 'center' });
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
@@ -1043,14 +1187,9 @@ async function generateAndSendCertificate() {
     doc.setFontSize(8);
     doc.text(`ID: ${certId}`, 148.5, 195, { align: 'center' });
 
-    // Save PDF
-    const pdfBlob = doc.output('blob');
-    const fileName = `Sertifikat_${currentUser.name.replace(/\s+/g, '_')}_${certId}.pdf`;
-
-    // Download first
+    const fileName = `Sertifikat_${(currentUser.name || 'user').replace(/\s+/g, '_')}_${certId}.pdf`;
     doc.save(fileName);
     
-    // Try send email
     if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY && CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_KEY') {
       try {
         const templateParams = {
@@ -1065,15 +1204,15 @@ async function generateAndSendCertificate() {
         showToast('✅ Sertifikat berhasil dikirim ke email: ' + currentUser.email, 'success');
       } catch (emailErr) {
         console.error('EmailJS Error:', emailErr);
-        showToast('📥 Sertifikat berhasil di-download. Email gagal dikirim (cek konfigurasi EmailJS)', 'info');
+        showToast('📥 Sertifikat berhasil di-download. Email gagal dikirim', 'info');
       }
     } else {
-      showToast('📥 Sertifikat berhasil di-download (EmailJS belum dikonfigurasi)', 'info');
+      showToast('📥 Sertifikat berhasil di-download', 'success');
     }
 
   } catch (err) {
     console.error('Certificate Error:', err);
-    showToast('Gagal mengirim sertifikat: ' + err.message, 'error');
+    showToast('Gagal: ' + err.message, 'error');
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email';
@@ -1113,16 +1252,22 @@ async function loadAdminModules() {
   const tbody = document.getElementById('adminModulesTable');
   
   if (modules.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8">Belum ada modul</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8">Belum ada modul</td></tr>';
     return;
   }
 
-  tbody.innerHTML = modules.map((m, index) => `
+  tbody.innerHTML = modules.map((m, index) => {
+    const videoCount = (m.videos && m.videos.length) || 0;
+    const ebookCount = (m.ebooks && m.ebooks.length) || 0;
+    const quizCount = (m.quiz && m.quiz.length) || 0;
+    
+    return `
     <tr>
       <td>${index + 1}</td>
       <td>${m.judul}</td>
-      <td>${m.video_url ? '<i class="fas fa-check text-green-400"></i>' : '<i class="fas fa-times text-red-400"></i>'}</td>
-      <td>${m.quiz && m.quiz.length > 0 ? m.quiz.length + ' soal' : '-'}</td>
+      <td>${videoCount > 0 ? videoCount + ' video' : '-'}</td>
+      <td>${ebookCount > 0 ? ebookCount + ' ebook' : '-'}</td>
+      <td>${quizCount > 0 ? quizCount + ' soal' : '-'}</td>
       <td>
         <button onclick="editModule(${m.id})" class="text-blue-400 hover:text-blue-300 mr-2">
           <i class="fas fa-edit"></i>
@@ -1132,30 +1277,43 @@ async function loadAdminModules() {
         </button>
       </td>
     </tr>
-  `).join('');
+  `}).join('');
 }
-
-let quizQuestionCount = 0;
 
 function showModuleForm(moduleId = null) {
   const modal = document.getElementById('moduleModal');
   const title = document.getElementById('moduleModalTitle');
   const form = document.getElementById('moduleForm');
   
+  videoCount = 0;
+  ebookCount = 0;
   quizQuestionCount = 0;
+  document.getElementById('videosContainer').innerHTML = '';
+  document.getElementById('ebooksContainer').innerHTML = '';
   document.getElementById('quizQuestionsContainer').innerHTML = '';
   
   if (moduleId) {
     const module = modulesData.find(m => m.id === moduleId);
     title.textContent = 'Edit Modul';
     document.getElementById('moduleId').value = module.id;
-    document.getElementById('moduleTitle').value = module.judul;
+    document.getElementById('moduleTitle').value = module.judul || '';
     document.getElementById('moduleDesc').value = module.deskripsi || '';
-    document.getElementById('moduleVideo').value = module.video_url || '';
     document.getElementById('moduleIcon').value = module.icon || 'book';
     document.getElementById('moduleColor').value = module.color || 'from-blue-500 to-cyan-500';
     
-    // Load quiz questions
+    // Load videos
+    if (module.videos && module.videos.length > 0) {
+      module.videos.forEach(v => addVideoField(v));
+    } else {
+      addVideoField();
+    }
+    
+    // Load ebooks
+    if (module.ebooks && module.ebooks.length > 0) {
+      module.ebooks.forEach(e => addEbookField(e));
+    }
+    
+    // Load quiz
     if (module.quiz && module.quiz.length > 0) {
       module.quiz.forEach(q => addQuizQuestion(q));
     }
@@ -1163,6 +1321,7 @@ function showModuleForm(moduleId = null) {
     title.textContent = 'Tambah Modul';
     form.reset();
     document.getElementById('moduleId').value = '';
+    addVideoField();
   }
   
   modal.classList.remove('hidden-section');
@@ -1170,6 +1329,62 @@ function showModuleForm(moduleId = null) {
 
 function closeModuleModal() {
   document.getElementById('moduleModal').classList.add('hidden-section');
+}
+
+function addVideoField(existingData = null) {
+  videoCount++;
+  const container = document.getElementById('videosContainer');
+  
+  const videoDiv = document.createElement('div');
+  videoDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  videoDiv.innerHTML = `
+    <div class="flex justify-between items-center mb-2">
+      <h4 class="font-semibold">Video ${videoCount}</h4>
+      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-300">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div>
+      <label class="text-xs text-gray-400">Judul Video</label>
+      <input type="text" class="video-title w-full px-3 py-2 rounded-lg mt-1" 
+        placeholder="Contoh: Pengantar Digital Marketing" value="${existingData && existingData.title ? existingData.title : ''}" />
+    </div>
+    <div class="mt-2">
+      <label class="text-xs text-gray-400">URL Video (YouTube/Vimeo)</label>
+      <input type="text" class="video-url w-full px-3 py-2 rounded-lg mt-1" 
+        placeholder="https://www.youtube.com/watch?v=..." value="${existingData && existingData.url ? existingData.url : ''}" />
+    </div>
+  `;
+  
+  container.appendChild(videoDiv);
+}
+
+function addEbookField(existingData = null) {
+  ebookCount++;
+  const container = document.getElementById('ebooksContainer');
+  
+  const ebookDiv = document.createElement('div');
+  ebookDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  ebookDiv.innerHTML = `
+    <div class="flex justify-between items-center mb-2">
+      <h4 class="font-semibold">E-Book ${ebookCount}</h4>
+      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-300">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div>
+      <label class="text-xs text-gray-400">Judul E-Book</label>
+      <input type="text" class="ebook-title w-full px-3 py-2 rounded-lg mt-1" 
+        placeholder="Contoh: Panduan Lengkap Digital Marketing" value="${existingData && existingData.title ? existingData.title : ''}" />
+    </div>
+    <div class="mt-2">
+      <label class="text-xs text-gray-400">URL Download (PDF)</label>
+      <input type="text" class="ebook-url w-full px-3 py-2 rounded-lg mt-1" 
+        placeholder="https://example.com/ebook.pdf" value="${existingData && existingData.url ? existingData.url : ''}" />
+    </div>
+  `;
+  
+  container.appendChild(ebookDiv);
 }
 
 function addQuizQuestion(existingData = null) {
@@ -1189,18 +1404,18 @@ function addQuizQuestion(existingData = null) {
       <div>
         <label class="text-xs text-gray-400">Pertanyaan</label>
         <input type="text" class="quiz-question-text w-full px-3 py-2 rounded-lg mt-1" 
-          placeholder="Masukkan pertanyaan" value="${existingData ? existingData.question : ''}" />
+          placeholder="Masukkan pertanyaan" value="${existingData && existingData.question ? existingData.question : ''}" />
       </div>
       <div>
         <label class="text-xs text-gray-400">Pilihan Jawaban (pisahkan dengan koma)</label>
         <input type="text" class="quiz-question-options w-full px-3 py-2 rounded-lg mt-1" 
           placeholder="Jawaban A, Jawaban B, Jawaban C, Jawaban D" 
-          value="${existingData ? existingData.options.join(', ') : ''}" />
+          value="${existingData && existingData.options ? existingData.options.join(', ') : ''}" />
       </div>
       <div>
         <label class="text-xs text-gray-400">Jawaban Benar (nomor urut 1-4)</label>
         <input type="number" class="quiz-question-correct w-full px-3 py-2 rounded-lg mt-1" 
-          min="1" max="4" value="${existingData ? existingData.correct + 1 : 1}" />
+          min="1" max="4" value="${existingData && typeof existingData.correct === 'number' ? existingData.correct + 1 : 1}" />
       </div>
     </div>
   `;
@@ -1212,6 +1427,30 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const id = document.getElementById('moduleId').value;
+  
+  // Collect videos
+  const videos = [];
+  const videoDivs = document.querySelectorAll('#videosContainer > div');
+  videoDivs.forEach(div => {
+    const title = div.querySelector('.video-title').value.trim();
+    const url = div.querySelector('.video-url').value.trim();
+    
+    if (title && url) {
+      videos.push({ title, url });
+    }
+  });
+  
+  // Collect ebooks
+  const ebooks = [];
+  const ebookDivs = document.querySelectorAll('#ebooksContainer > div');
+  ebookDivs.forEach(div => {
+    const title = div.querySelector('.ebook-title').value.trim();
+    const url = div.querySelector('.ebook-url').value.trim();
+    
+    if (title && url) {
+      ebooks.push({ title, url });
+    }
+  });
   
   // Collect quiz questions
   const quizQuestions = [];
@@ -1236,7 +1475,8 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   const moduleData = {
     judul: document.getElementById('moduleTitle').value.trim(),
     deskripsi: document.getElementById('moduleDesc').value.trim(),
-    video_url: document.getElementById('moduleVideo').value.trim(),
+    videos: videos.length > 0 ? videos : [],
+    ebooks: ebooks.length > 0 ? ebooks : [],
     icon: document.getElementById('moduleIcon').value,
     color: document.getElementById('moduleColor').value,
     quiz: quizQuestions.length > 0 ? quizQuestions : null,
