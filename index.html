@@ -4,18 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AcademyPro - Platform Pelatihan & Bisnis Digital</title>
-<meta name="description" content="Platform pelatihan profesional dengan sertifikat otomatis" />
 
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
-<!-- AOS Animation -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<!-- Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -26,7 +20,6 @@
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
     min-height: 100vh;
     color: #fff;
-    overflow-x: hidden;
   }
   .glass {
     background: rgba(255, 255, 255, 0.05);
@@ -37,24 +30,15 @@
     background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   .btn-primary {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
   }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
-  }
+  .btn-primary:hover { transform: translateY(-2px); }
   .btn-success {
     background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     transition: all 0.3s ease;
-  }
-  .btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(34, 197, 94, 0.5);
   }
   .btn-danger {
     background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
@@ -82,10 +66,7 @@
     height: 40px;
     animation: spin 1s linear infinite;
   }
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .module-card:hover {
     transform: translateY(-5px);
     border-color: rgba(139, 92, 246, 0.5);
@@ -102,7 +83,6 @@
   input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: #a78bfa;
-    background: rgba(255,255,255,0.08);
   }
   .toast {
     position: fixed;
@@ -125,18 +105,11 @@
   }
   .video-container iframe {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
   }
-  .video-item {
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .video-item:hover {
-    background: rgba(99, 102, 241, 0.2);
-  }
+  .video-item { cursor: pointer; transition: all 0.3s ease; }
+  .video-item:hover { background: rgba(99, 102, 241, 0.2); }
   .video-item.active {
     background: rgba(99, 102, 241, 0.3);
     border-color: #8b5cf6;
@@ -145,58 +118,31 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  .quiz-option:hover {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: #6366f1;
-  }
-  .quiz-option.selected {
-    background: rgba(99, 102, 241, 0.3);
-    border-color: #8b5cf6;
-  }
-  .quiz-option.correct {
-    background: rgba(34, 197, 94, 0.3);
-    border-color: #22c55e;
-  }
-  .quiz-option.wrong {
-    background: rgba(239, 68, 68, 0.3);
-    border-color: #ef4444;
-  }
-  .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+  .quiz-option:hover { background: rgba(99, 102, 241, 0.2); }
+  .quiz-option.selected { background: rgba(99, 102, 241, 0.3); border-color: #8b5cf6; }
+  .quiz-option.correct { background: rgba(34, 197, 94, 0.3); border-color: #22c55e; }
+  .quiz-option.wrong { background: rgba(239, 68, 68, 0.3); border-color: #ef4444; }
+  .admin-table { width: 100%; border-collapse: collapse; }
   .admin-table th, .admin-table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
-  .admin-table th {
-    background: rgba(99, 102, 241, 0.2);
-    font-weight: 600;
-  }
-  .admin-table tr:hover {
-    background: rgba(255,255,255,0.05);
-  }
-  .ebook-card {
-    transition: all 0.3s ease;
-  }
-  .ebook-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  }
+  .admin-table th { background: rgba(99, 102, 241, 0.2); font-weight: 600; }
+  .admin-table tr:hover { background: rgba(255,255,255,0.05); }
+  .ebook-card { transition: all 0.3s ease; }
+  .ebook-card:hover { transform: translateY(-3px); }
 </style>
 </head>
 <body>
 
-<!-- Background Blobs -->
 <div class="blob bg-purple-600 w-96 h-96 top-0 -left-48"></div>
 <div class="blob bg-blue-600 w-96 h-96 top-1/2 -right-48"></div>
 <div class="blob bg-pink-600 w-96 h-96 bottom-0 left-1/3"></div>
 
-<!-- Toast Container -->
 <div id="toastContainer"></div>
 
-<!-- Navigation -->
+<!-- NAVIGATION -->
 <nav class="relative z-50 glass px-6 py-4 mb-8">
   <div class="max-w-6xl mx-auto flex items-center justify-between">
     <div class="flex items-center gap-3">
@@ -206,17 +152,17 @@
       <span class="text-2xl font-bold gradient-text">AcademyPro</span>
     </div>
     <div class="flex gap-3">
-      <button onclick="showLanding()" class="glass px-4 py-2 rounded-xl hover:bg-white/10 transition">
+      <button onclick="showLanding()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
         <i class="fas fa-home mr-2"></i>Home
       </button>
-      <button onclick="showAdminLogin()" class="glass px-4 py-2 rounded-xl hover:bg-white/10 transition">
+      <button onclick="showAdminLogin()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
         <i class="fas fa-lock mr-2"></i>Admin
       </button>
     </div>
   </div>
 </nav>
 
-<!-- SECTION 1: LANDING -->
+<!-- LANDING -->
 <section id="landingSection" class="relative min-h-screen flex items-center justify-center px-4 py-20">
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="text-center mb-12" data-aos="fade-up">
@@ -228,27 +174,23 @@
         Raih <span class="gradient-text">Cuan Jutaan</span>
       </h1>
       <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-        Dapatkan pelatihan profesional dengan video, quiz, e-book, sertifikat otomatis, dan peluang bisnis.
+        Pelatihan profesional dengan video, quiz, e-book, sertifikat otomatis, dan peluang bisnis.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <button onclick="showRegisterModal()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg">
           <i class="fas fa-rocket mr-2"></i>Daftar Sekarang - GRATIS
         </button>
-        <button onclick="scrollToFeatures()" class="glass px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition">
-          <i class="fas fa-play mr-2"></i>Lihat Fitur
-        </button>
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16" data-aos="fade-up" data-aos-delay="200">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16" data-aos="fade-up">
       <div class="glass rounded-2xl p-6 text-center">
         <div class="text-3xl font-bold gradient-text" id="statAlumni">0</div>
         <div class="text-sm text-gray-400">Alumni Aktif</div>
       </div>
       <div class="glass rounded-2xl p-6 text-center">
         <div class="text-3xl font-bold gradient-text">98%</div>
-        <div class="text-sm text-gray-400">Tingkat Kepuasan</div>
+        <div class="text-sm text-gray-400">Kepuasan</div>
       </div>
       <div class="glass rounded-2xl p-6 text-center">
         <div class="text-3xl font-bold gradient-text" id="statModules">0</div>
@@ -262,9 +204,9 @@
   </div>
 </section>
 
-<!-- SECTION 2: REGISTER MODAL -->
+<!-- REGISTER MODAL -->
 <div id="registerModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-  <div class="glass rounded-3xl p-8 max-w-md w-full glow relative" data-aos="zoom-in">
+  <div class="glass rounded-3xl p-8 max-w-md w-full glow relative">
     <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
       <i class="fas fa-times text-xl"></i>
     </button>
@@ -273,20 +215,19 @@
         <i class="fas fa-user-plus text-2xl"></i>
       </div>
       <h2 class="text-2xl font-bold">Daftar Pelatihan</h2>
-      <p class="text-gray-400 text-sm mt-1">Isi data dengan benar untuk memulai</p>
     </div>
     <form id="registerForm" class="space-y-4">
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Nama Lengkap</label>
-        <input type="text" id="regName" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl" />
+        <input type="text" id="regName" required class="w-full px-4 py-3 rounded-xl" />
       </div>
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Nomor WhatsApp</label>
-        <input type="tel" id="regWa" required placeholder="08123456789" pattern="[0-9]{10,15}" class="w-full px-4 py-3 rounded-xl" />
+        <input type="tel" id="regWa" required class="w-full px-4 py-3 rounded-xl" />
       </div>
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Email Aktif</label>
-        <input type="email" id="regEmail" required placeholder="email@domain.com" class="w-full px-4 py-3 rounded-xl" />
+        <input type="email" id="regEmail" required class="w-full px-4 py-3 rounded-xl" />
       </div>
       <button type="submit" id="btnRegister" class="btn-primary w-full py-4 rounded-xl font-bold text-lg">
         <i class="fas fa-paper-plane mr-2"></i>Daftar & Mulai Belajar
@@ -295,30 +236,25 @@
   </div>
 </div>
 
-<!-- SECTION 3: DASHBOARD -->
+<!-- DASHBOARD -->
 <section id="dashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
   <div class="max-w-6xl mx-auto relative z-10">
-    <!-- Header -->
     <div class="glass rounded-2xl p-6 mb-6 flex items-center justify-between flex-wrap gap-4">
       <div>
         <h2 class="text-2xl font-bold">Selamat Datang, <span id="userName" class="gradient-text"></span> 👋</h2>
         <p class="text-gray-400 text-sm">Lanjutkan perjalanan belajarmu</p>
       </div>
       <div class="flex gap-2">
-        <button onclick="showProfileInfo()" class="glass px-4 py-2 rounded-xl hover:bg-white/10">
-          <i class="fas fa-user mr-2"></i>Profil
-        </button>
-        <button onclick="logout()" class="bg-red-500/20 border border-red-500/30 px-4 py-2 rounded-xl hover:bg-red-500/30">
+        <button onclick="logout()" class="bg-red-500/20 border border-red-500/30 px-4 py-2 rounded-xl">
           <i class="fas fa-sign-out-alt mr-2"></i>Keluar
         </button>
       </div>
     </div>
 
-    <!-- Progress -->
     <div class="grid md:grid-cols-3 gap-4 mb-6">
       <div class="glass rounded-2xl p-6">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Progress Belajar</span>
+          <span class="text-gray-400 text-sm">Progress</span>
           <i class="fas fa-chart-line text-purple-400"></i>
         </div>
         <div class="text-3xl font-bold" id="progressPercent">0%</div>
@@ -342,24 +278,16 @@
       </div>
     </div>
 
-    <!-- Modules -->
     <h3 class="text-2xl font-bold mb-4"><i class="fas fa-book-open mr-2 text-purple-400"></i>Modul Pelatihan</h3>
-    <div id="modulesContainer" class="grid md:grid-cols-2 gap-4 mb-8">
-      <div class="glass rounded-2xl p-8 text-center">
-        <div class="loader mx-auto mb-4"></div>
-        <p class="text-gray-400">Loading modules...</p>
-      </div>
-    </div>
+    <div id="modulesContainer" class="grid md:grid-cols-2 gap-4 mb-8"></div>
 
-    <!-- Certificate Section -->
     <div id="certificateSection" class="hidden-section">
       <div class="glass rounded-2xl p-8 text-center glow">
         <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4 floating">
           <i class="fas fa-trophy text-3xl"></i>
         </div>
         <h3 class="text-3xl font-bold mb-2">🎉 Selamat! Kamu Lulus!</h3>
-        <p class="text-gray-300 mb-6">Sertifikat resmi akan dikirim otomatis ke email kamu</p>
-        <button onclick="generateAndSendCertificate()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg">
+        <button onclick="generateAndSendCertificate()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg mt-4">
           <i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email
         </button>
       </div>
@@ -367,58 +295,42 @@
   </div>
 </section>
 
-<!-- SECTION 4: MODULE LEARNING -->
+<!-- LEARNING SECTION -->
 <section id="learningSection" class="hidden-section relative min-h-screen px-4 py-10">
   <div class="max-w-6xl mx-auto relative z-10">
     <button onclick="backToDashboard()" class="glass px-4 py-2 rounded-xl mb-6 hover:bg-white/10">
       <i class="fas fa-arrow-left mr-2"></i>Kembali
     </button>
 
-    <div id="learningContent">
-      <!-- Module Title -->
-      <div class="glass rounded-2xl p-6 mb-6">
-        <h2 id="moduleTitle" class="text-3xl font-bold mb-2"></h2>
-        <p id="moduleDescription" class="text-gray-300"></p>
-      </div>
+    <div class="glass rounded-2xl p-6 mb-6">
+      <h2 id="moduleTitle" class="text-3xl font-bold mb-2"></h2>
+      <p id="moduleDescription" class="text-gray-300"></p>
+    </div>
 
-      <!-- Videos Section -->
-      <div class="glass rounded-2xl p-6 mb-6">
-        <h3 class="text-xl font-bold mb-4"><i class="fas fa-video mr-2 text-red-400"></i>Video Pembelajaran</h3>
-        
-        <!-- Video Thumbnails -->
-        <div id="videoThumbnails" class="grid md:grid-cols-3 gap-3 mb-4">
-          <!-- Video thumbnails will be rendered here -->
-        </div>
+    <div class="glass rounded-2xl p-6 mb-6">
+      <h3 class="text-xl font-bold mb-4"><i class="fas fa-video mr-2 text-red-400"></i>Video Pembelajaran</h3>
+      <div id="videoThumbnails" class="grid md:grid-cols-3 gap-3 mb-4"></div>
+      <div id="activeVideoContainer" class="video-container mb-4"></div>
+    </div>
 
-        <!-- Active Video Player -->
-        <div id="activeVideoContainer" class="video-container mb-4">
-          <!-- Video will be embedded here -->
-        </div>
-      </div>
+    <div id="ebooksSection" class="glass rounded-2xl p-6 mb-6 hidden-section">
+      <h3 class="text-xl font-bold mb-4"><i class="fas fa-book mr-2 text-blue-400"></i>E-Book & Materi Download</h3>
+      <div id="ebooksContainer" class="grid md:grid-cols-2 gap-4"></div>
+    </div>
 
-      <!-- E-Books Section -->
-      <div id="ebooksSection" class="glass rounded-2xl p-6 mb-6">
-        <h3 class="text-xl font-bold mb-4"><i class="fas fa-book mr-2 text-blue-400"></i>E-Book & Materi Download</h3>
-        <div id="ebooksContainer" class="grid md:grid-cols-2 gap-4">
-          <!-- E-books will be rendered here -->
-        </div>
-      </div>
-
-      <!-- Quiz -->
-      <div id="quizContainer" class="glass rounded-2xl p-6">
-        <h3 class="text-xl font-bold mb-4"><i class="fas fa-question-circle mr-2 text-purple-400"></i>Quiz</h3>
-        <div id="quizContent"></div>
-        <button id="submitQuiz" onclick="submitQuiz()" class="btn-primary mt-4 px-6 py-3 rounded-xl font-bold hidden">
-          <i class="fas fa-paper-plane mr-2"></i>Jawab Quiz
-        </button>
-      </div>
+    <div class="glass rounded-2xl p-6">
+      <h3 class="text-xl font-bold mb-4"><i class="fas fa-question-circle mr-2 text-purple-400"></i>Quiz</h3>
+      <div id="quizContent"></div>
+      <button id="submitQuiz" onclick="submitQuiz()" class="btn-primary mt-4 px-6 py-3 rounded-xl font-bold hidden">
+        <i class="fas fa-paper-plane mr-2"></i>Jawab Quiz
+      </button>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: ADMIN LOGIN -->
+<!-- ADMIN LOGIN -->
 <section id="adminLoginSection" class="hidden-section relative min-h-screen flex items-center justify-center px-4">
-  <div class="glass rounded-3xl p-8 max-w-md w-full glow" data-aos="zoom-in">
+  <div class="glass rounded-3xl p-8 max-w-md w-full glow">
     <div class="text-center mb-6">
       <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center mb-4">
         <i class="fas fa-shield-alt text-2xl"></i>
@@ -426,37 +338,30 @@
       <h2 class="text-2xl font-bold">Admin Login</h2>
     </div>
     <form id="adminLoginForm" class="space-y-4">
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Email Admin</label>
-        <input type="email" id="adminEmail" required placeholder="admin@academypro.com" class="w-full px-4 py-3 rounded-xl" />
-      </div>
-      <div>
-        <label class="text-sm text-gray-300 mb-2 block">Password</label>
-        <input type="password" id="adminPassword" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl" />
-      </div>
-      <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold text-lg">
+      <input type="email" id="adminEmail" required placeholder="Email Admin" class="w-full px-4 py-3 rounded-xl" />
+      <input type="password" id="adminPassword" required placeholder="Password" class="w-full px-4 py-3 rounded-xl" />
+      <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold">
         <i class="fas fa-sign-in-alt mr-2"></i>Login
       </button>
     </form>
-    <button onclick="showLanding()" class="w-full mt-4 glass py-3 rounded-xl hover:bg-white/10 transition">
+    <button onclick="showLanding()" class="w-full mt-4 glass py-3 rounded-xl hover:bg-white/10">
       <i class="fas fa-arrow-left mr-2"></i>Kembali
     </button>
   </div>
 </section>
 
-<!-- SECTION 6: ADMIN DASHBOARD -->
+<!-- ADMIN DASHBOARD -->
 <section id="adminDashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="glass rounded-2xl p-6 mb-6 flex items-center justify-between flex-wrap gap-4">
       <div>
         <h2 class="text-2xl font-bold"><i class="fas fa-cog mr-2 text-purple-400"></i>Admin Dashboard</h2>
-        <p class="text-gray-400 text-sm">Kelola modul, video, e-book, dan quiz</p>
       </div>
       <div class="flex gap-2">
         <button onclick="showModuleForm()" class="btn-success px-4 py-2 rounded-xl">
           <i class="fas fa-plus mr-2"></i>Tambah Modul
         </button>
-        <button onclick="logout()" class="bg-red-500/20 border border-red-500/30 px-4 py-2 rounded-xl hover:bg-red-500/30">
+        <button onclick="logout()" class="bg-red-500/20 border border-red-500/30 px-4 py-2 rounded-xl">
           <i class="fas fa-sign-out-alt mr-2"></i>Logout
         </button>
       </div>
@@ -476,16 +381,14 @@
               <th>Aksi</th>
             </tr>
           </thead>
-          <tbody id="adminModulesTable">
-            <tr><td colspan="6" class="text-center py-8">Loading...</td></tr>
-          </tbody>
+          <tbody id="adminModulesTable"></tbody>
         </table>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MODAL: ADD/EDIT MODULE -->
+<!-- MODULE MODAL -->
 <div id="moduleModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
   <div class="glass rounded-3xl p-8 max-w-3xl w-full glow relative max-h-[90vh] overflow-y-auto">
     <button onclick="closeModuleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
@@ -496,16 +399,15 @@
       <input type="hidden" id="moduleId" />
       
       <div>
-        <label class="text-sm text-gray-300 mb-2 block">Judul Modul</label>
-        <input type="text" id="moduleTitle" required placeholder="Contoh: Fundamental Digital Marketing" class="w-full px-4 py-3 rounded-xl" />
+        <label class="text-sm text-gray-300 mb-2 block">Judul Modul *</label>
+        <input type="text" id="moduleTitle" required class="w-full px-4 py-3 rounded-xl" />
       </div>
 
       <div>
-        <label class="text-sm text-gray-300 mb-2 block">Deskripsi</label>
-        <textarea id="moduleDesc" rows="3" required placeholder="Deskripsi modul..." class="w-full px-4 py-3 rounded-xl"></textarea>
+        <label class="text-sm text-gray-300 mb-2 block">Deskripsi *</label>
+        <textarea id="moduleDesc" rows="3" required class="w-full px-4 py-3 rounded-xl"></textarea>
       </div>
 
-      <!-- Multiple Videos Section -->
       <div class="border-t border-white/10 pt-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="font-bold">Video Pembelajaran</h3>
@@ -513,12 +415,9 @@
             <i class="fas fa-plus mr-1"></i>Tambah Video
           </button>
         </div>
-        <div id="videosContainer" class="space-y-3">
-          <!-- Video fields will be added here -->
-        </div>
+        <div id="videosContainer" class="space-y-3"></div>
       </div>
 
-      <!-- E-Books Section -->
       <div class="border-t border-white/10 pt-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="font-bold">E-Book / Materi Download</h3>
@@ -526,13 +425,11 @@
             <i class="fas fa-plus mr-1"></i>Tambah E-Book
           </button>
         </div>
-        <div id="ebooksContainer" class="space-y-3">
-          <!-- E-book fields will be added here -->
-        </div>
+        <div id="ebooksFormContainer" class="space-y-3"></div>
       </div>
 
       <div>
-        <label class="text-sm text-gray-300 mb-2 block">Icon (Font Awesome)</label>
+        <label class="text-sm text-gray-300 mb-2 block">Icon</label>
         <select id="moduleIcon" class="w-full px-4 py-3 rounded-xl">
           <option value="book">book</option>
           <option value="video">video</option>
@@ -543,7 +440,7 @@
       </div>
 
       <div>
-        <label class="text-sm text-gray-300 mb-2 block">Warna Gradient</label>
+        <label class="text-sm text-gray-300 mb-2 block">Warna</label>
         <select id="moduleColor" class="w-full px-4 py-3 rounded-xl">
           <option value="from-blue-500 to-cyan-500">Biru - Cyan</option>
           <option value="from-purple-500 to-pink-500">Ungu - Pink</option>
@@ -552,17 +449,14 @@
         </select>
       </div>
 
-      <!-- Quiz Section -->
-      <div class="border-t border-white/10 pt-4 mt-4">
+      <div class="border-t border-white/10 pt-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="font-bold">Quiz (Opsional)</h3>
           <button type="button" onclick="addQuizQuestion()" class="text-sm text-blue-400 hover:text-blue-300">
             <i class="fas fa-plus mr-1"></i>Tambah Pertanyaan
           </button>
         </div>
-        <div id="quizQuestionsContainer" class="space-y-4">
-          <!-- Quiz questions will be added here -->
-        </div>
+        <div id="quizQuestionsContainer" class="space-y-4"></div>
       </div>
 
       <div class="flex gap-3 pt-4">
@@ -579,14 +473,14 @@
 
 <script>
 /* ============================================================
-   KONFIGURASI
+   KONFIGURASI - GANTI DENGAN DATA KAMU
    ============================================================ */
 const CONFIG = {
-  SUPABASE_URL: 'https://YOUR_PROJECT.supabase.co',
-  SUPABASE_ANON_KEY: 'YOUR_ANON_KEY',
-  EMAILJS_PUBLIC_KEY: 'YOUR_EMAILJS_KEY',
-  EMAILJS_SERVICE_ID: 'YOUR_SERVICE_ID',
-  EMAILJS_TEMPLATE_ID: 'YOUR_TEMPLATE_ID',
+  SUPABASE_URL: 'https://jnbtgryfrrvpxpfujwuo.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYnRncnlmcnJ2cHhwZnVqd3VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5MDY0OTcsImV4cCI6MjEwNzQ4MjQ5N30.8Gx4t5YG9Cnp_yOpyKhET-CgyhUzVC44AYQ39pnJxUU',
+  EMAILJS_PUBLIC_KEY: 'sRsr8CzetQwJFHxm-',
+  EMAILJS_SERVICE_ID: 'service_vsztggq',
+  EMAILJS_TEMPLATE_ID: 'template_jadl66m',
   ADMIN_EMAIL: 'admin@academypro.com',
   ADMIN_PASSWORD: 'admin123'
 };
@@ -594,7 +488,7 @@ const CONFIG = {
 /* ============================================================
    GLOBAL VARIABLES
    ============================================================ */
-let supabaseClient;
+let supabaseClient = null;
 let currentUser = null;
 let currentAdmin = null;
 let modulesData = [];
@@ -602,23 +496,35 @@ let currentModule = null;
 let currentVideoIndex = 0;
 let quizAnswers = {};
 let quizScore = 0;
-let videoCount = 0;
-let ebookCount = 0;
-let quizQuestionCount = 0;
+
+// Counter untuk form
+let videoFieldCounter = 0;
+let ebookFieldCounter = 0;
+let quizFieldCounter = 0;
 
 /* ============================================================
-   INISIALISASI
+   SUPABASE INIT - SAFE
    ============================================================ */
-function initSupabase() {
+function getSupabase() {
   if (!supabaseClient) {
-    supabaseClient = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+    try {
+      if (typeof window.supabase !== 'undefined' && CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY) {
+        supabaseClient = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+      }
+    } catch (e) {
+      console.warn('Supabase init failed:', e);
+    }
   }
   return supabaseClient;
 }
 
 // Init EmailJS
-if (typeof emailjs !== 'undefined') {
-  emailjs.init({ publicKey: CONFIG.EMAILJS_PUBLIC_KEY });
+try {
+  if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY) {
+    emailjs.init({ publicKey: CONFIG.EMAILJS_PUBLIC_KEY });
+  }
+} catch (e) {
+  console.warn('EmailJS init failed:', e);
 }
 
 /* ============================================================
@@ -626,78 +532,94 @@ if (typeof emailjs !== 'undefined') {
    ============================================================ */
 function showToast(message, type = 'success') {
   const container = document.getElementById('toastContainer');
+  if (!container) return;
+  
   const colors = {
     success: 'from-green-500 to-emerald-600',
     error: 'from-red-500 to-rose-600',
     info: 'from-blue-500 to-indigo-600'
   };
   const icons = { success: 'check-circle', error: 'exclamation-circle', info: 'info-circle' };
+  
   const toast = document.createElement('div');
-  toast.className = `toast glass rounded-xl p-4 bg-gradient-to-r ${colors[type]} max-w-sm`;
-  toast.innerHTML = `<div class="flex items-center gap-3"><i class="fas fa-${icons[type]} text-xl"></i><span>${message}</span></div>`;
+  toast.className = `toast glass rounded-xl p-4 bg-gradient-to-r ${colors[type] || colors.info} max-w-sm`;
+  toast.innerHTML = `<div class="flex items-center gap-3"><i class="fas fa-${icons[type] || 'info-circle'} text-xl"></i><span>${message}</span></div>`;
   container.appendChild(toast);
   setTimeout(() => toast.remove(), 4000);
 }
 
 function hideAllSections() {
-  document.getElementById('landingSection').classList.add('hidden-section');
-  document.getElementById('dashboardSection').classList.add('hidden-section');
-  document.getElementById('learningSection').classList.add('hidden-section');
-  document.getElementById('adminLoginSection').classList.add('hidden-section');
-  document.getElementById('adminDashboardSection').classList.add('hidden-section');
-  document.getElementById('registerModal').classList.add('hidden-section');
-  document.getElementById('moduleModal').classList.add('hidden-section');
+  ['landingSection', 'dashboardSection', 'learningSection', 
+   'adminLoginSection', 'adminDashboardSection', 
+   'registerModal', 'moduleModal'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('hidden-section');
+  });
 }
 
 function showLanding() {
   hideAllSections();
-  document.getElementById('landingSection').classList.remove('hidden-section');
+  const el = document.getElementById('landingSection');
+  if (el) el.classList.remove('hidden-section');
   loadStats();
   window.scrollTo(0, 0);
 }
 
 function showRegisterModal() { 
-  document.getElementById('registerModal').classList.remove('hidden-section'); 
+  const el = document.getElementById('registerModal');
+  if (el) el.classList.remove('hidden-section'); 
 }
 
 function closeRegisterModal() { 
-  document.getElementById('registerModal').classList.add('hidden-section'); 
-}
-
-function scrollToFeatures() { 
-  const features = document.getElementById('features');
-  if (features) features.scrollIntoView({ behavior: 'smooth' }); 
+  const el = document.getElementById('registerModal');
+  if (el) el.classList.add('hidden-section'); 
 }
 
 /* ============================================================
-   LOAD DATA
+   LOAD DATA - DENGAN FALLBACK
    ============================================================ */
 async function loadModules() {
+  const supabase = getSupabase();
+  
+  if (!supabase) {
+    console.log('Supabase tidak tersedia, menggunakan data lokal');
+    return getLocalModules();
+  }
+  
   try {
-    const supabase = initSupabase();
     const { data, error } = await supabase
       .from('modules')
       .select('*')
       .order('urutan', { ascending: true });
     
-    if (error) throw error;
+    if (error) {
+      console.warn('Error load modules:', error.message);
+      return getLocalModules();
+    }
+    
     modulesData = data || [];
     return modulesData;
   } catch (err) {
     console.error('Error loading modules:', err);
-    return getDefaultModules();
+    return getLocalModules();
   }
 }
 
 async function loadPeserta() {
+  const supabase = getSupabase();
+  
+  if (!supabase) return [];
+  
   try {
-    const supabase = initSupabase();
     const { data, error } = await supabase
       .from('peserta_pelatihan')
       .select('*')
       .order('tanggal_daftar', { ascending: false });
     
-    if (error) throw error;
+    if (error) {
+      console.warn('Error load peserta:', error.message);
+      return [];
+    }
     return data || [];
   } catch (err) {
     console.error('Error loading peserta:', err);
@@ -712,24 +634,35 @@ async function loadStats() {
       loadModules()
     ]);
     
-    document.getElementById('statAlumni').textContent = peserta.length;
-    document.getElementById('statModules').textContent = modules.length;
+    const statAlumni = document.getElementById('statAlumni');
+    const statModules = document.getElementById('statModules');
+    if (statAlumni) statAlumni.textContent = peserta.length;
+    if (statModules) statModules.textContent = modules.length;
   } catch (err) {
     console.error('Error loading stats:', err);
   }
 }
 
-function getDefaultModules() {
-  return [
+function getLocalModules() {
+  const saved = localStorage.getItem('localModules');
+  if (saved) {
+    try {
+      modulesData = JSON.parse(saved);
+      return modulesData;
+    } catch (e) {}
+  }
+  
+  // Default modules
+  const defaults = [
     {
       id: 1,
       judul: 'Fundamental Digital Marketing',
-      deskripsi: 'Pelajari dasar-dasar digital marketing',
+      deskripsi: 'Pelajari dasar-dasar digital marketing dari nol sampai mahir',
       videos: [
         { title: 'Pengantar Digital Marketing', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
       ],
       ebooks: [
-        { title: 'Panduan Digital Marketing', url: 'https://example.com/ebook.pdf' }
+        { title: 'Panduan Digital Marketing PDF', url: 'https://example.com/ebook.pdf' }
       ],
       icon: 'book',
       color: 'from-blue-500 to-cyan-500',
@@ -737,23 +670,51 @@ function getDefaultModules() {
       quiz: [
         {
           question: 'Apa itu Digital Marketing?',
-          options: ['Pemasaran digital', 'Jual beli online', 'Iklan di TV', 'Semua benar'],
+          options: ['Pemasaran melalui media digital', 'Jual beli di pasar', 'Iklan di TV saja', 'Tidak ada yang benar'],
           correct: 0
         }
       ]
+    },
+    {
+      id: 2,
+      judul: 'Copywriting & Content Strategy',
+      deskripsi: 'Belajar menulis copy yang menjual dan strategi konten',
+      videos: [
+        { title: 'Dasar Copywriting', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
+      ],
+      ebooks: [],
+      icon: 'pen-fancy',
+      color: 'from-purple-500 to-pink-500',
+      urutan: 2,
+      quiz: []
     }
   ];
+  
+  modulesData = defaults;
+  return defaults;
+}
+
+function saveLocalModules() {
+  try {
+    localStorage.setItem('localModules', JSON.stringify(modulesData));
+  } catch (e) {
+    console.warn('Gagal simpan ke localStorage:', e);
+  }
 }
 
 function extractVideoId(url) {
   if (!url || typeof url !== 'string') return null;
   
-  if (url.includes('youtube.com') || url.includes('youtu.be')) {
-    const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-  } else if (url.includes('vimeo.com')) {
-    const match = url.match(/vimeo\.com\/(\d+)/);
-    return match ? `https://player.vimeo.com/video/${match[1]}` : null;
+  try {
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+      return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+    } else if (url.includes('vimeo.com')) {
+      const match = url.match(/vimeo\.com\/(\d+)/);
+      return match ? `https://player.vimeo.com/video/${match[1]}` : null;
+    }
+  } catch (e) {
+    console.warn('Error extract video:', e);
   }
   return url;
 }
@@ -763,12 +724,15 @@ function extractVideoId(url) {
    ============================================================ */
 async function renderModules() {
   const container = document.getElementById('modulesContainer');
+  if (!container) return;
+  
   const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   
   try {
     const modules = await loadModules();
-    document.getElementById('totalModules').textContent = modules.length;
+    const totalEl = document.getElementById('totalModules');
+    if (totalEl) totalEl.textContent = modules.length;
     
     if (modules.length === 0) {
       container.innerHTML = `
@@ -783,21 +747,21 @@ async function renderModules() {
     container.innerHTML = modules.map(m => {
       const isDone = completed.includes(m.id);
       const score = scores[m.id] || 0;
-      const videoCount = (m.videos && m.videos.length) || 0;
-      const ebookCount = (m.ebooks && m.ebooks.length) || 0;
+      const vCount = (m.videos && m.videos.length) || 0;
+      const eCount = (m.ebooks && m.ebooks.length) || 0;
       
       return `
         <div class="glass rounded-2xl p-6 module-card transition cursor-pointer" onclick="openModule(${m.id})">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center">
-              <i class="fas fa-${m.icon} text-2xl"></i>
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${m.color || 'from-blue-500 to-cyan-500'} flex items-center justify-center">
+              <i class="fas fa-${m.icon || 'book'} text-2xl"></i>
             </div>
             ${isDone ? '<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs"><i class="fas fa-check mr-1"></i>Selesai</span>' : '<span class="bg-white/10 text-gray-400 px-3 py-1 rounded-full text-xs">Belum</span>'}
           </div>
-          <h4 class="font-bold text-lg mb-1">Modul ${m.urutan || m.id}: ${m.judul}</h4>
-          ${videoCount > 0 ? `<p class="text-sm text-red-400 mb-1"><i class="fas fa-video mr-1"></i>${videoCount} Video</p>` : ''}
-          ${ebookCount > 0 ? `<p class="text-sm text-blue-400 mb-1"><i class="fas fa-book mr-1"></i>${ebookCount} E-Book</p>` : ''}
-          ${m.quiz && m.quiz.length > 0 ? '<p class="text-sm text-purple-400 mb-2"><i class="fas fa-question-circle mr-1"></i>Ada Quiz</p>' : ''}
+          <h4 class="font-bold text-lg mb-1">Modul ${m.urutan || m.id}: ${m.judul || ''}</h4>
+          ${vCount > 0 ? `<p class="text-sm text-red-400 mb-1"><i class="fas fa-video mr-1"></i>${vCount} Video</p>` : ''}
+          ${eCount > 0 ? `<p class="text-sm text-blue-400 mb-1"><i class="fas fa-book mr-1"></i>${eCount} E-Book</p>` : ''}
+          ${(m.quiz && m.quiz.length > 0) ? '<p class="text-sm text-purple-400 mb-2"><i class="fas fa-question-circle mr-1"></i>Ada Quiz</p>' : ''}
           ${score > 0 ? `<p class="text-sm text-yellow-400">Nilai: ${score}</p>` : ''}
           <button class="mt-4 w-full py-2 rounded-lg ${isDone ? 'bg-green-500/20 text-green-400' : 'btn-primary text-white'} font-semibold">
             ${isDone ? 'Ulangi Materi' : 'Mulai Belajar'}
@@ -824,18 +788,16 @@ async function openModule(id) {
   currentVideoIndex = 0;
   
   hideAllSections();
-  document.getElementById('learningSection').classList.remove('hidden-section');
+  const el = document.getElementById('learningSection');
+  if (el) el.classList.remove('hidden-section');
   
-  document.getElementById('moduleTitle').textContent = `Modul ${module.urutan || module.id}: ${module.judul}`;
-  document.getElementById('moduleDescription').textContent = module.deskripsi || '';
+  const titleEl = document.getElementById('moduleTitle');
+  const descEl = document.getElementById('moduleDescription');
+  if (titleEl) titleEl.textContent = `Modul ${module.urutan || module.id}: ${module.judul || ''}`;
+  if (descEl) descEl.textContent = module.deskripsi || '';
   
-  // Render videos
   renderVideos(module);
-  
-  // Render ebooks
   renderEbooks(module);
-  
-  // Render quiz
   renderQuiz(module);
   
   window.scrollTo(0, 0);
@@ -844,6 +806,7 @@ async function openModule(id) {
 function renderVideos(module) {
   const thumbnailsContainer = document.getElementById('videoThumbnails');
   const videoContainer = document.getElementById('activeVideoContainer');
+  if (!thumbnailsContainer || !videoContainer) return;
   
   if (!module.videos || module.videos.length === 0) {
     thumbnailsContainer.innerHTML = '<p class="text-gray-400 col-span-3">Tidak ada video untuk modul ini</p>';
@@ -851,7 +814,6 @@ function renderVideos(module) {
     return;
   }
   
-  // Render thumbnails
   thumbnailsContainer.innerHTML = module.videos.map((v, idx) => `
     <div class="video-item glass p-3 rounded-xl border border-white/10 ${idx === 0 ? 'active' : ''}" onclick="playVideo(${idx})">
       <div class="aspect-video bg-black/50 rounded-lg mb-2 flex items-center justify-center">
@@ -861,7 +823,6 @@ function renderVideos(module) {
     </div>
   `).join('');
   
-  // Play first video
   playVideo(0);
 }
 
@@ -873,6 +834,8 @@ function playVideo(index) {
   const embedUrl = extractVideoId(videoUrl);
   
   const videoContainer = document.getElementById('activeVideoContainer');
+  if (!videoContainer) return;
+  
   if (embedUrl) {
     videoContainer.innerHTML = `
       <iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -881,19 +844,16 @@ function playVideo(index) {
     videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">URL video tidak valid</div>';
   }
   
-  // Update active thumbnail
   document.querySelectorAll('.video-item').forEach((el, idx) => {
-    if (idx === index) {
-      el.classList.add('active');
-    } else {
-      el.classList.remove('active');
-    }
+    if (idx === index) el.classList.add('active');
+    else el.classList.remove('active');
   });
 }
 
 function renderEbooks(module) {
   const container = document.getElementById('ebooksContainer');
   const section = document.getElementById('ebooksSection');
+  if (!container || !section) return;
   
   if (!module.ebooks || module.ebooks.length === 0) {
     section.classList.add('hidden-section');
@@ -920,6 +880,7 @@ function renderEbooks(module) {
 function renderQuiz(module) {
   const quizContainer = document.getElementById('quizContent');
   const submitBtn = document.getElementById('submitQuiz');
+  if (!quizContainer || !submitBtn) return;
   
   if (!module.quiz || module.quiz.length === 0) {
     quizContainer.innerHTML = '<p class="text-gray-400">Tidak ada quiz untuk modul ini</p>';
@@ -931,9 +892,9 @@ function renderQuiz(module) {
   
   quizContainer.innerHTML = module.quiz.map((q, idx) => `
     <div class="mb-6" data-quiz-idx="${idx}">
-      <p class="font-semibold mb-3">${idx + 1}. ${q.question}</p>
+      <p class="font-semibold mb-3">${idx + 1}. ${q.question || ''}</p>
       <div class="space-y-2">
-        ${q.options.map((opt, optIdx) => `
+        ${(q.options || []).map((opt, optIdx) => `
           <div class="quiz-option glass p-3 rounded-xl border border-white/10" onclick="selectQuizAnswer(${idx}, ${optIdx})">
             ${opt}
           </div>
@@ -949,12 +910,12 @@ function selectQuizAnswer(questionIdx, answerIdx) {
   quizAnswers[questionIdx] = answerIdx;
   
   const questionDiv = document.querySelector(`[data-quiz-idx="${questionIdx}"]`);
+  if (!questionDiv) return;
+  
   const options = questionDiv.querySelectorAll('.quiz-option');
   options.forEach((opt, idx) => {
     opt.classList.remove('selected');
-    if (idx === answerIdx) {
-      opt.classList.add('selected');
-    }
+    if (idx === answerIdx) opt.classList.add('selected');
   });
 }
 
@@ -966,19 +927,16 @@ async function submitQuiz() {
   
   currentModule.quiz.forEach((q, idx) => {
     const userAnswer = quizAnswers[idx];
-    if (userAnswer === q.correct) {
-      correct++;
-    }
+    if (userAnswer === q.correct) correct++;
     
     const questionDiv = document.querySelector(`[data-quiz-idx="${idx}"]`);
+    if (!questionDiv) return;
+    
     const options = questionDiv.querySelectorAll('.quiz-option');
     options.forEach((opt, optIdx) => {
       opt.classList.remove('selected');
-      if (optIdx === q.correct) {
-        opt.classList.add('correct');
-      } else if (optIdx === userAnswer && userAnswer !== q.correct) {
-        opt.classList.add('wrong');
-      }
+      if (optIdx === q.correct) opt.classList.add('correct');
+      else if (optIdx === userAnswer && userAnswer !== q.correct) opt.classList.add('wrong');
     });
   });
   
@@ -1000,35 +958,46 @@ async function submitQuiz() {
     const modules = await loadModules();
     if (completed.length >= modules.length) {
       setTimeout(() => {
-        document.getElementById('certificateSection').classList.remove('hidden-section');
-        document.getElementById('certificateSection').scrollIntoView({ behavior: 'smooth' });
+        const certEl = document.getElementById('certificateSection');
+        if (certEl) {
+          certEl.classList.remove('hidden-section');
+          certEl.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 1000);
     }
   } else {
     showToast(`Nilai Anda: ${quizScore} - Minimal 70 untuk lulus`, 'error');
   }
   
-  document.getElementById('submitQuiz').classList.add('hidden');
+  const submitBtn = document.getElementById('submitQuiz');
+  if (submitBtn) submitBtn.classList.add('hidden');
   updateProgress();
 }
 
 function updateProgress() {
   const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
-  const total = modulesData.length || 5;
+  const total = modulesData.length || 1;
   const percent = Math.round((completed.length / total) * 100);
-  document.getElementById('progressPercent').textContent = percent + '%';
-  document.getElementById('progressBar').style.width = percent + '%';
-  document.getElementById('completedModules').textContent = completed.length;
+  
+  const percentEl = document.getElementById('progressPercent');
+  const barEl = document.getElementById('progressBar');
+  const completedEl = document.getElementById('completedModules');
+  
+  if (percentEl) percentEl.textContent = percent + '%';
+  if (barEl) barEl.style.width = percent + '%';
+  if (completedEl) completedEl.textContent = completed.length;
   
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   const scoreValues = Object.values(scores);
   const avg = scoreValues.length > 0 ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length) : 0;
-  document.getElementById('averageScore').textContent = avg;
+  const avgEl = document.getElementById('averageScore');
+  if (avgEl) avgEl.textContent = avg;
 }
 
 function backToDashboard() {
   hideAllSections();
-  document.getElementById('dashboardSection').classList.remove('hidden-section');
+  const el = document.getElementById('dashboardSection');
+  if (el) el.classList.remove('hidden-section');
   renderModules();
 }
 
@@ -1037,37 +1006,61 @@ function backToDashboard() {
    ============================================================ */
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  
   const btn = document.getElementById('btnRegister');
-  const name = document.getElementById('regName').value.trim();
-  const wa = document.getElementById('regWa').value.trim();
-  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const nameInput = document.getElementById('regName');
+  const waInput = document.getElementById('regWa');
+  const emailInput = document.getElementById('regEmail');
+  
+  if (!nameInput || !waInput || !emailInput) {
+    showToast('Form tidak lengkap', 'error');
+    return;
+  }
+  
+  const name = (nameInput.value || '').trim();
+  const wa = (waInput.value || '').trim();
+  const email = (emailInput.value || '').trim().toLowerCase();
+
+  if (!name || !wa || !email) {
+    showToast('Semua field harus diisi', 'error');
+    return;
+  }
 
   btn.disabled = true;
   btn.innerHTML = '<div class="loader mx-auto"></div>';
 
   try {
-    const supabase = initSupabase();
+    const supabase = getSupabase();
     
-    const { data: existing } = await supabase
-      .from('peserta_pelatihan')
-      .select('id')
-      .eq('email', email)
-      .single();
+    if (supabase) {
+      try {
+        const { data: existing } = await supabase
+          .from('peserta_pelatihan')
+          .select('id')
+          .eq('email', email)
+          .single();
 
-    if (!existing) {
-      const { error } = await supabase.from('peserta_pelatihan').insert([{
-        nama: name,
-        whatsapp: wa,
-        email: email,
-        tanggal_daftar: new Date().toISOString(),
-        progress: 0,
-        status: 'aktif'
-      }]);
-      
-      if (error && error.code !== '42P01') throw error;
-      showToast('Registrasi berhasil! Selamat belajar 🎉', 'success');
-    } else {
-      showToast('Email sudah terdaftar!', 'info');
+        if (!existing) {
+          const { error } = await supabase.from('peserta_pelatihan').insert([{
+            nama: name,
+            whatsapp: wa,
+            email: email,
+            tanggal_daftar: new Date().toISOString(),
+            progress: 0,
+            status: 'aktif'
+          }]);
+          
+          if (error && error.code !== '42P01') {
+            console.warn('Insert error:', error.message);
+          } else if (!error) {
+            showToast('Registrasi berhasil! Selamat belajar 🎉', 'success');
+          }
+        } else {
+          showToast('Email sudah terdaftar!', 'info');
+        }
+      } catch (dbErr) {
+        console.warn('Database error, menggunakan mode lokal:', dbErr.message);
+      }
     }
 
     currentUser = { name, wa, email, registeredAt: Date.now() };
@@ -1096,17 +1089,15 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
 function showDashboard() {
   hideAllSections();
-  document.getElementById('dashboardSection').classList.remove('hidden-section');
+  const el = document.getElementById('dashboardSection');
+  if (el) el.classList.remove('hidden-section');
+  
   if (currentUser) {
-    document.getElementById('userName').textContent = currentUser.name;
+    const nameEl = document.getElementById('userName');
+    if (nameEl) nameEl.textContent = currentUser.name;
   }
   renderModules();
   window.scrollTo(0, 0);
-}
-
-function showProfileInfo() {
-  if (!currentUser) return;
-  alert(` Profil Kamu\n\nNama: ${currentUser.name}\nWA: ${currentUser.wa}\nEmail: ${currentUser.email}\nTerdaftar: ${new Date(currentUser.registeredAt).toLocaleDateString('id-ID')}`);
 }
 
 function logout() {
@@ -1122,13 +1113,15 @@ function logout() {
    SERTIFIKAT
    ============================================================ */
 async function generateAndSendCertificate() {
-  const btn = event.target;
-  btn.disabled = true;
-  btn.innerHTML = '<div class="loader mx-auto"></div> Mengirim...';
+  const btn = event.target.closest('button');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<div class="loader mx-auto"></div> Mengirim...';
+  }
 
   try {
     if (!currentUser || !currentUser.email) {
-      throw new Error('Email pengguna tidak ditemukan. Silakan login ulang.');
+      throw new Error('Email pengguna tidak ditemukan.');
     }
 
     const { jsPDF } = window.jspdf;
@@ -1159,7 +1152,7 @@ async function generateAndSendCertificate() {
     doc.setFontSize(28);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(79, 70, 229);
-    doc.text((currentUser.name || '').toUpperCase(), 148.5, 100, { align: 'center' });
+    doc.text((currentUser.name || 'USER').toUpperCase(), 148.5, 100, { align: 'center' });
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
@@ -1192,19 +1185,17 @@ async function generateAndSendCertificate() {
     
     if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY && CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_KEY') {
       try {
-        const templateParams = {
+        await emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
           to_email: currentUser.email,
           to_name: currentUser.name,
           certificate_id: certId,
           date: today,
           message: 'Selamat! Berikut adalah sertifikat Anda.'
-        };
-
-        await emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, templateParams);
-        showToast('✅ Sertifikat berhasil dikirim ke email: ' + currentUser.email, 'success');
+        });
+        showToast('✅ Sertifikat berhasil dikirim ke email!', 'success');
       } catch (emailErr) {
         console.error('EmailJS Error:', emailErr);
-        showToast('📥 Sertifikat berhasil di-download. Email gagal dikirim', 'info');
+        showToast('📥 Sertifikat di-download. Email gagal dikirim.', 'info');
       }
     } else {
       showToast('📥 Sertifikat berhasil di-download', 'success');
@@ -1214,8 +1205,10 @@ async function generateAndSendCertificate() {
     console.error('Certificate Error:', err);
     showToast('Gagal: ' + err.message, 'error');
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email';
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-envelope mr-2"></i>Kirim Sertifikat ke Email';
+    }
   }
 }
 
@@ -1224,13 +1217,14 @@ async function generateAndSendCertificate() {
    ============================================================ */
 function showAdminLogin() {
   hideAllSections();
-  document.getElementById('adminLoginSection').classList.remove('hidden-section');
+  const el = document.getElementById('adminLoginSection');
+  if (el) el.classList.remove('hidden-section');
 }
 
 document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  const email = document.getElementById('adminEmail').value.trim();
-  const password = document.getElementById('adminPassword').value;
+  const email = (document.getElementById('adminEmail').value || '').trim();
+  const password = document.getElementById('adminPassword').value || '';
 
   if (email === CONFIG.ADMIN_EMAIL && password === CONFIG.ADMIN_PASSWORD) {
     currentAdmin = { email };
@@ -1243,13 +1237,15 @@ document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
 
 async function showAdminDashboard() {
   hideAllSections();
-  document.getElementById('adminDashboardSection').classList.remove('hidden-section');
+  const el = document.getElementById('adminDashboardSection');
+  if (el) el.classList.remove('hidden-section');
   await loadAdminModules();
 }
 
 async function loadAdminModules() {
   const modules = await loadModules();
   const tbody = document.getElementById('adminModulesTable');
+  if (!tbody) return;
   
   if (modules.length === 0) {
     tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8">Belum ada modul</td></tr>';
@@ -1257,17 +1253,17 @@ async function loadAdminModules() {
   }
 
   tbody.innerHTML = modules.map((m, index) => {
-    const videoCount = (m.videos && m.videos.length) || 0;
-    const ebookCount = (m.ebooks && m.ebooks.length) || 0;
-    const quizCount = (m.quiz && m.quiz.length) || 0;
+    const vCount = (m.videos && m.videos.length) || 0;
+    const eCount = (m.ebooks && m.ebooks.length) || 0;
+    const qCount = (m.quiz && m.quiz.length) || 0;
     
     return `
     <tr>
       <td>${index + 1}</td>
-      <td>${m.judul}</td>
-      <td>${videoCount > 0 ? videoCount + ' video' : '-'}</td>
-      <td>${ebookCount > 0 ? ebookCount + ' ebook' : '-'}</td>
-      <td>${quizCount > 0 ? quizCount + ' soal' : '-'}</td>
+      <td>${m.judul || ''}</td>
+      <td>${vCount > 0 ? vCount + ' video' : '-'}</td>
+      <td>${eCount > 0 ? eCount + ' ebook' : '-'}</td>
+      <td>${qCount > 0 ? qCount + ' soal' : '-'}</td>
       <td>
         <button onclick="editModule(${m.id})" class="text-blue-400 hover:text-blue-300 mr-2">
           <i class="fas fa-edit"></i>
@@ -1285,74 +1281,93 @@ function showModuleForm(moduleId = null) {
   const title = document.getElementById('moduleModalTitle');
   const form = document.getElementById('moduleForm');
   
-  videoCount = 0;
-  ebookCount = 0;
-  quizQuestionCount = 0;
-  document.getElementById('videosContainer').innerHTML = '';
-  document.getElementById('ebooksContainer').innerHTML = '';
-  document.getElementById('quizQuestionsContainer').innerHTML = '';
+  videoFieldCounter = 0;
+  ebookFieldCounter = 0;
+  quizFieldCounter = 0;
+  
+  const videosContainer = document.getElementById('videosContainer');
+  const ebooksContainer = document.getElementById('ebooksFormContainer');
+  const quizContainer = document.getElementById('quizQuestionsContainer');
+  
+  if (videosContainer) videosContainer.innerHTML = '';
+  if (ebooksContainer) ebooksContainer.innerHTML = '';
+  if (quizContainer) quizContainer.innerHTML = '';
   
   if (moduleId) {
     const module = modulesData.find(m => m.id === moduleId);
-    title.textContent = 'Edit Modul';
-    document.getElementById('moduleId').value = module.id;
-    document.getElementById('moduleTitle').value = module.judul || '';
-    document.getElementById('moduleDesc').value = module.deskripsi || '';
-    document.getElementById('moduleIcon').value = module.icon || 'book';
-    document.getElementById('moduleColor').value = module.color || 'from-blue-500 to-cyan-500';
+    if (!module) {
+      showToast('Modul tidak ditemukan', 'error');
+      return;
+    }
     
-    // Load videos
+    title.textContent = 'Edit Modul';
+    const idField = document.getElementById('moduleId');
+    const titleField = document.getElementById('moduleTitle');
+    const descField = document.getElementById('moduleDesc');
+    const iconField = document.getElementById('moduleIcon');
+    const colorField = document.getElementById('moduleColor');
+    
+    if (idField) idField.value = module.id;
+    if (titleField) titleField.value = module.judul || '';
+    if (descField) descField.value = module.deskripsi || '';
+    if (iconField) iconField.value = module.icon || 'book';
+    if (colorField) colorField.value = module.color || 'from-blue-500 to-cyan-500';
+    
     if (module.videos && module.videos.length > 0) {
       module.videos.forEach(v => addVideoField(v));
     } else {
       addVideoField();
     }
     
-    // Load ebooks
     if (module.ebooks && module.ebooks.length > 0) {
       module.ebooks.forEach(e => addEbookField(e));
     }
     
-    // Load quiz
     if (module.quiz && module.quiz.length > 0) {
       module.quiz.forEach(q => addQuizQuestion(q));
     }
   } else {
     title.textContent = 'Tambah Modul';
-    form.reset();
-    document.getElementById('moduleId').value = '';
+    if (form) form.reset();
+    const idField = document.getElementById('moduleId');
+    if (idField) idField.value = '';
     addVideoField();
   }
   
-  modal.classList.remove('hidden-section');
+  if (modal) modal.classList.remove('hidden-section');
 }
 
 function closeModuleModal() {
-  document.getElementById('moduleModal').classList.add('hidden-section');
+  const el = document.getElementById('moduleModal');
+  if (el) el.classList.add('hidden-section');
 }
 
 function addVideoField(existingData = null) {
-  videoCount++;
+  videoFieldCounter++;
   const container = document.getElementById('videosContainer');
+  if (!container) return;
   
   const videoDiv = document.createElement('div');
   videoDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  videoDiv.dataset.videoId = videoFieldCounter;
   videoDiv.innerHTML = `
     <div class="flex justify-between items-center mb-2">
-      <h4 class="font-semibold">Video ${videoCount}</h4>
-      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-300">
+      <h4 class="font-semibold">Video ${videoFieldCounter}</h4>
+      <button type="button" onclick="this.closest('[data-video-id]').remove()" class="text-red-400 hover:text-red-300">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div>
       <label class="text-xs text-gray-400">Judul Video</label>
       <input type="text" class="video-title w-full px-3 py-2 rounded-lg mt-1" 
-        placeholder="Contoh: Pengantar Digital Marketing" value="${existingData && existingData.title ? existingData.title : ''}" />
+        placeholder="Contoh: Pengantar Digital Marketing" 
+        value="${existingData && existingData.title ? existingData.title : ''}" />
     </div>
     <div class="mt-2">
       <label class="text-xs text-gray-400">URL Video (YouTube/Vimeo)</label>
       <input type="text" class="video-url w-full px-3 py-2 rounded-lg mt-1" 
-        placeholder="https://www.youtube.com/watch?v=..." value="${existingData && existingData.url ? existingData.url : ''}" />
+        placeholder="https://www.youtube.com/watch?v=..." 
+        value="${existingData && existingData.url ? existingData.url : ''}" />
     </div>
   `;
   
@@ -1360,27 +1375,31 @@ function addVideoField(existingData = null) {
 }
 
 function addEbookField(existingData = null) {
-  ebookCount++;
-  const container = document.getElementById('ebooksContainer');
+  ebookFieldCounter++;
+  const container = document.getElementById('ebooksFormContainer');
+  if (!container) return;
   
   const ebookDiv = document.createElement('div');
   ebookDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  ebookDiv.dataset.ebookId = ebookFieldCounter;
   ebookDiv.innerHTML = `
     <div class="flex justify-between items-center mb-2">
-      <h4 class="font-semibold">E-Book ${ebookCount}</h4>
-      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-300">
+      <h4 class="font-semibold">E-Book ${ebookFieldCounter}</h4>
+      <button type="button" onclick="this.closest('[data-ebook-id]').remove()" class="text-red-400 hover:text-red-300">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div>
       <label class="text-xs text-gray-400">Judul E-Book</label>
       <input type="text" class="ebook-title w-full px-3 py-2 rounded-lg mt-1" 
-        placeholder="Contoh: Panduan Lengkap Digital Marketing" value="${existingData && existingData.title ? existingData.title : ''}" />
+        placeholder="Contoh: Panduan Lengkap" 
+        value="${existingData && existingData.title ? existingData.title : ''}" />
     </div>
     <div class="mt-2">
       <label class="text-xs text-gray-400">URL Download (PDF)</label>
       <input type="text" class="ebook-url w-full px-3 py-2 rounded-lg mt-1" 
-        placeholder="https://example.com/ebook.pdf" value="${existingData && existingData.url ? existingData.url : ''}" />
+        placeholder="https://example.com/ebook.pdf" 
+        value="${existingData && existingData.url ? existingData.url : ''}" />
     </div>
   `;
   
@@ -1388,15 +1407,17 @@ function addEbookField(existingData = null) {
 }
 
 function addQuizQuestion(existingData = null) {
-  quizQuestionCount++;
+  quizFieldCounter++;
   const container = document.getElementById('quizQuestionsContainer');
+  if (!container) return;
   
   const questionDiv = document.createElement('div');
   questionDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  questionDiv.dataset.quizId = quizFieldCounter;
   questionDiv.innerHTML = `
     <div class="flex justify-between items-center mb-3">
-      <h4 class="font-semibold">Pertanyaan ${quizQuestionCount}</h4>
-      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-300">
+      <h4 class="font-semibold">Pertanyaan ${quizFieldCounter}</h4>
+      <button type="button" onclick="this.closest('[data-quiz-id]').remove()" class="text-red-400 hover:text-red-300">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -1404,7 +1425,8 @@ function addQuizQuestion(existingData = null) {
       <div>
         <label class="text-xs text-gray-400">Pertanyaan</label>
         <input type="text" class="quiz-question-text w-full px-3 py-2 rounded-lg mt-1" 
-          placeholder="Masukkan pertanyaan" value="${existingData && existingData.question ? existingData.question : ''}" />
+          placeholder="Masukkan pertanyaan" 
+          value="${existingData && existingData.question ? existingData.question : ''}" />
       </div>
       <div>
         <label class="text-xs text-gray-400">Pilihan Jawaban (pisahkan dengan koma)</label>
@@ -1413,9 +1435,10 @@ function addQuizQuestion(existingData = null) {
           value="${existingData && existingData.options ? existingData.options.join(', ') : ''}" />
       </div>
       <div>
-        <label class="text-xs text-gray-400">Jawaban Benar (nomor urut 1-4)</label>
+        <label class="text-xs text-gray-400">Jawaban Benar (nomor 1-4)</label>
         <input type="number" class="quiz-question-correct w-full px-3 py-2 rounded-lg mt-1" 
-          min="1" max="4" value="${existingData && typeof existingData.correct === 'number' ? existingData.correct + 1 : 1}" />
+          min="1" max="4" 
+          value="${existingData && typeof existingData.correct === 'number' ? existingData.correct + 1 : 1}" />
       </div>
     </div>
   `;
@@ -1426,85 +1449,124 @@ function addQuizQuestion(existingData = null) {
 document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
-  const id = document.getElementById('moduleId').value;
-  
-  // Collect videos
-  const videos = [];
-  const videoDivs = document.querySelectorAll('#videosContainer > div');
-  videoDivs.forEach(div => {
-    const title = div.querySelector('.video-title').value.trim();
-    const url = div.querySelector('.video-url').value.trim();
-    
-    if (title && url) {
-      videos.push({ title, url });
-    }
-  });
-  
-  // Collect ebooks
-  const ebooks = [];
-  const ebookDivs = document.querySelectorAll('#ebooksContainer > div');
-  ebookDivs.forEach(div => {
-    const title = div.querySelector('.ebook-title').value.trim();
-    const url = div.querySelector('.ebook-url').value.trim();
-    
-    if (title && url) {
-      ebooks.push({ title, url });
-    }
-  });
-  
-  // Collect quiz questions
-  const quizQuestions = [];
-  const questionDivs = document.querySelectorAll('#quizQuestionsContainer > div');
-  questionDivs.forEach(div => {
-    const questionText = div.querySelector('.quiz-question-text').value.trim();
-    const optionsText = div.querySelector('.quiz-question-options').value.trim();
-    const correctAnswer = parseInt(div.querySelector('.quiz-question-correct').value) - 1;
-    
-    if (questionText && optionsText) {
-      const options = optionsText.split(',').map(o => o.trim()).filter(o => o);
-      if (options.length >= 2) {
-        quizQuestions.push({
-          question: questionText,
-          options: options,
-          correct: correctAnswer
-        });
-      }
-    }
-  });
-  
-  const moduleData = {
-    judul: document.getElementById('moduleTitle').value.trim(),
-    deskripsi: document.getElementById('moduleDesc').value.trim(),
-    videos: videos.length > 0 ? videos : [],
-    ebooks: ebooks.length > 0 ? ebooks : [],
-    icon: document.getElementById('moduleIcon').value,
-    color: document.getElementById('moduleColor').value,
-    quiz: quizQuestions.length > 0 ? quizQuestions : null,
-    updated_at: new Date().toISOString()
-  };
-
   try {
-    const supabase = initSupabase();
+    const idField = document.getElementById('moduleId');
+    const titleField = document.getElementById('moduleTitle');
+    const descField = document.getElementById('moduleDesc');
+    const iconField = document.getElementById('moduleIcon');
+    const colorField = document.getElementById('moduleColor');
     
+    if (!titleField || !descField) {
+      showToast('Form tidak lengkap', 'error');
+      return;
+    }
+    
+    const id = idField ? idField.value : '';
+    
+    // Collect videos
+    const videos = [];
+    const videoDivs = document.querySelectorAll('#videosContainer > [data-video-id]');
+    videoDivs.forEach(div => {
+      const titleEl = div.querySelector('.video-title');
+      const urlEl = div.querySelector('.video-url');
+      const title = titleEl ? (titleEl.value || '').trim() : '';
+      const url = urlEl ? (urlEl.value || '').trim() : '';
+      
+      if (title && url) {
+        videos.push({ title, url });
+      }
+    });
+    
+    // Collect ebooks
+    const ebooks = [];
+    const ebookDivs = document.querySelectorAll('#ebooksFormContainer > [data-ebook-id]');
+    ebookDivs.forEach(div => {
+      const titleEl = div.querySelector('.ebook-title');
+      const urlEl = div.querySelector('.ebook-url');
+      const title = titleEl ? (titleEl.value || '').trim() : '';
+      const url = urlEl ? (urlEl.value || '').trim() : '';
+      
+      if (title && url) {
+        ebooks.push({ title, url });
+      }
+    });
+    
+    // Collect quiz
+    const quizQuestions = [];
+    const questionDivs = document.querySelectorAll('#quizQuestionsContainer > [data-quiz-id]');
+    questionDivs.forEach(div => {
+      const textEl = div.querySelector('.quiz-question-text');
+      const optEl = div.querySelector('.quiz-question-options');
+      const corrEl = div.querySelector('.quiz-question-correct');
+      
+      const questionText = textEl ? (textEl.value || '').trim() : '';
+      const optionsText = optEl ? (optEl.value || '').trim() : '';
+      const correctVal = corrEl ? parseInt(corrEl.value) : 1;
+      const correctAnswer = isNaN(correctVal) ? 0 : correctVal - 1;
+      
+      if (questionText && optionsText) {
+        const options = optionsText.split(',').map(o => o.trim()).filter(o => o);
+        if (options.length >= 2) {
+          quizQuestions.push({
+            question: questionText,
+            options: options,
+            correct: correctAnswer
+          });
+        }
+      }
+    });
+    
+    const moduleData = {
+      judul: (titleField.value || '').trim(),
+      deskripsi: (descField.value || '').trim(),
+      videos: videos,
+      ebooks: ebooks,
+      icon: iconField ? iconField.value : 'book',
+      color: colorField ? colorField.value : 'from-blue-500 to-cyan-500',
+      quiz: quizQuestions.length > 0 ? quizQuestions : [],
+      updated_at: new Date().toISOString()
+    };
+
     if (id) {
-      const { error } = await supabase.from('modules').update(moduleData).eq('id', id);
-      if (error) throw error;
+      // Update existing
+      const idx = modulesData.findIndex(m => m.id === parseInt(id));
+      if (idx !== -1) {
+        modulesData[idx] = { ...modulesData[idx], ...moduleData };
+      }
       showToast('Modul berhasil diupdate', 'success');
     } else {
+      // Add new
+      const newId = modulesData.length > 0 ? Math.max(...modulesData.map(m => m.id)) + 1 : 1;
+      moduleData.id = newId;
       moduleData.urutan = modulesData.length + 1;
       moduleData.created_at = new Date().toISOString();
-      
-      const { error } = await supabase.from('modules').insert([moduleData]);
-      if (error) throw error;
+      modulesData.push(moduleData);
       showToast('Modul berhasil ditambahkan', 'success');
+    }
+    
+    // Save to localStorage as fallback
+    saveLocalModules();
+    
+    // Try save to Supabase
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        if (id) {
+          await supabase.from('modules').update(moduleData).eq('id', id);
+        } else {
+          await supabase.from('modules').insert([moduleData]);
+        }
+      } catch (dbErr) {
+        console.warn('Supabase save failed, using localStorage:', dbErr.message);
+      }
     }
     
     closeModuleModal();
     await loadAdminModules();
     
   } catch (err) {
-    console.error(err);
-    showToast('Gagal menyimpan modul: ' + err.message, 'error');
+    console.error('Form submit error:', err);
+    showToast('Gagal menyimpan: ' + err.message, 'error');
   }
 });
 
@@ -1516,9 +1578,19 @@ async function deleteModule(id) {
   if (!confirm('Yakin ingin hapus modul ini?')) return;
   
   try {
-    const supabase = initSupabase();
-    const { error } = await supabase.from('modules').delete().eq('id', id);
-    if (error) throw error;
+    // Remove from local array
+    modulesData = modulesData.filter(m => m.id !== id);
+    saveLocalModules();
+    
+    // Try remove from Supabase
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        await supabase.from('modules').delete().eq('id', id);
+      } catch (dbErr) {
+        console.warn('Supabase delete failed:', dbErr.message);
+      }
+    }
     
     showToast('Modul berhasil dihapus', 'success');
     await loadAdminModules();
@@ -1535,14 +1607,22 @@ async function deleteModule(id) {
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('currentUser');
   if (saved) {
-    currentUser = JSON.parse(saved);
-    showDashboard();
+    try {
+      currentUser = JSON.parse(saved);
+      showDashboard();
+    } catch (e) {
+      showLanding();
+    }
   } else {
     showLanding();
   }
   
-  if (typeof AOS !== 'undefined') {
-    AOS.init({ duration: 800, once: true });
+  try {
+    if (typeof AOS !== 'undefined') {
+      AOS.init({ duration: 800, once: true });
+    }
+  } catch (e) {
+    console.warn('AOS init failed:', e);
   }
 });
 </script>
