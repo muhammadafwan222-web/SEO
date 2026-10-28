@@ -2502,8 +2502,16 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
     const icon = document.getElementById('moduleIcon').value;
     const color = document.getElementById('moduleColor').value;
     
-    if (!judul || !deskripsi) {
-      showToast('Judul dan deskripsi wajib diisi', 'error');
+    // Validasi lebih detail
+    if (!judul) {
+      showToast('❌ Judul modul wajib diisi!', 'error');
+      document.getElementById('moduleTitle').focus();
+      return;
+    }
+    
+    if (!deskripsi) {
+      showToast('❌ Deskripsi modul wajib diisi!', 'error');
+      document.getElementById('moduleDesc').focus();
       return;
     }
     
@@ -2568,14 +2576,14 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
     if (id) {
       const idx = modulesData.findIndex(m => m.id === parseInt(id));
       if (idx !== -1) modulesData[idx] = { ...modulesData[idx], ...moduleData };
-      showToast('Modul berhasil diupdate', 'success');
+      showToast('✅ Modul berhasil diupdate', 'success');
     } else {
       const newId = modulesData.length > 0 ? Math.max(...modulesData.map(m => m.id)) + 1 : 1;
       moduleData.id = newId;
       moduleData.urutan = modulesData.length + 1;
       moduleData.created_at = new Date().toISOString();
       modulesData.push(moduleData);
-      showToast('Modul berhasil ditambahkan', 'success');
+      showToast('✅ Modul berhasil ditambahkan', 'success');
     }
     
     saveLocalData();
