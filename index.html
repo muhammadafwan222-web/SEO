@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AcademyPro - Platform Pelatihan & Bisnis Digital</title>
-<meta name="description" content="Platform pelatihan profesional dengan sertifikat otomatis dan peluang bisnis menghasilkan cuan" />
+<meta name="description" content="Platform pelatihan profesional dengan sertifikat otomatis" />
 
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +19,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
   * { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -49,14 +48,6 @@
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
   }
-  .btn-danger {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    transition: all 0.3s ease;
-  }
-  .btn-danger:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5);
-  }
   .btn-success {
     background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     transition: all 0.3s ease;
@@ -65,12 +56,12 @@
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(34, 197, 94, 0.5);
   }
-  .glow {
-    box-shadow: 0 0 60px rgba(139, 92, 246, 0.3);
+  .btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    transition: all 0.3s ease;
   }
-  .floating {
-    animation: floating 3s ease-in-out infinite;
-  }
+  .glow { box-shadow: 0 0 60px rgba(139, 92, 246, 0.3); }
+  .floating { animation: floating 3s ease-in-out infinite; }
   @keyframes floating {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -124,6 +115,40 @@
     from { transform: translateX(400px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
   }
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .quiz-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .quiz-option:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: #6366f1;
+  }
+  .quiz-option.selected {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: #8b5cf6;
+  }
+  .quiz-option.correct {
+    background: rgba(34, 197, 94, 0.3);
+    border-color: #22c55e;
+  }
+  .quiz-option.wrong {
+    background: rgba(239, 68, 68, 0.3);
+    border-color: #ef4444;
+  }
   .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -152,7 +177,7 @@
 <!-- Toast Container -->
 <div id="toastContainer"></div>
 
-<!-- ============ NAVIGATION ============ -->
+<!-- Navigation -->
 <nav class="relative z-50 glass px-6 py-4 mb-8">
   <div class="max-w-6xl mx-auto flex items-center justify-between">
     <div class="flex items-center gap-3">
@@ -172,7 +197,7 @@
   </div>
 </nav>
 
-<!-- ============ SECTION 1: LANDING ============ -->
+<!-- SECTION 1: LANDING -->
 <section id="landingSection" class="relative min-h-screen flex items-center justify-center px-4 py-20">
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="text-center mb-12" data-aos="fade-up">
@@ -184,8 +209,7 @@
         Raih <span class="gradient-text">Cuan Jutaan</span>
       </h1>
       <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-        Dapatkan pelatihan profesional, sertifikat resmi otomatis ke email, 
-        dan akses ke peluang bisnis yang menghasilkan income nyata.
+        Dapatkan pelatihan profesional dengan video, quiz, sertifikat otomatis, dan peluang bisnis.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <button onclick="showRegisterModal()" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg">
@@ -216,35 +240,10 @@
         <div class="text-sm text-gray-400">Rata-rata Income</div>
       </div>
     </div>
-
-    <!-- Features -->
-    <div id="features" class="grid md:grid-cols-3 gap-6 mt-20">
-      <div class="glass rounded-2xl p-8 module-card transition" data-aos="fade-up">
-        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4">
-          <i class="fas fa-graduation-cap text-2xl"></i>
-        </div>
-        <h3 class="text-xl font-bold mb-2">Pelatihan Profesional</h3>
-        <p class="text-gray-400">Materi terstruktur dari mentor berpengalaman dengan studi kasus nyata.</p>
-      </div>
-      <div class="glass rounded-2xl p-8 module-card transition" data-aos="fade-up" data-aos-delay="100">
-        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4">
-          <i class="fas fa-certificate text-2xl"></i>
-        </div>
-        <h3 class="text-xl font-bold mb-2">Sertifikat Otomatis</h3>
-        <p class="text-gray-400">Sertifikat digital profesional langsung terkirim ke email setelah lulus.</p>
-      </div>
-      <div class="glass rounded-2xl p-8 module-card transition" data-aos="fade-up" data-aos-delay="200">
-        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-4">
-          <i class="fas fa-money-bill-wave text-2xl"></i>
-        </div>
-        <h3 class="text-xl font-bold mb-2">Peluang Bisnis</h3>
-        <p class="text-gray-400">Akses ke program bisnis & affiliate yang menghasilkan cuan jutaan rupiah.</p>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- ============ SECTION 2: REGISTER MODAL ============ -->
+<!-- SECTION 2: REGISTER MODAL -->
 <div id="registerModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
   <div class="glass rounded-3xl p-8 max-w-md w-full glow relative" data-aos="zoom-in">
     <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
@@ -260,30 +259,24 @@
     <form id="registerForm" class="space-y-4">
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Nama Lengkap</label>
-        <input type="text" id="regName" required placeholder="John Doe"
-          class="w-full px-4 py-3 rounded-xl" />
+        <input type="text" id="regName" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl" />
       </div>
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Nomor WhatsApp</label>
-        <input type="tel" id="regWa" required placeholder="08123456789"
-          pattern="[0-9]{10,15}" class="w-full px-4 py-3 rounded-xl" />
+        <input type="tel" id="regWa" required placeholder="08123456789" pattern="[0-9]{10,15}" class="w-full px-4 py-3 rounded-xl" />
       </div>
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Email Aktif</label>
-        <input type="email" id="regEmail" required placeholder="email@domain.com"
-          class="w-full px-4 py-3 rounded-xl" />
+        <input type="email" id="regEmail" required placeholder="email@domain.com" class="w-full px-4 py-3 rounded-xl" />
       </div>
       <button type="submit" id="btnRegister" class="btn-primary w-full py-4 rounded-xl font-bold text-lg">
         <i class="fas fa-paper-plane mr-2"></i>Daftar & Mulai Belajar
       </button>
     </form>
-    <p class="text-xs text-gray-500 text-center mt-4">
-      Dengan mendaftar, Anda menyetujui syarat & ketentuan kami
-    </p>
   </div>
 </div>
 
-<!-- ============ SECTION 3: DASHBOARD ============ -->
+<!-- SECTION 3: DASHBOARD -->
 <section id="dashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
   <div class="max-w-6xl mx-auto relative z-10">
     <!-- Header -->
@@ -302,7 +295,7 @@
       </div>
     </div>
 
-    <!-- Progress Overview -->
+    <!-- Progress -->
     <div class="grid md:grid-cols-3 gap-4 mb-6">
       <div class="glass rounded-2xl p-6">
         <div class="flex items-center justify-between mb-2">
@@ -320,19 +313,17 @@
           <i class="fas fa-check-circle text-green-400"></i>
         </div>
         <div class="text-3xl font-bold"><span id="completedModules">0</span>/<span id="totalModules">0</span></div>
-        <p class="text-xs text-gray-500 mt-2">Terus semangat!</p>
       </div>
       <div class="glass rounded-2xl p-6">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Potensi Cuan</span>
-          <i class="fas fa-wallet text-yellow-400"></i>
+          <span class="text-gray-400 text-sm">Nilai Rata-rata</span>
+          <i class="fas fa-star text-yellow-400"></i>
         </div>
-        <div class="text-3xl font-bold gradient-text">Rp 5Jt+</div>
-        <p class="text-xs text-gray-500 mt-2">Setelah lulus pelatihan</p>
+        <div class="text-3xl font-bold gradient-text" id="averageScore">0</div>
       </div>
     </div>
 
-    <!-- Training Modules -->
+    <!-- Modules -->
     <h3 class="text-2xl font-bold mb-4"><i class="fas fa-book-open mr-2 text-purple-400"></i>Modul Pelatihan</h3>
     <div id="modulesContainer" class="grid md:grid-cols-2 gap-4 mb-8">
       <div class="glass rounded-2xl p-8 text-center">
@@ -341,7 +332,7 @@
       </div>
     </div>
 
-    <!-- Certificate Section (hidden until complete) -->
+    <!-- Certificate Section -->
     <div id="certificateSection" class="hidden-section">
       <div class="glass rounded-2xl p-8 text-center glow">
         <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4 floating">
@@ -354,41 +345,39 @@
         </button>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Business Section -->
-    <div class="mt-8">
-      <h3 class="text-2xl font-bold mb-4"><i class="fas fa-briefcase mr-2 text-green-400"></i>Peluang Bisnis & Cuan</h3>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="glass rounded-2xl p-6 module-card transition">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-3">
-            <i class="fas fa-handshake text-xl"></i>
-          </div>
-          <h4 class="font-bold mb-2">Affiliate Program</h4>
-          <p class="text-sm text-gray-400 mb-3">Komisi 30% untuk setiap referral berhasil</p>
-          <div class="text-green-400 font-bold">Potensi: Rp 3-10 Jt/bulan</div>
+<!-- SECTION 4: MODULE LEARNING -->
+<section id="learningSection" class="hidden-section relative min-h-screen px-4 py-10">
+  <div class="max-w-4xl mx-auto relative z-10">
+    <button onclick="backToDashboard()" class="glass px-4 py-2 rounded-xl mb-6 hover:bg-white/10">
+      <i class="fas fa-arrow-left mr-2"></i>Kembali
+    </button>
+
+    <div id="learningContent">
+      <!-- Video -->
+      <div class="glass rounded-2xl p-6 mb-6">
+        <h2 id="moduleTitle" class="text-2xl font-bold mb-4"></h2>
+        <div id="videoContainer" class="video-container mb-4">
+          <!-- Video will be embedded here -->
         </div>
-        <div class="glass rounded-2xl p-6 module-card transition">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-3">
-            <i class="fas fa-laptop-code text-xl"></i>
-          </div>
-          <h4 class="font-bold mb-2">Freelance Service</h4>
-          <p class="text-sm text-gray-400 mb-3">Tawarkan jasa sesuai skill yang dipelajari</p>
-          <div class="text-blue-400 font-bold">Potensi: Rp 5-20 Jt/proyek</div>
-        </div>
-        <div class="glass rounded-2xl p-6 module-card transition">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-3">
-            <i class="fas fa-store text-xl"></i>
-          </div>
-          <h4 class="font-bold mb-2">Bisnis Digital</h4>
-          <p class="text-sm text-gray-400 mb-3">Bangun bisnis online dengan sistem kami</p>
-          <div class="text-purple-400 font-bold">Potensi: Rp 10-50 Jt/bulan</div>
-        </div>
+        <p id="moduleDescription" class="text-gray-300"></p>
+      </div>
+
+      <!-- Quiz -->
+      <div id="quizContainer" class="glass rounded-2xl p-6">
+        <h3 class="text-xl font-bold mb-4"><i class="fas fa-question-circle mr-2 text-purple-400"></i>Quiz</h3>
+        <div id="quizContent"></div>
+        <button id="submitQuiz" onclick="submitQuiz()" class="btn-primary mt-4 px-6 py-3 rounded-xl font-bold hidden">
+          <i class="fas fa-paper-plane mr-2"></i>Jawab Quiz
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SECTION 4: ADMIN LOGIN ============ -->
+<!-- SECTION 5: ADMIN LOGIN -->
 <section id="adminLoginSection" class="hidden-section relative min-h-screen flex items-center justify-center px-4">
   <div class="glass rounded-3xl p-8 max-w-md w-full glow" data-aos="zoom-in">
     <div class="text-center mb-6">
@@ -396,18 +385,15 @@
         <i class="fas fa-shield-alt text-2xl"></i>
       </div>
       <h2 class="text-2xl font-bold">Admin Login</h2>
-      <p class="text-gray-400 text-sm mt-1">Masuk untuk manage pelatihan</p>
     </div>
     <form id="adminLoginForm" class="space-y-4">
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Email Admin</label>
-        <input type="email" id="adminEmail" required placeholder="admin@academypro.com"
-          class="w-full px-4 py-3 rounded-xl" />
+        <input type="email" id="adminEmail" required placeholder="admin@academypro.com" class="w-full px-4 py-3 rounded-xl" />
       </div>
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Password</label>
-        <input type="password" id="adminPassword" required placeholder="••••••••"
-          class="w-full px-4 py-3 rounded-xl" />
+        <input type="password" id="adminPassword" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl" />
       </div>
       <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold text-lg">
         <i class="fas fa-sign-in-alt mr-2"></i>Login
@@ -419,14 +405,13 @@
   </div>
 </section>
 
-<!-- ============ SECTION 5: ADMIN DASHBOARD ============ -->
+<!-- SECTION 6: ADMIN DASHBOARD -->
 <section id="adminDashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
   <div class="max-w-6xl mx-auto relative z-10">
-    <!-- Header -->
     <div class="glass rounded-2xl p-6 mb-6 flex items-center justify-between flex-wrap gap-4">
       <div>
         <h2 class="text-2xl font-bold"><i class="fas fa-cog mr-2 text-purple-400"></i>Admin Dashboard</h2>
-        <p class="text-gray-400 text-sm">Kelola modul pelatihan dan lihat statistik</p>
+        <p class="text-gray-400 text-sm">Kelola modul, video, dan quiz</p>
       </div>
       <div class="flex gap-2">
         <button onclick="showModuleForm()" class="btn-success px-4 py-2 rounded-xl">
@@ -438,83 +423,21 @@
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="grid md:grid-cols-4 gap-4 mb-6">
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Total Peserta</span>
-          <i class="fas fa-users text-blue-400"></i>
-        </div>
-        <div class="text-3xl font-bold" id="adminStatPeserta">0</div>
-      </div>
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Total Modul</span>
-          <i class="fas fa-book text-purple-400"></i>
-        </div>
-        <div class="text-3xl font-bold" id="adminStatModul">0</div>
-      </div>
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Lulus</span>
-          <i class="fas fa-certificate text-green-400"></i>
-        </div>
-        <div class="text-3xl font-bold" id="adminStatLulus">0</div>
-      </div>
-      <div class="glass rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-gray-400 text-sm">Aktif</span>
-          <i class="fas fa-chart-line text-yellow-400"></i>
-        </div>
-        <div class="text-3xl font-bold" id="adminStatAktif">0</div>
-      </div>
-    </div>
-
-    <!-- Modules Management -->
-    <div class="glass rounded-2xl p-6 mb-6">
-      <h3 class="text-xl font-bold mb-4">Kelola Modul Pelatihan</h3>
+    <div class="glass rounded-2xl p-6">
+      <h3 class="text-xl font-bold mb-4">Daftar Modul</h3>
       <div class="overflow-x-auto">
         <table class="admin-table">
           <thead>
             <tr>
               <th>No</th>
               <th>Judul</th>
-              <th>Durasi</th>
-              <th>Icon</th>
-              <th>Status</th>
+              <th>Video</th>
+              <th>Quiz</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody id="adminModulesTable">
-            <tr>
-              <td colspan="6" class="text-center py-8">
-                <div class="loader mx-auto mb-2"></div>
-                Loading...
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Recent Registrations -->
-    <div class="glass rounded-2xl p-6">
-      <h3 class="text-xl font-bold mb-4">Pendaftaran Terbaru</h3>
-      <div class="overflow-x-auto">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Nama</th>
-              <th>Email</th>
-              <th>WhatsApp</th>
-              <th>Tanggal</th>
-              <th>Progress</th>
-            </tr>
-          </thead>
-          <tbody id="adminPesertaTable">
-            <tr>
-              <td colspan="5" class="text-center py-8">Loading...</td>
-            </tr>
+            <tr><td colspan="5" class="text-center py-8">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -522,51 +445,64 @@
   </div>
 </section>
 
-<!-- ============ MODAL: ADD/EDIT MODULE ============ -->
+<!-- MODAL: ADD/EDIT MODULE -->
 <div id="moduleModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-  <div class="glass rounded-3xl p-8 max-w-lg w-full glow relative" data-aos="zoom-in">
+  <div class="glass rounded-3xl p-8 max-w-2xl w-full glow relative max-h-[90vh] overflow-y-auto">
     <button onclick="closeModuleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
       <i class="fas fa-times text-xl"></i>
     </button>
     <h2 class="text-2xl font-bold mb-6" id="moduleModalTitle">Tambah Modul</h2>
     <form id="moduleForm" class="space-y-4">
       <input type="hidden" id="moduleId" />
+      
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Judul Modul</label>
-        <input type="text" id="moduleTitle" required placeholder="Contoh: Fundamental Digital Marketing"
-          class="w-full px-4 py-3 rounded-xl" />
+        <input type="text" id="moduleTitle" required placeholder="Contoh: Fundamental Digital Marketing" class="w-full px-4 py-3 rounded-xl" />
       </div>
+
       <div>
-        <label class="text-sm text-gray-300 mb-2 block">Durasi</label>
-        <input type="text" id="moduleDuration" required placeholder="Contoh: 45 menit"
-          class="w-full px-4 py-3 rounded-xl" />
+        <label class="text-sm text-gray-300 mb-2 block">Deskripsi</label>
+        <textarea id="moduleDesc" rows="3" required placeholder="Deskripsi modul..." class="w-full px-4 py-3 rounded-xl"></textarea>
       </div>
+
+      <div>
+        <label class="text-sm text-gray-300 mb-2 block">Video URL (YouTube/Vimeo)</label>
+        <input type="text" id="moduleVideo" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-4 py-3 rounded-xl" />
+        <p class="text-xs text-gray-400 mt-1">Masukkan link YouTube atau Vimeo</p>
+      </div>
+
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Icon (Font Awesome)</label>
         <select id="moduleIcon" class="w-full px-4 py-3 rounded-xl">
-          <option value="bullhorn">bullhorn (Megaphone)</option>
-          <option value="pen-fancy">pen-fancy (Pen)</option>
-          <option value="share-alt">share-alt (Share)</option>
-          <option value="funnel-dollar">funnel-dollar (Funnel)</option>
-          <option value="rocket">rocket (Rocket)</option>
-          <option value="chart-line">chart-line (Chart)</option>
-          <option value="lightbulb">lightbulb (Lightbulb)</option>
-          <option value="target">target (Target)</option>
-          <option value="star">star (Star)</option>
-          <option value="trophy">trophy (Trophy)</option>
+          <option value="book">book</option>
+          <option value="video">video</option>
+          <option value="laptop-code">laptop-code</option>
+          <option value="chart-line">chart-line</option>
+          <option value="rocket">rocket</option>
         </select>
       </div>
+
       <div>
         <label class="text-sm text-gray-300 mb-2 block">Warna Gradient</label>
         <select id="moduleColor" class="w-full px-4 py-3 rounded-xl">
           <option value="from-blue-500 to-cyan-500">Biru - Cyan</option>
           <option value="from-purple-500 to-pink-500">Ungu - Pink</option>
-          <option value="from-pink-500 to-rose-500">Pink - Rose</option>
-          <option value="from-green-500 to-emerald-500">Hijau - Emerald</option>
+          <option value="from-green-500 to-emerald-500">Hijau</option>
           <option value="from-orange-500 to-red-500">Orange - Merah</option>
-          <option value="from-yellow-500 to-orange-500">Kuning - Orange</option>
         </select>
       </div>
+
+      <!-- Quiz Section -->
+      <div class="border-t border-white/10 pt-4 mt-4">
+        <h3 class="font-bold mb-3">Quiz (Opsional)</h3>
+        <div id="quizQuestionsContainer" class="space-y-4">
+          <!-- Quiz questions will be added here -->
+        </div>
+        <button type="button" onclick="addQuizQuestion()" class="mt-3 glass px-4 py-2 rounded-xl hover:bg-white/10 text-sm">
+          <i class="fas fa-plus mr-2"></i>Tambah Pertanyaan Quiz
+        </button>
+      </div>
+
       <div class="flex gap-3 pt-4">
         <button type="submit" class="btn-primary flex-1 py-3 rounded-xl font-bold">
           <i class="fas fa-save mr-2"></i>Simpan
@@ -579,24 +515,18 @@
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="relative z-10 text-center py-8 text-gray-500 text-sm">
-  <p>© 2026 AcademyPro. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> in Indonesia</p>
-</footer>
-
-<!-- ============ JAVASCRIPT ============ -->
 <script>
 /* ============================================================
    KONFIGURASI
    ============================================================ */
 const CONFIG = {
-  SUPABASE_URL: 'https://jnbtgryfrrvpxpfujwuo.supabase.co',
-  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYnRncnlmcnJ2cHhwZnVqd3VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5MDY0OTcsImV4cCI6MjEwNzQ4MjQ5N30.8Gx4t5YG9Cnp_yOpyKhET-CgyhUzVC44AYQ39pnJxUU',
-  EMAILJS_PUBLIC_KEY: 'sRsr8CzetQwJFHxm-',
-  EMAILJS_SERVICE_ID: 'service_vsztggq',
-  EMAILJS_TEMPLATE_ID: 'template_jadl66m',
+  SUPABASE_URL: 'https://YOUR_PROJECT.supabase.co',
+  SUPABASE_ANON_KEY: 'YOUR_ANON_KEY',
+  EMAILJS_PUBLIC_KEY: 'YOUR_EMAILJS_KEY',
+  EMAILJS_SERVICE_ID: 'YOUR_SERVICE_ID',
+  EMAILJS_TEMPLATE_ID: 'YOUR_TEMPLATE_ID',
   ADMIN_EMAIL: 'admin@academypro.com',
-  ADMIN_PASSWORD: 'admin123' // Ganti dengan password yang lebih aman!
+  ADMIN_PASSWORD: 'admin123'
 };
 
 /* ============================================================
@@ -606,6 +536,9 @@ let supabaseClient;
 let currentUser = null;
 let currentAdmin = null;
 let modulesData = [];
+let currentModule = null;
+let quizAnswers = {};
+let quizScore = 0;
 
 /* ============================================================
    INISIALISASI
@@ -643,6 +576,7 @@ function showToast(message, type = 'success') {
 function hideAllSections() {
   document.getElementById('landingSection').classList.add('hidden-section');
   document.getElementById('dashboardSection').classList.add('hidden-section');
+  document.getElementById('learningSection').classList.add('hidden-section');
   document.getElementById('adminLoginSection').classList.add('hidden-section');
   document.getElementById('adminDashboardSection').classList.add('hidden-section');
   document.getElementById('registerModal').classList.add('hidden-section');
@@ -669,7 +603,7 @@ function scrollToFeatures() {
 }
 
 /* ============================================================
-   LOAD DATA FROM SUPABASE
+   LOAD DATA
    ============================================================ */
 async function loadModules() {
   try {
@@ -680,12 +614,10 @@ async function loadModules() {
       .order('urutan', { ascending: true });
     
     if (error) throw error;
-    
     modulesData = data || [];
     return modulesData;
   } catch (err) {
     console.error('Error loading modules:', err);
-    // Fallback ke default modules jika tabel belum ada
     return getDefaultModules();
   }
 }
@@ -722,20 +654,44 @@ async function loadStats() {
 
 function getDefaultModules() {
   return [
-    { id: 1, judul: 'Fundamental Digital Marketing', durasi: '45 menit', icon: 'bullhorn', color: 'from-blue-500 to-cyan-500', urutan: 1 },
-    { id: 2, judul: 'Copywriting & Content Strategy', durasi: '60 menit', icon: 'pen-fancy', color: 'from-purple-500 to-pink-500', urutan: 2 },
-    { id: 3, judul: 'Social Media Mastery', durasi: '50 menit', icon: 'share-alt', color: 'from-pink-500 to-rose-500', urutan: 3 },
-    { id: 4, judul: 'Sales Funnel & Conversion', durasi: '55 menit', icon: 'funnel-dollar', color: 'from-green-500 to-emerald-500', urutan: 4 },
-    { id: 5, judul: 'Business Scaling & Automation', durasi: '70 menit', icon: 'rocket', color: 'from-orange-500 to-red-500', urutan: 5 }
+    {
+      id: 1,
+      judul: 'Fundamental Digital Marketing',
+      deskripsi: 'Pelajari dasar-dasar digital marketing',
+      video_url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      icon: 'book',
+      color: 'from-blue-500 to-cyan-500',
+      urutan: 1,
+      quiz: [
+        {
+          question: 'Apa itu Digital Marketing?',
+          options: ['Pemasaran digital', 'Jual beli online', 'Iklan di TV', 'Semua benar'],
+          correct: 0
+        }
+      ]
+    }
   ];
 }
 
+function extractVideoId(url) {
+  // Extract video ID from YouTube or Vimeo URL
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  } else if (url.includes('vimeo.com')) {
+    const match = url.match(/vimeo\.com\/(\d+)/);
+    return match ? `https://player.vimeo.com/video/${match[1]}` : null;
+  }
+  return url;
+}
+
 /* ============================================================
-   RENDER MODULES (STUDENT VIEW)
+   RENDER MODULES
    ============================================================ */
 async function renderModules() {
   const container = document.getElementById('modulesContainer');
   const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+  const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   
   try {
     const modules = await loadModules();
@@ -753,6 +709,7 @@ async function renderModules() {
     
     container.innerHTML = modules.map(m => {
       const isDone = completed.includes(m.id);
+      const score = scores[m.id] || 0;
       return `
         <div class="glass rounded-2xl p-6 module-card transition cursor-pointer" onclick="openModule(${m.id})">
           <div class="flex items-start justify-between mb-4">
@@ -762,7 +719,9 @@ async function renderModules() {
             ${isDone ? '<span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs"><i class="fas fa-check mr-1"></i>Selesai</span>' : '<span class="bg-white/10 text-gray-400 px-3 py-1 rounded-full text-xs">Belum</span>'}
           </div>
           <h4 class="font-bold text-lg mb-1">Modul ${m.urutan || m.id}: ${m.judul}</h4>
-          <p class="text-sm text-gray-400"><i class="far fa-clock mr-1"></i>${m.durasi}</p>
+          ${m.video_url ? '<p class="text-sm text-blue-400 mb-2"><i class="fas fa-video mr-1"></i>Ada Video</p>' : ''}
+          ${m.quiz && m.quiz.length > 0 ? '<p class="text-sm text-purple-400 mb-2"><i class="fas fa-question-circle mr-1"></i>Ada Quiz</p>' : ''}
+          ${score > 0 ? `<p class="text-sm text-yellow-400">Nilai: ${score}</p>` : ''}
           <button class="mt-4 w-full py-2 rounded-lg ${isDone ? 'bg-green-500/20 text-green-400' : 'btn-primary text-white'} font-semibold">
             ${isDone ? 'Ulangi Materi' : 'Mulai Belajar'}
           </button>
@@ -777,29 +736,131 @@ async function renderModules() {
   }
 }
 
-function openModule(id) {
+async function openModule(id) {
   const module = modulesData.find(m => m.id === id);
-  if (confirm(`Mulai Modul: ${module.judul}?\n\n(Di versi production, ini akan membuka video/materi lengkap)`)) {
-    markModuleComplete(id);
+  currentModule = module;
+  
+  hideAllSections();
+  document.getElementById('learningSection').classList.remove('hidden-section');
+  
+  document.getElementById('moduleTitle').textContent = `Modul ${module.urutan || module.id}: ${module.judul}`;
+  document.getElementById('moduleDescription').textContent = module.deskripsi || '';
+  
+  // Embed video
+  const videoContainer = document.getElementById('videoContainer');
+  if (module.video_url) {
+    const embedUrl = extractVideoId(module.video_url);
+    videoContainer.innerHTML = `
+      <iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `;
+  } else {
+    videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">Tidak ada video untuk modul ini</div>';
   }
+  
+  // Render quiz
+  renderQuiz(module);
+  
+  window.scrollTo(0, 0);
 }
 
-function markModuleComplete(id) {
-  let completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
-  if (!completed.includes(id)) {
-    completed.push(id);
-    localStorage.setItem('completedModules', JSON.stringify(completed));
-    showToast(`Modul selesai! 🎉`, 'success');
-    renderModules();
+function renderQuiz(module) {
+  const quizContainer = document.getElementById('quizContent');
+  const submitBtn = document.getElementById('submitQuiz');
+  
+  if (!module.quiz || module.quiz.length === 0) {
+    quizContainer.innerHTML = '<p class="text-gray-400">Tidak ada quiz untuk modul ini</p>';
+    submitBtn.classList.add('hidden');
+    return;
+  }
+  
+  quizAnswers = {};
+  
+  quizContainer.innerHTML = module.quiz.map((q, idx) => `
+    <div class="mb-6" data-quiz-idx="${idx}">
+      <p class="font-semibold mb-3">${idx + 1}. ${q.question}</p>
+      <div class="space-y-2">
+        ${q.options.map((opt, optIdx) => `
+          <div class="quiz-option glass p-3 rounded-xl border border-white/10" onclick="selectQuizAnswer(${idx}, ${optIdx})">
+            ${opt}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  
+  submitBtn.classList.remove('hidden');
+}
+
+function selectQuizAnswer(questionIdx, answerIdx) {
+  quizAnswers[questionIdx] = answerIdx;
+  
+  // Visual feedback
+  const questionDiv = document.querySelector(`[data-quiz-idx="${questionIdx}"]`);
+  const options = questionDiv.querySelectorAll('.quiz-option');
+  options.forEach((opt, idx) => {
+    opt.classList.remove('selected');
+    if (idx === answerIdx) {
+      opt.classList.add('selected');
+    }
+  });
+}
+
+async function submitQuiz() {
+  if (!currentModule || !currentModule.quiz) return;
+  
+  let correct = 0;
+  const total = currentModule.quiz.length;
+  
+  currentModule.quiz.forEach((q, idx) => {
+    const userAnswer = quizAnswers[idx];
+    if (userAnswer === q.correct) {
+      correct++;
+    }
+    
+    // Show correct/wrong
+    const questionDiv = document.querySelector(`[data-quiz-idx="${idx}"]`);
+    const options = questionDiv.querySelectorAll('.quiz-option');
+    options.forEach((opt, optIdx) => {
+      opt.classList.remove('selected');
+      if (optIdx === q.correct) {
+        opt.classList.add('correct');
+      } else if (optIdx === userAnswer && userAnswer !== q.correct) {
+        opt.classList.add('wrong');
+      }
+    });
+  });
+  
+  quizScore = Math.round((correct / total) * 100);
+  
+  // Save score
+  const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
+  scores[currentModule.id] = quizScore;
+  localStorage.setItem('quizScores', JSON.stringify(scores));
+  
+  // Mark module as complete if score >= 70
+  if (quizScore >= 70) {
+    let completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+    if (!completed.includes(currentModule.id)) {
+      completed.push(currentModule.id);
+      localStorage.setItem('completedModules', JSON.stringify(completed));
+    }
+    
+    showToast(`Selamat! Nilai Anda: ${quizScore} - Modul selesai!`, 'success');
     
     // Check if all modules completed
-    if (completed.length >= modulesData.length && modulesData.length > 0) {
+    const modules = await loadModules();
+    if (completed.length >= modules.length) {
       setTimeout(() => {
         document.getElementById('certificateSection').classList.remove('hidden-section');
         document.getElementById('certificateSection').scrollIntoView({ behavior: 'smooth' });
       }, 1000);
     }
+  } else {
+    showToast(`Nilai Anda: ${quizScore} - Minimal 70 untuk lulus`, 'error');
   }
+  
+  document.getElementById('submitQuiz').classList.add('hidden');
+  updateProgress();
 }
 
 function updateProgress() {
@@ -809,6 +870,18 @@ function updateProgress() {
   document.getElementById('progressPercent').textContent = percent + '%';
   document.getElementById('progressBar').style.width = percent + '%';
   document.getElementById('completedModules').textContent = completed.length;
+  
+  // Calculate average score
+  const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
+  const scoreValues = Object.values(scores);
+  const avg = scoreValues.length > 0 ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length) : 0;
+  document.getElementById('averageScore').textContent = avg;
+}
+
+function backToDashboard() {
+  hideAllSections();
+  document.getElementById('dashboardSection').classList.remove('hidden-section');
+  renderModules();
 }
 
 /* ============================================================
@@ -827,17 +900,13 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   try {
     const supabase = initSupabase();
     
-    // Cek apakah email sudah terdaftar
     const { data: existing } = await supabase
       .from('peserta_pelatihan')
       .select('id')
       .eq('email', email)
       .single();
 
-    if (existing) {
-      showToast('Email sudah terdaftar! Langsung masuk dashboard.', 'info');
-    } else {
-      // Insert data baru
+    if (!existing) {
       const { error } = await supabase.from('peserta_pelatihan').insert([{
         nama: name,
         whatsapp: wa,
@@ -847,28 +916,12 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         status: 'aktif'
       }]);
       
-      if (error) {
-        // Jika tabel belum ada, buat otomatis
-        if (error.code === '42P01') {
-          await createPesertaTable();
-          // Retry insert
-          await supabase.from('peserta_pelatihan').insert([{
-            nama: name,
-            whatsapp: wa,
-            email: email,
-            tanggal_daftar: new Date().toISOString(),
-            progress: 0,
-            status: 'aktif'
-          }]);
-        } else {
-          throw error;
-        }
-      }
-      
+      if (error && error.code !== '42P01') throw error;
       showToast('Registrasi berhasil! Selamat belajar 🎉', 'success');
+    } else {
+      showToast('Email sudah terdaftar!', 'info');
     }
 
-    // Simpan ke localStorage
     currentUser = { name, wa, email, registeredAt: Date.now() };
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
@@ -879,7 +932,6 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
   } catch (err) {
     console.error(err);
-    // Fallback mode
     currentUser = { name, wa, email, registeredAt: Date.now() };
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     showToast('Mode demo - data disimpan lokal', 'info');
@@ -894,15 +946,6 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   }
 });
 
-async function createPesertaTable() {
-  const supabase = initSupabase();
-  // Note: Creating tables via client is limited. This is just a fallback.
-  console.log('Table peserta_pelatihan tidak ada. Buat manual di Supabase dashboard.');
-}
-
-/* ============================================================
-   DASHBOARD
-   ============================================================ */
 function showDashboard() {
   hideAllSections();
   document.getElementById('dashboardSection').classList.remove('hidden-section');
@@ -915,13 +958,12 @@ function showDashboard() {
 
 function showProfileInfo() {
   if (!currentUser) return;
-  alert(`📋 Profil Kamu\n\nNama: ${currentUser.name}\nWA: ${currentUser.wa}\nEmail: ${currentUser.email}\nTerdaftar: ${new Date(currentUser.registeredAt).toLocaleDateString('id-ID')}`);
+  alert(` Profil Kamu\n\nNama: ${currentUser.name}\nWA: ${currentUser.wa}\nEmail: ${currentUser.email}\nTerdaftar: ${new Date(currentUser.registeredAt).toLocaleDateString('id-ID')}`);
 }
 
 function logout() {
   if (confirm('Yakin ingin keluar?')) {
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('completedModules');
     currentUser = null;
     currentAdmin = null;
     showLanding();
@@ -929,7 +971,7 @@ function logout() {
 }
 
 /* ============================================================
-   SERTIFIKAT
+   SERTIFIKAT - FIXED VERSION
    ============================================================ */
 async function generateAndSendCertificate() {
   const btn = event.target;
@@ -937,6 +979,10 @@ async function generateAndSendCertificate() {
   btn.innerHTML = '<div class="loader mx-auto"></div> Mengirim...';
 
   try {
+    if (!currentUser || !currentUser.email) {
+      throw new Error('Email pengguna tidak ditemukan. Silakan login ulang.');
+    }
+
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
 
@@ -971,7 +1017,6 @@ async function generateAndSendCertificate() {
     doc.setTextColor(79, 70, 229);
     doc.text(currentUser.name.toUpperCase(), 148.5, 100, { align: 'center' });
 
-    // Deskripsi
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(146, 64, 14);
@@ -985,7 +1030,6 @@ async function generateAndSendCertificate() {
     doc.setFont('helvetica', 'normal');
     doc.text('Dengan predikat SANGAT BAIK', 148.5, 150, { align: 'center' });
 
-    // Tanggal & Tanda Tangan
     const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     doc.setFontSize(10);
     doc.text(`Jakarta, ${today}`, 230, 170, { align: 'center' });
@@ -995,44 +1039,40 @@ async function generateAndSendCertificate() {
     doc.text('_____________________', 67, 180, { align: 'center' });
     doc.text('Mentor Utama', 67, 185, { align: 'center' });
 
-    // ID Sertifikat
     const certId = 'ACPRO-' + Date.now().toString(36).toUpperCase();
     doc.setFontSize(8);
     doc.text(`ID: ${certId}`, 148.5, 195, { align: 'center' });
 
-    const pdfBase64 = doc.output('datauristring');
+    // Save PDF
+    const pdfBlob = doc.output('blob');
     const fileName = `Sertifikat_${currentUser.name.replace(/\s+/g, '_')}_${certId}.pdf`;
 
-    // Kirim email
-    if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
-      await emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
-        to_email: currentUser.email,
-        to_name: currentUser.name,
-        certificate_id: certId,
-        date: today,
-        attachment: pdfBase64,
-        attachment_name: fileName
-      });
-      showToast('✅ Sertifikat berhasil dikirim ke email kamu!', 'success');
-    } else {
-      doc.save(fileName);
-      showToast(' Sertifikat berhasil di-download', 'info');
-    }
+    // Download first
+    doc.save(fileName);
+    
+    // Try send email
+    if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY && CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_KEY') {
+      try {
+        const templateParams = {
+          to_email: currentUser.email,
+          to_name: currentUser.name,
+          certificate_id: certId,
+          date: today,
+          message: 'Selamat! Berikut adalah sertifikat Anda.'
+        };
 
-    // Update progress di Supabase
-    try {
-      const supabase = initSupabase();
-      await supabase.from('peserta_pelatihan').update({
-        progress: 100,
-        sertifikat_id: certId,
-        tanggal_lulus: new Date().toISOString()
-      }).eq('email', currentUser.email);
-    } catch (err) {
-      console.log('Update database skipped:', err.message);
+        await emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, templateParams);
+        showToast('✅ Sertifikat berhasil dikirim ke email: ' + currentUser.email, 'success');
+      } catch (emailErr) {
+        console.error('EmailJS Error:', emailErr);
+        showToast('📥 Sertifikat berhasil di-download. Email gagal dikirim (cek konfigurasi EmailJS)', 'info');
+      }
+    } else {
+      showToast('📥 Sertifikat berhasil di-download (EmailJS belum dikonfigurasi)', 'info');
     }
 
   } catch (err) {
-    console.error(err);
+    console.error('Certificate Error:', err);
     showToast('Gagal mengirim sertifikat: ' + err.message, 'error');
   } finally {
     btn.disabled = false;
@@ -1065,39 +1105,15 @@ document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
 async function showAdminDashboard() {
   hideAllSections();
   document.getElementById('adminDashboardSection').classList.remove('hidden-section');
-  await loadAdminData();
+  await loadAdminModules();
 }
 
-async function loadAdminData() {
-  try {
-    const [peserta, modules] = await Promise.all([
-      loadPeserta(),
-      loadModules()
-    ]);
-
-    // Update stats
-    document.getElementById('adminStatPeserta').textContent = peserta.length;
-    document.getElementById('adminStatModul').textContent = modules.length;
-    document.getElementById('adminStatLulus').textContent = peserta.filter(p => p.progress === 100).length;
-    document.getElementById('adminStatAktif').textContent = peserta.filter(p => p.status === 'aktif').length;
-
-    // Render modules table
-    renderAdminModulesTable(modules);
-    
-    // Render peserta table
-    renderAdminPesertaTable(peserta);
-
-  } catch (err) {
-    console.error('Error loading admin data:', err);
-    showToast('Gagal load data admin', 'error');
-  }
-}
-
-function renderAdminModulesTable(modules) {
+async function loadAdminModules() {
+  const modules = await loadModules();
   const tbody = document.getElementById('adminModulesTable');
   
   if (modules.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8">Belum ada modul</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8">Belum ada modul</td></tr>';
     return;
   }
 
@@ -1105,9 +1121,8 @@ function renderAdminModulesTable(modules) {
     <tr>
       <td>${index + 1}</td>
       <td>${m.judul}</td>
-      <td>${m.durasi}</td>
-      <td><i class="fas fa-${m.icon}"></i></td>
-      <td><span class="px-2 py-1 rounded-full text-xs ${m.status === 'aktif' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}">${m.status || 'aktif'}</span></td>
+      <td>${m.video_url ? '<i class="fas fa-check text-green-400"></i>' : '<i class="fas fa-times text-red-400"></i>'}</td>
+      <td>${m.quiz && m.quiz.length > 0 ? m.quiz.length + ' soal' : '-'}</td>
       <td>
         <button onclick="editModule(${m.id})" class="text-blue-400 hover:text-blue-300 mr-2">
           <i class="fas fa-edit"></i>
@@ -1120,46 +1135,30 @@ function renderAdminModulesTable(modules) {
   `).join('');
 }
 
-function renderAdminPesertaTable(peserta) {
-  const tbody = document.getElementById('adminPesertaTable');
-  
-  if (peserta.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8">Belum ada peserta</td></tr>';
-    return;
-  }
+let quizQuestionCount = 0;
 
-  tbody.innerHTML = peserta.slice(0, 10).map(p => `
-    <tr>
-      <td>${p.nama}</td>
-      <td>${p.email}</td>
-      <td>${p.whatsapp}</td>
-      <td>${new Date(p.tanggal_daftar).toLocaleDateString('id-ID')}</td>
-      <td>
-        <div class="w-full bg-white/10 rounded-full h-2">
-          <div class="progress-bar h-2 rounded-full" style="width: ${p.progress || 0}%"></div>
-        </div>
-        <span class="text-xs text-gray-400">${p.progress || 0}%</span>
-      </td>
-    </tr>
-  `).join('');
-}
-
-/* ============================================================
-   CRUD MODULES
-   ============================================================ */
 function showModuleForm(moduleId = null) {
   const modal = document.getElementById('moduleModal');
   const title = document.getElementById('moduleModalTitle');
   const form = document.getElementById('moduleForm');
+  
+  quizQuestionCount = 0;
+  document.getElementById('quizQuestionsContainer').innerHTML = '';
   
   if (moduleId) {
     const module = modulesData.find(m => m.id === moduleId);
     title.textContent = 'Edit Modul';
     document.getElementById('moduleId').value = module.id;
     document.getElementById('moduleTitle').value = module.judul;
-    document.getElementById('moduleDuration').value = module.durasi;
-    document.getElementById('moduleIcon').value = module.icon;
-    document.getElementById('moduleColor').value = module.color;
+    document.getElementById('moduleDesc').value = module.deskripsi || '';
+    document.getElementById('moduleVideo').value = module.video_url || '';
+    document.getElementById('moduleIcon').value = module.icon || 'book';
+    document.getElementById('moduleColor').value = module.color || 'from-blue-500 to-cyan-500';
+    
+    // Load quiz questions
+    if (module.quiz && module.quiz.length > 0) {
+      module.quiz.forEach(q => addQuizQuestion(q));
+    }
   } else {
     title.textContent = 'Tambah Modul';
     form.reset();
@@ -1173,16 +1172,74 @@ function closeModuleModal() {
   document.getElementById('moduleModal').classList.add('hidden-section');
 }
 
+function addQuizQuestion(existingData = null) {
+  quizQuestionCount++;
+  const container = document.getElementById('quizQuestionsContainer');
+  
+  const questionDiv = document.createElement('div');
+  questionDiv.className = 'glass p-4 rounded-xl border border-white/10';
+  questionDiv.innerHTML = `
+    <div class="flex justify-between items-center mb-3">
+      <h4 class="font-semibold">Pertanyaan ${quizQuestionCount}</h4>
+      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-300">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="space-y-3">
+      <div>
+        <label class="text-xs text-gray-400">Pertanyaan</label>
+        <input type="text" class="quiz-question-text w-full px-3 py-2 rounded-lg mt-1" 
+          placeholder="Masukkan pertanyaan" value="${existingData ? existingData.question : ''}" />
+      </div>
+      <div>
+        <label class="text-xs text-gray-400">Pilihan Jawaban (pisahkan dengan koma)</label>
+        <input type="text" class="quiz-question-options w-full px-3 py-2 rounded-lg mt-1" 
+          placeholder="Jawaban A, Jawaban B, Jawaban C, Jawaban D" 
+          value="${existingData ? existingData.options.join(', ') : ''}" />
+      </div>
+      <div>
+        <label class="text-xs text-gray-400">Jawaban Benar (nomor urut 1-4)</label>
+        <input type="number" class="quiz-question-correct w-full px-3 py-2 rounded-lg mt-1" 
+          min="1" max="4" value="${existingData ? existingData.correct + 1 : 1}" />
+      </div>
+    </div>
+  `;
+  
+  container.appendChild(questionDiv);
+}
+
 document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const id = document.getElementById('moduleId').value;
+  
+  // Collect quiz questions
+  const quizQuestions = [];
+  const questionDivs = document.querySelectorAll('#quizQuestionsContainer > div');
+  questionDivs.forEach(div => {
+    const questionText = div.querySelector('.quiz-question-text').value.trim();
+    const optionsText = div.querySelector('.quiz-question-options').value.trim();
+    const correctAnswer = parseInt(div.querySelector('.quiz-question-correct').value) - 1;
+    
+    if (questionText && optionsText) {
+      const options = optionsText.split(',').map(o => o.trim()).filter(o => o);
+      if (options.length >= 2) {
+        quizQuestions.push({
+          question: questionText,
+          options: options,
+          correct: correctAnswer
+        });
+      }
+    }
+  });
+  
   const moduleData = {
     judul: document.getElementById('moduleTitle').value.trim(),
-    durasi: document.getElementById('moduleDuration').value.trim(),
+    deskripsi: document.getElementById('moduleDesc').value.trim(),
+    video_url: document.getElementById('moduleVideo').value.trim(),
     icon: document.getElementById('moduleIcon').value,
     color: document.getElementById('moduleColor').value,
-    status: 'aktif',
+    quiz: quizQuestions.length > 0 ? quizQuestions : null,
     updated_at: new Date().toISOString()
   };
 
@@ -1190,36 +1247,24 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
     const supabase = initSupabase();
     
     if (id) {
-      // Update
-      const { error } = await supabase
-        .from('modules')
-        .update(moduleData)
-        .eq('id', id);
+      const { error } = await supabase.from('modules').update(moduleData).eq('id', id);
       if (error) throw error;
       showToast('Modul berhasil diupdate', 'success');
     } else {
-      // Insert
       moduleData.urutan = modulesData.length + 1;
       moduleData.created_at = new Date().toISOString();
       
       const { error } = await supabase.from('modules').insert([moduleData]);
-      if (error) {
-        // Jika tabel belum ada
-        if (error.code === '42P01') {
-          showToast('Tabel modules belum ada. Buat di Supabase dashboard.', 'error');
-          return;
-        }
-        throw error;
-      }
+      if (error) throw error;
       showToast('Modul berhasil ditambahkan', 'success');
     }
     
     closeModuleModal();
-    await loadAdminData();
+    await loadAdminModules();
     
   } catch (err) {
     console.error(err);
-    showToast('Gagal menyimpan modul', 'error');
+    showToast('Gagal menyimpan modul: ' + err.message, 'error');
   }
 });
 
@@ -1236,7 +1281,7 @@ async function deleteModule(id) {
     if (error) throw error;
     
     showToast('Modul berhasil dihapus', 'success');
-    await loadAdminData();
+    await loadAdminModules();
     
   } catch (err) {
     console.error(err);
@@ -1248,7 +1293,6 @@ async function deleteModule(id) {
    INIT
    ============================================================ */
 window.addEventListener('DOMContentLoaded', () => {
-  // Check if user already logged in
   const saved = localStorage.getItem('currentUser');
   if (saved) {
     currentUser = JSON.parse(saved);
@@ -1257,7 +1301,6 @@ window.addEventListener('DOMContentLoaded', () => {
     showLanding();
   }
   
-  // Init AOS
   if (typeof AOS !== 'undefined') {
     AOS.init({ duration: 800, once: true });
   }
