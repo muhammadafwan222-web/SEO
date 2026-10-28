@@ -54,13 +54,6 @@
   }
   .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5); }
 
-  .btn-copy {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-  }
-  .btn-copy:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
-
   .glow { box-shadow: 0 0 60px rgba(139, 92, 246, 0.2); }
   .floating { animation: floating 4s ease-in-out infinite; }
   @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
@@ -885,37 +878,16 @@ function showToast(message, type = 'success') {
   setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(120%)'; setTimeout(() => toast.remove(), 400); }, 4000);
 }
 
-// 🚀 FITUR SHARE KE WHATSAPP (VIRAL MARKETING)
 function shareToWhatsApp(moduleId) {
   const module = modulesData.find(m => m.id === moduleId);
   if (!module) return;
-  
-  // Ganti URL ini dengan domain website kamu setelah di-deploy (misal: https://academypro.com)
   const websiteUrl = window.location.href.split('#')[0]; 
-  
   const message = `🚀 *Upgrade Skill & Raih Cuan!* 🚀\n\n` +
-                  `Halo! 👋 Saya menemukan pelatihan *"${module.judul}"* yang sangat direkomendasikan untuk kamu yang ingin serius di dunia digital.\n\n` +
+                  `Halo! 👋 Saya menemukan pelatihan *"${module.judul}"* yang sangat direkomendasikan.\n\n` +
                   `📌 *Tentang Pelatihan:*\n${module.deskripsi}\n\n` +
-                  `✅ Materi Video Premium & E-Book\n` +
-                  `✅ Sertifikat Resmi Otomatis\n` +
-                  `✅ Akses Peluang Bisnis & Cuan\n\n` +
-                  `🔗 *Daftar GRATIS Sekarang:*\n${websiteUrl}\n\n` +
-                  `Yuk, jangan sampai ketinggalan! Slot terbatas. 💪🔥`;
-  
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  window.open(whatsappUrl, '_blank');
-}
-
-function copyLink(moduleId) {
-  const module = modulesData.find(m => m.id === moduleId);
-  if (!module) return;
-  const url = window.location.href.split('#')[0];
-  const text = `Cek pelatihan menarik: ${module.judul}\n${url}`;
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('Link berhasil disalin! 📋', 'success');
-  }).catch(() => {
-    showToast('Gagal menyalin link', 'error');
-  });
+                  `✅ Materi Video Premium & E-Book\n✅ Sertifikat Resmi Otomatis\n✅ Akses Peluang Bisnis & Cuan\n\n` +
+                  `🔗 *Daftar GRATIS Sekarang:*\n${websiteUrl}\n\nYuk, jangan sampai ketinggalan! 💪🔥`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 function hideAllSections() {
@@ -1000,9 +972,8 @@ function getLocalModules() {
   const saved = localStorage.getItem('localModules');
   if (saved) { try { modulesData = JSON.parse(saved); return modulesData; } catch (e) {} }
   const defaults = [
-    { id: 1, judul: 'Fundamental Digital Marketing', kategori: 'Digital Marketing', deskripsi: 'Pelajari dasar-dasar digital marketing dari nol sampai mahir dan siap menghasilkan cuan.', videos: [{ title: 'Pengantar Digital Marketing', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }], ebooks: [{ title: 'Panduan Digital Marketing PDF', url: '#' }], stages: [{ title: 'Pengenalan', desc: 'Memahami konsep dasar digital marketing', icon: 'info-circle' }, { title: 'Strategi', desc: 'Membuat strategi marketing yang efektif', icon: 'target' }, { title: 'Eksekusi', desc: 'Implementasi strategi di berbagai platform', icon: 'rocket' }], icon: 'bullhorn', color: 'from-blue-500 to-cyan-500', urutan: 1, quiz: [{ question: 'Apa itu Digital Marketing?', options: ['Pemasaran melalui media digital', 'Jual beli di pasar', 'Iklan di TV saja', 'Tidak ada yang benar'], correct: 0 }] },
-    { id: 2, judul: 'Copywriting Mastery', kategori: 'Content Creation', deskripsi: 'Belajar menulis copy yang menjual dan persuasif untuk meningkatkan konversi.', videos: [{ title: 'Dasar Copywriting', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }], ebooks: [], stages: [{ title: 'Psikologi Pembeli', desc: 'Memahami mindset konsumen', icon: 'brain' }, { title: 'Formula AIDA', desc: 'Attention, Interest, Desire, Action', icon: 'magic' }], icon: 'pen-fancy', color: 'from-purple-500 to-pink-500', urutan: 2, quiz: [] },
-    { id: 3, judul: 'Bisnis Online dari Nol', kategori: 'Bisnis Online', deskripsi: 'Bangun bisnis online yang profitable dan scalable dari awal.', videos: [], ebooks: [{ title: 'Panduan Bisnis Online', url: '#' }], stages: [{ title: 'Riset Pasar', desc: 'Menemukan niche yang profitable', icon: 'search' }, { title: 'Setup Bisnis', desc: 'Membangun infrastruktur bisnis', icon: 'cogs' }], icon: 'store', color: 'from-green-500 to-emerald-500', urutan: 3, quiz: [] }
+    { id: 1, judul: 'Fundamental Digital Marketing', kategori: 'Digital Marketing', deskripsi: 'Pelajari dasar-dasar digital marketing dari nol sampai mahir.', videos: [{ title: 'Pengantar', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }], ebooks: [{ title: 'Panduan PDF', url: '#' }], stages: [{ title: 'Pengenalan', desc: 'Memahami konsep dasar', icon: 'info-circle' }], icon: 'bullhorn', color: 'from-blue-500 to-cyan-500', urutan: 1, quiz: [{ question: 'Apa itu Digital Marketing?', options: ['Pemasaran digital', 'Jual beli di pasar', 'Iklan TV', 'Tidak ada'], correct: 0 }] },
+    { id: 2, judul: 'Copywriting Mastery', kategori: 'Content Creation', deskripsi: 'Belajar menulis copy yang menjual.', videos: [], ebooks: [], stages: [{ title: 'Psikologi', desc: 'Memahami mindset', icon: 'brain' }], icon: 'pen-fancy', color: 'from-purple-500 to-pink-500', urutan: 2, quiz: [] }
   ];
   modulesData = defaults;
   return defaults;
@@ -1012,10 +983,7 @@ function getLocalProducts() {
   const saved = localStorage.getItem('localProducts');
   if (saved) { try { productsData = JSON.parse(saved); return productsData; } catch (e) {} }
   const defaults = [
-    { id: 1, name: 'E-Book Digital Marketing Lengkap', category: 'E-Book', description: 'Panduan lengkap digital marketing dari A-Z dengan 200+ halaman', price: 149000, originalPrice: 299000, image: '', url: '#', seller: 'AcademyPro', sold: 1250, rating: 4.9 },
-    { id: 2, name: 'Template Landing Page Premium', category: 'Template', description: '50+ template landing page siap pakai untuk berbagai niche', price: 199000, originalPrice: 399000, image: '', url: '#', seller: 'DesignPro', sold: 856, rating: 4.8 },
-    { id: 3, name: 'Course Facebook Ads Mastery', category: 'Course', description: 'Video course lengkap Facebook Ads dari basic sampai advanced', price: 499000, originalPrice: 999000, image: '', url: '#', seller: 'AdsExpert', sold: 2340, rating: 4.9 },
-    { id: 4, name: 'Pack Icon Premium 5000+', category: 'Design Asset', description: 'Koleksi 5000+ icon premium untuk desain grafis', price: 99000, originalPrice: 199000, image: '', url: '#', seller: 'IconMaster', sold: 3420, rating: 4.7 }
+    { id: 1, name: 'E-Book Digital Marketing', category: 'E-Book', description: 'Panduan lengkap A-Z', price: 149000, originalPrice: 299000, image: '', url: '#', seller: 'AcademyPro', sold: 1250, rating: 4.9 }
   ];
   productsData = defaults;
   return defaults;
@@ -1024,7 +992,13 @@ function getLocalProducts() {
 function getLocalCertTemplate() {
   const saved = localStorage.getItem('localCertTemplate');
   if (saved) { try { certTemplate = JSON.parse(saved); return certTemplate; } catch (e) {} }
-  const defaultTemplate = { id: 1, header: 'ACADEMYPRO CERTIFIED', mainTitle: 'SERTIFIKAT', intro: 'Diberikan kepada', description: 'Telah menyelesaikan pelatihan profesional:', trainingName: 'Digital Marketing & Business Mastery', predicate: 'Dengan predikat SANGAT BAIK', signLeft: 'Mentor Utama', signRight: 'Direktur AcademyPro', city: 'Jakarta', bgColor: '#fef3c7', borderColor: '#92400e', textColor: '#92400e', nameColor: '#4f46e5' };
+  const defaultTemplate = { 
+    id: 1, header: 'ACADEMYPRO CERTIFIED', mainTitle: 'SERTIFIKAT', intro: 'Diberikan kepada', 
+    description: 'Telah menyelesaikan pelatihan profesional:', // PERBAIKAN: gunakan description
+    trainingName: 'Digital Marketing & Business Mastery', predicate: 'Dengan predikat SANGAT BAIK', 
+    signLeft: 'Mentor Utama', signRight: 'Direktur AcademyPro', city: 'Jakarta', 
+    bgColor: '#fef3c7', borderColor: '#92400e', textColor: '#92400e', nameColor: '#4f46e5' 
+  };
   certTemplate = defaultTemplate;
   return defaultTemplate;
 }
@@ -1068,17 +1042,9 @@ async function renderFeaturedTrainings() {
       <span class="category-badge bg-purple-500/20 text-purple-300 mb-3 w-fit">${m.kategori || 'Umum'}</span>
       <h4 class="font-bold text-xl mb-2">${m.judul || ''}</h4>
       <p class="text-sm text-gray-400 mb-4 line-clamp-2 flex-grow">${m.deskripsi || ''}</p>
-      <div class="flex items-center gap-3 text-xs text-gray-400 mb-4">
-        <span><i class="fas fa-video mr-1"></i>${(m.videos || []).length} Video</span>
-        <span><i class="fas fa-layer-group mr-1"></i>${(m.stages || []).length} Tahapan</span>
-      </div>
       <div class="grid grid-cols-2 gap-2 mt-auto">
-        <button onclick="enrollTraining(${m.id})" class="btn-primary py-3 rounded-xl font-semibold text-sm">
-          Mulai Belajar
-        </button>
-        <button onclick="shareToWhatsApp(${m.id})" class="btn-whatsapp py-3 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2">
-          <i class="fab fa-whatsapp text-lg"></i> Share
-        </button>
+        <button onclick="enrollTraining(${m.id})" class="btn-primary py-3 rounded-xl font-semibold text-sm">Mulai Belajar</button>
+        <button onclick="shareToWhatsApp(${m.id})" class="btn-whatsapp py-3 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Share</button>
       </div>
     </div>
   `).join('');
@@ -1099,23 +1065,14 @@ async function renderTrainingsList(filterCategory = null) {
   const container = document.getElementById('trainingsListContainer');
   const filterContainer = document.getElementById('categoryFilter');
   if (!container) return;
-  
   const modules = await loadModules();
   const categories = [...new Set(modules.map(m => m.kategori).filter(Boolean))];
-  
   if (filterContainer) {
-    filterContainer.innerHTML = `
-      <button onclick="renderTrainingsList(null)" class="glass px-4 py-2 rounded-xl ${!filterCategory ? 'bg-purple-500/30 border-purple-500/50' : ''} transition">Semua</button>
-      ${categories.map(c => `<button onclick="renderTrainingsList('${c}')" class="glass px-4 py-2 rounded-xl ${filterCategory === c ? 'bg-purple-500/30 border-purple-500/50' : ''} transition">${c}</button>`).join('')}
-    `;
+    filterContainer.innerHTML = `<button onclick="renderTrainingsList(null)" class="glass px-4 py-2 rounded-xl ${!filterCategory ? 'bg-purple-500/30 border-purple-500/50' : ''} transition">Semua</button>` +
+      categories.map(c => `<button onclick="renderTrainingsList('${c}')" class="glass px-4 py-2 rounded-xl ${filterCategory === c ? 'bg-purple-500/30 border-purple-500/50' : ''} transition">${c}</button>`).join('');
   }
-  
   const filtered = filterCategory ? modules.filter(m => m.kategori === filterCategory) : modules;
-  if (filtered.length === 0) {
-    container.innerHTML = '<div class="col-span-3 text-center py-12 text-gray-400 glass rounded-2xl">Tidak ada pelatihan</div>';
-    return;
-  }
-  
+  if (filtered.length === 0) { container.innerHTML = '<div class="col-span-3 text-center py-12 text-gray-400 glass rounded-2xl">Tidak ada pelatihan</div>'; return; }
   container.innerHTML = filtered.map(m => `
     <div class="glass rounded-2xl p-6 glass-hover transition duration-300 border border-white/10 flex flex-col h-full">
       <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${m.color || 'from-blue-500 to-cyan-500'} flex items-center justify-center mb-4 shadow-lg">
@@ -1124,32 +1081,15 @@ async function renderTrainingsList(filterCategory = null) {
       <span class="category-badge bg-purple-500/20 text-purple-300 mb-3 w-fit">${m.kategori || 'Umum'}</span>
       <h4 class="font-bold text-xl mb-2">${m.judul || ''}</h4>
       <p class="text-sm text-gray-400 mb-4 line-clamp-3 flex-grow">${m.deskripsi || ''}</p>
-      
-      <div class="space-y-2 mb-4">
-        ${(m.stages || []).slice(0, 2).map((s, i) => `
-          <div class="flex items-center gap-2 text-xs text-gray-300">
-            <div class="w-6 h-6 rounded-full bg-purple-500/30 flex items-center justify-center flex-shrink-0"><i class="fas fa-${s.icon || 'check'} text-xs"></i></div>
-            <span>${s.title || 'Tahap ' + (i+1)}</span>
-          </div>
-        `).join('')}
-      </div>
-      
       <div class="grid grid-cols-2 gap-2 mt-auto">
-        <button onclick="enrollTraining(${m.id})" class="btn-primary py-3 rounded-xl font-semibold text-sm">
-          <i class="fas fa-rocket mr-1"></i> Mulai
-        </button>
-        <button onclick="shareToWhatsApp(${m.id})" class="btn-whatsapp py-3 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2">
-          <i class="fab fa-whatsapp text-lg"></i> Share WA
-        </button>
+        <button onclick="enrollTraining(${m.id})" class="btn-primary py-3 rounded-xl font-semibold text-sm"><i class="fas fa-rocket mr-1"></i> Mulai</button>
+        <button onclick="shareToWhatsApp(${m.id})" class="btn-whatsapp py-3 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Share WA</button>
       </div>
     </div>
   `).join('');
 }
 
-function enrollTraining(id) {
-  if (!currentUser) { showRegisterModal(); return; }
-  openModule(id);
-}
+function enrollTraining(id) { if (!currentUser) { showRegisterModal(); return; } openModule(id); }
 
 async function showMarketplace() {
   hideAllSections();
@@ -1163,23 +1103,14 @@ async function renderMarketplaceList(filterCategory = null) {
   const container = document.getElementById('marketplaceListContainer');
   const filterContainer = document.getElementById('productCategoryFilter');
   if (!container) return;
-  
   const products = await loadProducts();
   const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
-  
   if (filterContainer) {
-    filterContainer.innerHTML = `
-      <button onclick="renderMarketplaceList(null)" class="glass px-4 py-2 rounded-xl ${!filterCategory ? 'bg-green-500/30 border-green-500/50' : ''} transition">Semua</button>
-      ${categories.map(c => `<button onclick="renderMarketplaceList('${c}')" class="glass px-4 py-2 rounded-xl ${filterCategory === c ? 'bg-green-500/30 border-green-500/50' : ''} transition">${c}</button>`).join('')}
-    `;
+    filterContainer.innerHTML = `<button onclick="renderMarketplaceList(null)" class="glass px-4 py-2 rounded-xl ${!filterCategory ? 'bg-green-500/30 border-green-500/50' : ''} transition">Semua</button>` +
+      categories.map(c => `<button onclick="renderMarketplaceList('${c}')" class="glass px-4 py-2 rounded-xl ${filterCategory === c ? 'bg-green-500/30 border-green-500/50' : ''} transition">${c}</button>`).join('');
   }
-  
   const filtered = filterCategory ? products.filter(p => p.category === filterCategory) : products;
-  if (filtered.length === 0) {
-    container.innerHTML = '<div class="col-span-4 text-center py-12 text-gray-400 glass rounded-2xl">Tidak ada produk</div>';
-    return;
-  }
-  
+  if (filtered.length === 0) { container.innerHTML = '<div class="col-span-4 text-center py-12 text-gray-400 glass rounded-2xl">Tidak ada produk</div>'; return; }
   container.innerHTML = filtered.map(p => {
     const discount = p.originalPrice && p.originalPrice > p.price ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
     return `
@@ -1189,19 +1120,13 @@ async function renderMarketplaceList(filterCategory = null) {
       </div>
       <span class="category-badge bg-blue-500/20 text-blue-300 text-xs w-fit mb-2">${p.category || 'Product'}</span>
       <h4 class="font-bold text-base mb-2 line-clamp-2 flex-grow">${p.name || ''}</h4>
-      <div class="flex items-center gap-1 text-xs text-yellow-400 mb-3">
-        <i class="fas fa-star"></i><span>${p.rating || 4.5}</span><span class="text-gray-400">(${p.sold || 0} terjual)</span>
-      </div>
       <div class="flex items-center gap-2 mb-4">
         <span class="font-bold text-green-400 text-lg">${formatRupiah(p.price)}</span>
-        ${p.originalPrice ? `<span class="text-xs text-gray-500 line-through">${formatRupiah(p.originalPrice)}</span>` : ''}
         ${discount > 0 ? `<span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded font-bold">-${discount}%</span>` : ''}
       </div>
-      <button onclick="buyProduct(${p.id})" class="btn-primary w-full py-3 rounded-xl font-semibold text-sm mt-auto">
-        <i class="fas fa-shopping-cart mr-1"></i> Beli Sekarang
-      </button>
-    </div>
-  `}).join('');
+      <button onclick="buyProduct(${p.id})" class="btn-primary w-full py-3 rounded-xl font-semibold text-sm mt-auto"><i class="fas fa-shopping-cart mr-1"></i> Beli Sekarang</button>
+    </div>`;
+  }).join('');
 }
 
 function getProductIcon(category) {
@@ -1226,7 +1151,6 @@ function switchDashboardTab(tabName) {
   if (tabEl) tabEl.classList.remove('hidden-section');
   const activeBtn = document.querySelector(`#dashboardSection .tab-btn[data-tab="${tabName}"]`);
   if (activeBtn) activeBtn.classList.add('active');
-  
   if (tabName === 'all-trainings') renderAllTrainings();
   if (tabName === 'marketplace') renderDashboardMarketplace();
   if (tabName === 'my-certificates') renderMyCertificates();
@@ -1270,8 +1194,8 @@ async function renderDashboardMarketplace() {
         ${discount > 0 ? `<span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">-${discount}%</span>` : ''}
       </div>
       <button onclick="buyProduct(${p.id})" class="btn-primary w-full py-2 rounded-xl font-semibold text-sm mt-auto"><i class="fas fa-shopping-cart mr-1"></i> Beli</button>
-    </div>
-  `}).join('');
+    </div>`;
+  }).join('');
 }
 
 function renderMyCertificates() {
@@ -1294,9 +1218,7 @@ function renderMyCertificates() {
           <p class="text-xs text-gray-500">${cert.date || '-'}</p>
         </div>
       </div>
-      <button onclick="downloadCertificate('${cert.certId}')" class="w-full py-3 rounded-xl btn-primary font-semibold">
-        <i class="fas fa-download mr-2"></i>Download PDF
-      </button>
+      <button onclick="downloadCertificate('${cert.certId}')" class="w-full py-3 rounded-xl btn-primary font-semibold"><i class="fas fa-download mr-2"></i>Download PDF</button>
     </div>
   `).join('');
 }
@@ -1311,17 +1233,14 @@ async function renderModules() {
   if (!container) return;
   const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
-  
   try {
     const modules = await loadModules();
     const totalEl = document.getElementById('totalModules');
     if (totalEl) totalEl.textContent = modules.length;
-    
     if (modules.length === 0) {
       container.innerHTML = '<div class="glass rounded-2xl p-8 text-center col-span-2"><i class="fas fa-inbox text-4xl text-gray-400 mb-3"></i><p class="text-gray-400">Belum ada modul</p></div>';
       return;
     }
-    
     container.innerHTML = modules.map(m => {
       const isDone = completed.includes(m.id);
       const score = scores[m.id] || 0;
@@ -1341,15 +1260,10 @@ async function renderModules() {
           </div>
           ${score > 0 ? `<p class="text-sm text-yellow-400 font-bold mb-3">Nilai Quiz: ${score}</p>` : ''}
           <div class="grid grid-cols-2 gap-2">
-            <button class="py-2 rounded-xl ${isDone ? 'bg-green-500/20 text-green-400' : 'btn-primary text-white'} font-semibold text-sm">
-              ${isDone ? 'Ulangi Materi' : 'Mulai Belajar'}
-            </button>
-            <button onclick="event.stopPropagation(); shareToWhatsApp(${m.id})" class="btn-whatsapp py-2 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2">
-              <i class="fab fa-whatsapp"></i> Share
-            </button>
+            <button class="py-2 rounded-xl ${isDone ? 'bg-green-500/20 text-green-400' : 'btn-primary text-white'} font-semibold text-sm">${isDone ? 'Ulangi Materi' : 'Mulai Belajar'}</button>
+            <button onclick="event.stopPropagation(); shareToWhatsApp(${m.id})" class="btn-whatsapp py-2 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2"><i class="fab fa-whatsapp"></i> Share</button>
           </div>
-        </div>
-      `;
+        </div>`;
     }).join('');
     updateProgress();
   } catch (err) { console.error('Error rendering modules:', err); }
@@ -1363,12 +1277,10 @@ async function openModule(id) {
   hideAllSections();
   const el = document.getElementById('learningSection');
   if (el) el.classList.remove('hidden-section');
-  
   const titleEl = document.getElementById('moduleTitle');
   const descEl = document.getElementById('moduleDescription');
   if (titleEl) titleEl.textContent = `Modul ${module.urutan || module.id}: ${module.judul || ''}`;
   if (descEl) descEl.textContent = module.deskripsi || '';
-  
   renderStages(module);
   renderVideos(module);
   renderEbooks(module);
@@ -1379,10 +1291,7 @@ async function openModule(id) {
 function renderStages(module) {
   const container = document.getElementById('stagesContainer');
   if (!container) return;
-  if (!module.stages || module.stages.length === 0) {
-    container.innerHTML = '<p class="text-gray-400">Belum ada tahapan untuk modul ini</p>';
-    return;
-  }
+  if (!module.stages || module.stages.length === 0) { container.innerHTML = '<p class="text-gray-400">Belum ada tahapan untuk modul ini</p>'; return; }
   container.innerHTML = module.stages.map((s, idx) => `
     <div class="step-item">
       <div class="step-icon">${idx + 1}</div>
@@ -1398,7 +1307,6 @@ function renderVideos(module) {
   const thumbnailsContainer = document.getElementById('videoThumbnails');
   const videoContainer = document.getElementById('activeVideoContainer');
   if (!thumbnailsContainer || !videoContainer) return;
-  
   if (!module.videos || module.videos.length === 0) {
     thumbnailsContainer.innerHTML = '<p class="text-gray-400 col-span-3">Tidak ada video</p>';
     videoContainer.innerHTML = '<div class="bg-white/5 rounded-lg p-8 text-center text-gray-400">Tidak ada video</div>';
@@ -1406,9 +1314,7 @@ function renderVideos(module) {
   }
   thumbnailsContainer.innerHTML = module.videos.map((v, idx) => `
     <div class="video-item glass p-3 rounded-xl border border-white/10 ${idx === 0 ? 'active' : ''}" onclick="playVideo(${idx})">
-      <div class="aspect-video bg-black/50 rounded-lg mb-2 flex items-center justify-center">
-        <i class="fas fa-play-circle text-3xl text-white/70"></i>
-      </div>
+      <div class="aspect-video bg-black/50 rounded-lg mb-2 flex items-center justify-center"><i class="fas fa-play-circle text-3xl text-white/70"></i></div>
       <p class="text-sm font-semibold truncate">${v.title || 'Video ' + (idx + 1)}</p>
     </div>
   `).join('');
@@ -1422,7 +1328,6 @@ function playVideo(index) {
   const embedUrl = extractVideoId(videoUrl);
   const videoContainer = document.getElementById('activeVideoContainer');
   if (!videoContainer) return;
-  
   if (embedUrl) {
     videoContainer.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
@@ -1449,9 +1354,7 @@ function renderEbooks(module) {
         <h4 class="font-semibold truncate text-lg">${ebook.title || 'E-Book ' + (idx + 1)}</h4>
         <p class="text-xs text-gray-400 mt-1">PDF Document</p>
       </div>
-      <a href="${ebook.url}" target="_blank" class="btn-primary px-5 py-3 rounded-xl text-sm font-semibold">
-        <i class="fas fa-download mr-1"></i> Download
-      </a>
+      <a href="${ebook.url}" target="_blank" class="btn-primary px-5 py-3 rounded-xl text-sm font-semibold"><i class="fas fa-download mr-1"></i> Download</a>
     </div>
   `).join('');
 }
@@ -1501,7 +1404,6 @@ async function submitQuiz() {
   if (!currentModule || !currentModule.quiz) return;
   let correct = 0;
   const total = currentModule.quiz.length;
-  
   currentModule.quiz.forEach((q, idx) => {
     const userAnswer = quizAnswers[idx];
     if (userAnswer === q.correct) correct++;
@@ -1520,12 +1422,10 @@ async function submitQuiz() {
       }
     });
   });
-  
   quizScore = Math.round((correct / total) * 100);
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   scores[currentModule.id] = quizScore;
   localStorage.setItem('quizScores', JSON.stringify(scores));
-  
   if (quizScore >= 70) {
     let completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
     if (!completed.includes(currentModule.id)) {
@@ -1557,7 +1457,6 @@ function updateProgress() {
   if (percentEl) percentEl.textContent = percent + '%';
   if (barEl) barEl.style.width = percent + '%';
   if (completedEl) completedEl.textContent = completed.length;
-  
   const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
   const scoreValues = Object.values(scores);
   const avg = scoreValues.length > 0 ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length) : 0;
@@ -1581,17 +1480,13 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   const nameInput = document.getElementById('regName');
   const waInput = document.getElementById('regWa');
   const emailInput = document.getElementById('regEmail');
-  
   if (!nameInput || !waInput || !emailInput) { showToast('Form tidak lengkap', 'error'); return; }
   const name = (nameInput.value || '').trim();
   const wa = (waInput.value || '').trim();
   const email = (emailInput.value || '').trim().toLowerCase();
-
   if (!name || !wa || !email) { showToast('Semua field harus diisi', 'error'); return; }
-
   btn.disabled = true;
   btn.innerHTML = '<div class="loader mx-auto"></div>';
-
   try {
     const supabase = getSupabase();
     if (supabase) {
@@ -1645,80 +1540,62 @@ function logout() {
 async function generateAndSendCertificate() {
   const btn = event.target.closest('button');
   if (btn) { btn.disabled = true; btn.innerHTML = '<div class="loader mx-auto"></div> Mengirim...'; }
-
   try {
     if (!currentUser || !currentUser.email) throw new Error('Email tidak ditemukan.');
     const template = await loadCertTemplate();
     const t = template || certTemplate || getLocalCertTemplate();
-
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-
     const bgColor = hexToRgb(t.bgColor || '#fef3c7');
     doc.setFillColor(bgColor.r, bgColor.g, bgColor.b);
     doc.rect(0, 0, 297, 210, 'F');
-
     const borderColor = hexToRgb(t.borderColor || '#92400e');
     doc.setDrawColor(borderColor.r, borderColor.g, borderColor.b);
     doc.setLineWidth(2);
     doc.rect(10, 10, 277, 190);
     doc.setLineWidth(0.5);
     doc.rect(15, 15, 267, 180);
-
     const textColor = hexToRgb(t.textColor || '#92400e');
     const nameColor = hexToRgb(t.nameColor || '#4f46e5');
-
     doc.setTextColor(textColor.r, textColor.g, textColor.b);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
     doc.text(t.header || 'ACADEMYPRO CERTIFIED', 148.5, 40, { align: 'center' });
-
     doc.setFontSize(36);
     doc.setFont('helvetica', 'bold');
     doc.text(t.mainTitle || 'SERTIFIKAT', 148.5, 65, { align: 'center' });
-
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
     doc.text(t.intro || 'Diberikan kepada', 148.5, 85, { align: 'center' });
-
     doc.setFontSize(32);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(nameColor.r, nameColor.g, nameColor.b);
     doc.text((currentUser.name || 'USER').toUpperCase(), 148.5, 105, { align: 'center' });
-
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(textColor.r, textColor.g, textColor.b);
-    doc.text(t.description || 'Telah menyelesaikan pelatihan profesional:', 148.5, 125, { align: 'center' });
-
+    doc.text(t.description || 'Telah menyelesaikan pelatihan profesional:', 148.5, 125, { align: 'center' }); // PERBAIKAN: t.description
     doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
     doc.text(t.trainingName || 'Digital Marketing & Business Mastery', 148.5, 140, { align: 'center' });
-
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
     doc.text(t.predicate || 'Dengan predikat SANGAT BAIK', 148.5, 155, { align: 'center' });
-
     const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     doc.setFontSize(10);
     doc.text(`${t.city || 'Jakarta'}, ${today}`, 230, 175, { align: 'center' });
     doc.text('_____________________', 230, 185, { align: 'center' });
     doc.text(t.signRight || 'Direktur AcademyPro', 230, 190, { align: 'center' });
-
     doc.text('_____________________', 67, 185, { align: 'center' });
     doc.text(t.signLeft || 'Mentor Utama', 67, 190, { align: 'center' });
-
     const certId = 'ACPRO-' + Date.now().toString(36).toUpperCase();
     doc.setFontSize(8);
     doc.text(`ID: ${certId}`, 148.5, 200, { align: 'center' });
-
     const fileName = `Sertifikat_${(currentUser.name || 'user').replace(/\s+/g, '_')}_${certId}.pdf`;
     doc.save(fileName);
-    
     const myCerts = JSON.parse(localStorage.getItem('myCertificates') || '[]');
     myCerts.push({ certId, trainingName: t.trainingName, date: today, name: currentUser.name, email: currentUser.email });
     localStorage.setItem('myCertificates', JSON.stringify(myCerts));
-    
     if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY && CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_KEY') {
       try {
         await emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, { to_email: currentUser.email, to_name: currentUser.name, certificate_id: certId, date: today, message: 'Selamat! Berikut adalah sertifikat Anda.' });
@@ -1882,18 +1759,14 @@ function showModuleForm(moduleId = null) {
   const modal = document.getElementById('moduleModal');
   const title = document.getElementById('moduleModalTitle');
   const form = document.getElementById('moduleForm');
-  
   videoFieldCounter = 0; ebookFieldCounter = 0; quizFieldCounter = 0; stageFieldCounter = 0;
   ['videosContainer', 'ebooksFormContainer', 'quizQuestionsContainer', 'stagesFormContainer'].forEach(id => {
     const el = document.getElementById(id); if (el) el.innerHTML = '';
   });
-  
   if (moduleId) {
     const module = modulesData.find(m => m.id === moduleId);
     if (!module) { showToast('Modul tidak ditemukan', 'error'); return; }
     title.textContent = 'Edit Modul';
-    
-    // Safe assignment function
     const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val || ''; };
     setVal('moduleId', module.id);
     setVal('moduleTitle', module.judul);
@@ -1901,7 +1774,6 @@ function showModuleForm(moduleId = null) {
     setVal('moduleCategory', module.kategori);
     setVal('moduleIcon', module.icon);
     setVal('moduleColor', module.color);
-    
     if (module.stages && module.stages.length > 0) module.stages.forEach(s => addStageField(s)); else addStageField();
     if (module.videos && module.videos.length > 0) module.videos.forEach(v => addVideoField(v)); else addVideoField();
     if (module.ebooks && module.ebooks.length > 0) module.ebooks.forEach(e => addEbookField(e));
@@ -2038,16 +1910,13 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
   try {
     const titleEl = document.getElementById('moduleTitle');
     const descEl = document.getElementById('moduleDesc');
-    
     if (!titleEl || !descEl) { showToast('Form tidak ditemukan. Silakan refresh halaman.', 'error'); return; }
-
     const id = document.getElementById('moduleId').value;
     const judul = (titleEl.value || '').trim();
     const deskripsi = (descEl.value || '').trim();
     const kategori = document.getElementById('moduleCategory').value;
     const icon = document.getElementById('moduleIcon').value;
     const color = document.getElementById('moduleColor').value;
-    
     if (!judul || judul.length < 3) {
       showToast('❌ Judul minimal 3 karakter!', 'error');
       titleEl.focus();
@@ -2058,7 +1927,6 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       descEl.focus();
       return;
     }
-    
     const stages = [];
     document.querySelectorAll('#stagesFormContainer > [data-stage-id]').forEach(div => {
       const t = div.querySelector('.stage-title');
@@ -2069,7 +1937,6 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       const ic = i ? i.value : 'check';
       if (title) stages.push({ title, desc: desc, icon: ic });
     });
-    
     const videos = [];
     document.querySelectorAll('#videosContainer > [data-video-id]').forEach(div => {
       const t = div.querySelector('.video-title');
@@ -2078,7 +1945,6 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       const url = u ? (u.value || '').trim() : '';
       if (title && url) videos.push({ title, url });
     });
-    
     const ebooks = [];
     document.querySelectorAll('#ebooksFormContainer > [data-ebook-id]').forEach(div => {
       const t = div.querySelector('.ebook-title');
@@ -2087,7 +1953,6 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       const url = u ? (u.value || '').trim() : '';
       if (title && url) ebooks.push({ title, url });
     });
-    
     const quizQuestions = [];
     document.querySelectorAll('#quizQuestionsContainer > [data-quiz-id]').forEach(div => {
       const t = div.querySelector('.quiz-question-text');
@@ -2102,14 +1967,12 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
         if (options.length >= 2) quizQuestions.push({ question: questionText, options, correct: correctAnswer });
       }
     });
-    
     const moduleData = {
       judul, deskripsi, kategori, icon, color,
       stages, videos, ebooks,
       quiz: quizQuestions.length > 0 ? quizQuestions : [],
       updated_at: new Date().toISOString()
     };
-
     if (id) {
       const idx = modulesData.findIndex(m => m.id === parseInt(id));
       if (idx !== -1) modulesData[idx] = { ...modulesData[idx], ...moduleData };
@@ -2122,7 +1985,6 @@ document.getElementById('moduleForm').addEventListener('submit', async (e) => {
       modulesData.push(moduleData);
       showToast('✅ Modul berhasil ditambahkan', 'success');
     }
-    
     saveLocalData();
     const supabase = getSupabase();
     if (supabase) {
@@ -2193,11 +2055,8 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
     const image = (document.getElementById('productImage').value || '').trim();
     const url = (document.getElementById('productUrl').value || '').trim();
     const seller = (document.getElementById('productSeller').value || '').trim();
-    
     if (!name || !description || price <= 0) { showToast('Nama, deskripsi, dan harga wajib diisi', 'error'); return; }
-    
     const productData = { name, category, description, price, originalPrice, image, url, seller, sold: 0, rating: 4.5, updated_at: new Date().toISOString() };
-
     if (id) {
       const idx = productsData.findIndex(p => p.id === parseInt(id));
       if (idx !== -1) productsData[idx] = { ...productsData[idx], ...productData };
@@ -2246,13 +2105,12 @@ async function showCertTemplateForm() {
   setVal('certHeader', t.header);
   setVal('certMainTitle', t.mainTitle);
   setVal('certIntro', t.intro);
-  setVal('certDesc', t.description);
+  setVal('certDesc', t.description); // PERBAIKAN: t.description
   setVal('certTrainingName', t.trainingName);
   setVal('certPredicate', t.predicate);
   setVal('certSignLeft', t.signLeft);
   setVal('certSignRight', t.signRight);
   setVal('certCity', t.city);
-  
   selectedCertColors = { bg: t.bgColor || '#fef3c7', border: t.borderColor || '#92400e', text: t.textColor || '#92400e', name: t.nameColor || '#4f46e5' };
   document.querySelectorAll('.color-option').forEach(el => el.classList.remove('active'));
   Object.keys(selectedCertColors).forEach(type => {
@@ -2263,7 +2121,6 @@ async function showCertTemplateForm() {
       if (activeEl) activeEl.classList.add('active');
     }
   });
-  
   const modal = document.getElementById('certTemplateModal');
   if (modal) { modal.classList.remove('hidden-section'); modal.scrollTop = 0; }
 }
@@ -2285,7 +2142,7 @@ document.getElementById('certTemplateForm').addEventListener('submit', async (e)
       header: (document.getElementById('certHeader').value || '').trim(),
       mainTitle: (document.getElementById('certMainTitle').value || '').trim(),
       intro: (document.getElementById('certIntro').value || '').trim(),
-      description: (document.getElementById('certDesc').value || '').trim(),
+      description: (document.getElementById('certDesc').value || '').trim(), // PERBAIKAN: description
       trainingName: (document.getElementById('certTrainingName').value || '').trim(),
       predicate: (document.getElementById('certPredicate').value || '').trim(),
       signLeft: (document.getElementById('certSignLeft').value || '').trim(),
