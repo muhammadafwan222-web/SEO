@@ -1,1220 +1,2477 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AcademyPro - Platform Pelatihan & Akselerasi Bisnis</title>
-<meta name="description" content="Platform pelatihan profesional dengan sertifikasi dan integrasi bisnis digital kelas korporat." />
-
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademyPro — Enterprise Learning & Business Acceleration Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  * { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-  body {
-    background-color: #0f172a; /* Deep slate background */
-    background-image: radial-gradient(circle at top right, rgba(30, 58, 138, 0.15), transparent 40%),
-                      radial-gradient(circle at bottom left, rgba(15, 23, 42, 1), transparent 40%);
-    min-height: 100vh;
-    color: #f8fafc;
-  }
-  /* Refined Glassmorphism for Business SaaS look */
-  .glass {
-    background: rgba(30, 41, 59, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-  }
-  .glass-hover:hover {
-    background: rgba(30, 41, 59, 0.85);
-    border-color: rgba(56, 189, 248, 0.3);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  }
-  /* Professional Blue Gradient Text */
-  .gradient-text {
-    background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #2563eb 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  /* Corporate Primary Button */
-  .btn-primary {
-    background: #2563eb;
-    color: #ffffff;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
-  }
-  .btn-primary:hover { 
-    background: #1d4ed8; 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); 
-  }
-  
-  .btn-whatsapp {
-    background: #10b981;
-    color: white;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
-  }
-  .btn-whatsapp:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
+:root {
+  --primary: #0f172a;
+  --primary-light: #1e293b;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --gold: #f59e0b;
+  --emerald: #10b981;
+  --rose: #f43f5e;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+  --shadow-xl: 0 24px 60px rgba(0,0,0,0.12);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  /* Subtle Business Glow */
-  .glow { box-shadow: 0 0 40px rgba(37, 99, 235, 0.1); }
-  .floating { animation: floating 4s ease-in-out infinite; }
-  @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
-  
-  /* Abstract modern blobs */
-  .blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.2; z-index: 0; pointer-events: none; }
-  .hidden-section { display: none !important; }
-  
-  .loader {
-    border: 3px solid rgba(255,255,255,0.1);
-    border-top: 3px solid #38bdf8;
-    border-radius: 50%;
-    width: 28px; height: 28px;
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  
-  .progress-bar {
-    background: linear-gradient(90deg, #3b82f6, #6366f1);
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  input, textarea, select {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #f8fafc;
-    transition: all 0.3s ease;
-  }
-  input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: #3b82f6;
-    background: rgba(15, 23, 42, 0.8);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-  }
-  .toast {
-    position: fixed; top: 20px; right: 20px; z-index: 9999;
-    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  @keyframes slideIn {
-    from { transform: translateX(120%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  .video-container {
-    position: relative; padding-bottom: 56.25%; height: 0;
-    overflow: hidden; border-radius: 12px; background: #000;
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-  .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-  .video-item { cursor: pointer; transition: all 0.3s ease; border: 1px solid transparent; }
-  .video-item:hover { background: rgba(59, 130, 246, 0.1); }
-  .video-item.active { background: rgba(59, 130, 246, 0.15); border-color: #3b82f6; }
-  
-  .admin-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-  .admin-table th, .admin-table td { padding: 14px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .admin-table th { background: rgba(15, 23, 42, 0.6); font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
-  .admin-table tr:hover { background: rgba(255,255,255,0.02); }
-  
-  .step-item { position: relative; padding-left: 48px; }
-  .step-item::before {
-    content: ''; position: absolute; left: 15px; top: 40px; bottom: -20px;
-    width: 2px; background: linear-gradient(to bottom, rgba(59, 130, 246, 0.5), transparent);
-  }
-  .step-item:last-child::before { display: none; }
-  .step-icon {
-    position: absolute; left: 0; top: 0;
-    width: 32px; height: 32px; border-radius: 50%;
-    background: #1e293b;
-    border: 2px solid #3b82f6;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 700; color: #38bdf8;
-  }
-  .tab-btn { transition: all 0.3s ease; color: #94a3b8; }
-  .tab-btn.active {
-    background: #1e293b;
-    color: #f8fafc;
-    border-color: rgba(255,255,255,0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  .category-badge {
-    display: inline-block; padding: 4px 12px; border-radius: 6px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  background: var(--surface-alt);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+
+/* ============ NAVIGATION ============ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+.navbar.scrolled { box-shadow: var(--shadow-md); }
+.nav-container {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 2rem; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; font-size: 1.25rem; color: var(--primary);
+  text-decoration: none;
+}
+.nav-brand .logo-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+}
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--text-secondary);
+  font-weight: 500; font-size: 0.9rem;
+  transition: var(--transition); position: relative;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.btn {
+  padding: 10px 24px; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: 0.875rem;
+  cursor: pointer; transition: var(--transition);
+  border: none; display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent); color: white;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 16px rgba(59,130,246,0.4);
+  transform: translateY(-1px);
+}
+.btn-outline {
+  background: transparent; color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ghost { background: transparent; color: var(--text-secondary); }
+.btn-ghost:hover { background: var(--surface-alt); color: var(--text); }
+.btn-lg { padding: 14px 32px; font-size: 1rem; border-radius: var(--radius-md); }
+.btn-sm { padding: 8px 16px; font-size: 0.8rem; }
+.btn-danger { background: var(--rose); color: white; }
+.btn-danger:hover { background: #e11d48; }
+.btn-success { background: var(--emerald); color: white; }
+.btn-success:hover { background: #059669; }
+
+/* ============ HERO SECTION ============ */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 2rem 80px;
+  background: linear-gradient(180deg, #f0f7ff 0%, var(--surface-alt) 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+  animation: float 20s ease-in-out infinite;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -30%; left: -10%;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 70%);
+  animation: float 25s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
+}
+.hero-container {
+  max-width: 1280px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: center; position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 100px;
+  background: var(--accent-glow); color: var(--accent);
+  font-size: 0.8rem; font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(59,130,246,0.2);
+}
+.hero-badge .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--primary); margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 1.125rem; color: var(--text-secondary);
+  margin-bottom: 2.5rem; max-width: 520px; line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 3rem; }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+}
+.stat-item { text-align: left; }
+.stat-value {
+  font-size: 1.75rem; font-weight: 800; color: var(--primary);
+  display: flex; align-items: baseline; gap: 2px;
+}
+.stat-value .accent { color: var(--accent); }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+.hero-visual {
+  position: relative; display: flex; justify-content: center;
+}
+.hero-card-stack {
+  position: relative; width: 100%; max-width: 480px;
+}
+.hero-main-card {
+  background: var(--surface); border-radius: var(--radius-xl);
+  padding: 2rem; box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  position: relative; z-index: 2;
+}
+.hero-main-card .card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.card-status {
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 600;
+  background: rgba(16,185,129,0.1); color: var(--emerald);
+}
+.hero-main-card .progress-ring {
+  width: 120px; height: 120px; margin: 0 auto 1.5rem;
+  position: relative;
+}
+.hero-main-card .progress-ring svg { transform: rotate(-90deg); }
+.hero-main-card .progress-ring .progress-text {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem; font-weight: 800; color: var(--primary);
+}
+.hero-main-card .module-list { display: flex; flex-direction: column; gap: 12px; }
+.module-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px; border-radius: var(--radius-sm);
+  background: var(--surface-alt); transition: var(--transition);
+}
+.module-item:hover { background: var(--accent-glow); }
+.module-item .check {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+}
+.module-item .check.done { background: var(--emerald); color: white; }
+.module-item .check.pending { background: var(--border); color: var(--text-muted); }
+.module-item .module-info { flex: 1; }
+.module-item .module-title { font-size: 0.85rem; font-weight: 600; }
+.module-item .module-meta { font-size: 0.75rem; color: var(--text-muted); }
+
+.floating-card {
+  position: absolute; background: var(--surface);
+  border-radius: var(--radius-md); padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+  animation: floatCard 6s ease-in-out infinite;
+}
+.floating-card.card-1 { top: -20px; right: -30px; z-index: 3; }
+.floating-card.card-2 { bottom: 20px; left: -40px; z-index: 3; animation-delay: -3s; }
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.floating-card .fc-row { display: flex; align-items: center; gap: 10px; }
+.floating-card .fc-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.floating-card .fc-text { font-size: 0.8rem; font-weight: 600; }
+.floating-card .fc-sub { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ============ SECTIONS ============ */
+.section {
+  padding: 100px 2rem;
+  max-width: 1280px; margin: 0 auto;
+}
+.section-header {
+  text-align: center; margin-bottom: 4rem;
+}
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.8rem; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800; color: var(--primary);
+  letter-spacing: -0.02em; margin-bottom: 1rem;
+}
+.section-desc {
+  font-size: 1.05rem; color: var(--text-secondary);
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ============ FEATURES GRID ============ */
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.feature-card {
+  background: var(--surface); border-radius: var(--radius-lg);
+  padding: 2rem; border: 1px solid var(--border);
+  transition: var(--transition); position: relative; overflow: hidden;
+}
+.feature-card:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--accent), #8b5cf6);
+  opacity: 0; transition: var(--transition);
+}
+.feature-card:hover::before { opacity: 1; }
+.feature-icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; margin-bottom: 1.25rem;
+}
+.feature-card h3 {
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem;
+}
+.feature-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ============ PROGRAMS / CATALOG ============ */
+.programs-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.program-card {
+  background: var(--surface); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  transition: var(--transition); cursor: pointer;
+}
+.program-card:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-lg);
+}
+.program-thumb {
+  height: 180px; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  display: flex; align-items: center; justify-content: center;
+}
+.program-thumb i { font-size: 3rem; color: rgba(255,255,255,0.3); }
+.program-thumb .badge-overlay {
+  position: absolute; top: 12px; left: 12px;
+  padding: 4px 10px; border-radius: 6px;
+  background: rgba(0,0,0,0.5); color: white;
+  font-size: 0.7rem; font-weight: 600; backdrop-filter: blur(4px);
+}
+.program-body { padding: 1.5rem; }
+.program-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.program-body p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5; }
+.program-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 1rem; border-top: 1px solid var(--border);
+}
+.program-meta .meta-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: var(--text-muted);
+}
+
+/* ============ MARKETPLACE ============ */
+.marketplace-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  background: var(--surface); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  transition: var(--transition);
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.product-img {
+  height: 160px; background: linear-gradient(135deg, #f0f7ff, #ede9fe);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; color: var(--accent);
+}
+.product-body { padding: 1.25rem; }
+.product-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+.product-body .product-cat {
+  font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;
+}
+.product-pricing { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
+.product-pricing .price { font-size: 1.1rem; font-weight: 800; color: var(--primary); }
+.product-pricing .price-old {
+  font-size: 0.8rem; color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* ============ REGISTRATION FORM ============ */
+.register-section {
+  background: var(--primary); color: white;
+  border-radius: var(--radius-xl); padding: 4rem;
+  margin: 0 2rem; position: relative; overflow: hidden;
+}
+.register-section::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+}
+.register-container {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: center; position: relative; z-index: 1;
+}
+.register-content h2 {
+  font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem;
+}
+.register-content p { color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 2rem; }
+.register-form {
+  background: var(--surface); border-radius: var(--radius-lg);
+  padding: 2rem; color: var(--text);
+}
+.form-group { margin-bottom: 1.25rem; }
+.form-group label {
+  display: block; font-size: 0.8rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--text-secondary);
+}
+.form-control {
+  width: 100%; padding: 12px 16px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); font-size: 0.9rem;
+  font-family: inherit; transition: var(--transition);
+  background: var(--surface);
+}
+.form-control:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+textarea.form-control { resize: vertical; min-height: 100px; }
+select.form-control { cursor: pointer; }
+
+/* ============ DASHBOARD ============ */
+.dashboard { display: none; min-height: 100vh; }
+.dashboard.active { display: flex; }
+.sidebar {
+  width: 260px; background: var(--primary);
+  min-height: 100vh; padding: 1.5rem 0;
+  position: fixed; left: 0; top: 0; z-index: 100;
+  display: flex; flex-direction: column;
+  transition: var(--transition);
+}
+.sidebar-brand {
+  padding: 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 1.5rem;
+}
+.sidebar-brand a {
+  display: flex; align-items: center; gap: 10px;
+  color: white; text-decoration: none; font-weight: 700; font-size: 1.1rem;
+}
+.sidebar-brand .logo-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.sidebar-nav { flex: 1; padding: 0 0.75rem; }
+.sidebar-nav .nav-section {
+  font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.3);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 0 0.75rem; margin: 1.5rem 0 0.5rem;
+}
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  font-size: 0.875rem; font-weight: 500;
+  transition: var(--transition); margin-bottom: 2px;
+}
+.sidebar-nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+.sidebar-nav a.active {
+  background: rgba(59,130,246,0.15); color: var(--accent);
+}
+.sidebar-nav a i { width: 20px; text-align: center; font-size: 0.9rem; }
+.sidebar-footer {
+  padding: 1rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sidebar-user {
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-user .avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 0.85rem;
+}
+.sidebar-user .user-info { flex: 1; }
+.sidebar-user .user-name { color: white; font-size: 0.85rem; font-weight: 600; }
+.sidebar-user .user-role { color: rgba(255,255,255,0.4); font-size: 0.7rem; }
+
+.dash-main {
+  margin-left: 260px; flex: 1; min-height: 100vh;
+  background: var(--surface-alt);
+}
+.dash-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem; display: flex; align-items: center;
+  justify-content: space-between; position: sticky; top: 0; z-index: 50;
+}
+.dash-header h2 { font-size: 1.25rem; font-weight: 700; }
+.dash-content { padding: 2rem; }
+
+/* Dashboard Cards */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem; margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--surface); border-radius: var(--radius-md);
+  padding: 1.5rem; border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.stat-card:hover { box-shadow: var(--shadow-md); }
+.stat-card .stat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.stat-card .stat-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.stat-card .stat-trend {
+  font-size: 0.75rem; font-weight: 600; padding: 2px 8px;
+  border-radius: 100px;
+}
+.stat-card .stat-trend.up { background: rgba(16,185,129,0.1); color: var(--emerald); }
+.stat-card .stat-trend.down { background: rgba(244,63,94,0.1); color: var(--rose); }
+.stat-card .stat-number { font-size: 1.75rem; font-weight: 800; }
+.stat-card .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+.dash-grid {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;
+}
+.dash-card {
+  background: var(--surface); border-radius: var(--radius-md);
+  border: 1px solid var(--border); overflow: hidden;
+}
+.dash-card-header {
+  padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.dash-card-header h3 { font-size: 1rem; font-weight: 700; }
+.dash-card-body { padding: 1.5rem; }
+
+/* Progress Bar */
+.progress-bar-container { margin-bottom: 1rem; }
+.progress-label {
+  display: flex; justify-content: space-between; margin-bottom: 6px;
+  font-size: 0.8rem;
+}
+.progress-label .label { font-weight: 600; }
+.progress-label .value { color: var(--text-muted); }
+.progress-bar {
+  height: 8px; background: var(--surface-alt); border-radius: 100px;
+  overflow: hidden;
+}
+.progress-bar .fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent), #8b5cf6);
+  transition: width 1s ease;
+}
+
+/* Activity List */
+.activity-list { display: flex; flex-direction: column; }
+.activity-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 1rem 0; border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-item .act-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+.activity-item .act-content { flex: 1; }
+.activity-item .act-title { font-size: 0.85rem; font-weight: 600; }
+.activity-item .act-time { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ============ TABLE ============ */
+.table-container { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  padding: 12px 16px; text-align: left;
+  font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--border); background: var(--surface-alt);
+}
+.data-table td {
+  padding: 14px 16px; font-size: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+.data-table tr:hover td { background: var(--surface-alt); }
+.badge {
+  display: inline-flex; padding: 3px 10px; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 600;
+}
+.badge-success { background: rgba(16,185,129,0.1); color: var(--emerald); }
+.badge-warning { background: rgba(245,158,11,0.1); color: var(--gold); }
+.badge-info { background: rgba(59,130,246,0.1); color: var(--accent); }
+.badge-danger { background: rgba(244,63,94,0.1); color: var(--rose); }
+
+/* ============ MODAL ============ */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+  z-index: 2000; display: none; align-items: center; justify-content: center;
+  padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal {
+  background: var(--surface); border-radius: var(--radius-lg);
+  width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+  box-shadow: var(--shadow-xl); transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal { transform: scale(1); }
+.modal-header {
+  padding: 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h3 { font-size: 1.1rem; font-weight: 700; }
+.modal-close {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: var(--transition);
+  background: none; border: none; color: var(--text-muted);
+}
+.modal-close:hover { background: var(--surface-alt); color: var(--text); }
+.modal-body { padding: 1.5rem; }
+.modal-footer {
+  padding: 1rem 1.5rem; border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 12px;
+}
+
+/* ============ CERTIFICATE ============ */
+.certificate-preview {
+  background: white; border: 2px solid var(--border);
+  border-radius: var(--radius-md); padding: 3rem;
+  text-align: center; position: relative;
+  background-image: 
+    linear-gradient(135deg, rgba(59,130,246,0.03) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(139,92,246,0.03) 0%, transparent 50%);
+}
+.certificate-preview::before {
+  content: ''; position: absolute; inset: 12px;
+  border: 1px solid var(--border); border-radius: 8px;
+  pointer-events: none;
+}
+.cert-header { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+.cert-title { font-size: 1.75rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem; }
+.cert-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2rem; }
+.cert-name { font-size: 2rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; font-style: italic; }
+.cert-program { font-size: 1rem; font-weight: 600; margin-bottom: 2rem; }
+.cert-signatures { display: flex; justify-content: space-around; margin-top: 2rem; }
+.cert-sig { text-align: center; }
+.cert-sig .sig-line { width: 150px; height: 1px; background: var(--text); margin: 0 auto 8px; }
+.cert-sig .sig-name { font-size: 0.8rem; font-weight: 600; }
+.cert-sig .sig-title { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ============ QUIZ ============ */
+.quiz-container { max-width: 700px; margin: 0 auto; }
+.quiz-question {
+  background: var(--surface); border-radius: var(--radius-md);
+  padding: 2rem; border: 1px solid var(--border); margin-bottom: 1.5rem;
+}
+.quiz-question .q-number {
+  font-size: 0.75rem; font-weight: 600; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.quiz-question .q-text { font-size: 1rem; font-weight: 600; margin-bottom: 1.25rem; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-option {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); cursor: pointer;
+  transition: var(--transition); font-size: 0.9rem;
+}
+.quiz-option:hover { border-color: var(--accent); background: var(--accent-glow); }
+.quiz-option.selected { border-color: var(--accent); background: var(--accent-glow); }
+.quiz-option .radio {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.quiz-option.selected .radio {
+  border-color: var(--accent); background: var(--accent);
+}
+.quiz-option.selected .radio::after {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; background: white;
+}
+
+/* ============ NOTIFICATION / TOAST ============ */
+.toast-container {
+  position: fixed; top: 88px; right: 24px; z-index: 3000;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.toast {
+  background: var(--surface); border-radius: var(--radius-md);
+  padding: 1rem 1.25rem; box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border); display: flex; align-items: center; gap: 12px;
+  min-width: 320px; animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast .toast-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0;
+}
+.toast .toast-msg { flex: 1; font-size: 0.85rem; font-weight: 500; }
+
+/* ============ FOOTER ============ */
+.footer {
+  background: var(--primary); color: rgba(255,255,255,0.6);
+  padding: 4rem 2rem 2rem; margin-top: 4rem;
+}
+.footer-container {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+}
+.footer-brand h3 { color: white; font-size: 1.25rem; margin-bottom: 1rem; }
+.footer-brand p { font-size: 0.85rem; line-height: 1.7; }
+.footer-col h4 { color: white; font-size: 0.85rem; margin-bottom: 1rem; font-weight: 600; }
+.footer-col a {
+  display: block; color: rgba(255,255,255,0.5); text-decoration: none;
+  font-size: 0.85rem; margin-bottom: 8px; transition: var(--transition);
+}
+.footer-col a:hover { color: white; }
+.footer-bottom {
+  max-width: 1280px; margin: 3rem auto 0; padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem;
+}
+
+/* ============ PAGE TRANSITIONS ============ */
+.page { display: none; animation: fadeIn 0.4s ease; }
+.page.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .hero-container { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .register-container { grid-template-columns: 1fr; }
+  .dash-grid { grid-template-columns: 1fr; }
+  .footer-container { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero { padding: 100px 1.5rem 60px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .section { padding: 60px 1.5rem; }
+  .register-section { padding: 2.5rem 1.5rem; margin: 0 1rem; }
+  .sidebar { width: 0; overflow: hidden; }
+  .sidebar.open { width: 260px; }
+  .dash-main { margin-left: 0; }
+  .footer-container { grid-template-columns: 1fr; }
+}
+
+/* ============ UTILITIES ============ */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+
+/* ============ LOADING SKELETON ============ */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-alt) 25%, var(--border) 50%, var(--surface-alt) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============ TABS ============ */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+.tab-btn {
+  padding: 10px 20px; background: none; border: none;
+  font-size: 0.85rem; font-weight: 600; color: var(--text-muted);
+  cursor: pointer; position: relative; transition: var(--transition);
+  font-family: inherit;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); }
+.tab-btn.active::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 2px; background: var(--accent); border-radius: 2px 2px 0 0;
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 </style>
 </head>
-<body class="antialiased">
+<body>
 
-<!-- Professional Background Accents -->
-<div class="blob bg-blue-900 w-[600px] h-[600px] top-0 -left-48"></div>
-<div class="blob bg-indigo-900 w-[500px] h-[500px] top-1/2 -right-48"></div>
+<!-- ============ TOAST CONTAINER ============ -->
+<div class="toast-container" id="toastContainer"></div>
 
-<div id="toastContainer"></div>
-
-<!-- NAVIGATION -->
-<nav class="relative z-50 glass px-6 py-4 mb-8 sticky top-0 border-b border-white/5">
-  <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-3">
-    <div class="flex items-center gap-3 cursor-pointer" onclick="showLanding()">
-      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-md">
-        <i class="fas fa-briefcase text-lg text-white"></i>
-      </div>
-      <span class="text-2xl font-bold text-white tracking-tight">Academy<span class="text-blue-400">Pro</span></span>
-    </div>
-    <div class="flex gap-2 flex-wrap">
-      <button onclick="showLanding()" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition text-sm font-medium">
-        Beranda
+<!-- ============ PUBLIC NAVBAR ============ -->
+<nav class="navbar" id="publicNav">
+  <div class="nav-container">
+    <a href="#" class="nav-brand" onclick="showPage('home')">
+      <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+      AcademyPro
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')">Beranda</a></li>
+      <li><a href="#" onclick="showPage('catalog')">Katalog Pelatihan</a></li>
+      <li><a href="#" onclick="showPage('marketplace')">Aset Digital</a></li>
+      <li><a href="#" onclick="showPage('about')">Tentang</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn btn-ghost" onclick="showModal('loginModal')">
+        <i class="fas fa-sign-in-alt"></i> Masuk
       </button>
-      <button onclick="showTrainings()" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition text-sm font-medium">
-        Katalog Pelatihan
-      </button>
-      <button onclick="showMarketplace()" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition text-sm font-medium">
-        Aset Digital
-      </button>
-      <div class="w-px h-6 bg-slate-700 mx-2 self-center hidden sm:block"></div>
-      <button onclick="showAdminLogin()" class="px-4 py-2 rounded-lg text-slate-400 hover:text-blue-400 transition text-sm font-medium flex items-center">
-        <i class="fas fa-shield-alt mr-2"></i>Portal Admin
+      <button class="btn btn-primary" onclick="showPage('register')">
+        Mulai Gratis
       </button>
     </div>
   </div>
 </nav>
 
-<!-- LANDING -->
-<section id="landingSection" class="relative min-h-[85vh] flex items-center justify-center px-4 py-12">
-  <div class="max-w-7xl mx-auto relative z-10">
-    <div class="text-center mb-16" data-aos="fade-up">
-      <div class="inline-block glass rounded-full px-5 py-1.5 mb-6 border border-blue-500/30">
-        <span class="text-xs text-blue-300 font-semibold uppercase tracking-wider">Platform Edukasi Bisnis & Profesional</span>
-      </div>
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
-        Tingkatkan <span class="gradient-text">Kompetensi Digital</span><br/>
-        Akselerasi <span class="gradient-text">Pertumbuhan Bisnis</span>
-      </h1>
-      <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-        Sistem manajemen pembelajaran premium yang dilengkapi dengan modul tersertifikasi, evaluasi komprehensif, dan akses eksklusif ke aset digital korporat.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button onclick="showRegisterModal()" class="btn-primary px-8 py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2">
-          Mulai Transformasi <i class="fas fa-arrow-right ml-1"></i>
-        </button>
-        <button onclick="showTrainings()" class="glass px-8 py-4 rounded-xl font-semibold text-base text-slate-300 hover:text-white transition flex items-center justify-center gap-2">
-          Jelajahi Program
-        </button>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20" data-aos="fade-up" data-aos-delay="100">
-      <div class="glass rounded-xl p-6 text-center border-l-4 border-l-blue-500">
-        <div class="text-3xl font-bold text-white mb-1" id="statAlumni">0</div>
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Profesional Tersertifikasi</div>
-      </div>
-      <div class="glass rounded-xl p-6 text-center border-l-4 border-l-indigo-500">
-        <div class="text-3xl font-bold text-white mb-1" id="statTrainings">0</div>
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Modul Premium</div>
-      </div>
-      <div class="glass rounded-xl p-6 text-center border-l-4 border-l-sky-500">
-        <div class="text-3xl font-bold text-white mb-1" id="statProducts">0</div>
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Aset Korporat</div>
-      </div>
-      <div class="glass rounded-xl p-6 text-center border-l-4 border-l-emerald-500">
-        <div class="text-3xl font-bold text-white mb-1">98%</div>
-        <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Tingkat Kepuasan</div>
-      </div>
-    </div>
-
-    <div class="mt-32" data-aos="fade-up">
-      <div class="flex justify-between items-end mb-8">
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold text-white">Program Unggulan</h2>
-          <p class="text-slate-400 mt-2 text-sm">Modul pelatihan berstandar industri untuk karir dan bisnis Anda.</p>
+<!-- ============ HOME PAGE ============ -->
+<div class="page active" id="page-home">
+  
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse"></span>
+          Platform Pembelajaran #1 Indonesia
         </div>
-      </div>
-      <div id="featuredTrainings" class="grid md:grid-cols-3 gap-6"></div>
-    </div>
-  </div>
-</section>
-
-<!-- REGISTER MODAL -->
-<div id="registerModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm">
-  <div class="glass rounded-2xl p-8 max-w-md w-full relative border border-slate-700 shadow-2xl" data-aos="zoom-in">
-    <button onclick="closeRegisterModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
-      <i class="fas fa-times text-xl"></i>
-    </button>
-    <div class="mb-8">
-      <h2 class="text-2xl font-bold text-white mb-2">Registrasi Peserta</h2>
-      <p class="text-slate-400 text-sm">Bergabunglah dengan ekosistem profesional kami.</p>
-    </div>
-    <form id="registerForm" class="space-y-5">
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Nama Lengkap</label>
-        <input type="text" id="regName" required placeholder="Sesuai identitas resmi" class="w-full px-4 py-3 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Nomor Kontak (WhatsApp)</label>
-        <input type="tel" id="regWa" required placeholder="08XXXXXXXXXX" class="w-full px-4 py-3 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Alamat Email Bisnis/Aktif</label>
-        <input type="email" id="regEmail" required placeholder="email@perusahaan.com" class="w-full px-4 py-3 rounded-lg text-sm" />
-      </div>
-      <button type="submit" id="btnRegister" class="btn-primary w-full py-3.5 rounded-lg font-bold text-sm mt-4 tracking-wide">
-        Daftar & Akses Dashboard
-      </button>
-    </form>
-  </div>
-</div>
-
-<!-- USER DASHBOARD -->
-<section id="dashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-7xl mx-auto relative z-10">
-    <div class="glass rounded-xl p-6 mb-8 flex items-center justify-between flex-wrap gap-4 border border-slate-700">
-      <div>
-        <h2 class="text-2xl font-bold text-white">Dashboard, <span id="userName" class="text-blue-400"></span></h2>
-        <p class="text-slate-400 text-sm mt-1">Pantau perkembangan kompetensi dan akses aset digital Anda.</p>
-      </div>
-      <button onclick="logout()" class="border border-slate-700 text-slate-300 px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition text-sm font-medium">
-        <i class="fas fa-sign-out-alt mr-2"></i>Keluar Sesi
-      </button>
-    </div>
-
-    <div class="flex gap-3 mb-8 flex-wrap overflow-x-auto pb-2 border-b border-slate-800">
-      <button onclick="switchDashboardTab('my-trainings')" class="tab-btn active px-4 py-3 rounded-t-lg whitespace-nowrap text-sm font-semibold" data-tab="my-trainings">
-        <i class="fas fa-book-open mr-2"></i>Modul Saya
-      </button>
-      <button onclick="switchDashboardTab('all-trainings')" class="tab-btn px-4 py-3 rounded-t-lg whitespace-nowrap text-sm font-semibold" data-tab="all-trainings">
-        <i class="fas fa-compass mr-2"></i>Eksplorasi Modul
-      </button>
-      <button onclick="switchDashboardTab('marketplace')" class="tab-btn px-4 py-3 rounded-t-lg whitespace-nowrap text-sm font-semibold" data-tab="marketplace">
-        <i class="fas fa-box-open mr-2"></i>Aset Digital
-      </button>
-      <button onclick="switchDashboardTab('my-certificates')" class="tab-btn px-4 py-3 rounded-t-lg whitespace-nowrap text-sm font-semibold" data-tab="my-certificates">
-        <i class="fas fa-award mr-2"></i>Sertifikasi
-      </button>
-    </div>
-
-    <!-- Modul Saya -->
-    <div id="tab-my-trainings" class="dashboard-tab">
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
-        <div class="glass rounded-xl p-6 border border-slate-700 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-bl-full -mr-4 -mt-4"></div>
-          <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-3">Progress Keseluruhan</div>
-          <div class="text-4xl font-bold text-white mb-4" id="progressPercent">0%</div>
-          <div class="w-full bg-slate-800 rounded-full h-2">
-            <div id="progressBar" class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+        <h1>
+          Tingkatkan <span class="gradient-text">Kompetensi Digital</span> & Akselerasi Bisnis Anda
+        </h1>
+        <p>
+          Sistem manajemen pembelajaran enterprise dengan modul tersertifikasi industri, evaluasi komprehensif, dan akses eksklusif ke aset digital korporat untuk pertumbuhan bisnis yang berkelanjutan.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" onclick="showPage('register')">
+            <i class="fas fa-rocket"></i> Mulai Transformasi
+          </button>
+          <button class="btn btn-outline btn-lg" onclick="showPage('catalog')">
+            <i class="fas fa-play-circle"></i> Jelajahi Program
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value">12<span class="accent">K+</span></div>
+            <div class="stat-label">Profesional Tersertifikasi</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">250<span class="accent">+</span></div>
+            <div class="stat-label">Modul Premium</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">98<span class="accent">%</span></div>
+            <div class="stat-label">Tingkat Kepuasan</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">4.9<span class="accent">★</span></div>
+            <div class="stat-label">Rating Platform</div>
           </div>
         </div>
-        <div class="glass rounded-xl p-6 border border-slate-700">
-          <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-3">Modul Diselesaikan</div>
-          <div class="text-4xl font-bold text-white"><span id="completedModules">0</span><span class="text-slate-600 text-2xl font-normal"> / <span id="totalModules">0</span></span></div>
-        </div>
-        <div class="glass rounded-xl p-6 border border-slate-700">
-          <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-3">Rata-rata Evaluasi</div>
-          <div class="text-4xl font-bold text-blue-400" id="averageScore">0</div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-stack">
+          <div class="hero-main-card">
+            <div class="card-header">
+              <span style="font-weight:700;font-size:0.9rem;">Progress Belajar</span>
+              <span class="card-status">Aktif</span>
+            </div>
+            <div class="progress-ring">
+              <svg width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="url(#grad)" stroke-width="8"
+                  stroke-dasharray="326.7" stroke-dashoffset="81.7" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                    <stop offset="100%" style="stop-color:#8b5cf6"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="progress-text">75%</div>
+            </div>
+            <div class="module-list">
+              <div class="module-item">
+                <div class="check done"><i class="fas fa-check"></i></div>
+                <div class="module-info">
+                  <div class="module-title">Fundamental Digital Marketing</div>
+                  <div class="module-meta">8 Modul • Selesai</div>
+                </div>
+              </div>
+              <div class="module-item">
+                <div class="check done"><i class="fas fa-check"></i></div>
+                <div class="module-info">
+                  <div class="module-title">Business Strategy & Analytics</div>
+                  <div class="module-meta">6 Modul • Selesai</div>
+                </div>
+              </div>
+              <div class="module-item">
+                <div class="check pending"><i class="fas fa-clock"></i></div>
+                <div class="module-info">
+                  <div class="module-title">Advanced Data-Driven Growth</div>
+                  <div class="module-meta">10 Modul • Dalam Progres</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-card card-1">
+            <div class="fc-row">
+              <div class="fc-icon" style="background:rgba(16,185,129,0.1);color:var(--emerald);">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <div>
+                <div class="fc-text">Sertifikat Diterbitkan</div>
+                <div class="fc-sub">Baru saja</div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-card card-2">
+            <div class="fc-row">
+              <div class="fc-icon" style="background:rgba(245,158,11,0.1);color:var(--gold);">
+                <i class="fas fa-star"></i>
+              </div>
+              <div>
+                <div class="fc-text">Nilai Evaluasi: 95/100</div>
+                <div class="fc-sub">Lulus dengan predikat Excellent</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <h3 class="text-xl font-bold text-white mb-6">Materi Pembelajaran Aktif</h3>
-      <div id="modulesContainer" class="grid md:grid-cols-2 gap-6 mb-8"></div>
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label"><i class="fas fa-sparkles"></i> Keunggulan Platform</div>
+      <h2 class="section-title">Solusi Pembelajaran Terintegrasi</h2>
+      <p class="section-desc">Dirancang untuk memenuhi standar kompetensi profesional dengan ekosistem pembelajaran end-to-end.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(59,130,246,0.1);color:var(--accent);">
+          <i class="fas fa-video"></i>
+        </div>
+        <h3>Video Pembelajaran Premium</h3>
+        <p>Konten video berkualitas tinggi yang diproduksi oleh praktisi industri dengan standar broadcast profesional.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3>E-Book & Dokumentasi</h3>
+        <p>Referensi komprehensif dalam format digital yang dapat diunduh dan diakses kapan saja untuk pembelajaran mendalam.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(16,185,129,0.1);color:var(--emerald);">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <h3>Evaluasi Kompetensi</h3>
+        <p>Sistem quiz interaktif dengan analisis performa real-time untuk mengukur pemahaman dan kesiapan profesional.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(245,158,11,0.1);color:var(--gold);">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <h3>Sertifikasi Resmi</h3>
+        <p>Sertifikat digital terverifikasi yang diakui industri, dikirim otomatis ke email setelah kelulusan.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(244,63,94,0.1);color:var(--rose);">
+          <i class="fas fa-store"></i>
+        </div>
+        <h3>Marketplace Aset Digital</h3>
+        <p>Akses ke ribuan template, software, dan aset digital berkualitas untuk mendukung efisiensi operasional bisnis.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(6,182,212,0.1);color:#06b6d4;">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Analytics & Tracking</h3>
+        <p>Dashboard analitik komprehensif untuk memantau progress pembelajaran dan perkembangan kompetensi secara real-time.</p>
+      </div>
+    </div>
+  </section>
 
-      <div id="certificateSection" class="hidden-section mt-10">
-        <div class="glass rounded-xl p-8 text-center border border-emerald-500/30 bg-emerald-900/10">
-          <div class="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 flex items-center justify-center mb-4 text-emerald-400">
-            <i class="fas fa-check-circle text-3xl"></i>
+  <!-- PROGRAMS PREVIEW -->
+  <section class="section" style="background:var(--surface);max-width:100%;padding-left:0;padding-right:0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 2rem;">
+      <div class="section-header">
+        <div class="section-label"><i class="fas fa-award"></i> Program Unggulan</div>
+        <h2 class="section-title">Modul Berstandar Industri</h2>
+        <p class="section-desc">Kurikulum dirancang bersama praktisi dan ekspert industri untuk memastikan relevansi kompetensi.</p>
+      </div>
+      <div class="programs-grid" id="homePrograms"></div>
+      <div class="text-center mt-3">
+        <button class="btn btn-outline btn-lg" onclick="showPage('catalog')">
+          Lihat Semua Program <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER CTA -->
+  <section class="section">
+    <div class="register-section">
+      <div class="register-container">
+        <div class="register-content">
+          <h2>Bergabung dengan 12,000+ Profesional</h2>
+          <p>Mulai perjalanan transformasi digital Anda hari ini. Akses gratis ke modul introductory dan dapatkan sertifikat pertama Anda.</p>
+          <div style="display:flex;gap:2rem;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:1.5rem;font-weight:800;color:white;">Gratis</div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Registrasi & Akses Dasar</div>
+            </div>
+            <div>
+              <div style="font-size:1.5rem;font-weight:800;color:white;">24/7</div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Support & Mentoring</div>
+            </div>
+            <div>
+              <div style="font-size:1.5rem;font-weight:800;color:white;">Lifetime</div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Akses Materi</div>
+            </div>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2">Evaluasi Selesai</h3>
-          <p class="text-slate-400 mb-6 max-w-md mx-auto text-sm">Anda telah memenuhi standar kompetensi. Dokumen sertifikasi resmi telah siap untuk diterbitkan.</p>
-          <button onclick="generateAndSendCertificate()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold text-sm transition shadow-lg shadow-emerald-900/20">
-            Terbitkan & Kirim ke Email
+        </div>
+        <div class="register-form">
+          <h3 style="margin-bottom:1.25rem;font-size:1.1rem;">Registrasi Peserta</h3>
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" class="form-control" id="regName" placeholder="Masukkan nama lengkap">
+          </div>
+          <div class="form-group">
+            <label>Nomor WhatsApp</label>
+            <input type="tel" class="form-control" id="regPhone" placeholder="08xxxxxxxxxx">
+          </div>
+          <div class="form-group">
+            <label>Email Aktif</label>
+            <input type="email" class="form-control" id="regEmail" placeholder="email@domain.com">
+          </div>
+          <button class="btn btn-primary btn-lg" style="width:100%;" onclick="handleRegister()">
+            <i class="fas fa-arrow-right"></i> Daftar & Akses Dashboard
           </button>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Semua Pelatihan -->
-    <div id="tab-all-trainings" class="dashboard-tab hidden-section">
-      <h3 class="text-xl font-bold text-white mb-6">Semua Program Tersedia</h3>
-      <div id="allTrainingsContainer" class="grid md:grid-cols-3 gap-6"></div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3><i class="fas fa-graduation-cap"></i> AcademyPro</h3>
+        <p>Platform pembelajaran profesional dan akselerasi bisnis digital terdepan di Indonesia. Membangun kompetensi masa depan untuk pertumbuhan berkelanjutan.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="#">Katalog Pelatihan</a>
+        <a href="#">Marketplace</a>
+        <a href="#">Sertifikasi</a>
+        <a href="#">Enterprise</a>
+      </div>
+      <div class="footer-col">
+        <h4>Perusahaan</h4>
+        <a href="#">Tentang Kami</a>
+        <a href="#">Karir</a>
+        <a href="#">Blog</a>
+        <a href="#">Kontak</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Syarat & Ketentuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Cookie Policy</a>
+      </div>
     </div>
-
-    <!-- Marketplace -->
-    <div id="tab-marketplace" class="dashboard-tab hidden-section">
-      <h3 class="text-xl font-bold text-white mb-6">Aset Digital & Software</h3>
-      <div id="marketplaceContainer" class="grid md:grid-cols-4 gap-6"></div>
+    <div class="footer-bottom">
+      <span>© 2026 AcademyPro Corporate Solutions. All rights reserved.</span>
+      <span>Made with <i class="fas fa-heart" style="color:var(--rose);"></i> in Indonesia</span>
     </div>
+  </footer>
+</div>
 
-    <!-- Sertifikat Saya -->
-    <div id="tab-my-certificates" class="dashboard-tab hidden-section">
-      <h3 class="text-xl font-bold text-white mb-6">Dokumen Sertifikasi</h3>
-      <div id="myCertificatesContainer" class="grid md:grid-cols-2 gap-6"></div>
+<!-- ============ CATALOG PAGE ============ -->
+<div class="page" id="page-catalog">
+  <div style="padding-top:100px;"></div>
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label"><i class="fas fa-th-large"></i> Katalog Lengkap</div>
+      <h2 class="section-title">Temukan Program Pelatihan Anda</h2>
+      <p class="section-desc">Jelajahi berbagai modul pelatihan yang dirancang untuk akselerasi karir dan bisnis Anda.</p>
+    </div>
+    <div class="tabs" style="justify-content:center;">
+      <button class="tab-btn active" onclick="filterPrograms('all', this)">Semua</button>
+      <button class="tab-btn" onclick="filterPrograms('Digital Marketing', this)">Digital Marketing</button>
+      <button class="tab-btn" onclick="filterPrograms('Bisnis & Strategi', this)">Bisnis & Strategi</button>
+      <button class="tab-btn" onclick="filterPrograms('Teknologi & Data', this)">Teknologi & Data</button>
+      <button class="tab-btn" onclick="filterPrograms('Desain', this)">Desain</button>
+      <button class="tab-btn" onclick="filterPrograms('Keuangan', this)">Keuangan</button>
+    </div>
+    <div class="programs-grid" id="catalogPrograms"></div>
+  </section>
+</div>
+
+<!-- ============ MARKETPLACE PAGE ============ -->
+<div class="page" id="page-marketplace">
+  <div style="padding-top:100px;"></div>
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label"><i class="fas fa-store"></i> Direktori Aset Digital</div>
+      <h2 class="section-title">Marketplace Produk Digital</h2>
+      <p class="section-desc">Investasi pada instrumen digital berkualitas untuk efisiensi operasional bisnis Anda.</p>
+    </div>
+    <div class="marketplace-grid" id="marketplaceGrid"></div>
+  </section>
+</div>
+
+<!-- ============ ABOUT PAGE ============ -->
+<div class="page" id="page-about">
+  <div style="padding-top:100px;"></div>
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label"><i class="fas fa-building"></i> Tentang Kami</div>
+      <h2 class="section-title">Membangun Masa Depan Digital Indonesia</h2>
+      <p class="section-desc">AcademyPro adalah platform edukasi bisnis dan profesional yang berkomitmen untuk meningkatkan kompetensi digital melalui pembelajaran berkualitas tinggi.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(59,130,246,0.1);color:var(--accent);">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3>Visi</h3>
+        <p>Menjadi platform pembelajaran profesional terdepan yang mencetak talenta digital berdaya saing global.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3>Misi</h3>
+        <p>Menyediakan ekosistem pembelajaran terintegrasi yang accessible, berkualitas, dan berorientasi pada outcome.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(16,185,129,0.1);color:var(--emerald);">
+          <i class="fas fa-gem"></i>
+        </div>
+        <h3>Nilai</h3>
+        <p>Excellence, Innovation, Integrity, dan Impact menjadi fondasi setiap layanan yang kami berikan.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ REGISTER PAGE ============ -->
+<div class="page" id="page-register">
+  <div style="padding-top:100px;"></div>
+  <section class="section" style="max-width:600px;">
+    <div class="section-header">
+      <div class="section-label"><i class="fas fa-user-plus"></i> Registrasi</div>
+      <h2 class="section-title">Buat Akun Anda</h2>
+      <p class="section-desc">Bergabunglah dengan ekosistem profesional kami dan mulai perjalanan belajar Anda.</p>
+    </div>
+    <div class="register-form" style="box-shadow:var(--shadow-lg);">
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" class="form-control" id="regName2" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="form-group">
+        <label>Nomor WhatsApp</label>
+        <input type="tel" class="form-control" id="regPhone2" placeholder="08xxxxxxxxxx">
+      </div>
+      <div class="form-group">
+        <label>Email Aktif</label>
+        <input type="email" class="form-control" id="regEmail2" placeholder="email@domain.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" id="regPassword" placeholder="Minimal 8 karakter">
+      </div>
+      <button class="btn btn-primary btn-lg" style="width:100%;" onclick="handleRegister()">
+        <i class="fas fa-arrow-right"></i> Daftar & Akses Dashboard
+      </button>
+      <p class="text-center mt-2" style="font-size:0.85rem;color:var(--text-muted);">
+        Sudah punya akun? <a href="#" onclick="showModal('loginModal')" style="color:var(--accent);font-weight:600;">Masuk di sini</a>
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ USER DASHBOARD ============ -->
+<div class="dashboard" id="userDashboard">
+  <aside class="sidebar" id="userSidebar">
+    <div class="sidebar-brand">
+      <a href="#"><div class="logo-icon"><i class="fas fa-graduation-cap"></i></div> AcademyPro</a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Menu Utama</div>
+      <a href="#" class="active" onclick="showDashTab('dashOverview', this)"><i class="fas fa-th-large"></i> Overview</a>
+      <a href="#" onclick="showDashTab('dashModules', this)"><i class="fas fa-book"></i> Modul Saya</a>
+      <a href="#" onclick="showDashTab('dashCatalog', this)"><i class="fas fa-compass"></i> Eksplorasi Modul</a>
+      <a href="#" onclick="showDashTab('dashAssets', this)"><i class="fas fa-box"></i> Aset Digital</a>
+      <div class="nav-section">Akun</div>
+      <a href="#" onclick="showDashTab('dashCerts', this)"><i class="fas fa-certificate"></i> Sertifikasi</a>
+      <a href="#" onclick="showDashTab('dashProfile', this)"><i class="fas fa-user-cog"></i> Pengaturan</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="userAvatar">U</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">User</div>
+          <div class="user-role">Peserta</div>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:12px;color:rgba(255,255,255,0.5);" onclick="handleLogout()">
+        <i class="fas fa-sign-out-alt"></i> Keluar
+      </button>
+    </div>
+  </aside>
+  <main class="dash-main">
+    <header class="dash-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn btn-ghost btn-sm" style="display:none;" id="menuToggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <h2 id="dashTitle">Dashboard Overview</h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn btn-ghost btn-sm"><i class="fas fa-bell"></i></button>
+        <button class="btn btn-ghost btn-sm"><i class="fas fa-search"></i></button>
+      </div>
+    </header>
+    <div class="dash-content">
+      
+      <!-- Overview Tab -->
+      <div class="tab-content active" id="dashOverview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(59,130,246,0.1);color:var(--accent);"><i class="fas fa-book-open"></i></div>
+              <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 12%</span>
+            </div>
+            <div class="stat-number" id="statModules">0</div>
+            <div class="stat-label">Modul Aktif</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--emerald);"><i class="fas fa-check-circle"></i></div>
+              <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 8%</span>
+            </div>
+            <div class="stat-number" id="statCompleted">0</div>
+            <div class="stat-label">Modul Selesai</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--gold);"><i class="fas fa-star"></i></div>
+              <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 5%</span>
+            </div>
+            <div class="stat-number" id="statAvgScore">0</div>
+            <div class="stat-label">Rata-rata Evaluasi</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;"><i class="fas fa-certificate"></i></div>
+            </div>
+            <div class="stat-number" id="statCerts">0</div>
+            <div class="stat-label">Sertifikat Diperoleh</div>
+          </div>
+        </div>
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>Progress Pembelajaran</h3>
+              <button class="btn btn-sm btn-ghost">Lihat Semua</button>
+            </div>
+            <div class="dash-card-body" id="progressList">
+              <div class="progress-bar-container">
+                <div class="progress-label"><span class="label">Digital Marketing Fundamentals</span><span class="value">75%</span></div>
+                <div class="progress-bar"><div class="fill" style="width:75%"></div></div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-label"><span class="label">Business Strategy & Analytics</span><span class="value">45%</span></div>
+                <div class="progress-bar"><div class="fill" style="width:45%"></div></div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-label"><span class="label">Data-Driven Growth</span><span class="value">20%</span></div>
+                <div class="progress-bar"><div class="fill" style="width:20%"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>Aktivitas Terbaru</h3>
+            </div>
+            <div class="dash-card-body">
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="act-icon" style="background:rgba(16,185,129,0.1);color:var(--emerald);"><i class="fas fa-check"></i></div>
+                  <div class="act-content">
+                    <div class="act-title">Modul 5 selesai</div>
+                    <div class="act-time">2 jam yang lalu</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="act-icon" style="background:rgba(59,130,246,0.1);color:var(--accent);"><i class="fas fa-play"></i></div>
+                  <div class="act-content">
+                    <div class="act-title">Video pembelajaran dimulai</div>
+                    <div class="act-time">3 jam yang lalu</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="act-icon" style="background:rgba(245,158,11,0.1);color:var(--gold);"><i class="fas fa-certificate"></i></div>
+                  <div class="act-content">
+                    <div class="act-title">Sertifikat diterbitkan</div>
+                    <div class="act-time">1 hari yang lalu</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Modules Tab -->
+      <div class="tab-content" id="dashModules">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Modul Pelatihan Saya</h3>
+          </div>
+          <div class="dash-card-body">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Program</th>
+                    <th>Kategori</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="myModulesTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explore Tab -->
+      <div class="tab-content" id="dashCatalog">
+        <div class="programs-grid" id="dashCatalogGrid"></div>
+      </div>
+
+      <!-- Assets Tab -->
+      <div class="tab-content" id="dashAssets">
+        <div class="marketplace-grid" id="dashAssetsGrid"></div>
+      </div>
+
+      <!-- Certificates Tab -->
+      <div class="tab-content" id="dashCerts">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Sertifikat Saya</h3>
+          </div>
+          <div class="dash-card-body" id="certList">
+            <div class="text-center" style="padding:3rem;color:var(--text-muted);">
+              <i class="fas fa-certificate" style="font-size:3rem;margin-bottom:1rem;opacity:0.3;"></i>
+              <p>Belum ada sertifikat. Selesaikan modul untuk mendapatkan sertifikat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Tab -->
+      <div class="tab-content" id="dashProfile">
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Pengaturan Profil</h3></div>
+          <div class="dash-card-body">
+            <div class="form-group">
+              <label>Nama Lengkap</label>
+              <input type="text" class="form-control" id="profileName">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control" id="profileEmail">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp</label>
+              <input type="tel" class="form-control" id="profilePhone">
+            </div>
+            <button class="btn btn-primary" onclick="showToast('Profil berhasil diperbarui', 'success')">
+              <i class="fas fa-save"></i> Simpan Perubahan
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ ADMIN DASHBOARD ============ -->
+<div class="dashboard" id="adminDashboard">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <a href="#"><div class="logo-icon" style="background:linear-gradient(135deg,#f59e0b,#f43f5e);"><i class="fas fa-shield-alt"></i></div> Admin Panel</a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Manajemen</div>
+      <a href="#" class="active" onclick="showAdminTab('adminOverview', this)"><i class="fas fa-chart-pie"></i> Overview</a>
+      <a href="#" onclick="showAdminTab('adminModules', this)"><i class="fas fa-book"></i> Modul Pelatihan</a>
+      <a href="#" onclick="showAdminTab('adminProducts', this)"><i class="fas fa-box"></i> Produk Digital</a>
+      <a href="#" onclick="showAdminTab('adminUsers', this)"><i class="fas fa-users"></i> Data Peserta</a>
+      <div class="nav-section">Konfigurasi</div>
+      <a href="#" onclick="showAdminTab('adminCerts', this)"><i class="fas fa-certificate"></i> Template Sertifikat</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" style="background:linear-gradient(135deg,#f59e0b,#f43f5e);">A</div>
+        <div class="user-info">
+          <div class="user-name">Administrator</div>
+          <div class="user-role">Super Admin</div>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:12px;color:rgba(255,255,255,0.5);" onclick="handleLogout()">
+        <i class="fas fa-sign-out-alt"></i> Keluar
+      </button>
+    </div>
+  </aside>
+  <main class="dash-main">
+    <header class="dash-header">
+      <h2 id="adminTitle">Admin Overview</h2>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn btn-primary btn-sm" onclick="showModal('addModuleModal')"><i class="fas fa-plus"></i> Tambah Modul</button>
+        <button class="btn btn-outline btn-sm" onclick="showModal('addProductModal')"><i class="fas fa-plus"></i> Tambah Produk</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      
+      <!-- Admin Overview -->
+      <div class="tab-content active" id="adminOverview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(59,130,246,0.1);color:var(--accent);"><i class="fas fa-users"></i></div>
+              <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 18%</span>
+            </div>
+            <div class="stat-number" id="adminStatUsers">0</div>
+            <div class="stat-label">Total Peserta</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--emerald);"><i class="fas fa-book"></i></div>
+            </div>
+            <div class="stat-number" id="adminStatModules">0</div>
+            <div class="stat-label">Modul Aktif</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--gold);"><i class="fas fa-box"></i></div>
+            </div>
+            <div class="stat-number" id="adminStatProducts">0</div>
+            <div class="stat-label">Produk Digital</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;"><i class="fas fa-money-bill-wave"></i></div>
+              <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 24%</span>
+            </div>
+            <div class="stat-number" id="adminStatRevenue">Rp 0</div>
+            <div class="stat-label">Total Revenue</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Modules -->
+      <div class="tab-content" id="adminModules">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Manajemen Modul Pelatihan</h3>
+            <button class="btn btn-primary btn-sm" onclick="showModal('addModuleModal')"><i class="fas fa-plus"></i> Tambah</button>
+          </div>
+          <div class="dash-card-body">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr><th>No</th><th>Judul</th><th>Kategori</th><th>Modul</th><th>Peserta</th><th>Status</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminModulesTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Products -->
+      <div class="tab-content" id="adminProducts">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>Direktori Produk Digital</h3>
+            <button class="btn btn-primary btn-sm" onclick="showModal('addProductModal')"><i class="fas fa-plus"></i> Tambah</button>
+          </div>
+          <div class="dash-card-body">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr><th>No</th><th>Nama Produk</th><th>Kategori</th><th>Harga</th><th>Terjual</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminProductsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Users -->
+      <div class="tab-content" id="adminUsers">
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Data Peserta</h3></div>
+          <div class="dash-card-body">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr><th>No</th><th>Nama</th><th>Email</th><th>WhatsApp</th><th>Tgl. Registrasi</th><th>Progress</th></tr>
+                </thead>
+                <tbody id="adminUsersTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Certificates -->
+      <div class="tab-content" id="adminCerts">
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Konfigurasi Template Sertifikat</h3></div>
+          <div class="dash-card-body">
+            <div class="certificate-preview" id="certPreview">
+              <div class="cert-header">ACADEMYPRO CERTIFICATE</div>
+              <div class="cert-title">Certificate of Completion</div>
+              <div class="cert-desc">Dengan ini menyatakan bahwa</div>
+              <div class="cert-name" id="certPreviewName">Nama Peserta</div>
+              <div class="cert-desc">Telah berhasil menyelesaikan program pelatihan</div>
+              <div class="cert-program" id="certPreviewProgram">Digital Marketing Fundamentals</div>
+              <div class="cert-signatures">
+                <div class="cert-sig">
+                  <div class="sig-line"></div>
+                  <div class="sig-name">Director</div>
+                  <div class="sig-title">AcademyPro</div>
+                </div>
+                <div class="cert-sig">
+                  <div class="sig-line"></div>
+                  <div class="sig-name">Instructor</div>
+                  <div class="sig-title">Program Lead</div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="form-group">
+                <label>Header / Kop Surat</label>
+                <input type="text" class="form-control" value="ACADEMYPRO CERTIFICATE" id="certHeader">
+              </div>
+              <div class="form-group">
+                <label>Judul Utama</label>
+                <input type="text" class="form-control" value="Certificate of Completion" id="certTitle">
+              </div>
+              <div class="form-group">
+                <label>Tanda Tangan Kiri</label>
+                <input type="text" class="form-control" value="Director" id="certSig1">
+              </div>
+              <div class="form-group">
+                <label>Tanda Tangan Kanan</label>
+                <input type="text" class="form-control" value="Instructor" id="certSig2">
+              </div>
+              <button class="btn btn-primary" onclick="showToast('Template sertifikat diperbarui', 'success')">
+                <i class="fas fa-save"></i> Simpan Template
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ MODALS ============ -->
+
+<!-- Login Modal -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Masuk ke Akun Anda</h3>
+      <button class="modal-close" onclick="closeModal('loginModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchLoginTab('user', this)">Peserta</button>
+        <button class="tab-btn" onclick="switchLoginTab('admin', this)">Administrator</button>
+      </div>
+      <div id="loginUserForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" id="loginEmail" placeholder="email@domain.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Masukkan password">
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%;" onclick="handleLogin('user')">
+          <i class="fas fa-sign-in-alt"></i> Masuk
+        </button>
+      </div>
+      <div id="loginAdminForm" class="hidden">
+        <div class="form-group">
+          <label>Email Administrator</label>
+          <input type="email" class="form-control" id="adminEmail" placeholder="admin@academypro.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" id="adminPassword" placeholder="Password admin">
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%;" onclick="handleLogin('admin')">
+          <i class="fas fa-shield-alt"></i> Otorisasi Masuk
+        </button>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Halaman Daftar Pelatihan Global -->
-<section id="trainingsSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-7xl mx-auto relative z-10">
-    <h1 class="text-3xl font-bold text-white mb-2">Katalog Program Pelatihan</h1>
-    <p class="text-slate-400 mb-8 text-sm">Temukan modul yang relevan untuk akselerasi karir dan bisnis Anda.</p>
-    <div class="flex gap-2 mb-8 flex-wrap" id="categoryFilter"></div>
-    <div id="trainingsListContainer" class="grid md:grid-cols-3 gap-6"></div>
+<!-- Add Module Modal -->
+<div class="modal-overlay" id="addModuleModal">
+  <div class="modal" style="max-width:640px;">
+    <div class="modal-header">
+      <h3>Tambah Modul Pelatihan</h3>
+      <button class="modal-close" onclick="closeModal('addModuleModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Judul Program *</label>
+        <input type="text" class="form-control" id="moduleTitle" placeholder="Masukkan judul modul">
+      </div>
+      <div class="form-group">
+        <label>Kategori *</label>
+        <select class="form-control" id="moduleCategory">
+          <option>Digital Marketing</option>
+          <option>Bisnis & Strategi</option>
+          <option>Teknologi & Data</option>
+          <option>Desain</option>
+          <option>Keuangan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Deskripsi *</label>
+        <textarea class="form-control" id="moduleDesc" placeholder="Deskripsi singkat modul"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Jumlah Modul</label>
+        <input type="number" class="form-control" id="moduleCount" value="8" min="1">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('addModuleModal')">Batal</button>
+      <button class="btn btn-primary" onclick="addModule()"><i class="fas fa-save"></i> Simpan Modul</button>
+    </div>
   </div>
-</section>
+</div>
 
-<!-- Halaman Marketplace Global -->
-<section id="marketplaceSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-7xl mx-auto relative z-10">
-    <h1 class="text-3xl font-bold text-white mb-2">Direktori Aset Digital</h1>
-    <p class="text-slate-400 mb-8 text-sm">Investasi pada instrumen digital berkualitas untuk efisiensi operasional.</p>
-    <div class="flex gap-2 mb-8 flex-wrap" id="productCategoryFilter"></div>
-    <div id="marketplaceListContainer" class="grid md:grid-cols-4 gap-6"></div>
+<!-- Add Product Modal -->
+<div class="modal-overlay" id="addProductModal">
+  <div class="modal" style="max-width:640px;">
+    <div class="modal-header">
+      <h3>Tambah Produk Digital</h3>
+      <button class="modal-close" onclick="closeModal('addProductModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Nama Produk *</label>
+        <input type="text" class="form-control" id="productName" placeholder="Nama produk digital">
+      </div>
+      <div class="form-group">
+        <label>Kategori *</label>
+        <select class="form-control" id="productCategory">
+          <option>Template</option>
+          <option>E-Book</option>
+          <option>Software</option>
+          <option>Design Asset</option>
+          <option>Course</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Deskripsi</label>
+        <textarea class="form-control" id="productDesc" placeholder="Deskripsi produk"></textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="form-group">
+          <label>Harga (Rp) *</label>
+          <input type="number" class="form-control" id="productPrice" placeholder="150000">
+        </div>
+        <div class="form-group">
+          <label>Harga Coret (Rp)</label>
+          <input type="number" class="form-control" id="productOldPrice" placeholder="250000">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('addProductModal')">Batal</button>
+      <button class="btn btn-primary" onclick="addProduct()"><i class="fas fa-save"></i> Simpan Produk</button>
+    </div>
   </div>
-</section>
+</div>
 
-<!-- LEARNING SECTION -->
-<section id="learningSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-5xl mx-auto relative z-10">
-    <button onclick="backToDashboard()" class="text-slate-400 hover:text-white transition mb-6 text-sm flex items-center font-medium">
-      <i class="fas fa-arrow-left mr-2"></i> Kembali ke Dashboard
-    </button>
-
-    <div class="mb-10">
-      <h2 id="moduleTitle" class="text-3xl md:text-4xl font-bold text-white mb-3"></h2>
-      <p id="moduleDescription" class="text-slate-400 text-base max-w-3xl leading-relaxed"></p>
+<!-- Module Detail Modal -->
+<div class="modal-overlay" id="moduleDetailModal">
+  <div class="modal" style="max-width:720px;">
+    <div class="modal-header">
+      <h3 id="moduleDetailTitle">Detail Modul</h3>
+      <button class="modal-close" onclick="closeModal('moduleDetailModal')"><i class="fas fa-times"></i></button>
     </div>
+    <div class="modal-body" id="moduleDetailBody"></div>
+  </div>
+</div>
 
-    <!-- Tahapan -->
-    <div class="glass rounded-xl p-8 mb-8 border border-slate-700">
-      <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider text-xs flex items-center"><i class="fas fa-sitemap mr-2 text-blue-400"></i> Struktur Silabus</h3>
-      <div id="stagesContainer" class="space-y-6"></div>
+<!-- Quiz Modal -->
+<div class="modal-overlay" id="quizModal">
+  <div class="modal" style="max-width:720px;">
+    <div class="modal-header">
+      <h3>Evaluasi Kompetensi</h3>
+      <button class="modal-close" onclick="closeModal('quizModal')"><i class="fas fa-times"></i></button>
     </div>
-
-    <!-- Video -->
-    <div class="glass rounded-xl p-8 mb-8 border border-slate-700">
-      <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider text-xs flex items-center"><i class="fas fa-play-circle mr-2 text-indigo-400"></i> Materi Visual</h3>
-      <div id="videoThumbnails" class="grid md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6"></div>
-      <div id="activeVideoContainer" class="video-container shadow-2xl"></div>
+    <div class="modal-body">
+      <div class="quiz-container" id="quizContainer"></div>
     </div>
-
-    <!-- Ebook -->
-    <div id="ebooksSection" class="glass rounded-xl p-8 mb-8 hidden-section border border-slate-700">
-      <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider text-xs flex items-center"><i class="fas fa-file-pdf mr-2 text-sky-400"></i> Referensi & Dokumen</h3>
-      <div id="ebooksContainer" class="grid md:grid-cols-2 gap-4"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('quizModal')">Nanti Saja</button>
+      <button class="btn btn-primary" onclick="submitQuiz()"><i class="fas fa-paper-plane"></i> Submit Evaluasi</button>
     </div>
+  </div>
+</div>
 
-    <!-- Quiz -->
-    <div class="glass rounded-xl p-8 border border-slate-700">
-      <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider text-xs flex items-center"><i class="fas fa-clipboard-check mr-2 text-emerald-400"></i> Evaluasi Kompetensi</h3>
-      <div id="quizContent" class="text-sm"></div>
-      <button id="submitQuiz" onclick="submitQuiz()" class="btn-primary mt-8 px-8 py-3.5 rounded-lg font-semibold text-sm hidden w-full md:w-auto shadow-lg">
-        Submit Evaluasi
+<!-- Certificate Modal -->
+<div class="modal-overlay" id="certModal">
+  <div class="modal" style="max-width:800px;">
+    <div class="modal-header">
+      <h3>Sertifikat Kelulusan</h3>
+      <button class="modal-close" onclick="closeModal('certModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="certificate-preview">
+        <div class="cert-header">ACADEMYPRO CERTIFICATE</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-desc">Dengan ini menyatakan bahwa</div>
+        <div class="cert-name" id="certModalName">-</div>
+        <div class="cert-desc">Telah berhasil menyelesaikan program pelatihan</div>
+        <div class="cert-program" id="certModalProgram">-</div>
+        <div class="cert-signatures">
+          <div class="cert-sig"><div class="sig-line"></div><div class="sig-name">Director</div><div class="sig-title">AcademyPro</div></div>
+          <div class="cert-sig"><div class="sig-line"></div><div class="sig-name">Instructor</div><div class="sig-title">Program Lead</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('certModal')">Tutup</button>
+      <button class="btn btn-primary" onclick="showToast('Sertifikat dikirim ke email Anda', 'success'); closeModal('certModal');">
+        <i class="fas fa-envelope"></i> Kirim ke Email
       </button>
     </div>
   </div>
-</section>
-
-<!-- ADMIN LOGIN -->
-<section id="adminLoginSection" class="hidden-section relative min-h-screen flex items-center justify-center px-4">
-  <div class="glass rounded-2xl p-8 max-w-md w-full relative border border-slate-700 shadow-2xl" data-aos="zoom-in">
-    <div class="text-center mb-8">
-      <div class="w-16 h-16 mx-auto rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-4">
-        <i class="fas fa-lock text-2xl text-slate-300"></i>
-      </div>
-      <h2 class="text-2xl font-bold text-white">Portal Administrator</h2>
-      <p class="text-slate-400 mt-1 text-sm">Akses terbatas untuk manajemen sistem.</p>
-    </div>
-    <form id="adminLoginForm" class="space-y-4">
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Email Otorisasi</label>
-        <input type="email" id="adminEmail" required placeholder="admin@domain.com" class="w-full px-4 py-3 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Kata Sandi</label>
-        <input type="password" id="adminPassword" required placeholder="••••••••" class="w-full px-4 py-3 rounded-lg text-sm" />
-      </div>
-      <button type="submit" class="btn-primary w-full py-3.5 rounded-lg font-bold text-sm mt-2">
-        Otorisasi Masuk
-      </button>
-    </form>
-    <button onclick="showLanding()" class="w-full mt-4 py-3 text-slate-400 hover:text-white transition text-sm font-medium">
-      Kembali ke Beranda
-    </button>
-  </div>
-</section>
-
-<!-- ADMIN DASHBOARD -->
-<section id="adminDashboardSection" class="hidden-section relative min-h-screen px-4 py-10">
-  <div class="max-w-7xl mx-auto relative z-10">
-    <div class="glass rounded-xl p-6 mb-8 flex items-center justify-between flex-wrap gap-4 border border-slate-700">
-      <div>
-        <h2 class="text-2xl font-bold text-white flex items-center gap-2"><i class="fas fa-server text-blue-400 text-xl"></i> System Administration</h2>
-        <p class="text-slate-400 text-sm mt-1">Control Panel Utama AcademyPro</p>
-      </div>
-      <div class="flex gap-2 flex-wrap">
-        <button onclick="showModuleForm()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-          <i class="fas fa-plus mr-1"></i> Modul Baru
-        </button>
-        <button onclick="showProductForm()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-          <i class="fas fa-box mr-1"></i> Aset Baru
-        </button>
-        <button onclick="showCertTemplateForm()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition border border-slate-600">
-          <i class="fas fa-palette mr-1"></i> Template Sertifikat
-        </button>
-        <button onclick="logout()" class="bg-red-500/10 text-red-400 hover:bg-red-500/20 px-4 py-2 rounded-lg text-sm font-medium transition border border-red-500/20">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-      </div>
-    </div>
-
-    <div class="flex gap-1 mb-6 flex-wrap overflow-x-auto border-b border-slate-800 pb-2">
-      <button onclick="switchAdminTab('modules')" class="tab-btn active px-4 py-2 rounded-md text-sm font-semibold" data-tab="modules">Manajemen Modul</button>
-      <button onclick="switchAdminTab('products')" class="tab-btn px-4 py-2 rounded-md text-sm font-semibold" data-tab="products">Direktori Aset</button>
-      <button onclick="switchAdminTab('peserta')" class="tab-btn px-4 py-2 rounded-md text-sm font-semibold" data-tab="peserta">Data Klien/Peserta</button>
-      <button onclick="switchAdminTab('certificates')" class="tab-btn px-4 py-2 rounded-md text-sm font-semibold" data-tab="certificates">Konfigurasi Sertifikat</button>
-    </div>
-
-    <!-- Modul Tab -->
-    <div id="admin-tab-modules" class="admin-tab">
-      <div class="glass rounded-xl border border-slate-700 overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="admin-table w-full">
-            <thead>
-              <tr><th>No</th><th>Judul Program</th><th>Kategori</th><th>Visual</th><th>Materi</th><th>Evaluasi</th><th>Opsi</th></tr>
-            </thead>
-            <tbody id="adminModulesTable"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Products Tab -->
-    <div id="admin-tab-products" class="admin-tab hidden-section">
-      <div class="glass rounded-xl border border-slate-700 overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="admin-table w-full">
-            <thead>
-              <tr><th>No</th><th>Nama Aset Digital</th><th>Klasifikasi</th><th>Nilai Investasi</th><th>Distribusi</th><th>Opsi</th></tr>
-            </thead>
-            <tbody id="adminProductsTable"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Peserta Tab -->
-    <div id="admin-tab-peserta" class="admin-tab hidden-section">
-      <div class="glass rounded-xl border border-slate-700 overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="admin-table w-full">
-            <thead>
-              <tr><th>No</th><th>Identitas Klien</th><th>Email Korporat</th><th>Kontak</th><th>Tgl. Registrasi</th><th>Status Progres</th></tr>
-            </thead>
-            <tbody id="adminPesertaTable"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Certificate Tab -->
-    <div id="admin-tab-certificates" class="admin-tab hidden-section">
-      <div class="glass rounded-xl p-6 border border-slate-700">
-        <h3 class="text-lg font-bold text-white mb-4">Parameter Visual Sertifikasi</h3>
-        <div id="currentCertTemplate" class="bg-slate-800/50 rounded-lg p-5 mb-6 border border-slate-700 text-sm text-slate-300"></div>
-        <button onclick="showCertTemplateForm()" class="btn-primary px-6 py-2.5 rounded-lg font-semibold text-sm">
-          Perbarui Parameter
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- (JS Logic and Modals Code remains structurally identical to ensure functionality, with updated classes for UI elements) -->
-<!-- Modal forms below have been styled to match the new dark corporate theme -->
-
-<!-- MODULE MODAL -->
-<div id="moduleModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm">
-  <div class="glass rounded-2xl p-8 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-700 shadow-2xl">
-    <button onclick="closeModuleModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
-      <i class="fas fa-times text-xl"></i>
-    </button>
-    <h2 class="text-2xl font-bold text-white mb-6" id="moduleModalTitle">Formulir Modul</h2>
-    <form id="moduleForm" class="space-y-5">
-      <input type="hidden" id="moduleId" />
-      
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Judul Program *</label>
-        <input type="text" id="moduleTitle" required class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Contoh: Strategi Pemasaran Digital B2B" />
-      </div>
-
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Klasifikasi *</label>
-        <select id="moduleCategory" required class="w-full px-4 py-2.5 rounded-lg text-sm">
-          <option value="Digital Marketing">Pemasaran Digital</option>
-          <option value="Bisnis & Strategi">Bisnis & Strategi</option>
-          <option value="Pengembangan Produk">Pengembangan Produk</option>
-          <option value="Teknologi & Data">Teknologi & Data</option>
-          <option value="Keuangan Korporat">Keuangan Korporat</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Deskripsi Singkat *</label>
-        <textarea id="moduleDesc" rows="3" required class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Uraian kompetensi teknis yang diajarkan..."></textarea>
-      </div>
-
-      <!-- Sections for Stages, Videos, Ebooks, Quiz remain dynamically injected by JS. CSS adjusted in JS string. -->
-      <div class="border-t border-slate-700 pt-6">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-white">Struktur Silabus (Tahapan)</h3>
-          <button type="button" onclick="addStageField()" class="text-xs font-semibold text-blue-400 hover:text-blue-300 uppercase"><i class="fas fa-plus mr-1"></i>Tambah Tahap</button>
-        </div>
-        <div id="stagesFormContainer" class="space-y-4"></div>
-      </div>
-
-      <div class="border-t border-slate-700 pt-6">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-white">Materi Visual (Video)</h3>
-          <button type="button" onclick="addVideoField()" class="text-xs font-semibold text-blue-400 hover:text-blue-300 uppercase"><i class="fas fa-plus mr-1"></i>Tambah Video</button>
-        </div>
-        <div id="videosContainer" class="space-y-4"></div>
-      </div>
-
-      <div class="border-t border-slate-700 pt-6">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-white">Dokumen Referensi (PDF)</h3>
-          <button type="button" onclick="addEbookField()" class="text-xs font-semibold text-blue-400 hover:text-blue-300 uppercase"><i class="fas fa-plus mr-1"></i>Tambah Dokumen</button>
-        </div>
-        <div id="ebooksFormContainer" class="space-y-4"></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Ikon Representasi</label>
-          <select id="moduleIcon" class="w-full px-4 py-2.5 rounded-lg text-sm">
-            <option value="briefcase">Briefcase</option>
-            <option value="chart-line">Chart Line</option>
-            <option value="laptop-code">Laptop</option>
-            <option value="globe">Globe</option>
-            <option value="building">Building</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Aksen Warna</label>
-          <select id="moduleColor" class="w-full px-4 py-2.5 rounded-lg text-sm">
-            <option value="from-blue-600 to-indigo-700">Corporate Blue</option>
-            <option value="from-slate-600 to-slate-800">Executive Slate</option>
-            <option value="from-emerald-600 to-teal-700">Growth Emerald</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="border-t border-slate-700 pt-6">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-white">Parameter Evaluasi (Quiz)</h3>
-          <button type="button" onclick="addQuizQuestion()" class="text-xs font-semibold text-blue-400 hover:text-blue-300 uppercase"><i class="fas fa-plus mr-1"></i>Tambah Butir Soal</button>
-        </div>
-        <div id="quizQuestionsContainer" class="space-y-4"></div>
-      </div>
-
-      <div class="flex gap-3 pt-6 border-t border-slate-700">
-        <button type="submit" class="btn-primary flex-1 py-3 rounded-lg font-bold text-sm">Simpan Data</button>
-        <button type="button" onclick="closeModuleModal()" class="bg-slate-800 hover:bg-slate-700 text-white flex-1 py-3 rounded-lg font-bold text-sm transition">Batal</button>
-      </div>
-    </form>
-  </div>
 </div>
 
-<!-- PRODUCT MODAL -->
-<div id="productModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm">
-  <div class="glass rounded-2xl p-8 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-700 shadow-2xl">
-    <button onclick="closeProductModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
-      <i class="fas fa-times text-xl"></i>
-    </button>
-    <h2 class="text-2xl font-bold text-white mb-6" id="productModalTitle">Registrasi Aset Digital</h2>
-    <form id="productForm" class="space-y-4">
-      <input type="hidden" id="productId" />
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Nama Instrumen/Aset *</label>
-        <input type="text" id="productName" required class="w-full px-4 py-2.5 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Klasifikasi *</label>
-        <select id="productCategory" required class="w-full px-4 py-2.5 rounded-lg text-sm">
-          <option value="Sistem & Template">Sistem & Template</option>
-          <option value="Dokumen Legal">Dokumen Legal</option>
-          <option value="Software Bisnis">Software Bisnis</option>
-          <option value="Laporan Riset">Laporan Riset</option>
-        </select>
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Spesifikasi *</label>
-        <textarea id="productDesc" rows="3" required class="w-full px-4 py-2.5 rounded-lg text-sm"></textarea>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Nilai Investasi (Rp) *</label>
-          <input type="number" id="productPrice" required min="0" class="w-full px-4 py-2.5 rounded-lg text-sm" />
-        </div>
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Nilai Taksiran (Rp)</label>
-          <input type="number" id="productOriginalPrice" min="0" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Opsional" />
-        </div>
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Tautan Representasi Visual (URL)</label>
-        <input type="text" id="productImage" class="w-full px-4 py-2.5 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Tautan Distribusi (URL)</label>
-        <input type="text" id="productUrl" class="w-full px-4 py-2.5 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Entitas Penerbit</label>
-        <input type="text" id="productSeller" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Nama instansi/perusahaan" />
-      </div>
-      <div class="flex gap-3 pt-4 border-t border-slate-700">
-        <button type="submit" class="btn-primary flex-1 py-3 rounded-lg font-bold text-sm">Simpan Aset</button>
-        <button type="button" onclick="closeProductModal()" class="bg-slate-800 hover:bg-slate-700 text-white flex-1 py-3 rounded-lg font-bold text-sm transition">Batal</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- CERTIFICATE TEMPLATE MODAL -->
-<div id="certTemplateModal" class="hidden-section fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm">
-  <div class="glass rounded-2xl p-8 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-700 shadow-2xl">
-    <button onclick="closeCertTemplateModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
-      <i class="fas fa-times text-xl"></i>
-    </button>
-    <h2 class="text-2xl font-bold text-white mb-6">Konfigurasi Visual Dokumen Sertifikasi</h2>
-    <form id="certTemplateForm" class="space-y-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Kop Surat / Identitas</label>
-          <input type="text" id="certHeader" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="ACADEMYPRO BUSINESS CERTIFIED" />
-        </div>
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Jenis Dokumen</label>
-          <input type="text" id="certMainTitle" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="SERTIFIKAT KOMPETENSI" />
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Pernyataan Pemberian</label>
-          <input type="text" id="certIntro" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Dianugerahkan secara resmi kepada:" />
-        </div>
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Deskripsi Pemenuhan</label>
-          <input type="text" id="certDesc" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Atas keberhasilan menyelesaikan standar kompetensi:" />
-        </div>
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Nomor / Subjek Penilaian</label>
-        <input type="text" id="certTrainingName" class="w-full px-4 py-2.5 rounded-lg text-sm" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Kualifikasi / Predikat Akhir</label>
-        <input type="text" id="certPredicate" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Predikat: PROFESSIONAL DISTINCTION" />
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Otorisator 1 (Kiri)</label>
-          <input type="text" id="certSignLeft" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Lead Assessor" />
-        </div>
-        <div>
-          <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Otorisator 2 (Kanan)</label>
-          <input type="text" id="certSignRight" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Chief Executive Officer" />
-        </div>
-      </div>
-      <div>
-        <label class="text-xs text-slate-300 mb-1.5 block font-semibold uppercase tracking-wider">Lokasi Penerbitan</label>
-        <input type="text" id="certCity" class="w-full px-4 py-2.5 rounded-lg text-sm" placeholder="Jakarta Selatan" />
-      </div>
-      
-      <!-- Colors selection reduced to corporate palette logic in JS below, keeping it simple here -->
-      <div class="border-t border-slate-700 pt-6">
-        <h3 class="font-bold text-white mb-4">Skema Warna Korporat</h3>
-        <p class="text-xs text-slate-400 mb-4">Konfigurasi standar (Minimalist Putih, Teks Slate) akan diterapkan demi menjaga estetika profesional korporasi.</p>
-      </div>
-
-      <div class="flex gap-3 pt-4 border-t border-slate-700">
-        <button type="submit" class="btn-primary flex-1 py-3 rounded-lg font-bold text-sm">Validasi Konfigurasi</button>
-        <button type="button" onclick="closeCertTemplateModal()" class="bg-slate-800 hover:bg-slate-700 text-white flex-1 py-3 rounded-lg font-bold text-sm transition">Batal</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<footer class="relative z-10 text-center py-10 text-slate-500 text-xs tracking-wider uppercase font-semibold border-t border-slate-800 mt-20">
-  <p>© 2026 AcademyPro Corporate Solutions. Seluruh Hak Cipta Dilindungi.</p>
-</footer>
 
 <script>
-// Logic remains identical to original; injected HTML templates updated for the new sleek dark UI.
-// Only modifying dynamically injected HTML strings to match the new Tailwind classes.
-
-const CONFIG = {
-  SUPABASE_URL: 'https://jnbtgryfrrvpxpfujwuo.supabase.co',
-  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYnRncnlmcnJ2cHhwZnVqd3VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5MDY0OTcsImV4cCI6MjEwNzQ4MjQ5N30.8Gx4t5YG9Cnp_yOpyKhET-CgyhUzVC44AYQ39pnJxUU',
-  EMAILJS_PUBLIC_KEY: 'sRsr8CzetQwJFHxm-',
-  EMAILJS_SERVICE_ID: 'service_vsztggq',
-  EMAILJS_TEMPLATE_ID: 'template_jadl66m',
-  ADMIN_EMAIL: 'admin@academypro.com',
-  ADMIN_PASSWORD: 'admin123'
+// ============ DATA STORE ============
+const DB = {
+  programs: JSON.parse(localStorage.getItem('ap_programs')) || [
+    { id: 1, title: 'Digital Marketing Fundamentals', category: 'Digital Marketing', desc: 'Kuasai fondasi digital marketing dari SEO, SEM, Social Media, hingga Content Marketing.', modules: 8, participants: 1240, icon: 'fa-bullhorn', color: '#3b82f6' },
+    { id: 2, title: 'Business Strategy & Analytics', category: 'Bisnis & Strategi', desc: 'Strategi bisnis modern berbasis data analytics untuk pengambilan keputusan yang tepat.', modules: 10, participants: 890, icon: 'fa-chart-line', color: '#8b5cf6' },
+    { id: 3, title: 'UI/UX Design Professional', category: 'Desain', desc: 'Menjadi designer profesional dengan metodologi design thinking dan tools industri.', modules: 12, participants: 1560, icon: 'fa-paint-brush', color: '#f43f5e' },
+    { id: 4, title: 'Full-Stack Web Development', category: 'Teknologi & Data', desc: 'Bangun aplikasi web modern dari frontend hingga backend dengan stack terkini.', modules: 15, participants: 2100, icon: 'fa-code', color: '#10b981' },
+    { id: 5, title: 'Data Science & Machine Learning', category: 'Teknologi & Data', desc: 'Kuasai data science, machine learning, dan AI untuk kebutuhan industri.', modules: 14, participants: 1780, icon: 'fa-brain', color: '#06b6d4' },
+    { id: 6, title: 'Financial Planning & Analysis', category: 'Keuangan', desc: 'Perencanaan keuangan korporat, analisis investasi, dan manajemen risiko.', modules: 9, participants: 670, icon: 'fa-coins', color: '#f59e0b' },
+    { id: 7, title: 'Content Creation Mastery', category: 'Digital Marketing', desc: 'Strategi konten yang engaging untuk brand building dan konversi bisnis.', modules: 7, participants: 1420, icon: 'fa-pen-fancy', color: '#ec4899' },
+    { id: 8, title: 'Entrepreneurship & Startup', category: 'Bisnis & Strategi', desc: 'Membangun startup dari ide hingga scaling dengan framework yang terbukti.', modules: 11, participants: 950, icon: 'fa-rocket', color: '#ef4444' },
+  ],
+  products: JSON.parse(localStorage.getItem('ap_products')) || [
+    { id: 1, name: 'Business Plan Template Pack', category: 'Template', desc: '50+ template business plan profesional', price: 149000, oldPrice: 299000, sold: 342, icon: 'fa-file-alt' },
+    { id: 2, name: 'Social Media Kit Pro', category: 'Design Asset', desc: '1000+ template sosial media siap pakai', price: 199000, oldPrice: 399000, sold: 567, icon: 'fa-images' },
+    { id: 3, name: 'E-Book: Digital Marketing 2026', category: 'E-Book', desc: 'Panduan lengkap digital marketing terkini', price: 79000, oldPrice: 149000, sold: 1203, icon: 'fa-book' },
+    { id: 4, name: 'Accounting Software Lite', category: 'Software', desc: 'Software akuntansi untuk UMKM', price: 499000, oldPrice: 999000, sold: 189, icon: 'fa-calculator' },
+    { id: 5, name: 'UI Kit - Enterprise Dashboard', category: 'Design Asset', desc: 'Komponen UI untuk dashboard modern', price: 249000, oldPrice: 499000, sold: 421, icon: 'fa-layer-group' },
+    { id: 6, name: 'SEO Tools & Analyzer', category: 'Software', desc: 'Tools analisis SEO lengkap', price: 349000, oldPrice: 699000, sold: 276, icon: 'fa-search' },
+  ],
+  users: JSON.parse(localStorage.getItem('ap_users')) || [],
+  currentUser: JSON.parse(localStorage.getItem('ap_currentUser')) || null,
+  myModules: JSON.parse(localStorage.getItem('ap_myModules')) || [],
+  certificates: JSON.parse(localStorage.getItem('ap_certs')) || [],
 };
 
-let supabaseClient = null; let currentUser = null; let currentAdmin = null; let modulesData = []; let productsData = []; let certTemplate = null; let currentModule = null; let currentVideoIndex = 0; let quizAnswers = {}; let quizScore = 0; let videoFieldCounter = 0; let ebookFieldCounter = 0; let quizFieldCounter = 0; let stageFieldCounter = 0;
-let selectedCertColors = { bg: '#ffffff', border: '#1e293b', text: '#334155', name: '#0f172a' }; // Corporate defaults
-
-function getSupabase() {
-  if (!supabaseClient) { try { if (typeof window.supabase !== 'undefined' && CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY) supabaseClient = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY); } catch (e) { console.warn('Supabase init failed'); } }
-  return supabaseClient;
-}
-try { if (typeof emailjs !== 'undefined' && CONFIG.EMAILJS_PUBLIC_KEY) emailjs.init({ publicKey: CONFIG.EMAILJS_PUBLIC_KEY }); } catch (e) {}
-
-function showToast(message, type = 'success') {
-  const container = document.getElementById('toastContainer');
-  if (!container) return;
-  const colors = { success: 'border-emerald-500 bg-emerald-900/90 text-emerald-100', error: 'border-red-500 bg-red-900/90 text-red-100', info: 'border-blue-500 bg-blue-900/90 text-blue-100' };
-  const icons = { success: 'check-circle text-emerald-400', error: 'exclamation-circle text-red-400', info: 'info-circle text-blue-400' };
-  const toast = document.createElement('div');
-  toast.className = `toast rounded-lg p-4 border shadow-xl max-w-sm flex items-center gap-3 backdrop-blur-md ${colors[type] || colors.info}`;
-  toast.innerHTML = `<i class="fas fa-${icons[type] || 'info-circle'} text-lg"></i><span class="font-medium text-sm">${message}</span>`;
-  container.appendChild(toast);
-  setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(120%)'; setTimeout(() => toast.remove(), 400); }, 4000);
+function saveDB() {
+  localStorage.setItem('ap_programs', JSON.stringify(DB.programs));
+  localStorage.setItem('ap_products', JSON.stringify(DB.products));
+  localStorage.setItem('ap_users', JSON.stringify(DB.users));
+  localStorage.setItem('ap_currentUser', JSON.stringify(DB.currentUser));
+  localStorage.setItem('ap_myModules', JSON.stringify(DB.myModules));
+  localStorage.setItem('ap_certs', JSON.stringify(DB.certificates));
 }
 
-function shareToWhatsApp(moduleId) {
-  const module = modulesData.find(m => m.id === moduleId);
-  if (!module) return;
-  const websiteUrl = window.location.href.split('#')[0]; 
-  const message = `📈 *Akselerasi Pertumbuhan Bisnis Anda!*\n\n` +
-                  `Rekomendasi program pelatihan profesional: *"${module.judul}"*.\n\n` +
-                  `📌 *Tinjauan Program:*\n${module.deskripsi}\n\n` +
-                  `✅ Kurikulum Berstandar Industri\n✅ Sertifikasi Kompetensi Resmi\n✅ Akses ke Aset Digital\n\n` +
-                  `🔗 *Registrasi Program:*\n${websiteUrl}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+// ============ NAVIGATION ============
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('userDashboard').classList.remove('active');
+  document.getElementById('adminDashboard').classList.remove('active');
+  document.getElementById('publicNav').style.display = 'block';
+  window.scrollTo(0, 0);
+  
+  if (page === 'catalog') renderCatalog();
+  if (page === 'marketplace') renderMarketplace();
 }
 
-function hideAllSections() {
-  ['landingSection', 'dashboardSection', 'learningSection', 'adminLoginSection', 'adminDashboardSection', 
-   'registerModal', 'moduleModal', 'productModal', 'certTemplateModal', 'trainingsSection', 'marketplaceSection'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.classList.add('hidden-section');
+function showDashTab(tabId, el) {
+  document.querySelectorAll('#userDashboard .tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.querySelectorAll('#userDashboard .sidebar-nav a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  
+  const titles = {
+    dashOverview: 'Dashboard Overview',
+    dashModules: 'Modul Saya',
+    dashCatalog: 'Eksplorasi Modul',
+    dashAssets: 'Aset Digital',
+    dashCerts: 'Sertifikasi',
+    dashProfile: 'Pengaturan Profil'
+  };
+  document.getElementById('dashTitle').textContent = titles[tabId] || 'Dashboard';
+  
+  if (tabId === 'dashCatalog') renderDashCatalog();
+  if (tabId === 'dashAssets') renderDashAssets();
+  if (tabId === 'dashModules') renderMyModules();
+  if (tabId === 'dashCerts') renderCerts();
+}
+
+function showAdminTab(tabId, el) {
+  document.querySelectorAll('#adminDashboard .tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.querySelectorAll('#adminDashboard .sidebar-nav a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  
+  const titles = {
+    adminOverview: 'Admin Overview',
+    adminModules: 'Manajemen Modul',
+    adminProducts: 'Produk Digital',
+    adminUsers: 'Data Peserta',
+    adminCerts: 'Template Sertifikat'
+  };
+  document.getElementById('adminTitle').textContent = titles[tabId] || 'Admin';
+  
+  if (tabId === 'adminModules') renderAdminModules();
+  if (tabId === 'adminProducts') renderAdminProducts();
+  if (tabId === 'adminUsers') renderAdminUsers();
+  if (tabId === 'adminOverview') updateAdminStats();
+}
+
+// ============ MODAL ============
+function showModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   });
+});
+
+// ============ TOAST ============
+function showToast(msg, type = 'info') {
+  const colors = {
+    success: { bg: 'rgba(16,185,129,0.1)', color: 'var(--emerald)', icon: 'fa-check-circle' },
+    error: { bg: 'rgba(244,63,94,0.1)', color: 'var(--rose)', icon: 'fa-exclamation-circle' },
+    info: { bg: 'rgba(59,130,246,0.1)', color: 'var(--accent)', icon: 'fa-info-circle' },
+  };
+  const c = colors[type] || colors.info;
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <div class="toast-icon" style="background:${c.bg};color:${c.color};"><i class="fas ${c.icon}"></i></div>
+    <div class="toast-msg">${msg}</div>
+  `;
+  document.getElementById('toastContainer').appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3500);
 }
 
-function showLanding() { hideAllSections(); const el = document.getElementById('landingSection'); if (el) el.classList.remove('hidden-section'); loadStats(); renderFeaturedTrainings(); window.scrollTo(0, 0); }
-function showRegisterModal() { const el = document.getElementById('registerModal'); if (el) el.classList.remove('hidden-section'); }
-function closeRegisterModal() { const el = document.getElementById('registerModal'); if (el) el.classList.add('hidden-section'); }
-
-async function loadModules() { const supabase = getSupabase(); if (!supabase) return getLocalModules(); try { const { data, error } = await supabase.from('modules').select('*').order('urutan', { ascending: true }); if (error) return getLocalModules(); modulesData = data || []; return modulesData; } catch (err) { return getLocalModules(); } }
-async function loadProducts() { const supabase = getSupabase(); if (!supabase) return getLocalProducts(); try { const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false }); if (error) return getLocalProducts(); productsData = data || []; return productsData; } catch (err) { return getLocalProducts(); } }
-async function loadPeserta() { const supabase = getSupabase(); if (!supabase) return []; try { const { data, error } = await supabase.from('peserta_pelatihan').select('*').order('tanggal_daftar', { ascending: false }); if (error) return []; return data || []; } catch (err) { return []; } }
-async function loadCertTemplate() { const supabase = getSupabase(); if (!supabase) return getLocalCertTemplate(); try { const { data, error } = await supabase.from('certificate_templates').select('*').limit(1).single(); if (error) return getLocalCertTemplate(); certTemplate = data; return data; } catch (err) { return getLocalCertTemplate(); } }
-
-async function loadStats() {
-  try {
-    const [peserta, modules, products] = await Promise.all([loadPeserta(), loadModules(), loadProducts()]);
-    const statAlumni = document.getElementById('statAlumni'); const statTrainings = document.getElementById('statTrainings'); const statProducts = document.getElementById('statProducts');
-    if (statAlumni) statAlumni.textContent = peserta.length; if (statTrainings) statTrainings.textContent = modules.length; if (statProducts) statProducts.textContent = products.length;
-  } catch (err) {}
+// ============ AUTH ============
+function switchLoginTab(type, el) {
+  document.querySelectorAll('#loginModal .tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('loginUserForm').classList.toggle('hidden', type !== 'user');
+  document.getElementById('loginAdminForm').classList.toggle('hidden', type !== 'admin');
 }
 
-function getLocalModules() { const saved = localStorage.getItem('localModules'); if (saved) { try { modulesData = JSON.parse(saved); return modulesData; } catch (e) {} } const defaults = [ { id: 1, judul: 'Strategi Pemasaran Digital B2B', kategori: 'Pemasaran Digital', deskripsi: 'Penguasaan instrumen pemasaran untuk konversi B2B skala besar.', videos: [{ title: 'Pengantar', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }], ebooks: [{ title: 'Dokumen Strategi', url: '#' }], stages: [{ title: 'Analisa Pasar', desc: 'Pemetaan audiens', icon: 'chart-line' }], icon: 'briefcase', color: 'from-blue-600 to-indigo-700', urutan: 1, quiz: [{ question: 'Metrik B2B terpenting?', options: ['LTV', 'Likes', 'Views', 'Followers'], correct: 0 }] } ]; modulesData = defaults; return defaults; }
-function getLocalProducts() { const saved = localStorage.getItem('localProducts'); if (saved) { try { productsData = JSON.parse(saved); return productsData; } catch (e) {} } const defaults = [ { id: 1, name: 'SOP Manajemen Proyek Korporat', category: 'Dokumen Legal', description: 'Template operasional terstandarisasi', price: 750000, originalPrice: 1250000, image: '', url: '#', seller: 'AcademyPro', sold: 420, rating: 4.9 } ]; productsData = defaults; return defaults; }
-function getLocalCertTemplate() { const saved = localStorage.getItem('localCertTemplate'); if (saved) { try { certTemplate = JSON.parse(saved); return certTemplate; } catch (e) {} } const defaultTemplate = { id: 1, header: 'ACADEMYPRO CORPORATE CERTIFIED', mainTitle: 'SERTIFIKAT KOMPETENSI', intro: 'Dianugerahkan secara resmi kepada:', description: 'Atas keberhasilan menyelesaikan standar kompetensi:', trainingName: 'Digital Marketing & Business Mastery', predicate: 'Predikat: PROFESSIONAL DISTINCTION', signLeft: 'Lead Assessor', signRight: 'Chief Executive Officer', city: 'Jakarta Selatan', bgColor: '#ffffff', borderColor: '#1e293b', textColor: '#334155', nameColor: '#0f172a' }; certTemplate = defaultTemplate; return defaultTemplate; }
-function saveLocalData() { try { localStorage.setItem('localModules', JSON.stringify(modulesData)); localStorage.setItem('localProducts', JSON.stringify(productsData)); localStorage.setItem('localCertTemplate', JSON.stringify(certTemplate)); } catch (e) {} }
-
-function extractVideoId(url) { if (!url || typeof url !== 'string') return null; try { if (url.includes('youtube.com') || url.includes('youtu.be')) { const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/); return match ? `https://www.youtube.com/embed/${match[1]}` : null; } else if (url.includes('vimeo.com')) { const match = url.match(/vimeo\.com\/(\d+)/); return match ? `https://player.vimeo.com/video/${match[1]}` : null; } } catch (e) {} return url; }
-function formatRupiah(angka) { return 'Rp ' + (angka || 0).toLocaleString('id-ID'); }
-
-async function renderFeaturedTrainings() {
-  const container = document.getElementById('featuredTrainings'); if (!container) return; const modules = await loadModules();
-  container.innerHTML = modules.slice(0, 3).map(m => `
-    <div class="glass rounded-xl p-6 glass-hover border border-slate-700 flex flex-col h-full">
-      <div class="w-12 h-12 rounded-lg bg-gradient-to-br ${m.color || 'from-blue-600 to-indigo-700'} flex items-center justify-center mb-4 text-white shadow-lg">
-        <i class="fas fa-${m.icon || 'briefcase'} text-xl"></i>
-      </div>
-      <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">${m.kategori || 'Korporat'}</span>
-      <h4 class="font-bold text-lg text-white mb-2 leading-tight">${m.judul || ''}</h4>
-      <p class="text-sm text-slate-400 mb-6 line-clamp-2 flex-grow">${m.deskripsi || ''}</p>
-      <div class="grid grid-cols-2 gap-2 mt-auto">
-        <button onclick="enrollTraining(${m.id})" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold py-2.5 rounded border border-slate-600 transition">Akses Modul</button>
-        <button onclick="shareToWhatsApp(${m.id})" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 rounded transition">Bagikan <i class="fas fa-share-alt ml-1"></i></button>
-      </div>
-    </div>
-  `).join('');
-}
-
-async function showTrainings() { hideAllSections(); const el = document.getElementById('trainingsSection'); if (el) el.classList.remove('hidden-section'); await renderTrainingsList(); window.scrollTo(0, 0); }
-async function renderTrainingsList(filterCategory = null) {
-  const container = document.getElementById('trainingsListContainer'); const filterContainer = document.getElementById('categoryFilter'); if (!container) return;
-  const modules = await loadModules(); const categories = [...new Set(modules.map(m => m.kategori).filter(Boolean))];
-  if (filterContainer) {
-    filterContainer.innerHTML = `<button onclick="renderTrainingsList(null)" class="px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wider border ${!filterCategory ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400'} transition">Keseluruhan</button>` +
-      categories.map(c => `<button onclick="renderTrainingsList('${c}')" class="px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wider border ${filterCategory === c ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400'} transition">${c}</button>`).join('');
+function handleRegister() {
+  const name = document.getElementById('regName')?.value || document.getElementById('regName2')?.value;
+  const phone = document.getElementById('regPhone')?.value || document.getElementById('regPhone2')?.value;
+  const email = document.getElementById('regEmail')?.value || document.getElementById('regEmail2')?.value;
+  const password = document.getElementById('regPassword')?.value || 'password';
+  
+  if (!name || !phone || !email) {
+    showToast('Mohon lengkapi semua field', 'error');
+    return;
   }
-  const filtered = filterCategory ? modules.filter(m => m.kategori === filterCategory) : modules;
-  if (filtered.length === 0) { container.innerHTML = '<div class="col-span-3 text-center py-12 text-slate-500 text-sm">Tidak ada data ditemukan</div>'; return; }
-  container.innerHTML = filtered.map(m => `
-    <div class="glass rounded-xl p-6 glass-hover border border-slate-700 flex flex-col h-full">
-      <div class="w-12 h-12 rounded-lg bg-gradient-to-br ${m.color || 'from-blue-600 to-indigo-700'} flex items-center justify-center mb-4 text-white">
-        <i class="fas fa-${m.icon || 'briefcase'} text-xl"></i>
-      </div>
-      <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">${m.kategori || 'Umum'}</span>
-      <h4 class="font-bold text-lg text-white mb-2 leading-tight">${m.judul || ''}</h4>
-      <p class="text-sm text-slate-400 mb-6 line-clamp-3 flex-grow">${m.deskripsi || ''}</p>
-      <div class="flex gap-2 mt-auto">
-        <button onclick="enrollTraining(${m.id})" class="btn-primary flex-1 py-2.5 rounded font-semibold text-xs text-center">Registrasi Kelas</button>
-      </div>
-    </div>
-  `).join('');
+  
+  const user = { id: Date.now(), name, phone, email, password, joinDate: new Date().toISOString(), progress: 0 };
+  DB.users.push(user);
+  DB.currentUser = user;
+  saveDB();
+  
+  showToast('Registrasi berhasil! Selamat datang, ' + name, 'success');
+  enterDashboard('user');
 }
-function enrollTraining(id) { if (!currentUser) { showRegisterModal(); return; } openModule(id); }
 
-async function showMarketplace() { hideAllSections(); const el = document.getElementById('marketplaceSection'); if (el) el.classList.remove('hidden-section'); await renderMarketplaceList(); window.scrollTo(0, 0); }
-async function renderMarketplaceList(filterCategory = null) {
-  const container = document.getElementById('marketplaceListContainer'); const filterContainer = document.getElementById('productCategoryFilter'); if (!container) return;
-  const products = await loadProducts(); const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
-  if (filterContainer) {
-    filterContainer.innerHTML = `<button onclick="renderMarketplaceList(null)" class="px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wider border ${!filterCategory ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400'} transition">Semua Kategori</button>` +
-      categories.map(c => `<button onclick="renderMarketplaceList('${c}')" class="px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wider border ${filterCategory === c ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400'} transition">${c}</button>`).join('');
+function handleLogin(type) {
+  if (type === 'admin') {
+    const email = document.getElementById('adminEmail').value;
+    const pass = document.getElementById('adminPassword').value;
+    if (email === 'admin@academypro.com' && pass === 'admin123') {
+      closeModal('loginModal');
+      showToast('Login admin berhasil', 'success');
+      enterDashboard('admin');
+    } else {
+      showToast('Kredensial admin: admin@academypro.com / admin123', 'info');
+    }
+  } else {
+    const email = document.getElementById('loginEmail').value;
+    const pass = document.getElementById('loginPassword').value;
+    const user = DB.users.find(u => u.email === email && u.password === pass);
+    if (user) {
+      DB.currentUser = user;
+      saveDB();
+      closeModal('loginModal');
+      showToast('Login berhasil! Selamat datang kembali', 'success');
+      enterDashboard('user');
+    } else {
+      // Auto-login for demo
+      const demoUser = { id: 1, name: 'Demo User', phone: '08123456789', email: email || 'demo@academypro.com', joinDate: new Date().toISOString() };
+      DB.currentUser = demoUser;
+      if (!DB.users.find(u => u.email === demoUser.email)) DB.users.push(demoUser);
+      saveDB();
+      closeModal('loginModal');
+      showToast('Login berhasil!', 'success');
+      enterDashboard('user');
+    }
   }
-  const filtered = filterCategory ? products.filter(p => p.category === filterCategory) : products;
-  if (filtered.length === 0) { container.innerHTML = '<div class="col-span-4 text-center py-12 text-slate-500 text-sm">Inventaris kosong</div>'; return; }
-  container.innerHTML = filtered.map(p => {
-    const discount = p.originalPrice && p.originalPrice > p.price ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
-    return `
-    <div class="glass rounded-xl p-5 border border-slate-700 glass-hover flex flex-col h-full">
-      <div class="aspect-video bg-slate-800 rounded-lg mb-4 flex items-center justify-center border border-slate-700">
-        <i class="fas fa-${getProductIcon(p.category)} text-3xl text-indigo-400"></i>
-      </div>
-      <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 mb-1">${p.category || 'Aset'}</span>
-      <h4 class="font-semibold text-sm text-white mb-2 line-clamp-2 flex-grow">${p.name || ''}</h4>
-      <div class="flex items-center justify-between mb-4">
-        <span class="font-bold text-emerald-400 text-base">${formatRupiah(p.price)}</span>
-        ${discount > 0 ? `<span class="text-[10px] font-bold bg-red-900/50 text-red-400 px-1.5 py-0.5 rounded border border-red-800">Hemat ${discount}%</span>` : ''}
-      </div>
-      <button onclick="buyProduct(${p.id})" class="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-2.5 rounded font-semibold text-xs mt-auto transition">Akuisisi Aset</button>
-    </div>`;
-  }).join('');
-}
-function getProductIcon(category) { const icons = { 'Sistem & Template': 'sitemap', 'Dokumen Legal': 'file-contract', 'Software Bisnis': 'code', 'Laporan Riset': 'chart-pie' }; return icons[category] || 'box'; }
-function buyProduct(id) { const product = productsData.find(p => p.id === id); if (!product) return; if (!currentUser) { showRegisterModal(); showToast('Otorisasi diperlukan. Silakan login.', 'info'); return; } showToast(`Proses akuisisi ${product.name} (Simulasi)`, 'success'); }
-
-function switchDashboardTab(tabName) {
-  document.querySelectorAll('.dashboard-tab').forEach(el => el.classList.add('hidden-section'));
-  document.querySelectorAll('#dashboardSection .tab-btn').forEach(btn => btn.classList.remove('active', 'border-b-2', 'border-blue-500', 'text-white'));
-  const tabEl = document.getElementById(`tab-${tabName}`); if (tabEl) tabEl.classList.remove('hidden-section');
-  const activeBtn = document.querySelector(`#dashboardSection .tab-btn[data-tab="${tabName}"]`); if (activeBtn) activeBtn.classList.add('active', 'border-b-2', 'border-blue-500', 'text-white');
-  if (tabName === 'all-trainings') renderAllTrainings(); if (tabName === 'marketplace') renderDashboardMarketplace(); if (tabName === 'my-certificates') renderMyCertificates();
 }
 
-async function renderAllTrainings() {
-  const container = document.getElementById('allTrainingsContainer'); if (!container) return; const modules = await loadModules();
-  container.innerHTML = modules.map(m => `
-    <div class="glass rounded-xl p-5 border border-slate-700 flex flex-col h-full">
-      <h4 class="font-bold text-base text-white mb-1">${m.judul || ''}</h4>
-      <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-3 block">${m.kategori || 'Umum'}</span>
-      <p class="text-xs text-slate-400 mb-4 line-clamp-2 flex-grow">${m.deskripsi || ''}</p>
-      <button onclick="enrollTraining(${m.id})" class="btn-primary py-2 rounded text-xs font-semibold w-full">Akses Modul</button>
-    </div>
-  `).join('');
+function handleLogout() {
+  DB.currentUser = null;
+  saveDB();
+  document.getElementById('userDashboard').classList.remove('active');
+  document.getElementById('adminDashboard').classList.remove('active');
+  document.getElementById('publicNav').style.display = 'block';
+  showPage('home');
+  showToast('Anda telah keluar', 'info');
 }
-async function renderDashboardMarketplace() {
-  const container = document.getElementById('marketplaceContainer'); if (!container) return; const products = await loadProducts();
-  container.innerHTML = products.map(p => `
-    <div class="glass rounded-xl p-4 border border-slate-700 flex flex-col h-full">
-      <h4 class="font-semibold text-sm text-white mb-1 line-clamp-2">${p.name || ''}</h4>
-      <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-2 block">${formatRupiah(p.price)}</span>
-      <button onclick="buyProduct(${p.id})" class="bg-slate-700 hover:bg-slate-600 text-white w-full py-2 rounded text-xs font-semibold mt-auto transition">Beli</button>
-    </div>`).join('');
+
+function enterDashboard(type) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('publicNav').style.display = 'none';
+  
+  if (type === 'user') {
+    document.getElementById('userDashboard').classList.add('active');
+    document.getElementById('userName').textContent = DB.currentUser.name;
+    document.getElementById('userAvatar').textContent = DB.currentUser.name.charAt(0).toUpperCase();
+    document.getElementById('profileName').value = DB.currentUser.name;
+    document.getElementById('profileEmail').value = DB.currentUser.email;
+    document.getElementById('profilePhone').value = DB.currentUser.phone;
+    updateUserStats();
+  } else {
+    document.getElementById('adminDashboard').classList.add('active');
+    updateAdminStats();
+  }
 }
-function renderMyCertificates() {
-  const container = document.getElementById('myCertificatesContainer'); if (!container) return;
-  const myCerts = JSON.parse(localStorage.getItem('myCertificates') || '[]');
-  if (myCerts.length === 0) { container.innerHTML = '<div class="col-span-2 text-center py-8 text-slate-500 text-sm">Tidak ada sertifikat teregistrasi.</div>'; return; }
-  container.innerHTML = myCerts.map(cert => `
-    <div class="glass rounded-xl p-5 border border-slate-700 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <i class="fas fa-file-signature text-3xl text-emerald-500"></i>
-        <div>
-          <h4 class="font-bold text-sm text-white">${cert.trainingName || 'Sertifikat'}</h4>
-          <p class="text-[10px] text-slate-400 font-mono mt-1">ID: ${cert.certId || '-'}</p>
+
+// ============ RENDER FUNCTIONS ============
+function renderProgramCard(p) {
+  return `
+    <div class="program-card" onclick="openModuleDetail(${p.id})">
+      <div class="program-thumb" style="background:linear-gradient(135deg, ${p.color}, ${p.color}dd);">
+        <i class="fas ${p.icon}"></i>
+        <span class="badge-overlay">${p.category}</span>
+      </div>
+      <div class="program-body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="program-meta">
+          <div class="meta-item"><i class="fas fa-book"></i> ${p.modules} Modul</div>
+          <div class="meta-item"><i class="fas fa-users"></i> ${p.participants.toLocaleString()}</div>
         </div>
       </div>
-      <button onclick="downloadCertificate('${cert.certId}')" class="bg-slate-800 border border-slate-600 hover:bg-slate-700 px-4 py-2 rounded text-xs font-semibold text-white transition">Unduh PDF</button>
     </div>
-  `).join('');
-}
-function downloadCertificate(certId) { showToast('Memproses unduhan dokumen...', 'info'); }
-
-async function renderModules() {
-  const container = document.getElementById('modulesContainer'); if (!container) return;
-  const completed = JSON.parse(localStorage.getItem('completedModules') || '[]'); const scores = JSON.parse(localStorage.getItem('quizScores') || '{}');
-  try {
-    const modules = await loadModules(); const totalEl = document.getElementById('totalModules'); if (totalEl) totalEl.textContent = modules.length;
-    if (modules.length === 0) { container.innerHTML = '<div class="glass rounded-xl p-6 text-center col-span-2 text-slate-500 text-sm">Tidak ada silabus aktif</div>'; return; }
-    container.innerHTML = modules.map(m => {
-      const isDone = completed.includes(m.id); const score = scores[m.id] || 0;
-      return `
-        <div class="glass rounded-xl p-6 border border-slate-700 hover:border-blue-500/50 transition cursor-pointer flex flex-col" onclick="openModule(${m.id})">
-          <div class="flex justify-between items-start mb-4">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400">${m.kategori || 'Umum'}</span>
-            ${isDone ? '<span class="bg-emerald-900/50 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">SELESAI</span>' : '<span class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-[10px] font-bold border border-slate-700">TERTUNDA</span>'}
-          </div>
-          <h4 class="font-bold text-lg text-white mb-2">${m.judul || ''}</h4>
-          ${score > 0 ? `<p class="text-[11px] font-semibold text-indigo-300 mb-4">Skor Evaluasi: ${score}/100</p>` : '<div class="mb-4"></div>'}
-          <button class="${isDone ? 'bg-slate-800 border-slate-600 hover:bg-slate-700 text-white' : 'btn-primary'} w-full py-2.5 rounded text-xs font-semibold transition mt-auto">${isDone ? 'Tinjau Materi' : 'Lanjutkan Pembelajaran'}</button>
-        </div>`;
-    }).join('');
-    updateProgress();
-  } catch (err) {}
+  `;
 }
 
-async function openModule(id) {
-  const module = modulesData.find(m => m.id === id); if (!module) { showToast('Data modul korup', 'error'); return; }
-  currentModule = module; currentVideoIndex = 0; hideAllSections();
-  const el = document.getElementById('learningSection'); if (el) el.classList.remove('hidden-section');
-  const titleEl = document.getElementById('moduleTitle'); const descEl = document.getElementById('moduleDescription');
-  if (titleEl) titleEl.textContent = module.judul || ''; if (descEl) descEl.textContent = module.deskripsi || '';
-  renderStages(module); renderVideos(module); renderEbooks(module); renderQuiz(module); window.scrollTo(0, 0);
+function renderHomePrograms() {
+  const grid = document.getElementById('homePrograms');
+  grid.innerHTML = DB.programs.slice(0, 6).map(renderProgramCard).join('');
 }
-function renderStages(module) {
-  const container = document.getElementById('stagesContainer'); if (!container) return;
-  if (!module.stages || module.stages.length === 0) { container.innerHTML = '<p class="text-sm text-slate-500">Tidak ada struktur hierarki</p>'; return; }
-  container.innerHTML = module.stages.map((s, idx) => `
-    <div class="step-item">
-      <div class="step-icon bg-slate-800 text-blue-400 border-slate-700">${idx + 1}</div>
-      <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-        <h4 class="font-bold text-white text-sm mb-1">${s.title || 'Sesi ' + (idx + 1)}</h4>
-        <p class="text-xs text-slate-400">${s.desc || ''}</p>
+
+function renderCatalog(filter = 'all') {
+  const grid = document.getElementById('catalogPrograms');
+  const filtered = filter === 'all' ? DB.programs : DB.programs.filter(p => p.category === filter);
+  grid.innerHTML = filtered.map(renderProgramCard).join('');
+}
+
+function filterPrograms(cat, el) {
+  document.querySelectorAll('#page-catalog .tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderCatalog(cat);
+}
+
+function renderMarketplace() {
+  const grid = document.getElementById('marketplaceGrid');
+  grid.innerHTML = DB.products.map(p => `
+    <div class="product-card">
+      <div class="product-img"><i class="fas ${p.icon}"></i></div>
+      <div class="product-body">
+        <h4>${p.name}</h4>
+        <div class="product-cat">${p.category}</div>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">${p.desc}</p>
+        <div class="product-pricing">
+          <span class="price">Rp ${p.price.toLocaleString()}</span>
+          ${p.oldPrice ? `<span class="price-old">Rp ${p.oldPrice.toLocaleString()}</span>` : ''}
+        </div>
+        <button class="btn btn-primary btn-sm" style="width:100%;" onclick="showToast('Produk ditambahkan ke keranjang', 'success')">
+          <i class="fas fa-shopping-cart"></i> Beli Sekarang
+        </button>
       </div>
     </div>
   `).join('');
 }
-function renderVideos(module) {
-  const thumbnailsContainer = document.getElementById('videoThumbnails'); const videoContainer = document.getElementById('activeVideoContainer');
-  if (!thumbnailsContainer || !videoContainer) return;
-  if (!module.videos || module.videos.length === 0) { thumbnailsContainer.innerHTML = ''; videoContainer.innerHTML = '<div class="p-8 text-center text-slate-500 text-sm border border-slate-700 rounded-lg">Materi visual tidak tersedia</div>'; return; }
-  thumbnailsContainer.innerHTML = module.videos.map((v, idx) => `
-    <div class="video-item p-3 rounded-lg bg-slate-800/80 border border-slate-700 ${idx === 0 ? 'border-blue-500 bg-blue-900/20' : ''}" onclick="playVideo(${idx})">
-      <div class="text-xs font-semibold text-slate-300 truncate"><i class="fas fa-play mr-1.5 text-blue-400"></i> ${v.title || 'Bagian ' + (idx + 1)}</div>
+
+function renderDashCatalog() {
+  document.getElementById('dashCatalogGrid').innerHTML = DB.programs.map(renderProgramCard).join('');
+}
+
+function renderDashAssets() {
+  document.getElementById('dashAssetsGrid').innerHTML = DB.products.map(p => `
+    <div class="product-card">
+      <div class="product-img"><i class="fas ${p.icon}"></i></div>
+      <div class="product-body">
+        <h4>${p.name}</h4>
+        <div class="product-cat">${p.category}</div>
+        <div class="product-pricing">
+          <span class="price">Rp ${p.price.toLocaleString()}</span>
+        </div>
+        <button class="btn btn-primary btn-sm" style="width:100%;" onclick="showToast('Produk ditambahkan', 'success')">
+          <i class="fas fa-download"></i> Dapatkan
+        </button>
+      </div>
     </div>
   `).join('');
-  playVideo(0);
 }
-function playVideo(index) {
-  if (!currentModule || !currentModule.videos || !currentModule.videos[index]) return; currentVideoIndex = index;
-  const videoUrl = currentModule.videos[index].url; const embedUrl = extractVideoId(videoUrl);
-  const videoContainer = document.getElementById('activeVideoContainer'); if (!videoContainer) return;
-  if (embedUrl) videoContainer.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`; else videoContainer.innerHTML = '<div class="p-8 text-center text-slate-500 text-sm">Integritas URL invalid</div>';
-  document.querySelectorAll('.video-item').forEach((el, idx) => { if (idx === index) { el.classList.add('border-blue-500', 'bg-blue-900/20'); el.classList.remove('border-slate-700', 'bg-slate-800/80'); } else { el.classList.remove('border-blue-500', 'bg-blue-900/20'); el.classList.add('border-slate-700', 'bg-slate-800/80'); } });
+
+function renderMyModules() {
+  const tbody = document.getElementById('myModulesTable');
+  if (DB.myModules.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="text-center" style="padding:2rem;color:var(--text-muted);">Belum ada modul. Mulai eksplorasi dan enroll modul.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = DB.myModules.map((m, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td><strong>${m.title}</strong></td>
+      <td>${m.category}</td>
+      <td>
+        <div class="progress-bar" style="width:120px;"><div class="fill" style="width:${m.progress}%"></div></div>
+        <span style="font-size:0.75rem;color:var(--text-muted);">${m.progress}%</span>
+      </td>
+      <td><span class="badge ${m.progress >= 100 ? 'badge-success' : 'badge-warning'}">${m.progress >= 100 ? 'Selesai' : 'Dalam Progres'}</span></td>
+      <td>
+        ${m.progress < 100 ? `<button class="btn btn-sm btn-primary" onclick="continueModule(${m.id})"><i class="fas fa-play"></i> Lanjutkan</button>` : 
+        `<button class="btn btn-sm btn-success" onclick="viewCertificate(${m.id})"><i class="fas fa-certificate"></i> Sertifikat</button>`}
+      </td>
+    </tr>
+  `).join('');
 }
-function renderEbooks(module) {
-  const container = document.getElementById('ebooksContainer'); const section = document.getElementById('ebooksSection');
-  if (!container || !section) return; if (!module.ebooks || module.ebooks.length === 0) { section.classList.add('hidden-section'); return; }
-  section.classList.remove('hidden-section');
-  container.innerHTML = module.ebooks.map((ebook, idx) => `
-    <div class="bg-slate-800/80 p-4 rounded-lg border border-slate-700 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <i class="fas fa-file-pdf text-xl text-sky-400"></i>
-        <div class="min-w-0">
-          <h4 class="font-semibold text-white text-sm truncate">${ebook.title || 'Dokumen ' + (idx + 1)}</h4>
-          <p class="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">Format PDF Terenkripsi</p>
+
+function renderCerts() {
+  const container = document.getElementById('certList');
+  if (DB.certificates.length === 0) {
+    container.innerHTML = `<div class="text-center" style="padding:3rem;color:var(--text-muted);"><i class="fas fa-certificate" style="font-size:3rem;margin-bottom:1rem;opacity:0.3;"></i><p>Belum ada sertifikat. Selesaikan modul untuk mendapatkan sertifikat.</p></div>`;
+    return;
+  }
+  container.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">` +
+    DB.certificates.map(c => `
+      <div class="dash-card" style="cursor:pointer;" onclick="viewCertificate(${c.moduleId})">
+        <div class="dash-card-body text-center">
+          <i class="fas fa-certificate" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></i>
+          <h4 style="font-size:0.95rem;margin-bottom:0.5rem;">${c.title}</h4>
+          <p style="font-size:0.8rem;color:var(--text-muted);">Diterbitkan: ${new Date(c.date).toLocaleDateString('id-ID')}</p>
+          <button class="btn btn-sm btn-outline mt-2"><i class="fas fa-eye"></i> Lihat</button>
         </div>
       </div>
-      <a href="${ebook.url}" target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider transition">Unduh</a>
-    </div>
-  `).join('');
+    `).join('') + `</div>`;
 }
-function renderQuiz(module) {
-  const quizContainer = document.getElementById('quizContent'); const submitBtn = document.getElementById('submitQuiz');
-  if (!quizContainer || !submitBtn) return; if (!module.quiz || module.quiz.length === 0) { quizContainer.innerHTML = '<p class="text-slate-500 text-sm">Tidak ada instrumen evaluasi</p>'; submitBtn.classList.add('hidden'); return; }
+
+// ============ MODULE DETAIL ============
+function openModuleDetail(id) {
+  const p = DB.programs.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('moduleDetailTitle').textContent = p.title;
+  
+  const enrolled = DB.myModules.find(m => m.id === id);
+  
+  document.getElementById('moduleDetailBody').innerHTML = `
+    <div style="height:180px;border-radius:12px;background:linear-gradient(135deg,${p.color},${p.color}dd);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+      <i class="fas ${p.icon}" style="font-size:4rem;color:rgba(255,255,255,0.3);"></i>
+    </div>
+    <span class="badge badge-info" style="margin-bottom:1rem;">${p.category}</span>
+    <h3 style="font-size:1.25rem;margin-bottom:0.75rem;">${p.title}</h3>
+    <p style="color:var(--text-secondary);margin-bottom:1.5rem;">${p.desc}</p>
+    <div style="display:flex;gap:2rem;margin-bottom:1.5rem;">
+      <div><div style="font-size:1.5rem;font-weight:800;">${p.modules}</div><div style="font-size:0.8rem;color:var(--text-muted);">Modul</div></div>
+      <div><div style="font-size:1.5rem;font-weight:800;">${p.participants.toLocaleString()}</div><div style="font-size:0.8rem;color:var(--text-muted);">Peserta</div></div>
+      <div><div style="font-size:1.5rem;font-weight:800;">4.9★</div><div style="font-size:0.8rem;color:var(--text-muted);">Rating</div></div>
+    </div>
+    <h4 style="margin-bottom:1rem;font-size:0.95rem;">Kurikulum Pembelajaran</h4>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;">
+      ${Array.from({length: Math.min(p.modules, 5)}, (_, i) => `
+        <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:var(--surface-alt);">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;">${i+1}</div>
+          <div style="flex:1;font-size:0.85rem;font-weight:500;">Modul ${i+1}: ${['Pendahuluan', 'Konsep Dasar', 'Implementasi', 'Studi Kasus', 'Evaluasi'][i] || 'Materi Lanjutan'}</div>
+          <i class="fas fa-play-circle" style="color:var(--accent);"></i>
+        </div>
+      `).join('')}
+      ${p.modules > 5 ? `<div style="text-align:center;font-size:0.8rem;color:var(--text-muted);padding:8px;">+ ${p.modules - 5} modul lainnya</div>` : ''}
+    </div>
+    ${enrolled ? 
+      `<button class="btn btn-primary btn-lg" style="width:100%;" onclick="continueModule(${id})"><i class="fas fa-play"></i> Lanjutkan Belajar (${enrolled.progress}%)</button>` :
+      `<button class="btn btn-primary btn-lg" style="width:100%;" onclick="enrollModule(${id})"><i class="fas fa-plus"></i> Enroll Sekarang - GRATIS</button>`
+    }
+  `;
+  showModal('moduleDetailModal');
+}
+
+function enrollModule(id) {
+  const p = DB.programs.find(x => x.id === id);
+  if (!p) return;
+  DB.myModules.push({ id: p.id, title: p.title, category: p.category, progress: 0 });
+  saveDB();
+  closeModal('moduleDetailModal');
+  showToast('Berhasil enroll: ' + p.title, 'success');
+  updateUserStats();
+}
+
+function continueModule(id) {
+  closeModal('moduleDetailModal');
+  // Simulate progress
+  const m = DB.myModules.find(x => x.id === id);
+  if (!m) return;
+  if (m.progress < 100) {
+    m.progress = Math.min(100, m.progress + 25);
+    saveDB();
+    if (m.progress >= 100) {
+      // Offer quiz
+      openQuiz(id);
+    } else {
+      showToast('Progress diperbarui: ' + m.progress + '%', 'success');
+      updateUserStats();
+      renderMyModules();
+    }
+  }
+}
+
+// ============ QUIZ ============
+let currentQuizModule = null;
+let quizAnswers = {};
+
+function openQuiz(moduleId) {
+  currentQuizModule = moduleId;
   quizAnswers = {};
-  quizContainer.innerHTML = module.quiz.map((q, idx) => `
-    <div class="mb-6 p-4 rounded-lg border border-slate-700 bg-slate-800/30" data-quiz-idx="${idx}">
-      <p class="font-semibold text-white mb-4 text-sm">${idx + 1}. ${q.question || ''}</p>
-      <div class="space-y-2">
-        ${(q.options || []).map((opt, optIdx) => `
-          <div class="quiz-option p-3 rounded border border-slate-600 bg-slate-800 cursor-pointer flex items-center gap-3 hover:border-blue-400/50 transition" onclick="selectQuizAnswer(${idx}, ${optIdx})">
-            <div class="w-5 h-5 rounded-sm border border-slate-500 flex items-center justify-center text-[10px] font-bold text-slate-300 option-circle">${String.fromCharCode(65 + optIdx)}</div>
-            <span class="text-sm text-slate-300">${opt}</span>
+  const questions = [
+    { q: 'Apa prinsip utama dalam digital marketing modern?', opts: ['Mengabaikan data analitik', 'Berfokus pada customer-centric approach', 'Hanya menggunakan iklan berbayar', 'Tidak perlu konten berkualitas'] },
+    { q: 'Metode mana yang paling efektif untuk mengukur ROI kampanye?', opts: ['Mengandalkan intuisi', 'Tracking dan analytics berbasis data', 'Menghitung manual saja', 'Tidak perlu mengukur'] },
+    { q: 'Komponen kunci dalam strategi konten yang successful?', opts: ['Konsistensi dan relevansi', 'Jumlah konten sebanyak mungkin', 'Hanya konten viral', 'Mengabaikan audiens target'] },
+  ];
+  
+  document.getElementById('quizContainer').innerHTML = questions.map((q, i) => `
+    <div class="quiz-question">
+      <div class="q-number">Pertanyaan ${i + 1} dari ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((opt, j) => `
+          <div class="quiz-option" onclick="selectQuizOption(${i}, ${j}, this)">
+            <div class="radio"></div>
+            <span>${opt}</span>
           </div>
         `).join('')}
       </div>
     </div>
   `).join('');
-  submitBtn.classList.remove('hidden');
+  showModal('quizModal');
 }
-function selectQuizAnswer(questionIdx, answerIdx) {
-  quizAnswers[questionIdx] = answerIdx; const questionDiv = document.querySelector(`[data-quiz-idx="${questionIdx}"]`); if (!questionDiv) return;
-  const options = questionDiv.querySelectorAll('.quiz-option');
-  options.forEach((opt, idx) => {
-    opt.classList.remove('border-blue-500', 'bg-blue-900/20'); opt.classList.add('border-slate-600', 'bg-slate-800');
-    opt.querySelector('.option-circle').classList.remove('bg-blue-600', 'border-blue-600', 'text-white');
-    if (idx === answerIdx) { opt.classList.add('border-blue-500', 'bg-blue-900/20'); opt.classList.remove('border-slate-600', 'bg-slate-800'); opt.querySelector('.option-circle').classList.add('bg-blue-600', 'border-blue-600', 'text-white'); }
-  });
+
+function selectQuizOption(qIdx, optIdx, el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  quizAnswers[qIdx] = optIdx;
 }
-async function submitQuiz() {
-  if (!currentModule || !currentModule.quiz) return; let correct = 0; const total = currentModule.quiz.length;
-  currentModule.quiz.forEach((q, idx) => {
-    const userAnswer = quizAnswers[idx]; if (userAnswer === q.correct) correct++;
-    const questionDiv = document.querySelector(`[data-quiz-idx="${idx}"]`); if (!questionDiv) return;
-    const options = questionDiv.querySelectorAll('.quiz-option');
-    options.forEach((opt, optIdx) => {
-      opt.classList.remove('border-blue-500', 'bg-blue-900/20', 'border-emerald-500', 'bg-emerald-900/20', 'border-red-500', 'bg-red-900/20');
-      opt.querySelector('.option-circle').classList.remove('bg-blue-600', 'border-blue-600', 'bg-emerald-600', 'border-emerald-600', 'bg-red-600', 'border-red-600', 'text-white');
-      if (optIdx === q.correct) { opt.classList.add('border-emerald-500', 'bg-emerald-900/20'); opt.querySelector('.option-circle').classList.add('bg-emerald-600', 'border-emerald-600', 'text-white'); }
-      else if (optIdx === userAnswer && userAnswer !== q.correct) { opt.classList.add('border-red-500', 'bg-red-900/20'); opt.querySelector('.option-circle').classList.add('bg-red-600', 'border-red-600', 'text-white'); }
+
+function submitQuiz() {
+  const total = 3;
+  const answered = Object.keys(quizAnswers).length;
+  if (answered < total) {
+    showToast('Mohon jawab semua pertanyaan', 'error');
+    return;
+  }
+  
+  // Simulate scoring (correct answers: 1, 1, 0)
+  const correct = [1, 1, 0];
+  let score = 0;
+  for (let i = 0; i < total; i++) {
+    if (quizAnswers[i] === correct[i]) score++;
+  }
+  const finalScore = Math.round((score / total) * 100);
+  
+  // Update module progress
+  const m = DB.myModules.find(x => x.id === currentQuizModule);
+  if (m) {
+    m.progress = 100;
+    m.score = finalScore;
+    saveDB();
+  }
+  
+  // Issue certificate
+  const p = DB.programs.find(x => x.id === currentQuizModule);
+  if (p && finalScore >= 70) {
+    DB.certificates.push({
+      id: Date.now(),
+      moduleId: p.id,
+      title: p.title,
+      score: finalScore,
+      date: new Date().toISOString(),
+      userName: DB.currentUser?.name || 'Peserta'
     });
+    saveDB();
+  }
+  
+  closeModal('quizModal');
+  showToast(`Evaluasi selesai! Skor: ${finalScore}/100 ${finalScore >= 70 ? '- LULUS ✓' : '- Perlu perbaikan'}`, finalScore >= 70 ? 'success' : 'error');
+  updateUserStats();
+  
+  if (finalScore >= 70) {
+    setTimeout(() => {
+      viewCertificate(currentQuizModule);
+    }, 500);
+  }
+}
+
+function viewCertificate(moduleId) {
+  const cert = DB.certificates.find(c => c.moduleId === moduleId);
+  if (!cert) {
+    showToast('Sertifikat belum tersedia', 'error');
+    return;
+  }
+  document.getElementById('certModalName').textContent = cert.userName;
+  document.getElementById('certModalProgram').textContent = cert.title;
+  showModal('certModal');
+}
+
+// ============ ADMIN ============
+function updateAdminStats() {
+  document.getElementById('adminStatUsers').textContent = DB.users.length.toLocaleString();
+  document.getElementById('adminStatModules').textContent = DB.programs.length;
+  document.getElementById('adminStatProducts').textContent = DB.products.length;
+  const revenue = DB.products.reduce((sum, p) => sum + (p.price * p.sold), 0);
+  document.getElementById('adminStatRevenue').textContent = 'Rp ' + (revenue / 1000000).toFixed(1) + ' Jt';
+}
+
+function renderAdminModules() {
+  document.getElementById('adminModulesTable').innerHTML = DB.programs.map((p, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td><strong>${p.title}</strong></td>
+      <td><span class="badge badge-info">${p.category}</span></td>
+      <td>${p.modules}</td>
+      <td>${p.participants.toLocaleString()}</td>
+      <td><span class="badge badge-success">Aktif</span></td>
+      <td>
+        <button class="btn btn-sm btn-ghost" onclick="showToast('Edit modul', 'info')"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-sm btn-ghost" style="color:var(--rose);" onclick="deleteModule(${p.id})"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminProducts() {
+  document.getElementById('adminProductsTable').innerHTML = DB.products.map((p, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td><strong>${p.name}</strong></td>
+      <td><span class="badge badge-info">${p.category}</span></td>
+      <td>Rp ${p.price.toLocaleString()}</td>
+      <td>${p.sold}</td>
+      <td>
+        <button class="btn btn-sm btn-ghost" onclick="showToast('Edit produk', 'info')"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-sm btn-ghost" style="color:var(--rose);" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminUsers() {
+  const tbody = document.getElementById('adminUsersTable');
+  if (DB.users.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" class="text-center" style="padding:2rem;color:var(--text-muted);">Belum ada peserta terdaftar.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = DB.users.map((u, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td><strong>${u.name}</strong></td>
+      <td>${u.email}</td>
+      <td>${u.phone}</td>
+      <td>${new Date(u.joinDate).toLocaleDateString('id-ID')}</td>
+      <td><span class="badge badge-success">Aktif</span></td>
+    </tr>
+  `).join('');
+}
+
+function addModule() {
+  const title = document.getElementById('moduleTitle').value;
+  const category = document.getElementById('moduleCategory').value;
+  const desc = document.getElementById('moduleDesc').value;
+  const modules = parseInt(document.getElementById('moduleCount').value) || 8;
+  
+  if (!title || !desc) { showToast('Lengkapi semua field', 'error'); return; }
+  
+  const colors = ['#3b82f6', '#8b5cf6', '#10b981', '#f43f5e', '#f59e0b', '#06b6d4'];
+  const icons = ['fa-book', 'fa-chart-line', 'fa-laptop-code', 'fa-lightbulb', 'fa-cogs'];
+  
+  DB.programs.push({
+    id: Date.now(),
+    title, category, desc, modules,
+    participants: 0,
+    icon: icons[Math.floor(Math.random() * icons.length)],
+    color: colors[Math.floor(Math.random() * colors.length)]
   });
-  quizScore = Math.round((correct / total) * 100);
-  const scores = JSON.parse(localStorage.getItem('quizScores') || '{}'); scores[currentModule.id] = quizScore; localStorage.setItem('quizScores', JSON.stringify(scores));
-  if (quizScore >= 70) {
-    let completed = JSON.parse(localStorage.getItem('completedModules') || '[]'); if (!completed.includes(currentModule.id)) { completed.push(currentModule.id); localStorage.setItem('completedModules', JSON.stringify(completed)); }
-    showToast(`Otorisasi Lulus. Skor: ${quizScore}`, 'success');
-    const modules = await loadModules();
-    if (completed.length >= modules.length) { setTimeout(() => { const certEl = document.getElementById('certificateSection'); if (certEl) { certEl.classList.remove('hidden-section'); certEl.scrollIntoView({ behavior: 'smooth' }); } }, 1000); }
-  } else { showToast(`Skor: ${quizScore}. Minimum passing grade 70.`, 'error'); }
-  document.getElementById('submitQuiz').classList.add('hidden'); updateProgress();
-}
-function updateProgress() {
-  const completed = JSON.parse(localStorage.getItem('completedModules') || '[]'); const total = modulesData.length || 1; const percent = Math.round((completed.length / total) * 100);
-  const percentEl = document.getElementById('progressPercent'); const barEl = document.getElementById('progressBar'); const completedEl = document.getElementById('completedModules');
-  if (percentEl) percentEl.textContent = percent + '%'; if (barEl) barEl.style.width = percent + '%'; if (completedEl) completedEl.textContent = completed.length;
-  const scores = JSON.parse(localStorage.getItem('quizScores') || '{}'); const scoreValues = Object.values(scores);
-  const avg = scoreValues.length > 0 ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length) : 0;
-  const avgEl = document.getElementById('averageScore'); if (avgEl) avgEl.textContent = avg;
-}
-function backToDashboard() { hideAllSections(); const el = document.getElementById('dashboardSection'); if (el) el.classList.remove('hidden-section'); renderModules(); }
-
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
-  e.preventDefault(); const btn = document.getElementById('btnRegister');
-  const name = (document.getElementById('regName').value || '').trim(); const wa = (document.getElementById('regWa').value || '').trim(); const email = (document.getElementById('regEmail').value || '').trim().toLowerCase();
-  if (!name || !wa || !email) { showToast('Data tidak lengkap', 'error'); return; }
-  btn.disabled = true; btn.innerHTML = '<div class="loader mx-auto border-white border-t-transparent"></div>';
-  try {
-    const supabase = getSupabase();
-    if (supabase) { try { const { data: existing } = await supabase.from('peserta_pelatihan').select('id').eq('email', email).single(); if (!existing) { await supabase.from('peserta_pelatihan').insert([{ nama: name, whatsapp: wa, email: email, tanggal_daftar: new Date().toISOString(), progress: 0, status: 'aktif' }]); } } catch (dbErr) {} }
-    currentUser = { name, wa, email, registeredAt: Date.now() }; localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    setTimeout(() => { closeRegisterModal(); showDashboard(); showToast('Autentikasi Berhasil', 'success'); }, 800);
-  } catch (err) { currentUser = { name, wa, email, registeredAt: Date.now() }; localStorage.setItem('currentUser', JSON.stringify(currentUser)); setTimeout(() => { closeRegisterModal(); showDashboard(); }, 800); } finally { btn.disabled = false; btn.innerHTML = 'Daftar & Akses Dashboard'; }
-});
-function showDashboard() { hideAllSections(); const el = document.getElementById('dashboardSection'); if (el) el.classList.remove('hidden-section'); if (currentUser) { const nameEl = document.getElementById('userName'); if (nameEl) nameEl.textContent = currentUser.name; } renderModules(); window.scrollTo(0, 0); }
-function logout() { if (confirm('Terminasi sesi saat ini?')) { localStorage.removeItem('currentUser'); currentUser = null; currentAdmin = null; showLanding(); } }
-
-async function generateAndSendCertificate() {
-  const btn = event.target.closest('button'); if (btn) { btn.disabled = true; btn.innerHTML = '<div class="loader mx-auto border-white border-t-transparent w-4 h-4"></div>'; }
-  try {
-    if (!currentUser || !currentUser.email) throw new Error('Identitas tidak ditemukan.');
-    const template = await loadCertTemplate(); const t = template || certTemplate || getLocalCertTemplate();
-    const { jsPDF } = window.jspdf; const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-    
-    // Corporate minimalist design override
-    doc.setFillColor(255, 255, 255); doc.rect(0, 0, 297, 210, 'F');
-    doc.setDrawColor(30, 41, 59); doc.setLineWidth(1); doc.rect(12, 12, 273, 186); doc.setLineWidth(0.2); doc.rect(16, 16, 265, 178);
-    
-    doc.setTextColor(30, 41, 59);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.text(t.header || 'ACADEMYPRO CORPORATE', 148.5, 45, { align: 'center' });
-    doc.setFontSize(30); doc.text(t.mainTitle || 'SERTIFIKAT KOMPETENSI', 148.5, 65, { align: 'center' });
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(12); doc.text(t.intro || 'Dianugerahkan kepada:', 148.5, 90, { align: 'center' });
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(28); doc.setTextColor(15, 23, 42); doc.text((currentUser.name || 'USER').toUpperCase(), 148.5, 108, { align: 'center' });
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(51, 65, 85); doc.text(t.description || 'Atas kelulusan dalam program:', 148.5, 128, { align: 'center' });
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(16); doc.setTextColor(30, 41, 59); doc.text(t.trainingName || 'Corporate Training', 148.5, 142, { align: 'center' });
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.text(t.predicate || 'Predikat: EXCELLENT', 148.5, 155, { align: 'center' });
-    
-    const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-    doc.setFontSize(10); doc.text(`${t.city || 'Jakarta'}, ${today}`, 225, 175, { align: 'center' });
-    doc.setLineWidth(0.5); doc.line(195, 185, 255, 185); doc.text(t.signRight || 'CEO', 225, 190, { align: 'center' });
-    doc.line(42, 185, 102, 185); doc.text(t.signLeft || 'Assessor', 72, 190, { align: 'center' });
-    
-    const certId = 'AP-' + Date.now().toString(36).toUpperCase();
-    doc.setFontSize(8); doc.setTextColor(100, 116, 139); doc.text(`Dokumen Ref: ${certId}`, 148.5, 198, { align: 'center' });
-    
-    doc.save(`Sertifikat_${certId}.pdf`);
-    const myCerts = JSON.parse(localStorage.getItem('myCertificates') || '[]'); myCerts.push({ certId, trainingName: t.trainingName, date: today, name: currentUser.name, email: currentUser.email }); localStorage.setItem('myCertificates', JSON.stringify(myCerts));
-    showToast('Dokumen tersimpan', 'success');
-  } catch (err) { showToast('Gagal: ' + err.message, 'error'); } finally { if (btn) { btn.disabled = false; btn.innerHTML = 'Terbitkan & Kirim ke Email'; } }
+  saveDB();
+  closeModal('addModuleModal');
+  showToast('Modul berhasil ditambahkan', 'success');
+  renderAdminModules();
+  updateAdminStats();
+  
+  // Clear form
+  document.getElementById('moduleTitle').value = '';
+  document.getElementById('moduleDesc').value = '';
 }
 
-document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
-  e.preventDefault(); const email = (document.getElementById('adminEmail').value || '').trim(); const password = document.getElementById('adminPassword').value || '';
-  if (email === CONFIG.ADMIN_EMAIL && password === CONFIG.ADMIN_PASSWORD) { currentAdmin = { email }; showToast('Otorisasi Diterima', 'success'); showAdminDashboard(); } else { showToast('Akses Ditolak', 'error'); }
-});
-async function showAdminDashboard() { hideAllSections(); const el = document.getElementById('adminDashboardSection'); if (el) el.classList.remove('hidden-section'); await Promise.all([loadAdminModules(), loadAdminProducts(), loadAdminPeserta(), loadAdminCertTemplate()]); }
-function switchAdminTab(tabName) { document.querySelectorAll('.admin-tab').forEach(el => el.classList.add('hidden-section')); document.querySelectorAll('#adminDashboardSection .tab-btn').forEach(btn => btn.classList.remove('active', 'bg-slate-800', 'text-white')); const tabEl = document.getElementById(`admin-tab-${tabName}`); if (tabEl) tabEl.classList.remove('hidden-section'); const activeBtn = document.querySelector(`#adminDashboardSection .tab-btn[data-tab="${tabName}"]`); if (activeBtn) activeBtn.classList.add('active', 'bg-slate-800', 'text-white'); }
-
-async function loadAdminModules() { const modules = await loadModules(); const tbody = document.getElementById('adminModulesTable'); if (!tbody) return; if (modules.length === 0) { tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4">Kosong</td></tr>'; return; } tbody.innerHTML = modules.map((m, i) => `<tr><td>${i+1}</td><td class="font-semibold text-white">${m.judul}</td><td><span class="text-[10px] font-bold bg-slate-800 text-blue-400 px-2 py-1 rounded uppercase">${m.kategori}</span></td><td>${(m.videos||[]).length}</td><td>${(m.ebooks||[]).length}</td><td>${(m.quiz||[]).length}</td><td><div class="flex gap-2"><button onclick="editModule(${m.id})" class="text-blue-400 hover:text-blue-300"><i class="fas fa-edit"></i></button><button onclick="deleteModule(${m.id})" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button></div></td></tr>`).join(''); }
-async function loadAdminProducts() { const products = await loadProducts(); const tbody = document.getElementById('adminProductsTable'); if (!tbody) return; if (products.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Kosong</td></tr>'; return; } tbody.innerHTML = products.map((p, i) => `<tr><td>${i+1}</td><td class="font-semibold text-white">${p.name}</td><td><span class="text-[10px] font-bold bg-slate-800 text-indigo-400 px-2 py-1 rounded uppercase">${p.category}</span></td><td>${formatRupiah(p.price)}</td><td>${p.sold||0}</td><td><div class="flex gap-2"><button onclick="editProduct(${p.id})" class="text-blue-400 hover:text-blue-300"><i class="fas fa-edit"></i></button><button onclick="deleteProduct(${p.id})" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button></div></td></tr>`).join(''); }
-async function loadAdminPeserta() { const peserta = await loadPeserta(); const tbody = document.getElementById('adminPesertaTable'); if (!tbody) return; if (peserta.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Kosong</td></tr>'; return; } tbody.innerHTML = peserta.map((p, i) => `<tr><td>${i+1}</td><td class="font-semibold text-white">${p.nama}</td><td>${p.email}</td><td>${p.whatsapp}</td><td>${p.tanggal_daftar?new Date(p.tanggal_daftar).toLocaleDateString('id-ID'):'-'}</td><td><div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-blue-500 h-1.5 rounded-full" style="width:${p.progress||0}%"></div></div><span class="text-[10px] text-slate-400 block">${p.progress||0}%</span></td></tr>`).join(''); }
-async function loadAdminCertTemplate() { const template = await loadCertTemplate(); const container = document.getElementById('currentCertTemplate'); if (!container || !template) return; container.innerHTML = `<div class="grid grid-cols-2 gap-2"><div class="truncate">Header: ${template.header}</div><div class="truncate">Title: ${template.mainTitle}</div><div class="truncate">Sign 1: ${template.signLeft}</div><div class="truncate">Sign 2: ${template.signRight}</div></div>`; }
-
-function showModuleForm(id=null) {
-  const modal=document.getElementById('moduleModal'); const title=document.getElementById('moduleModalTitle'); const form=document.getElementById('moduleForm');
-  videoFieldCounter=0; ebookFieldCounter=0; quizFieldCounter=0; stageFieldCounter=0;
-  ['videosContainer', 'ebooksFormContainer', 'quizQuestionsContainer', 'stagesFormContainer'].forEach(id=>{ const el=document.getElementById(id); if(el)el.innerHTML=''; });
-  if(id) {
-    const m=modulesData.find(x=>x.id===id); if(!m)return; title.textContent='Edit Modul';
-    const setVal=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
-    setVal('moduleId',m.id); setVal('moduleTitle',m.judul); setVal('moduleDesc',m.deskripsi); setVal('moduleCategory',m.kategori); setVal('moduleIcon',m.icon); setVal('moduleColor',m.color);
-    (m.stages&&m.stages.length?m.stages:[{}]).forEach(x=>addStageField(x)); (m.videos&&m.videos.length?m.videos:[{}]).forEach(x=>addVideoField(x)); (m.ebooks||[]).forEach(x=>addEbookField(x)); (m.quiz||[]).forEach(x=>addQuizQuestion(x));
-  } else { title.textContent='Modul Baru'; if(form)form.reset(); document.getElementById('moduleId').value=''; addStageField(); addVideoField(); }
-  if(modal){modal.classList.remove('hidden-section'); modal.scrollTop=0;}
+function addProduct() {
+  const name = document.getElementById('productName').value;
+  const category = document.getElementById('productCategory').value;
+  const desc = document.getElementById('productDesc').value;
+  const price = parseInt(document.getElementById('productPrice').value) || 0;
+  const oldPrice = parseInt(document.getElementById('productOldPrice').value) || 0;
+  
+  if (!name || !price) { showToast('Lengkapi nama dan harga', 'error'); return; }
+  
+  const icons = ['fa-file-alt', 'fa-box', 'fa-laptop', 'fa-palette', 'fa-download'];
+  
+  DB.products.push({
+    id: Date.now(),
+    name, category, desc, price, oldPrice,
+    sold: 0,
+    icon: icons[Math.floor(Math.random() * icons.length)]
+  });
+  saveDB();
+  closeModal('addProductModal');
+  showToast('Produk berhasil ditambahkan', 'success');
+  renderAdminProducts();
+  updateAdminStats();
+  
+  document.getElementById('productName').value = '';
+  document.getElementById('productDesc').value = '';
+  document.getElementById('productPrice').value = '';
+  document.getElementById('productOldPrice').value = '';
 }
-function closeModuleModal(){document.getElementById('moduleModal').classList.add('hidden-section');}
 
-// Admin form dynamic generators simplified slightly for space, structure remains exactly same
-function addStageField(d=null){ stageFieldCounter++; const c=document.getElementById('stagesFormContainer'); if(!c)return; const div=document.createElement('div'); div.className='bg-slate-800 p-4 rounded-lg border border-slate-700'; div.dataset.stageId=stageFieldCounter; div.innerHTML=`<div class="flex justify-between mb-2"><h4 class="text-sm font-bold">Sesi ${stageFieldCounter}</h4><button type="button" onclick="this.closest('[data-stage-id]').remove()" class="text-red-400 hover:text-red-300"><i class="fas fa-times"></i></button></div><input type="text" class="stage-title w-full px-3 py-2 rounded text-sm mb-2 bg-slate-900 border-slate-700" placeholder="Judul" value="${d&&d.title?d.title:''}"><input type="text" class="stage-desc w-full px-3 py-2 rounded text-sm bg-slate-900 border-slate-700" placeholder="Deskripsi" value="${d&&d.desc?d.desc:''}">`; c.appendChild(div); }
-function addVideoField(d=null){ videoFieldCounter++; const c=document.getElementById('videosContainer'); if(!c)return; const div=document.createElement('div'); div.className='bg-slate-800 p-4 rounded-lg border border-slate-700'; div.dataset.videoId=videoFieldCounter; div.innerHTML=`<div class="flex justify-between mb-2"><h4 class="text-sm font-bold">Video ${videoFieldCounter}</h4><button type="button" onclick="this.closest('[data-video-id]').remove()" class="text-red-400 hover:text-red-300"><i class="fas fa-times"></i></button></div><input type="text" class="video-title w-full px-3 py-2 rounded text-sm mb-2 bg-slate-900 border-slate-700" placeholder="Judul" value="${d&&d.title?d.title:''}"><input type="text" class="video-url w-full px-3 py-2 rounded text-sm bg-slate-900 border-slate-700" placeholder="URL" value="${d&&d.url?d.url:''}">`; c.appendChild(div); }
-function addEbookField(d=null){ ebookFieldCounter++; const c=document.getElementById('ebooksFormContainer'); if(!c)return; const div=document.createElement('div'); div.className='bg-slate-800 p-4 rounded-lg border border-slate-700'; div.dataset.ebookId=ebookFieldCounter; div.innerHTML=`<div class="flex justify-between mb-2"><h4 class="text-sm font-bold">Dokumen ${ebookFieldCounter}</h4><button type="button" onclick="this.closest('[data-ebook-id]').remove()" class="text-red-400 hover:text-red-300"><i class="fas fa-times"></i></button></div><input type="text" class="ebook-title w-full px-3 py-2 rounded text-sm mb-2 bg-slate-900 border-slate-700" placeholder="Judul" value="${d&&d.title?d.title:''}"><input type="text" class="ebook-url w-full px-3 py-2 rounded text-sm bg-slate-900 border-slate-700" placeholder="URL PDF" value="${d&&d.url?d.url:''}">`; c.appendChild(div); }
-function addQuizQuestion(d=null){ quizFieldCounter++; const c=document.getElementById('quizQuestionsContainer'); if(!c)return; const div=document.createElement('div'); div.className='bg-slate-800 p-4 rounded-lg border border-slate-700'; div.dataset.quizId=quizFieldCounter; div.innerHTML=`<div class="flex justify-between mb-2"><h4 class="text-sm font-bold">Soal ${quizFieldCounter}</h4><button type="button" onclick="this.closest('[data-quiz-id]').remove()" class="text-red-400 hover:text-red-300"><i class="fas fa-times"></i></button></div><input type="text" class="quiz-question-text w-full px-3 py-2 rounded text-sm mb-2 bg-slate-900 border-slate-700" placeholder="Pertanyaan" value="${d&&d.question?d.question:''}"><input type="text" class="quiz-question-options w-full px-3 py-2 rounded text-sm mb-2 bg-slate-900 border-slate-700" placeholder="Opsi A, Opsi B..." value="${d&&d.options?d.options.join(', '):''}"><input type="number" class="quiz-question-correct w-full px-3 py-2 rounded text-sm bg-slate-900 border-slate-700" min="1" max="4" placeholder="Jawaban (1-4)" value="${d&&typeof d.correct==='number'?d.correct+1:1}">`; c.appendChild(div); }
-
-document.getElementById('moduleForm').addEventListener('submit', async(e)=>{
-  e.preventDefault(); try {
-    const id=document.getElementById('moduleId').value; const m={ judul:document.getElementById('moduleTitle').value.trim(), deskripsi:document.getElementById('moduleDesc').value.trim(), kategori:document.getElementById('moduleCategory').value, icon:document.getElementById('moduleIcon').value, color:document.getElementById('moduleColor').value, stages:[], videos:[], ebooks:[], quiz:[], updated_at:new Date().toISOString() };
-    document.querySelectorAll('#stagesFormContainer>[data-stage-id]').forEach(d=>{const t=d.querySelector('.stage-title').value.trim(),ds=d.querySelector('.stage-desc').value.trim();if(t)m.stages.push({title:t,desc:ds});});
-    document.querySelectorAll('#videosContainer>[data-video-id]').forEach(d=>{const t=d.querySelector('.video-title').value.trim(),u=d.querySelector('.video-url').value.trim();if(t&&u)m.videos.push({title:t,url:u});});
-    document.querySelectorAll('#ebooksFormContainer>[data-ebook-id]').forEach(d=>{const t=d.querySelector('.ebook-title').value.trim(),u=d.querySelector('.ebook-url').value.trim();if(t&&u)m.ebooks.push({title:t,url:u});});
-    document.querySelectorAll('#quizQuestionsContainer>[data-quiz-id]').forEach(d=>{const t=d.querySelector('.quiz-question-text').value.trim(),o=d.querySelector('.quiz-question-options').value.trim(),c=parseInt(d.querySelector('.quiz-question-correct').value);if(t&&o){const opts=o.split(',').map(x=>x.trim()).filter(x=>x);if(opts.length>=2)m.quiz.push({question:t,options:opts,correct:isNaN(c)?0:c-1});}});
-    if(id){ const i=modulesData.findIndex(x=>x.id===parseInt(id)); if(i!==-1)modulesData[i]={...modulesData[i],...m}; }else{ m.id=modulesData.length?Math.max(...modulesData.map(x=>x.id))+1:1; m.urutan=modulesData.length+1; m.created_at=new Date().toISOString(); modulesData.push(m); }
-    saveLocalData(); closeModuleModal(); await loadAdminModules(); showToast('Data Tersimpan','success');
-  } catch(err){ showToast('Error sistem','error'); }
-});
-async function editModule(id){showModuleForm(id);} async function deleteModule(id){if(!confirm('Hapus modul?'))return; modulesData=modulesData.filter(m=>m.id!==id); saveLocalData(); await loadAdminModules(); showToast('Terhapus','success');}
-
-function showProductForm(id=null) {
-  const m=document.getElementById('productModal'); if(id){ const p=productsData.find(x=>x.id===id); if(!p)return; document.getElementById('productModalTitle').textContent='Edit Aset'; const sv=(id,v)=>{document.getElementById(id).value=v||'';}; sv('productId',p.id);sv('productName',p.name);sv('productCategory',p.category);sv('productDesc',p.description);sv('productPrice',p.price);sv('productOriginalPrice',p.originalPrice);sv('productImage',p.image);sv('productUrl',p.url);sv('productSeller',p.seller); } else { document.getElementById('productModalTitle').textContent='Aset Baru'; document.getElementById('productForm').reset(); document.getElementById('productId').value=''; } m.classList.remove('hidden-section');
+function deleteModule(id) {
+  if (!confirm('Hapus modul ini?')) return;
+  DB.programs = DB.programs.filter(p => p.id !== id);
+  saveDB();
+  renderAdminModules();
+  updateAdminStats();
+  showToast('Modul dihapus', 'info');
 }
-function closeProductModal(){document.getElementById('productModal').classList.add('hidden-section');}
-document.getElementById('productForm').addEventListener('submit', async(e)=>{
-  e.preventDefault(); try{
-    const id=document.getElementById('productId').value; const p={ name:document.getElementById('productName').value.trim(), category:document.getElementById('productCategory').value, description:document.getElementById('productDesc').value.trim(), price:parseInt(document.getElementById('productPrice').value)||0, originalPrice:parseInt(document.getElementById('productOriginalPrice').value)||0, image:document.getElementById('productImage').value.trim(), url:document.getElementById('productUrl').value.trim(), seller:document.getElementById('productSeller').value.trim(), updated_at:new Date().toISOString() };
-    if(id){ const i=productsData.findIndex(x=>x.id===parseInt(id)); if(i!==-1)productsData[i]={...productsData[i],...p}; }else{ p.id=productsData.length?Math.max(...productsData.map(x=>x.id))+1:1; p.created_at=new Date().toISOString(); productsData.push(p); }
-    saveLocalData(); closeProductModal(); await loadAdminProducts(); showToast('Tersimpan','success');
-  } catch(err){ showToast('Error','error'); }
-});
-async function editProduct(id){showProductForm(id);} async function deleteProduct(id){if(!confirm('Hapus aset?'))return; productsData=productsData.filter(x=>x.id!==id); saveLocalData(); await loadAdminProducts(); showToast('Terhapus','success');}
 
-async function showCertTemplateForm() {
-  const t=await loadCertTemplate()||certTemplate||getLocalCertTemplate(); const sv=(id,v)=>{document.getElementById(id).value=v||'';};
-  sv('certHeader',t.header);sv('certMainTitle',t.mainTitle);sv('certIntro',t.intro);sv('certDesc',t.description);sv('certTrainingName',t.trainingName);sv('certPredicate',t.predicate);sv('certSignLeft',t.signLeft);sv('certSignRight',t.signRight);sv('certCity',t.city);
-  document.getElementById('certTemplateModal').classList.remove('hidden-section');
+function deleteProduct(id) {
+  if (!confirm('Hapus produk ini?')) return;
+  DB.products = DB.products.filter(p => p.id !== id);
+  saveDB();
+  renderAdminProducts();
+  updateAdminStats();
+  showToast('Produk dihapus', 'info');
 }
-function closeCertTemplateModal(){document.getElementById('certTemplateModal').classList.add('hidden-section');}
-document.getElementById('certTemplateForm').addEventListener('submit', async(e)=>{
-  e.preventDefault(); certTemplate = { id:1, header:document.getElementById('certHeader').value.trim(), mainTitle:document.getElementById('certMainTitle').value.trim(), intro:document.getElementById('certIntro').value.trim(), description:document.getElementById('certDesc').value.trim(), trainingName:document.getElementById('certTrainingName').value.trim(), predicate:document.getElementById('certPredicate').value.trim(), signLeft:document.getElementById('certSignLeft').value.trim(), signRight:document.getElementById('certSignRight').value.trim(), city:document.getElementById('certCity').value.trim(), updated_at:new Date().toISOString(), bgColor: '#ffffff', borderColor: '#1e293b', textColor: '#334155', nameColor: '#0f172a' }; saveLocalData(); showToast('Konfigurasi Tersimpan','success'); closeCertTemplateModal(); await loadAdminCertTemplate();
+
+// ============ USER STATS ============
+function updateUserStats() {
+  const total = DB.myModules.length;
+  const completed = DB.myModules.filter(m => m.progress >= 100).length;
+  const scores = DB.myModules.filter(m => m.score).map(m => m.score);
+  const avgScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
+  
+  document.getElementById('statModules').textContent = total;
+  document.getElementById('statCompleted').textContent = completed;
+  document.getElementById('statAvgScore').textContent = avgScore;
+  document.getElementById('statCerts').textContent = DB.certificates.length;
+}
+
+// ============ SIDEBAR TOGGLE ============
+function toggleSidebar() {
+  document.getElementById('userSidebar').classList.toggle('open');
+}
+
+// ============ NAVBAR SCROLL ============
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('publicNav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('currentUser'); if (saved) { try { currentUser = JSON.parse(saved); showDashboard(); } catch (e) { showLanding(); } } else { showLanding(); }
-  try { if (typeof AOS !== 'undefined') AOS.init({ duration: 600, once: true }); } catch (e) {}
-});
+// ============ INIT ============
+function init() {
+  renderHomePrograms();
+  
+  // Check if user is logged in
+  if (DB.currentUser) {
+    // Don't auto-enter dashboard, let user navigate
+  }
+  
+  // Animate stats on load
+  setTimeout(() => {
+    document.querySelectorAll('.stat-value').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(10px)';
+      el.style.transition = 'all 0.6s ease';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 100);
+    });
+  }, 300);
+}
+
+init();
 </script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 </body>
 </html>
